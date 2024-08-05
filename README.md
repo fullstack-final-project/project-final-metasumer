@@ -1,5 +1,6 @@
 # project-final-metasumer
 
+
 # 1. 프로젝트 소개
   - 프로젝트명 : 어사모(물고기를 사랑하는 모임)
   - 팀명 : 메타슈머(metasumer)
@@ -38,9 +39,9 @@
 
 
 # 7. 팀원
-  - 이주은 : 
+  - 이주은 : https://github.com/jueub
   - 이준기 : https://github.com/basislee
-  - 장연주 : 
-  - 조민성 : 
-  - 최수민 :  
+  - 장연주 : https://github.com/aktbskrks
+  - 조민성 : https://github.com/Chominsung0823
+  - 최수민 : https://github.com/sumiinn
 
