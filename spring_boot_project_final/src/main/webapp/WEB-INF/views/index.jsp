@@ -12,7 +12,7 @@
 		
 		userC index page 수정했습니다.
 		
-		테스트22
+		테스트3
 		
 	</body>
 </html>
