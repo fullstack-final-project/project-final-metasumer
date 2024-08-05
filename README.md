@@ -42,5 +42,5 @@
   - 이준기 : https://github.com/basislee
   - 장연주 : 
   - 조민성 : 
-  - 최수민 :  
+  - 최수민 : https://github.com/sumiinn 
 
