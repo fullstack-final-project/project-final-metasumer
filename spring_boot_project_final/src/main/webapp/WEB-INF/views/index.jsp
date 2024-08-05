@@ -9,5 +9,6 @@
 	</head>
 	<body>
 		index 페이지입니다.
+		userB test
 	</body>
 </html>
