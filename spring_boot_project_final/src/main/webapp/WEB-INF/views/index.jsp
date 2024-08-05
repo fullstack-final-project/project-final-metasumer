@@ -9,5 +9,8 @@
 	</head>
 	<body>
 		index 페이지입니다.
+		
+		userC index page 수정했습니다.
+		
 	</body>
 </html>
