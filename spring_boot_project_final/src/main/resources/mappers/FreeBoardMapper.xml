@@ -19,8 +19,7 @@
 	</resultMap>
 
 	<select id="selectItemsForPage" resultMap="fbResult">
-        SELECT b.boardPostNo,
-               m.memNickname, b.memId, b.title, b.createdDate
+        SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate
         FROM board b
         JOIN member m ON b.memId = m.memId
         ORDER BY b.createdDate DESC
@@ -38,5 +37,12 @@
 		VALUES (#{memId}, #{boardCtgId}, #{title}, #{content},
 		#{uploadFile})
 	</insert>
+	
+	<select id="detailViewFreeBoard" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+    	SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname
+   	 	FROM board b
+    	JOIN member m ON b.memId = m.memId
+   	 	WHERE b.boardPostNo = #{boardPostNo}
+	</select>
 
 </mapper>

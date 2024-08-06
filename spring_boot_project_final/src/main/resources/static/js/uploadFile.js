@@ -1,13 +1,19 @@
-/**
- * uploadFile.js
- */
-
 $(document).ready(function(){
+    $('#uploadFile').on('change', function() {
+        toggleDeleteButton();
+    });
+
+    $('#deleteButton').on('click', function() {
+        $('#uploadFile').val(''); 
+        toggleDeleteButton();
+        return false;
+    });
+
     $('#uploadFileForm').on('submit', function(event) {
         event.preventDefault();
-        
-        let formData = new FormData($('#uploadFileForm')[0]);
-        
+
+        let formData = new FormData(this);
+
         $.ajax({
             type: "post",
             url: "/freeboard/insertFreeBoard",
@@ -29,3 +35,14 @@ $(document).ready(function(){
     });
 });
 
+// 삭제 버튼 표시 및 숨김 함수
+function toggleDeleteButton() {
+    var fileInput = document.getElementById('uploadFile');
+    var deleteButton = document.getElementById('deleteButton');
+
+    if (fileInput.files.length > 0) {
+        $(deleteButton).show();
+    } else {
+        $(deleteButton).hide();
+    }
+}

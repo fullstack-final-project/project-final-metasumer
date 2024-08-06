@@ -32,7 +32,7 @@
                         <tr>
                             <td>${counter}</td>
                             <td>${fb.memNickname}</td>
-                            <td>${fb.title}</td>
+                            <td><a href="<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}' />">${fb.title}</td>
                             <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
                         </tr>
                         <c:set var="counter" value="${counter + 1}" />

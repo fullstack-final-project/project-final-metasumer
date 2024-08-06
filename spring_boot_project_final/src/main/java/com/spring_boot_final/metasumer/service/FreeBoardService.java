@@ -48,8 +48,7 @@ public class FreeBoardService implements IFreeBoardService {
 
 	@Override
 	public FreeBoardVO detailViewFreeBoard(String boardPostNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.detailViewFreeBoard(boardPostNo);
 	}
 
 	@Override

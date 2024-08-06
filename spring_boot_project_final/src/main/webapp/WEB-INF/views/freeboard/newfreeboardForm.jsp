@@ -40,13 +40,16 @@
                     </tr>
                     <tr>
 			            <td><label for="uploadFile">파일 업로드</label></td>
-			            <td><input type="file" id="uploadFile" name="uploadFile"></td>
+			            <td>
+			                <input type="file" id="uploadFile" name="uploadFile" onchange="toggleDeleteButton()">
+			                <button id="deleteButton" style="display: none;" onclick="resetFileInput()">삭제</button>
+            			</td>
+			            
 			        </tr>
                     <tr>
                         <td colspan="2">
                             <button type="submit">저장</button>
                             <button type="button" onclick="window.location.href='<c:url value='/freeborad/freeboradView'/>'">취소</button>
-                        <!-- 매퍼 수정해야함 -->
                         </td>
                     </tr>
                 </table>
