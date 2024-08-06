@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring_boot_final.metasumer.dao.IFreeBoardDAO">
+	<resultMap id="fbResult"
+		type="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		<result property="boardPostNo" column="boardPostNo" />
+		<result property="memId" column="memId" />
+		<result property="boardCtgId" column="boardCtgId" />
+		<result property="title" column="title" />
+		<result property="createdDate" column="createdDate" />
+		<result property="content" column="content" />
+		<result property="uploadFile" column="uploadFile" />
+		<result property="memName" column="memName" />
+	</resultMap>
+
+	<select id="selectItemsForPage" resultMap="fbResult">
+        SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate
+        FROM board b
+        JOIN member m ON b.memId = m.memId
+        ORDER BY b.createdDate DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+	<select id="countTotalItems" resultType="int">
+        SELECT COUNT(*) FROM board
+    </select>
+
+	<insert id="insertFreeBoard"
+		parameterType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		INSERT INTO board (memId, boardCtgId, title, content,
+		uploadFile)
+		VALUES (#{memId}, #{boardCtgId}, #{title}, #{content},
+		#{uploadFile})
+	</insert>
+	
+	<select id="detailViewFreeBoard" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+    	SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname
+   	 	FROM board b
+    	JOIN member m ON b.memId = m.memId
+   	 	WHERE b.boardPostNo = #{boardPostNo}
+	</select>
+
+</mapper>

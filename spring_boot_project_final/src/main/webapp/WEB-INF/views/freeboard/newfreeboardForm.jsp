@@ -1,0 +1,67 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+		<script src="<c:url value='/js/uploadFile.js'/>"></script>
+		<!-- head.jsp import -->
+		<%-- <c:import url = "/WEB-INF/views/layout/head.jsp"></c:import> --%>
+	</head>
+	<body>
+		<div id="wrap">
+			<!-- top.jsp import -->
+			<%-- <c:import url = "/WEB-INF/views/layout/top.jsp"></c:import> --%>
+			<section>
+				<form id="uploadFileForm" name="uploadFileForm" enctype="multipart/form-data">
+				<input type="hidden" name="memId" value="${memId}">
+				<input type="hidden" name="boardCtgId" value="2">
+				
+				
+                <table border="1" width="80%">
+                    <tr>
+                        <th colspan="2">글쓰기 페이지${memId}</th>
+                    </tr>
+                    <tr>
+                        <td>작성자</td>
+                        <td>${memNickname}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="title">제목</label></td>
+                        <td><input type="text" id="title" name="title" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="content">내용</label></td>
+                        <td><textarea id="content" name="content" rows="10" cols="50" required></textarea></td>
+                    </tr>
+                    <tr>
+			            <td><label for="uploadFile">파일 업로드</label></td>
+			            <td>
+			                <input type="file" id="uploadFile" name="uploadFile" onchange="toggleDeleteButton()">
+			                <button id="deleteButton" style="display: none;" onclick="resetFileInput()">삭제</button>
+            			</td>
+			            
+			        </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit">저장</button>
+                            <button type="button" onclick="window.location.href='<c:url value='/freeborad/freeboradView'/>'">취소</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+				
+				
+				
+				
+				
+			</section>
+			<!-- bottom.jsp import -->
+			<%-- <c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>	 --%>	
+		</div>
+	</body>
+</html>
