@@ -1,0 +1,106 @@
+@charset "UTF-8";
+
+/* Product Management CSS */
+
+#product-management {
+    padding: 20px;
+}
+
+#product-management h1, #product-management h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* insertProductForm */
+#product-form {
+    margin-bottom: 30px;
+}
+
+#product-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#product-form label, #product-form input, #product-form button {
+    margin: 5px 0;
+}
+/* //////////////////////////////////////////////  */
+
+/* 테이블의 기본 스타일 */
+.table.productList, .table.salesList {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table.productList th, .table.salesList th,
+.table.productList td, .table.salesList td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.table.productList th, .table.salesList th {
+    background-color: #f2f2f2;
+}
+
+/* 너비 조정을 위한 미디어 쿼리 */
+@media (min-width: 768px) {
+    .table.productList, .table.salesList, .table.table-button {
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .table.productList, .table.salesList, .table.table-button {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+@media (min-width: 1256px) {
+    .table.productList, .table.salesList, .table.table-button {
+        max-width: 1256px;
+        margin: 0 auto;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+.table-button {
+    display: flex;
+    justify-content: flex-end; /* 버튼을 우측 끝으로 정렬 */
+    flex: 0; /* 버튼 크기를 고정 */
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-add {
+    background-color: #39A7FF;
+    color: white;
+    border: none;
+    margin-bottom: 8px;
+}
+.btn-add:hover {
+		 background-color: #87C4FF;
+}
+
+
+
