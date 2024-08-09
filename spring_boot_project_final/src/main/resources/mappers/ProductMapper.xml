@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring_boot_final.metasumer.dao.IProductDAO">
+	<resultMap id="productResultMap" type="com.spring_boot_final.metasumer.model.ProductVO">
+      <id property="prdNo" column="prdNo"/>
+      <result property="prdName" column="prdName"/>
+      <result property="prdPrice" column="prdPrice"/>
+      <result property="prdStock" column="prdStock"/>
+      <result property="prdCategory" column="prdCategory"/>
+      <result property="prdMaker" column="prdMaker"/>
+      <result property="prdDescript" column="prdDescript"/>
+      <result property="prdImage" column="prdImage"/>
+      <result property="bizId" column="bizId"/>
+  </resultMap>
+
+    <!-- 모든 상품 조회 (사업체 ID로 필터링) -->
+    <select id="listAllProductByBizId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT * FROM product WHERE bizId = #{bizId}
+    </select>
+    
+    <!-- 상품 조회 -->
+    <select id="listAllProduct" parameterType="String" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT * FROM product ORDER BY prdNo
+    </select>
+    
+    <!-- 상품 상세 정보 조회 -->
+  	<!-- 상품번호(string) 전달받아서 해당 상품 찾아서 반환 (VO) -->
+  	<select id="detailViewProduct" parameterType="string"
+  				  resultType="com.spring_boot_final.metasumer.model.ProductVO">
+  		SELECT * FROM product WHERE prdNo = #{prdNo}
+  	</select>
+
+    <!-- 상품 추가 -->
+    <insert id="insertProduct" parameterType="com.spring_boot_final.metasumer.model.ProductVO">
+        INSERT INTO product (prdNo, prdName, prdPrice, prdStock, prdCategory, prdMaker, prdDescript, prdImage, bizId)
+        VALUES (#{prdNo}, #{prdName}, #{prdPrice}, #{prdStock}, #{prdCategory}, #{prdMaker}, #{prdDescript}, #{prdImage}, #{bizId})
+    </insert>
+
+    <!-- 상품 수정 -->
+    <update id="updateProduct" parameterType="com.spring_boot_final.metasumer.model.ProductVO">
+        UPDATE product
+        SET prdName = #{prdName},
+            prdPrice = #{prdPrice},
+            prdStock = #{prdStock},
+            prdCategory = #{prdCategory},
+            prdMaker = #{prdMaker},
+            prdDescript = #{prdDescript},
+            prdImage = #{prdImage},
+            bizId = #{bizId}
+        WHERE prdNo = #{prdNo}
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="deleteProduct" parameterType="String">
+        DELETE FROM product WHERE prdNo = #{prdNo}
+    </delete>
+
+    
+
+</mapper>
