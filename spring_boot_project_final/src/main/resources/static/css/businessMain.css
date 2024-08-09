@@ -40,17 +40,41 @@ main {
 }
 
 .card {
-	background-color: #f9f9f9;
+	position: relative;
 	border: 1px solid #ddd;
 	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 	padding: 20px;
 	box-sizing: border-box;
-	text-align: center;
+	display: flex;
+  flex-direction: column; /* 내부 요소들을 수직으로 배치 */
+  justify-content: center; /* 수직 중앙 정렬 */
+  align-items: center; /* 수평 중앙 정렬 */
+  text-align: center; /* 텍스트를 가운데로 정렬 */;
 	flex: 1 1 calc(33.333% - 20px); /* 기본적으로 3개의 카드가 가로로 배치됨 */
 	margin-top: 10px;
 	min-height: 400px; /* 카드의 최소 세로 크기 설정 */
+	max-width: calc(33.333% - 20px);
+	overflow: hidden;
 }
+
+.card::before {
+    content: ''; /* 가상의 요소 생성 */
+    position: absolute; /* 카드의 배경 위에 위치 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit; /* 카드의 배경 이미지와 동일하게 설정 */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px); /* 배경 이미지에 흐림 효과 추가 */
+    z-index: -1; /* 카드 내용이 흐림 효과 위에 위치하도록 */
+}
+
+
+
 
 /* 반응형 스타일 */
 @media ( min-width : 768px) {
@@ -81,10 +105,6 @@ main {
 
 /* 버튼 스타일 */
 .btn {
-	background-image: url('path/to/your/image.jpg'); /* 배경 이미지 URL */
-  background-size: cover; /* 배경 이미지를 카드의 전체 크기에 맞게 조절 */
-  background-position: center; /* 배경 이미지의 위치를 카드의 중앙으로 설정 */
-  background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
 	background-color: #39A7FF;
 	color: white;
 	padding: 10px 20px;
@@ -92,9 +112,22 @@ main {
 	border-radius: 5px;
 	font-weight: bold;
 	display: inline-block;
-	margin-top: auto;
+	margin-top: 50px;
 }
 
 .btn:hover {
 	background-color: #87C4FF;
+}
+
+#seaFishing {
+	background-image: url('/images/바다.jpg'); /* 배경 이미지 URL */
+  background-size: cover; /* 배경 이미지를 카드의 전체 크기에 맞게 조절 */
+  background-position: center; /* 배경 이미지의 위치를 카드의 중앙으로 설정 */
+}
+
+#freshWaterFishing {
+	color: white;
+	background-image: url('/images/민물.jpg'); /* 배경 이미지 URL */
+  background-size: cover; /* 배경 이미지를 카드의 전체 크기에 맞게 조절 */
+  background-position: center; /* 배경 이미지의 위치를 카드의 중앙으로 설정 */
 }

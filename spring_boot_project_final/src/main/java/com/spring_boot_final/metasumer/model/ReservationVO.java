@@ -17,6 +17,7 @@ public class ReservationVO {
   private String bizCoupon; // 사용된 쿠폰
   private String bizResId; // 사업체 예약 ID
   private ReservationStatus resStatus; // Enum 타입으로 예약 상태
+  private Integer bizCtgId;
 
   public Integer getResNo() {
     return resNo;
@@ -196,7 +197,18 @@ public class ReservationVO {
   public void setResStatus(ReservationStatus resStatus) {
     this.resStatus = resStatus;
   }
+  
 
+  public Integer getBizCtgId() {
+    return bizCtgId;
+  }
+
+
+
+
+  public void setBizCtgId(Integer bizCtgId) {
+    this.bizCtgId = bizCtgId;
+  }
 
 
 
