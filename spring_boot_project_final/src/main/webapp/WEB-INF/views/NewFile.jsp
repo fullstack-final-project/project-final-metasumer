@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<c:import url="/WEB-INF/views/home.jsp"></c:import>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<!-- head.jsp import -->

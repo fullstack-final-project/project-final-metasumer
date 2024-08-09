@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<c:import url="/WEB-INF/views/test.jsp"></c:import>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
@@ -18,53 +19,42 @@
 			<!-- top.jsp import -->
 			<%-- <c:import url = "/WEB-INF/views/layout/top.jsp"></c:import> --%>
 			<section>
-				<table border="1" width="80%">
+			<form method="post" action="<c:url value='/freeboard/updateFreeBoard'/>" enctype="multipart/form-data">
+				<input type="hidden" name="boardPostNo" value="${fb.boardPostNo}">
+				<input type="hidden" name="boardCtgId" value="${fb.boardCtgId}">
+				<table border="1">
                     <tr>
-                        <th colspan="2">수정</th>
+                        <th colspan="2">수정페이지${fb.boardCtgId}</th>
                     </tr>
                     <tr>
                         <td>작성자</td>
                         <td>${fb.memNickname}</td>
                     </tr>
                     <tr>
-                        <td>수정일</td>
-                        <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
-                    </tr>
-                    <tr>
-                    	<th>제목</th>
-                		<td><input type="text" id="title" name="title" value="${fb.title}" required></td>
-                    </tr>
-                    <tr>
-					    <td>내용</td>
-                <td><textarea id="content" name="content" rows="10" cols="50">${fb.content}</textarea></td>
-					</tr>
-                    <tr>
-					    <td>첨부파일</td>
+			            <th>제목</th>
+			            <td><input type="text" id="title" name="title" value="${fb.title}" required></td>
+			        </tr>
+			        <tr>
+			            <th>내용</th>
+			            <td><textarea id="content" name="content" rows="10" cols="50">${fb.content}</textarea></td>
+			        </tr>
+                   <tr>
+					    <th>첨부파일</th>
 					    <td>
-						    <c:if test="${not empty fb.uploadFile}">
-						        ${fb.uploadFile }
-						        <form id="deleteForm" action="<c:url value='/deleteFile/${fb.uploadFile}'/>" method="post">
-						            <input type="hidden" name="url" value="${fb.uploadFile}" />
-						            <button type="submit">삭제</button>
-						        </form>
-						        <script>
-						            document.getElementById('uploadFile').style.display = 'none';
-						        </script>
-						    </c:if>
-						    <c:if test="${empty fb.uploadFile}">
-						        <input type="file" id="uploadFile" name="uploadFile" onchange="handleFileInputChange()">
-						    </c:if>
-						</td>
-
+					        <input type="text" id="uploadedFile" value="${fb.uploadFile}" readonly/>
+					        <button type="button" class="btn" id="deleteButton" onclick="clearFile(event)">삭제</button>
+					        <input type="file" id="uploadFile" name="uploadFile" onchange="UploadOnChange(event)">
+  						</td>
 					</tr>
+
                     <tr>
                         <td colspan="2">
-                            <button type="button" onclick="window.location.href='<c:url value='/freeboard/freeboardView' />'">취소</button>
-                            <button type="button" onclick="window.location.href='<c:url value='/freeboard/updateFreeBoard' />'">완료</button>
+                         <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/freeboardView/${ fb.boardCtgId }'/>'">취소</button>
+                        <button type="submit" class="btn">완료</button>
                         </td>
                     </tr>
                 </table>
-				
+			</form>
 				
 				
 			</section>

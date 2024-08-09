@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+table {
+    border-collapse: collapse;
+    width: 100%; 
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+table, th, td {
+    border-top: 1px solid #87C4FF;
+    border-bottom: 1px solid #87C4FF;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 2;
+}
+
+thead th {
+    border-top: 2px solid #87C4FF;
+}
+
+tbody tr:last-child td {
+    border-bottom: 2px solid #87C4FF;
+}
+
+th {
+    background-color: #E0F4FF;
+}

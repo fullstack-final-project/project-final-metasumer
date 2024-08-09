@@ -3,7 +3,6 @@ package com.spring_boot_final.metasumer.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +10,10 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,38 +33,46 @@ public class FreeBoardController {
 	@Autowired
 	FreeBoardService fbService;
 
-	// 자유게시판 글 목록 전체 보기
-	@RequestMapping("/freeboard/freeboardView")
-	public String freeboardView(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	// 자유게시판, 공지사항, 자주묻는 질문, 고객센터 전체 보기
+	@RequestMapping("/freeboard/freeboardView/{boardCtgId}")
+	public String freeboardView(@PathVariable String boardCtgId, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
-		int pageSize = 10; // 한 페이지에 표시할 항목 수
+		try {
+	        int pageSize = 10; // 한 페이지에 표시할 항목 수
 
-		if (page < 1) {
-			page = 1;
-		}
+	        if (page < 1) {
+	            page = 1;
+	        }
 
-		// 총 항목 수
-		int totalItems = fbService.countTotalItems();
+	        // 총 항목 수
+	        int totalItems = fbService.countTotalItems(boardCtgId);
 
-		// 총 페이지 수를 계산
-		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+	        // 총 페이지 수를 계산
+	        int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 
-		if (page > totalPages) {
-			page = totalPages;
-		}
+	        if (page > totalPages) {
+	            page = totalPages;
+	        }
 
-		int offset = (page - 1) * pageSize;
-		List<FreeBoardVO> fbList = fbService.selectItemsForPage(offset, pageSize);
+	        int offset = (page - 1) * pageSize;
 
-		model.addAttribute("fbList", fbList);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
+	        List<FreeBoardVO> fbList = fbService.selectItemsForPage(offset, pageSize, boardCtgId);
 
-		return "freeboard/freeboardView";
+	        model.addAttribute("fbList", fbList);
+	        model.addAttribute("currentPage", page);
+	        model.addAttribute("totalPages", totalPages);
+
+	        return "freeboard/freeboardView";
+	        
+	    } catch (Exception e) {
+	        System.out.println(boardCtgId);
+	        return "freeboard/freeboardView";
+	    }
+		
 	}
 
-	@RequestMapping("/freeboard/newfreeboardForm")
-	public String newfreeboradForm(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/freeboard/newfreeboardForm/{boardCtgId}")
+	public String newfreeboradForm(@PathVariable String boardCtgId, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 
@@ -79,6 +81,7 @@ public class FreeBoardController {
 
 		request.setAttribute("memNickname", memNickname);
 		request.setAttribute("memId", memId);
+		request.setAttribute("boardCtgId", boardCtgId);
 
 		return "freeboard/newfreeboardForm";
 	}
@@ -100,25 +103,14 @@ public class FreeBoardController {
 			vo.setMemId(memId);
 
 			if (file != null && !file.isEmpty()) {
-				String uploadPath = "D:/springWorkspace/upload/";
-
-				String originalFileName = file.getOriginalFilename();
-
-				originalFileName = originalFileName.replace("[", "_").replace("]", "_");
-
-				UUID uuid = UUID.randomUUID();
-				String savedFileName = uuid.toString() + "_" + originalFileName;
-				File uploadFile = new File(uploadPath + savedFileName);
-
-				file.transferTo(uploadFile);
-
+				String savedFileName = saveFile(file);
 				vo.setUploadFile(savedFileName);
 			}
 
 			fbService.insertFreeBoard(vo);
 
 			response.put("status", "success");
-			response.put("redirectUrl", "/freeboard/freeboardView");
+			response.put("redirectUrl", "/freeboard/freeboardView/"+boardCtgId);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,13 +123,15 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/detailViewFreeBoard/{boardPostNo}")
 	public String detailViewFreeBoard(@PathVariable String boardPostNo, Model model) {
 		
+		
+		
 		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
 
 		model.addAttribute("fb", fb);
 
 		return "freeboard/detailViewFreeBoard";
 	}
-	
+
 	// 다운로드
 	@RequestMapping("/downloadFile/{uploadFile}")
 	public void FileDownload(@PathVariable String uploadFile, HttpServletResponse response) throws IOException {
@@ -157,21 +151,72 @@ public class FreeBoardController {
 		FileCopyUtils.copy(fis, os);
 
 	}
-	
+
 	// 수정
-	@RequestMapping("/freeboard/updateFreeBoard/{boardPostNo}")
-	public String updateFreeBoard(@PathVariable String boardPostNo, Model model) {
+	@RequestMapping("/freeboard/updateBoardForm/{boardPostNo}")
+	public String updateFreeBoardForm(@PathVariable String boardPostNo, Model model) {
 		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
 		model.addAttribute("fb", fb);
 		return "freeboard/updateFreeBoardForm";
 	}
-	
-	// 삭제
-	@RequestMapping("/freeboard/deleteFreeBoard/{boardPostNo}")
-	public String deleteFreeBoard() {
+
+	@RequestMapping("freeboard/updateFreeBoard")
+	public String updateFreeBoard(@RequestParam("boardPostNo") String boardPostNo,
+            @RequestParam("title") String title,
+            @RequestParam("boardCtgId") int boardCtgId,
+            @RequestParam("content") String content,
+            @RequestParam("uploadFile") MultipartFile file) {
 		
-		return "freeboard/deleteFreeBoardForm";
+		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
+		
+		FreeBoardVO vo = new FreeBoardVO();
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setBoardPostNo(boardPostNo);
+		
+		try {
+	        if (file != null && !file.isEmpty()) {
+	            String savedFileName = saveFile(file);
+	            vo.setUploadFile(savedFileName);
+	        } else {
+	            vo.setUploadFile(fb.getUploadFile());
+	        }
+
+	        fbService.updateFreeBoard(vo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+		
+		return "redirect:/freeboard/freeboardView/" + boardCtgId;
 	}
+
+	// 삭제
+	@RequestMapping("/freeboard/deleteBoard")
+	public String deleteFreeBoard(@RequestParam("boardPostNo") String boardPostNo, @RequestParam("boardCtgId") int boardCtgId) {
+		fbService.deleteFreeBoard(boardPostNo);
+		return "redirect:/freeboard/freeboardView/" + boardCtgId;
+	}
+
+	
+	
+	
+	
+	private String saveFile(MultipartFile file) throws IOException {
+		String uploadPath = "D:/springWorkspace/upload/";
+
+		String originalFileName = file.getOriginalFilename();
+		originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+
+		UUID uuid = UUID.randomUUID();
+		String savedFileName = uuid.toString() + "_" + originalFileName;
+		File uploadFile = new File(uploadPath + savedFileName);
+
+		file.transferTo(uploadFile);
+
+		return savedFileName;
+	}
+	
 	
 
 }
