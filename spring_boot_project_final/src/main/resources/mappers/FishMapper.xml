@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.spring_boot_final.metasumer.dao.IFishDAO">
+    <resultMap id="fishResult" type="com.spring_boot_final.metasumer.model.FishVO">
+        <result property="fishNo" column="fishNo"  />
+  		<result property="fishName" column="fishName"  />
+  		<result property="fishLength" column="fishLength"  />
+  		<result property="fishDescription" column="fishDescription"  />  		
+  		<result property="fishBreeding" column="fishBreeding"  />
+  		<result property="fishTip" column="fishTip"  />
+  		<result property="fishTime" column="fishTime"  />
+  		<result property="fishPlace" column="fishPlace"  />  		
+  		<result property="fishHabitat" column="fishHabitat"  />
+  		<result property="fishImg" column="fishImg"  />
+  		<result property="fishCtgId" column="fishCtgId"  />
+    </resultMap>
+  
+    <!-- 전체 어종 조회 -->
+    <select id="listAllFish" resultMap="fishResult">
+  		SELECT * FROM fish_info ORDER BY fishNo
+  	</select>
+    
+    <!-- 카테고리 별 어종 조회  -->
+  	<select id="fishCtgList" resultMap="fishResult">
+  		SELECT * FROM fish_info WHERE fishCtgId=#{fishCtgId} ORDER BY fishNo
+  	</select>  	
+  	
+  	<!-- 어종 별 상세 정보 조회 -->
+  	<select id="detailViewFish" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FishVO">
+  	    SELECT * FROM fish_info WHERE fishNo = #{fishNo}
+  	</select>
+  	
+  	<!-- 어종 검색 -->
+  	<select id="fishSearch" parameterType="hashmap" resultMap="fishResult">
+  	    SELECT * FROM fish_info WHERE
+  	       <choose>
+  				<when test="type != null and type.equals('fishName')">
+  					fishName LIKE CONCAT('%', #{keyword}, '%')
+  				</when>  				
+  			</choose>
+  	</select>
+  </mapper>

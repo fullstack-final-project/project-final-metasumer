@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>어종 정보</title>
+		<!-- head.jsp import -->
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/580a70d00e.js" crossorigin="anonymous"></script>
+        <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+        <script src="<c:url value='/js/fish.js'/>"></script>
+        <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishInfo.css'/>">
+	</head>
+	<body>
+		<div id="wrap">
+			<!-- top.jsp import -->
+		
+			<section>
+			  <header>
+			    <h2>어종 정보</h2>
+			  </header>
+			  <img src="/image/fishBanner2.jpg" class="fishBanner">
+			  <div class="fishCtg">
+			    <div id='fishCtgBtn'>
+			      <button class='fishBtn' data-category='all'>전체 어종</button>
+			      <button class='fishBtn' data-category='1'>인기 어종</button>
+			      <button class='fishBtn' data-category='2'>희귀 어종</button>
+			      <button class='fishBtn' data-category='3'>일반 어종</button>
+			    </div>			    
+			  </div>
+			  <form class="fishSearch" method="get" action="">
+			    <input class="searchText" type="text" name="keywords" placeholder="검색어를 입력하세요.">
+			    <button class="searchBtn" type="submit">
+			      <i class="fa-solid fa-magnifying-glass"></i>			    
+			    </button>
+			  </form>
+			  <main>
+			    <div class='fishBox'>
+			      <c:forEach var="fish" items="${fishList}">	
+			        <div id="fish" data-category="${fish.fishCtgId}">
+			          <div id="fishDetail">
+			            <div>
+			              <a href="<c:url value='/fish/detailViewFish/${fish.fishNo}' />">
+			                <img src="<c:url value='/project_images/어종/${fish.fishImg}' />">
+			              </a>
+			            </div>			            
+			            <p id="fishName">${fish.fishName}</p>			            
+			          </div>
+			        </div>
+			      </c:forEach>
+			    </div>
+			  </main>
+			</section>
+			<!-- bottom.jsp import -->
+					
+		</div>
+	</body>
+</html>
