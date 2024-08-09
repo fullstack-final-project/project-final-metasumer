@@ -9,8 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-		registry.addResourceHandler("/images/**")
-				.addResourceLocations("file:///D:/springWorkspace/upload/");
+		// 프로젝트 외부 경로 이미지 맵핑 설정 
+		// 맵핑 이름 : project_images
+		registry.addResourceHandler("/project_images/**")
+		.addResourceLocations("file:///D:/springWorkspace/metasumer_images/");
 	}
 }
