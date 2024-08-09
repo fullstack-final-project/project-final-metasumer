@@ -3,6 +3,9 @@
  */
  
  $(document).ready(function() {
+ 
+ 	var bizCtgId = $('#bizCtgId').val();
+ 	
     $('#calendar').fullCalendar({
         header: {
             left: '',
@@ -13,7 +16,8 @@
         editable: false,
         events: function(start, end, timezone, callback) {
             $.ajax({
-                url: '/business/getReservations',
+                url: '/business/listReservationByCategory',
+                data: { "bizCtgId" : bizCtgId },
                 dataType: 'json',
                 success: function(data) {
                     var events = [];
@@ -63,18 +67,18 @@
     });
 });
 
-function confirmReservation(resNo) {
-    if (confirm("확정하시겠습니까?")) {
-        $.post(`/business/confirmReservation/${resNo}`, function(response) {
+function confirmReservation(resNo, bizCtgId) {
+    if (confirm("예약을 확정하시겠습니까?")) {
+        $.post(`/business/confirmReservation/${resNo}?bizCtgId=${bizCtgId}`, function(response) {
             alert("확정되었습니다.");
             location.reload();
         });
     }
 }
 
-function cancelReservation(resNo) {
+function cancelReservation(resNo, bizCtgId) {
     if (confirm("취소하시겠습니까?")) {
-        $.post(`/business/cancelReservation/${resNo}`, function(response) {
+        $.post(`/business/cancelReservation/${resNo}?bizCtgId=${bizCtgId}`, function(response) {
             alert("취소되었습니다.");
             location.reload();
         });
