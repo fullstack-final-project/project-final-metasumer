@@ -29,10 +29,10 @@
 				           
 							<c:choose>
 							    <c:when test="${not empty mf.uploadImage}">
-							        <img src="<c:url value='/images/${mf.uploadImage}'/>" width="100%" height="200"><br>
+							        <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="100%" height="200"><br>
 							    </c:when>
 							    <c:otherwise>
-							        <img src="<c:url value='/images/noImage.png'/>" width="100%" height="200"><br>
+							        <img src="<c:url value='/project_images/noImage.png'/>" width="100%" height="200"><br>
 							    </c:otherwise>
 							</c:choose>
 

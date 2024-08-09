@@ -149,7 +149,7 @@ public class MyFishRecordsController {
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {
-		String uploadPath = "D:/springWorkspace/upload/";
+		String uploadPath = "D:/springWorkspace/metasumer_images/";
 
 		String originalFileName = file.getOriginalFilename();
 		originalFileName = originalFileName.replace("[", "_").replace("]", "_");

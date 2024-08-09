@@ -52,7 +52,7 @@
 				<pre>${fn:escapeXml(mf.content)}</pre>
 				
 				<c:if test="${not empty mf.uploadImage}">
-				    <img src="<c:url value='/images/${mf.uploadImage}'/>" width="40%"><br>
+				    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
 				</c:if>
 				
 				

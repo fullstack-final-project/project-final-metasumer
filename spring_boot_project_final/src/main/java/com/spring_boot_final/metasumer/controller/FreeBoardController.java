@@ -136,7 +136,7 @@ public class FreeBoardController {
 	@RequestMapping("/downloadFile/{uploadFile}")
 	public void FileDownload(@PathVariable String uploadFile, HttpServletResponse response) throws IOException {
 
-		File f = new File("D:/springWorkspace/upload", uploadFile);
+		File f = new File("D:/springWorkspace/metasumer_images", uploadFile);
 
 		String encodedFileName = new String(uploadFile.getBytes("UTF-8"), "ISO-8859-1");
 
@@ -203,7 +203,7 @@ public class FreeBoardController {
 	
 	
 	private String saveFile(MultipartFile file) throws IOException {
-		String uploadPath = "D:/springWorkspace/upload/";
+		String uploadPath = "D:/springWorkspace/metasumer_images/";
 
 		String originalFileName = file.getOriginalFilename();
 		originalFileName = originalFileName.replace("[", "_").replace("]", "_");
