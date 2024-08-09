@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<title>어종 정보</title>
 		<!-- head.jsp import -->
-
+        <c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -19,7 +19,8 @@
 	<body>
 		<div id="wrap">
 			<!-- top.jsp import -->
-		
+		    <c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
+		    <br><br><br>
 			<section>
 			  <header>
 			    <h2>어종 정보</h2>
@@ -57,7 +58,7 @@
 			  </main>
 			</section>
 			<!-- bottom.jsp import -->
-					
+			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		
 		</div>
 	</body>
 </html>
