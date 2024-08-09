@@ -19,16 +19,18 @@
 	</resultMap>
 
 	<select id="selectItemsForPage" resultMap="fbResult">
-        SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate
-        FROM board b
-        JOIN member m ON b.memId = m.memId
-        ORDER BY b.createdDate DESC
-        LIMIT #{limit} OFFSET #{offset}
-    </select>
+		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName
+		FROM board b
+		JOIN member m ON b.memId = m.memId
+		JOIN boardCtg c ON b.boardCtgId = c.boardCtgId
+		WHERE b.boardCtgId = #{boardCtgId}
+		ORDER BY b.createdDate DESC
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
 
 	<select id="countTotalItems" resultType="int">
-        SELECT COUNT(*) FROM board
-    </select>
+		SELECT COUNT(*) FROM board WHERE boardCtgId = #{boardCtgId}
+	</select>
 
 	<insert id="insertFreeBoard"
 		parameterType="com.spring_boot_final.metasumer.model.FreeBoardVO">
@@ -37,12 +39,25 @@
 		VALUES (#{memId}, #{boardCtgId}, #{title}, #{content},
 		#{uploadFile})
 	</insert>
-	
-	<select id="detailViewFreeBoard" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
-    	SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname
-   	 	FROM board b
-    	JOIN member m ON b.memId = m.memId
-   	 	WHERE b.boardPostNo = #{boardPostNo}
+
+	<select id="detailViewFreeBoard" parameterType="string"
+		resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname
+		FROM board b
+		JOIN member m ON b.memId = m.memId
+		WHERE b.boardPostNo = #{boardPostNo}
 	</select>
+
+	<update id="updateFreeBoard" parameterType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		UPDATE board
+		SET title = #{title}, content = #{content}, uploadFile = #{uploadFile}
+		WHERE boardPostNo = #{boardPostNo}
+	</update>
+	
+	<delete id="deleteFreeBoard" parameterType="string">
+		DELETE FROM board WHERE boardPostNo = #{boardPostNo}
+	</delete>
+
+
 
 </mapper>

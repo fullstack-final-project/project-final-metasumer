@@ -37,8 +37,8 @@ $(document).ready(function(){
 
 // 삭제 버튼 표시 및 숨김 함수
 function toggleDeleteButton() {
-    var fileInput = document.getElementById('uploadFile');
-    var deleteButton = document.getElementById('deleteButton');
+    let fileInput = document.getElementById('uploadFile');
+    let deleteButton = document.getElementById('deleteButton');
 
     if (fileInput.files.length > 0) {
         $(deleteButton).show();

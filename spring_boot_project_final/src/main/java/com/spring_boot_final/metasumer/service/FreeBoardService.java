@@ -19,13 +19,13 @@ public class FreeBoardService implements IFreeBoardService {
 	IFreeBoardDAO dao;
 	
 	@Override
-	public int countTotalItems() {
-		return dao.countTotalItems();
+	public int countTotalItems(String boardCtgId) {
+		return dao.countTotalItems(boardCtgId);
 	}
 	
 	@Override
-	public List<FreeBoardVO> selectItemsForPage(int offset, int limit) {
-		return dao.selectItemsForPage(offset, limit);
+	public List<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId) {
+		return dao.selectItemsForPage(offset, limit, boardCtgId);
 	}
 	
 
@@ -36,13 +36,12 @@ public class FreeBoardService implements IFreeBoardService {
 
 	@Override
 	public void updateFreeBoard(FreeBoardVO vo) {
-		// TODO Auto-generated method stub
-
+		dao.updateFreeBoard(vo);
 	}
 
 	@Override
 	public void deleteFreeBoard(String boardPostNo) {
-		// TODO Auto-generated method stub
+		dao.deleteFreeBoard(boardPostNo);
 
 	}
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring_boot_final.metasumer.dao.IMyFishRecordsDAO">
+	<resultMap id="mfResult"
+		type="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+		<result property="recordNo" column="recordNo" />
+		<result property="memId" column="memId" />
+		<result property="memNickname" column="memNickname" />
+		<result property="boardCtgId" column="boardCtgId" />
+		<result property="title" column="title" />
+		<result property="createdDate" column="createdDate" />
+		<result property="content" column="content" />
+		<result property="uploadImage" column="uploadImage" />
+		<result property="fishName" column="fishName" />
+		<result property="fishSize" column="fishSize" />
+		<result property="equipment" column="equipment" />
+		<result property="location" column="location" />
+		<result property="weather" column="weather" />
+		<result property="tag" column="tag" />
+	</resultMap>
+
+	<select id="listAllMyFishRecords" resultMap="mfResult">
+		SELECT f.memId,	m.memNickname, f.title, f.content, f.createdDate, f.uploadImage, f.boardCtgId, f.recordNo
+		FROM myFishRecords f
+		JOIN member m ON f.memId = m.memId
+		ORDER BY f.recordNo DESC
+	</select>
+	
+	 <insert id="insertMyFishRecords" parameterType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+        INSERT INTO myFishRecords (memId, boardCtgId, title, content, uploadImage, fishName, fishSize, equipment, location, weather, createdDate)
+        VALUES (#{memId}, #{boardCtgId}, #{title}, #{content}, #{uploadImage}, #{fishName}, #{fishSize}, #{equipment}, #{location}, #{weather}, #{createdDate})
+    </insert>
+    
+    <select id="detailViewMyFishRecords" parameterType="string" resultMap="mfResult">
+	    SELECT f.recordNo, f.memId, f.boardCtgId, f.title, f.createdDate, f.content, f.uploadImage, f.fishName, f.fishSize, f.equipment, f.location, f.weather, m.memNickname
+	    FROM myFishRecords f
+	    JOIN member m ON f.memId = m.memId
+	    WHERE f.recordNo = #{recordNo};
+	</select>
+	
+	<update id="updateMyFishRecords" parameterType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+		UPDATE myFishRecords
+        SET title = #{title}, content = #{content}, uploadImage = #{uploadImage}, fishName = #{fishName}, fishSize = #{fishSize}, createdDate = #{createdDate}, equipment = #{equipment}, location = #{location}, weather = #{weather}
+        WHERE recordNo = #{recordNo}
+	</update>
+
+</mapper>

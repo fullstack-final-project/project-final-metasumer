@@ -9,6 +9,9 @@ public class FreeBoardVO {
 	private String boardPostNo;
 	private String memId;
 	private int boardCtgId;
+	private String boardCtgName;
+	
+	
 	private String title;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -17,6 +20,8 @@ public class FreeBoardVO {
 	private String content;
 	private String uploadFile;
 	private String memNickname;
+	
+	
 	public String getBoardPostNo() {
 		return boardPostNo;
 	}
@@ -65,6 +70,13 @@ public class FreeBoardVO {
 	public void setMemNickname(String memNickname) {
 		this.memNickname = memNickname;
 	}
-
+	public String getBoardCtgName() {
+		return boardCtgName;
+	}
+	public void setBoardCtgName(String boardCtgName) {
+		this.boardCtgName = boardCtgName;
+	}
+	
+	
 	
 }

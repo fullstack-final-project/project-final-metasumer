@@ -10,10 +10,10 @@ import com.spring_boot_final.metasumer.model.FreeBoardVO;
 public interface IFreeBoardDAO {
 	
 	// 게시판 글 수
-	public int countTotalItems();
+	public int countTotalItems(String boardCtgId);
 	
 	// 게시판 글 목록
-	public List<FreeBoardVO> selectItemsForPage(int offset, int limit);
+	public List<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId);
 	
 	// 자유게시판 등록
 	public void insertFreeBoard(FreeBoardVO vo);

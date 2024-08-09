@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<c:import url="/WEB-INF/views/test.jsp"></c:import>
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/newfreeboardForm.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
@@ -19,7 +22,7 @@
 			<section>
 				<form id="uploadFileForm" name="uploadFileForm" enctype="multipart/form-data">
 				<input type="hidden" name="memId" value="${memId}">
-				<input type="hidden" name="boardCtgId" value="2">
+				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
 				
 				
                 <table border="1" width="80%">
@@ -42,14 +45,14 @@
 			            <td><label for="uploadFile">파일 업로드</label></td>
 			            <td>
 			                <input type="file" id="uploadFile" name="uploadFile" onchange="toggleDeleteButton()">
-			                <button id="deleteButton" style="display: none;" onclick="resetFileInput()">삭제</button>
+			                <button id="deleteButton" class="btn" style="display: none;" onclick="resetFileInput()">첨부파일 삭제</button>
             			</td>
 			            
 			        </tr>
                     <tr>
                         <td colspan="2">
-                            <button type="submit">저장</button>
-                            <button type="button" onclick="window.location.href='<c:url value='/freeborad/freeboradView'/>'">취소</button>
+                            <button type="submit" class="btn">저장</button>
+                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/freeboardView/${ boardCtgId }'/>'">취소</button>
                         </td>
                     </tr>
                 </table>
