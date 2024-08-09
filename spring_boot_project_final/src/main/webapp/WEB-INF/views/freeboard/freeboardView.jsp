@@ -5,21 +5,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<c:import url="/WEB-INF/views/test.jsp"></c:import>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/freeboardView.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
     <meta charset="UTF-8">
     <title>자유게시판</title>
     <!-- head.jsp import -->
-    <%-- <c:import url="/WEB-INF/views/layout/head.jsp"/> --%>
+    <c:import url="/WEB-INF/views/layout/head.jsp"/>
 </head>
 <body>
     <div id="wrap">
         <!-- top.jsp import -->
-        <%-- <c:import url="/WEB-INF/views/layout/top.jsp"/> --%>
+        <c:import url="/WEB-INF/views/layout/top.jsp"/>
         <section>
+            
             <h1>${fbList[0].boardCtgName}</h1>
-            <h1>${boardCtgId}</h1>
             
         <div style="text-align: right; margin-bottom: 10px;">
         	<a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${ boardCtgId }'/>">글쓰기</a>
@@ -80,7 +79,7 @@
             </c:if>
         </section>
         <!-- bottom.jsp import -->
-        <%-- <c:import url="/WEB-INF/views/layout/bottom.jsp"/> --%>
+        <c:import url="/WEB-INF/views/layout/bottom.jsp"/>
     </div>
 </body>
 </html>

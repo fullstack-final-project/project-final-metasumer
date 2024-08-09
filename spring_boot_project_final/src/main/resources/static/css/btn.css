@@ -23,3 +23,8 @@ section {
 .btn:hover {
 	background-color: #87C4FF;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}

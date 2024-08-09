@@ -29,4 +29,7 @@ public interface IMyFishRecordsService {
 	// 자유게시판 검색
 	public ArrayList<MyFishRecordsVO> MyFishRecordsSearch(HashMap<String, Object> map);
 
+	// 내가 쓴 기록만
+	public ArrayList<MyFishRecordsVO> MyFishRecordsList(String memId);
+
 }
