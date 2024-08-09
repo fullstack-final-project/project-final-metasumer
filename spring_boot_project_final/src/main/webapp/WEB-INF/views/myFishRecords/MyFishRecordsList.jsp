@@ -18,10 +18,9 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
-				
 				<div class="button-container">
-	        		<a class="btn" href="<c:url value='/myFishRecords/MyFishRecordsList'/>">내가 쓴 기록보기</a>
-	        		<a class="btn btn-write" href="<c:url value='/myFishRecords/newMyFishRecordsForm/6'/>">글쓰기</a>
+        			<a class="btn btn-write" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">전체 기록보기</a>
+        			<a class="btn btn-write" href="<c:url value='/myFishRecords/newMyFishRecordsForm/6'/>">글쓰기</a>
 				</div>
 				<div class="fish-container">
 				    <c:forEach items="${mfList}" var="mf">

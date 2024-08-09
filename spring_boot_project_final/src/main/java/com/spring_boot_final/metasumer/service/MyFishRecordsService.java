@@ -57,4 +57,9 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 		return null;
 	}
 
+	@Override
+	public ArrayList<MyFishRecordsVO> MyFishRecordsList(String memId) {
+		return dao.MyFishRecordsList(memId);
+	}
+
 }

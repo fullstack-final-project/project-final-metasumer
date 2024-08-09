@@ -48,5 +48,14 @@
         SET title = #{title}, content = #{content}, uploadImage = #{uploadImage}, fishName = #{fishName}, fishSize = #{fishSize}, createdDate = #{createdDate}, equipment = #{equipment}, location = #{location}, weather = #{weather}
         WHERE recordNo = #{recordNo}
 	</update>
+	
+	<select id="MyFishRecordsList" resultMap="mfResult">
+		SELECT f.memId,	m.memNickname, f.title, f.content, f.createdDate, f.uploadImage, f.boardCtgId, f.recordNo
+		FROM myFishRecords f
+		JOIN member m ON f.memId = m.memId
+		WHERE f.memId = #{memId}
+		ORDER BY f.recordNo DESC
+	</select>
+	
 
 </mapper>

@@ -21,9 +21,6 @@
 			<div id="topMenuRightBox">
 				<!-- 로그인하지 않은 경우 : 로그인, 회원가입만 보여줌 -->
 				<c:if test="${empty sessionScope.sid }">
-					<a href="<c:url value='/purchase/reserve'/>">예약</a>
-					<a href="<c:url value='/community/main'/>">커뮤니티</a>
-					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/loginForm'/>">로그인</a>
 					<a href="<c:url value='/member/joinForm'/>">회원가입</a>
 				</c:if>
@@ -31,7 +28,7 @@
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
 					<a href="<c:url value='/purchase/reserve'/>">예약</a>
-					<a href="<c:url value='/community/main'/>">커뮤니티</a>
+					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/member/logout'/>">로그아웃</a>
@@ -187,10 +184,10 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox9">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">게시판</a></li>
-								<li class="subListItem"><a class="subListTxt">공지사항</a></li>
-								<li class="subListItem"><a class="subListTxt">Q&A</a></li>
-								<li class="subListItem"><a class="subListTxt">고객센터</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/freeboardView/2'/>">자유게시판</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/freeboardView/1'/>">공지사항</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/freeboardView/3'/>">자주묻는 질문</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/freeboardView/4'/>">고객센터</a></li>
 							</ul>
 						</div>
 					</div>

@@ -24,6 +24,7 @@ import com.spring_boot_final.metasumer.model.MyFishRecordsVO;
 import com.spring_boot_final.metasumer.service.MyFishRecordsService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class MyFishRecordsController {
@@ -113,16 +114,15 @@ public class MyFishRecordsController {
 	}
 
 	@RequestMapping("myFishRecords/updatemyFishRecords")
-	public String updateFreeBoard(@RequestParam("title") String title,
-			@RequestParam("content") String content, @RequestParam("recordNo") int recordNo,
-			@RequestParam("uploadFile") MultipartFile image, @RequestParam("fishName") String fishName,
-			@RequestParam("fishSize") String fishSize, @RequestParam("equipment") String equipment,
-			@RequestParam("location") String location, @RequestParam("weather") String weather,
+	public String updateFreeBoard(@RequestParam("title") String title, @RequestParam("content") String content,
+			@RequestParam("recordNo") int recordNo, @RequestParam("uploadFile") MultipartFile image,
+			@RequestParam("fishName") String fishName, @RequestParam("fishSize") String fishSize,
+			@RequestParam("equipment") String equipment, @RequestParam("location") String location,
+			@RequestParam("weather") String weather,
 			@RequestParam("createdDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date createdDate) {
-		
-		
+
 		MyFishRecordsVO vo = new MyFishRecordsVO();
-		
+
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setFishName(fishName);
@@ -140,12 +140,25 @@ public class MyFishRecordsController {
 			}
 
 			mfService.updateMyFishRecords(vo);
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		return "redirect:/myFishRecords/myFishRecordsListView";
+	}
+
+	@RequestMapping("/myFishRecords/MyFishRecordsList")
+	public String MyFishRecordsList(HttpServletRequest request, Model model) {
+		
+		HttpSession session = request.getSession();
+        String memId = (String) session.getAttribute("memId");
+        
+		ArrayList<MyFishRecordsVO> mfList = mfService.MyFishRecordsList(memId);
+
+		model.addAttribute("mfList", mfList);
+		
+		return "myFishRecords/MyFishRecordsList";
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {

@@ -4,6 +4,13 @@
 
 /***********  **********/
 /*********  ********/
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+
 #headerBox a {
 	text-decoration : none;
 	color: black;
