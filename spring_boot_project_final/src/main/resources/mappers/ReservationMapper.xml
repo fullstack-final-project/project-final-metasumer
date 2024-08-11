@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="com.spring_boot_final.metasumer.dao.IBusinessDAO">
+	<mapper namespace="com.spring_boot_final.metasumer.dao.IReservationDAO">
 		<resultMap id="reservationResultMap" type="com.spring_boot_final.metasumer.model.ReservationVO">
 	    <id property="resNo" column="resNo"/>
 	    <result property="resType" column="resType"/>
@@ -16,11 +16,19 @@
 	    <result property="bizCoupon" column="bizCoupon"/>
 	    <result property="bizResId" column="bizResId"/>
 	    <result property="resStatus" column="resStatus"/> 
+	    <result property="bizCtgId" column="bizCtgId"/> 
 		</resultMap>
 	
 		<!-- 모든 예약 목록을 가져오는 쿼리 -->
     <select id="getAllReservations" resultType="com.spring_boot_final.metasumer.model.ReservationVO">
         SELECT * FROM reservation
+    </select>
+    
+    <!-- 특정 카테고리 예약 목록 조회 -->
+    <select id="listReservationByCategory" resultType="com.spring_boot_final.metasumer.model.ReservationVO">
+        SELECT *
+        FROM reservation
+        WHERE bizCtgId = #{bizCtgId}
     </select>
 	
 		<!-- 예약 상태 업데이트 쿼리 -->

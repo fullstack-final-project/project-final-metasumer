@@ -13,6 +13,7 @@ public class BusinessVO {
   private String bizHp3;
   private String memId;
   private Integer bizCtgId;
+  private String bizCtgName;
 
   private BusinessEnums.MemType memType; // Enum 타입으로 설정(일반/사업자)
 
@@ -111,6 +112,14 @@ public class BusinessVO {
 
   public void setBizCtgId(Integer bizCtgId) {
     this.bizCtgId = bizCtgId;
+  }
+  
+  public String getBizCtgName() {
+    return bizCtgName;
+  }
+
+  public void setBizCtgName(String bizCtgName) {
+    this.bizCtgName = bizCtgName;
   }
 
   public BusinessEnums.MemType getMemType() {

@@ -27,8 +27,24 @@
 			<!-- top 임포트 -->
 			<c:import url="/WEB-INF/views/layout/top.jsp" />
 			<section id="dashboard">
-				<h1>예약 현황</h1>
-	
+				<!-- bizCtgId에 따라 제목 변경 -->
+				<h1>
+					<c:choose>
+						<c:when test="${bizCtgId == 1}">
+							바다 낚시 예약 현황
+						</c:when>
+						<c:when test="${bizCtgId == 2}">
+							민물 낚시 예약 현황
+						</c:when>
+						<c:otherwise>
+							예약 현황
+						</c:otherwise>
+					</c:choose>
+				</h1>
+					
+					<!-- bizCtgId를 hidden input으로 추가 -->
+					<input type="hidden" id="bizCtgId" value="${bizCtgId}" />
+					
 					<!-- 달력 부분 -->
 					<div id="calendar"></div>
 	
@@ -59,10 +75,11 @@
                					<fmt:formatDate value="${reservation.bizEnd}" pattern="HH:mm" /></td>
 										<td>${reservation.resStatus}</td>
 										<td>
+											<!-- 확정 및 취소 버튼에 bizCtgId 전달 -->
 											<button class="btn btn-success"
-												onclick="confirmReservation(${reservation.resNo})">확정</button>
+												onclick="confirmReservation(${reservation.resNo}, ${bizCtgId})">확정</button>
 											<button class="btn btn-cancel"
-												onclick="cancelReservation(${reservation.resNo})">취소</button>
+												onclick="cancelReservation(${reservation.resNo}, ${bizCtgId})">취소</button>
 										</td>
 									</tr>
 								</c:forEach>
