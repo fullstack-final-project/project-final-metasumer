@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/newfreeboardForm.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
@@ -25,16 +27,19 @@
 				
 				<table>
 					<tr>
-						<th colspan="6"><input type="text" id="title" name="title" value="${ mf.title }" required></th>
+						<th>제목</th>
+						<td colspan="3"><input type="text" id="title" name="title" value="${ mf.title }" required></td>
+						<th>날짜</th>
+						<td><input type="date" id="createdDate" name="createdDate" value="<fmt:formatDate value="${mf.createdDate}" pattern="yyyy-MM-dd" />" required></td>
+						
 					</tr>
 					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>
 						<th>위치</th>
 						<td><input type="text" id="location" name="location" value="${ mf.location }" required></td>
-						<th>날짜</th>
-						<td><input type="date" id="createdDate" name="createdDate" value="<fmt:formatDate value="${mf.createdDate}" pattern="yyyy-MM-dd" />" required></td>
-						
+						<th>날씨</th>
+						<td><input type="text" id="weather" name="weather" value="${ mf.weather }" required></td>
 					</tr>
 					<tr>
 						<th>어종</th>
@@ -43,12 +48,11 @@
 						<td><input type="text" id="fishSize" name="fishSize" value="${ mf.fishSize }" required></td>
 						<th>장비</th>
 						<td><input type="text" id="equipment" name="equipment" value="${ mf.equipment }" required></td>
-						<th>날씨</th>
-						<td><input type="text" id="weather" name="weather" value="${ mf.weather }" required></td>
+						
 					</tr>
 					<tr>
 					    <th>글내용</th>
-					    <td><input type="text" id="content" name="content" value="${ mf.content }" required></td>
+					    <td colspan="5"><input type="text" id="content" name="content" value="${ mf.content }" required></td>
 					</tr>
 					<tr>
 					    <th>첨부파일</th>
@@ -59,9 +63,9 @@
   						</td>
 					</tr>
 					 <tr>
-                        <td colspan="2">
-                        <button type="button" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView'/>';">취소</button>
-                        <button type="submit">완료</button>
+                        <td colspan="6">
+                        <button class="btn" type="button" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView'/>';">취소</button>
+                        <button class="btn" type="submit">완료</button>
                         </td>
                     </tr>
 				</table>

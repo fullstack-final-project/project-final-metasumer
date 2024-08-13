@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		 <link rel="stylesheet" type="text/css" href="<c:url value='/css/newfreeboardForm.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
@@ -37,6 +39,12 @@
 			            <th>내용</th>
 			            <td><textarea id="content" name="content" rows="10" cols="50">${fb.content}</textarea></td>
 			        </tr>
+			    <c:if test="${fb.boardCtgId == 5}">
+                    <tr>
+                        <td><label for="price">가격</label></td>
+                        <td><input type="number" id="price" name="price" min="0" step="100"/></td>
+                    </tr>
+                </c:if>
                    <tr>
 					    <th>첨부파일</th>
 					    <td>

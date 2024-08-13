@@ -4,88 +4,82 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class FreeBoardVO {
-	
-	private String boardPostNo;
+public class CommentVO {
+
+	private String commentNo;
 	private String memId;
-	private int boardCtgId;
-	private String boardCtgName;
-	
-	
-	private String title;
-	
+	private String boardCtgId;
+	private String recordNo;
+	private String boardPostNo;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdDate;
-	
+
 	private String content;
-	private String uploadFile;
 	private String memNickname;
-	private String price;
-	
-	
-	
-	
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
+
 	public String getBoardPostNo() {
 		return boardPostNo;
 	}
+
 	public void setBoardPostNo(String boardPostNo) {
 		this.boardPostNo = boardPostNo;
 	}
+
+	public String getCommentNo() {
+		return commentNo;
+	}
+
+	public void setCommentNo(String commentNo) {
+		this.commentNo = commentNo;
+	}
+
 	public String getMemId() {
 		return memId;
 	}
+
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-	public int getBoardCtgId() {
+
+	public String getBoardCtgId() {
 		return boardCtgId;
 	}
-	public void setBoardCtgId(int boardCtgId) {
+
+	public void setBoardCtgId(String boardCtgId) {
 		this.boardCtgId = boardCtgId;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getRecordNo() {
+		return recordNo;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setRecordNo(String recordNo) {
+		this.recordNo = recordNo;
 	}
+
 	public Date getCreatedDate() {
 		return createdDate;
 	}
+
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getUploadFile() {
-		return uploadFile;
-	}
-	public void setUploadFile(String uploadFile) {
-		this.uploadFile = uploadFile;
-	}
+
 	public String getMemNickname() {
 		return memNickname;
 	}
+
 	public void setMemNickname(String memNickname) {
 		this.memNickname = memNickname;
 	}
-	public String getBoardCtgName() {
-		return boardCtgName;
-	}
-	public void setBoardCtgName(String boardCtgName) {
-		this.boardCtgName = boardCtgName;
-	}
-	
-	
-	
+
 }

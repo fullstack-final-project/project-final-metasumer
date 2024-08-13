@@ -42,7 +42,7 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 
 	@Override
 	public void deleteMyFishRecords(String recordNo) {
-		// TODO Auto-generated method stub
+		dao.deleteMyFishRecords(recordNo);
 
 	}
 

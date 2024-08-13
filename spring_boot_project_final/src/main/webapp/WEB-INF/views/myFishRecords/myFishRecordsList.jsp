@@ -25,22 +25,25 @@
 				<div class="fish-container">
 				    <c:forEach items="${mfList}" var="mf">
 				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }' />'" style="cursor: pointer;">
-				            <div id="title">${mf.title}</div>
+				            <div class="date">
+							    <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" />
+							</div>
 				           
 							<c:choose>
 							    <c:when test="${not empty mf.uploadImage}">
-							        <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="100%" height="200"><br>
+							        <img src="<c:url value='/project_images/${mf.uploadImage}'/>" 
+							             width="100%" height="200"
+							             onerror="this.src='<c:url value='/project_images/noImage.png'/>'">
 							    </c:when>
 							    <c:otherwise>
 							        <img src="<c:url value='/project_images/noImage.png'/>" width="100%" height="200"><br>
 							    </c:otherwise>
 							</c:choose>
+							
+				            <div class="fish-title">${mf.title}</div>
+    						<div class="fish-nickname">${mf.memNickname}</div>
 
 
-
-				            ${mf.memNickname}<br>
-				            ${mf.content}<br>
-				            <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" /><br>
 				        </div>
 				    </c:forEach>
 				</div>	

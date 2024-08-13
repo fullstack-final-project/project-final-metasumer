@@ -2,7 +2,6 @@ package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +23,7 @@ public class FreeBoardService implements IFreeBoardService {
 	}
 	
 	@Override
-	public List<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId) {
+	public ArrayList<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId) {
 		return dao.selectItemsForPage(offset, limit, boardCtgId);
 	}
 	
@@ -54,6 +53,11 @@ public class FreeBoardService implements IFreeBoardService {
 	public ArrayList<FreeBoardVO> FreeBoardSearch(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId) {
+		return dao.fleamarketList(boardCtgId);
 	}
 
 }
