@@ -10,6 +10,8 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+		<script src="<c:url value='/js/comment.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
@@ -18,13 +20,13 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
+							<input type="hidden" name="sid" value="${sessionScope.sid}" />
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView' />'">목록으로</button>
                         <c:if test="${sessionScope.sid eq mf.memId}">
-                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/updatemyFishRecordsForm/${mf.recordNo}' />'">수정</button>
-							    <button type="button" class="btn" onclick="confirmDelete()">삭제</button>
-                            <form id="deleteForm" action="<c:url value='/freeboard/deleteBoard' />" method="post">
+                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/updatemyFishRecordsForm/${mf.recordNo}' />'">수정</button>
+							<button type="button" class="btn" onclick="confirmDelete()">삭제</button>
+                            <form id="deleteForm" action="<c:url value='/myFishRecords/deletemyFishRecords' />" method="post">
 							    <input type="hidden" name="recordNo" value="${mf.recordNo}" />
-							    <input type="hidden" name="boardCtgId" value="${fm.boardCtgId}" />
 							</form>
 						</c:if>
 				<table>
@@ -47,24 +49,30 @@
 						<td>${ mf.weather }</td>
 					</tr>
 				</table>
-				
-				<pre>${fn:escapeXml(mf.content)}</pre>
-				
-				<c:if test="${not empty mf.uploadImage}">
-				    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
-				</c:if>
-				
-				
+				<div id="contentContainer">
+					<pre>${fn:escapeXml(mf.content)}</pre>
+					
+					<c:if test="${not empty mf.uploadImage}">
+					    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
+					</c:if>
+					
+					
+					<!-- 댓글 작성 -->
+					<form id="commentForm">
+						<p>${sessionScope.memNickname}</p>
+				        <input type="hidden" name="memId" value="${sessionScope.sid}">
+				        <input type="hidden" name="recordNo" value="${mf.recordNo}">
+				        <input type="hidden" name="boardCtgId" value="${mf.boardCtgId}">
+				        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
+				        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
+				    </form>
+	
+				    <div id="commentList">
+				    </div>
+				</div>			
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>
 		</div>
 	</body>
-	<script>
-	function confirmDelete() {
-	    if (confirm("정말로 삭제하시겠습니까?")) {
-	        document.getElementById('deleteForm').submit();
-	    }
-	}
-	</script>
 </html>

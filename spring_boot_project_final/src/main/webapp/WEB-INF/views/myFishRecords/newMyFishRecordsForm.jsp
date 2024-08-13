@@ -53,23 +53,23 @@
 		            </tr>
 		            <tr>
 		                <th>물고기 이름</th>
-		                <td><input type="text" id="fishName" name="fishName" required></td>
+		                <td><input type="text" id="fishName" name="fishName"></td>
 		            </tr>
 		            <tr>
 		                <th>물고기 크기</th>
-		                <td><input type="text" id="fishSize" name="fishSize" required></td>
+		                <td><input type="text" id="fishSize" name="fishSize"></td>
 		            </tr>
 		            <tr>
 		                <th>사용 장비</th>
-		                <td><input type="text" id="equipment" name="equipment" required></td>
+		                <td><input type="text" id="equipment" name="equipment"></td>
 		            </tr>
 		            <tr>
 		                <th>낚시 위치</th>
-		                <td><input type="text" id="location" name="location" required></td>
+		                <td><input type="text" id="location" name="location"></td>
 		            </tr>
 		            <tr>
 		                <th>날씨</th>
-		                <td><input type="text" id="weather" name="weather" required></td>
+		                <td><input type="text" id="weather" name="weather"></td>
 		            </tr>
 		            <tr>
 		            	<td colspan="2">

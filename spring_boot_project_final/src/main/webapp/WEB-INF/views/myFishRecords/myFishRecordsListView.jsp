@@ -20,14 +20,16 @@
 			<section>
 				
 				<div class="button-container">
-	        		<a class="btn" href="<c:url value='/myFishRecords/MyFishRecordsList'/>">내가 쓴 기록보기</a>
+	        		<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsList'/>">내가 쓴 기록보기</a>
 	        		<a class="btn btn-write" href="<c:url value='/myFishRecords/newMyFishRecordsForm/6'/>">글쓰기</a>
 				</div>
 				<div class="fish-container">
+				
 				    <c:forEach items="${mfList}" var="mf">
 				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }' />'" style="cursor: pointer;">
-				            <div id="title">${mf.title}</div>
-				           
+				            <div class="date">
+							    <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" />
+							</div>
 							<c:choose>
 							    <c:when test="${not empty mf.uploadImage}">
 							        <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="100%" height="200"><br>
@@ -37,14 +39,14 @@
 							    </c:otherwise>
 							</c:choose>
 
-
-
-				            ${mf.memNickname}<br>
-				            ${mf.content}<br>
-				            <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" /><br>
+							<div class="fish-title">${mf.title}</div>
+    						<div class="fish-nickname">${mf.memNickname}</div>
+				            
 				        </div>
 				    </c:forEach>
-				</div>	
+				</div>
+				
+				
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>

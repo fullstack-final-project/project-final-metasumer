@@ -108,7 +108,7 @@
 						<div class="subListBox" id="subListBox4">
 							<ul class="subList">
 								<li class="subListItem"><a class="subListTxt">낚시 용품</a></li>
-								<li class="subListItem"><a class="subListTxt">중고 장터</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a></li>
 							</ul>
 						</div>
 					</div>

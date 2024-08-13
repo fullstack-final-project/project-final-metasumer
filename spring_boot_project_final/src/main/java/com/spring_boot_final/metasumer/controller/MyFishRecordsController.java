@@ -105,7 +105,7 @@ public class MyFishRecordsController {
 	}
 
 	// 수정
-	@RequestMapping("/freeboard/updatemyFishRecordsForm/{recordNo}")
+	@RequestMapping("/myFishRecords/updatemyFishRecordsForm/{recordNo}")
 	public String updateMyFishRecordsForm(@PathVariable String recordNo, Model model) {
 
 		MyFishRecordsVO mf = mfService.detailViewMyFishRecords(recordNo);
@@ -113,7 +113,7 @@ public class MyFishRecordsController {
 		return "myFishRecords/updateMyFishRecordsForm";
 	}
 
-	@RequestMapping("myFishRecords/updatemyFishRecords")
+	@RequestMapping("/myFishRecords/updatemyFishRecords")
 	public String updateFreeBoard(@RequestParam("title") String title, @RequestParam("content") String content,
 			@RequestParam("recordNo") int recordNo, @RequestParam("uploadFile") MultipartFile image,
 			@RequestParam("fishName") String fishName, @RequestParam("fishSize") String fishSize,
@@ -148,17 +148,24 @@ public class MyFishRecordsController {
 		return "redirect:/myFishRecords/myFishRecordsListView";
 	}
 
-	@RequestMapping("/myFishRecords/MyFishRecordsList")
+	@RequestMapping("/myFishRecords/myFishRecordsList")
 	public String MyFishRecordsList(HttpServletRequest request, Model model) {
-		
+
 		HttpSession session = request.getSession();
-        String memId = (String) session.getAttribute("memId");
-        
+		String memId = (String) session.getAttribute("memId");
+
 		ArrayList<MyFishRecordsVO> mfList = mfService.MyFishRecordsList(memId);
 
 		model.addAttribute("mfList", mfList);
-		
-		return "myFishRecords/MyFishRecordsList";
+
+		return "myFishRecords/myFishRecordsList";
+	}
+
+	// 삭제
+	@RequestMapping("/myFishRecords/deletemyFishRecords")
+	public String deletemyFishRecords(@RequestParam("recordNo") String recordNo) {
+		mfService.deleteMyFishRecords(recordNo);
+		return "redirect:/myFishRecords/myFishRecordsListView";
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {

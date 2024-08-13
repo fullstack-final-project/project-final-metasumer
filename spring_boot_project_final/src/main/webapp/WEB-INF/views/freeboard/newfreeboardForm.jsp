@@ -24,7 +24,7 @@
 				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
 				
 				
-                <table border="1" width="80%">
+                <table border="1">
                     <tr>
                         <th colspan="2">글쓰기 페이지${memId}</th>
                     </tr>
@@ -40,6 +40,12 @@
                         <td><label for="content">내용</label></td>
                         <td><textarea id="content" name="content" rows="10" cols="50" required></textarea></td>
                     </tr>
+                <c:if test="${boardCtgId == 5}">
+                    <tr>
+                        <td><label for="price">가격</label></td>
+                        <td><input type="number" id="price" name="price" min="0" step="100"/></td>
+                    </tr>
+                </c:if>
                     <tr>
 			            <td><label for="uploadFile">파일 업로드</label></td>
 			            <td>

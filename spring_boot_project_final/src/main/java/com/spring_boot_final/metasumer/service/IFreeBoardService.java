@@ -2,7 +2,6 @@ package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
 
@@ -12,7 +11,10 @@ public interface IFreeBoardService {
 	public int countTotalItems(String boardCtgId);
 
 	// 게시판 글 목록
-	public List<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId);
+	public ArrayList<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId);
+
+	// 벼룩시장 글 목록
+	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId);
 
 	// 자유게시판 등록
 	public void insertFreeBoard(FreeBoardVO vo);

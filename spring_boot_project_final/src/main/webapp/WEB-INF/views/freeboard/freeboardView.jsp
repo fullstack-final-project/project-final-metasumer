@@ -17,10 +17,10 @@
         <!-- top.jsp import -->
         <c:import url="/WEB-INF/views/layout/top.jsp"/>
         <section>
-            
+         <div class="board-container">
             <h1>${fbList[0].boardCtgName}</h1>
             
-        <div style="text-align: right; margin-bottom: 10px;">
+        <div class="button-container2">
         	<a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${ boardCtgId }'/>">글쓰기</a>
     	</div>
 				
@@ -30,7 +30,7 @@
 	
 	
 			<c:if test="${not empty fbList}">
-            <table border="1" width="70%">
+            <table border="1">
                 <thead>
                     <tr>
                         <th>번호</th>
@@ -52,7 +52,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-
+			</div>
             <div class="pagination" style="text-align: center; margin-top: 10px;">
                 <!-- 이전 페이지 링크 -->
                 <c:if test="${currentPage > 1}">

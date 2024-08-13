@@ -57,5 +57,9 @@
 		ORDER BY f.recordNo DESC
 	</select>
 	
+	<delete id="deleteMyFishRecords" parameterType="string">
+		DELETE FROM myFishRecords WHERE recordNo = #{recordNo}
+	</delete>
+	
 
 </mapper>

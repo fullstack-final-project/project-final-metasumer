@@ -40,7 +40,7 @@
 					<a class="btn" href="<c:url value='/freeboard/freeboardView/2'/>">자유게시판</a>
 					<a class="btn" href="<c:url value='/freeboard/freeboardView/3'/>">자주묻는 질문</a>
 					<a class="btn" href="<c:url value='/freeboard/freeboardView/4'/>">고객센터</a>
-					<a class="btn" href="<c:url value='/freeboard/freeboardView/5'/>">벼룩시장</a>
+					<a class="btn" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a>
 					<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
 				</c:if>
 
