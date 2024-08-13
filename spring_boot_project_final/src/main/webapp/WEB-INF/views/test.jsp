@@ -11,12 +11,12 @@
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 		<script src="<c:url value='/js/test.js'/>"></script>
 		<!-- head.jsp import -->
-		<%-- <c:import url = "/WEB-INF/views/layout/head.jsp"></c:import> --%>
+		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
 	<body>
 		<div id="wrap">
 			<!-- top.jsp import -->
-			<%-- <c:import url = "/WEB-INF/views/layout/top.jsp"></c:import> --%>
+			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
 				<c:if test="${ empty sessionScope.sid }">
@@ -48,7 +48,7 @@
         </section>
         
 			<!-- bottom.jsp import -->
-			<%-- <c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>	 --%>	
+			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>
 		</div>
 	</body>
 </html>

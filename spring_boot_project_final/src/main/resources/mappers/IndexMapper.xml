@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring_boot_final.metasumer.dao.IIndexDAO">
+
+	<select id="listBestMemFishRecords" resultType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+		SELECT f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
+		FROM myFishRecords f
+	    JOIN member m ON f.memId = m.memId
+		ORDER BY fishSize DESC
+		LIMIT 10 
+	</select>
+	
+	<select id="listBestBusinessRank" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+		SELECT bizId, bizName, bizRegImg, bizCtgId
+		FROM business
+		ORDER BY bizId
+		LIMIT 5
+	</select>
+	
+	
+</mapper>
