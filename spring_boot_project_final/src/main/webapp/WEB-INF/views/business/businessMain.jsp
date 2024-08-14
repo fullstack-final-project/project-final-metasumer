@@ -34,6 +34,8 @@
         		 <div class="card-content">
 	             <h2>상품 판매</h2>
 	             <p>상품 판매 관련 관리 및 분석을 진행하세요.</p>
+	             <%-- <c:set var="bizId" value="${loggedInUser.bizId}" />
+	             <a href="<c:url value='/product/productManagement?bizId=${bizId}'/>" class="btn">자세히 보기</a> --%>
 	             <a href="<c:url value='/product/productManagement'/>" class="btn">자세히 보기</a>
 	           </div> 
          </div>

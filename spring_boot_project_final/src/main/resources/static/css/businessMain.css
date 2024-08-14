@@ -2,7 +2,6 @@
 
 /* 기본 스타일 설정 */
 body {
-	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
 }
@@ -74,35 +73,6 @@ main {
 }
 
 
-
-
-/* 반응형 스타일 */
-@media ( min-width : 768px) {
-	.cards {
-		justify-content: space-between;
-	}
-	.card {
-		flex: 1 1 calc(50% - 20px); /* 화면이 충분히 넓어지면 2개의 카드가 가로로 배치됨 */
-	}
-}
-
-@media ( min-width : 1024px) {
-	.card {
-		flex: 1 1 calc(33.333% - 20px); /* 화면이 더 넓어지면 3개의 카드가 가로로 배치됨 */
-	}
-}
-
-@media ( min-width : 1256px) {
-	.cards {
-		max-width: 1256px;
-		margin: 0 auto;
-		padding: 0 60px; /* 카드와 화면 가장자리 간의 여백을 조정 */
-	}
-	.card {
-		flex: 1 1 calc(33.333% - 40px); /* 화면이 최대 너비일 때 카드의 너비를 조정 */
-	}
-}
-
 /* 버튼 스타일 */
 .btn {
 	background-color: #39A7FF;
@@ -130,4 +100,31 @@ main {
 	background-image: url('/images/민물.jpg'); /* 배경 이미지 URL */
   background-size: cover; /* 배경 이미지를 카드의 전체 크기에 맞게 조절 */
   background-position: center; /* 배경 이미지의 위치를 카드의 중앙으로 설정 */
+}
+
+/* 반응형 스타일 */
+@media ( min-width : 768px) {
+	.cards {
+		justify-content: space-between;
+	}
+	.card {
+		flex: 1 1 calc(50% - 20px); /* 화면이 충분히 넓어지면 2개의 카드가 가로로 배치됨 */
+	}
+}
+
+@media ( min-width : 1024px) {
+	.card {
+		flex: 1 1 calc(33.333% - 20px); /* 화면이 더 넓어지면 3개의 카드가 가로로 배치됨 */
+	}
+}
+
+@media ( min-width : 1256px) {
+	.cards {
+		max-width: 1256px;
+		margin: 0 auto;
+		padding: 0 60px; /* 카드와 화면 가장자리 간의 여백을 조정 */
+	}
+	.card {
+		flex: 1 1 calc(33.333% - 40px); /* 화면이 최대 너비일 때 카드의 너비를 조정 */
+	}
 }

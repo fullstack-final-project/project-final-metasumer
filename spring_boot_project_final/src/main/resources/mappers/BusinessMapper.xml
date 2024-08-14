@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.spring_boot_final.metasumer.dao.IBusinessDAO">
+		
+		<!-- 모든 사업체 조회 -->
+		<select id="getAllBusiness" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT b.*, c.bizCtgName
+        FROM business b
+        JOIN bizCategory c ON b.bizCtgId = c.bizCtgId
+    </select>
+
+  	<!-- 사업체 상세 정보 및 카테고리 조회 -->
+	  <select id="getBusinessWithCategory" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+	    SELECT b.*, c.bizCtgName
+	    FROM business b
+	    JOIN bizCategory c ON b.bizCtgId = c.bizCtgId
+	    WHERE b.bizId = #{bizId}
+		</select>
+		
+		<!-- 모든 사업체 카테고리 조회 -->
+    <select id="getBusinessCategory" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT bizCtgId, bizCtgName FROM bizCategory
+    </select>
+		
+		<!-- 업체 등록 -->
+    <insert id="registerBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
+        INSERT INTO business (bizName, bizRegNum, bizZipcode, bizAddress1, bizAddress2, 
+                              bizRegImg, bizHP1, bizHP2, bizHP3, memId, bizCtgId)
+        VALUES (#{bizName}, #{bizRegNum}, #{bizZipcode}, #{bizAddress1}, #{bizAddress2},
+                #{bizRegImg}, #{bizHP1}, #{bizHP2}, #{bizHP3}, #{memId}, #{bizCtgId})
+    </insert>
+    
+		<!-- 업체 수정 -->
+    <update id="updateBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
+        UPDATE business
+        SET bizName = #{bizName},
+            bizRegNum = #{bizRegNum},
+            bizZipcode = #{bizZipcode},
+            bizAddress1 = #{bizAddress1},
+            bizAddress2 = #{bizAddress2},
+            bizRegImg = #{bizRegImg},
+            bizHP1 = #{bizHP1},
+            bizHP2 = #{bizHP2},
+            bizHP3 = #{bizHP3},
+            memId = #{memId},
+            bizCtgId = #{bizCtgId}
+        WHERE bizId = #{bizId}
+    </update>
+
+		<!-- 업체 삭제 -->
+    <delete id="deleteBusiness" parameterType="String">
+        DELETE FROM business WHERE bizId = #{bizId}
+    </delete>
+	</mapper>

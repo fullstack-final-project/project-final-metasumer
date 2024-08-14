@@ -50,11 +50,11 @@
 									<td>${product.prdName}</td>
 									<td>${product.prdPrice}</td>
 									<td>${product.prdStock}</td>
-									<td>${product.prdCategory}</td>
+									<td>${product.prdCtgId}</td>
 									<td>${product.prdMaker}</td>
 									<td>${product.prdDescript}</td>
-									<td><img src="${product.prdImage}"
-										width="50" height="50"></td>
+									<td><img src="<c:url value='/project_images/${product.prdImage}'/>"
+																alt="${product.prdName}"width="40px" height="40px">
 									<td>
 										<a href="<c:url value='/product/updateProductForm/${product.prdNo }'/>">[수정]</a>
 										<a href="javascript:deleteCheck('${product.prdNo}');">[삭제]</a>

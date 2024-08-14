@@ -9,11 +9,12 @@
       <result property="prdName" column="prdName"/>
       <result property="prdPrice" column="prdPrice"/>
       <result property="prdStock" column="prdStock"/>
-      <result property="prdCategory" column="prdCategory"/>
       <result property="prdMaker" column="prdMaker"/>
       <result property="prdDescript" column="prdDescript"/>
       <result property="prdImage" column="prdImage"/>
       <result property="bizId" column="bizId"/>
+      <result property="prdCtgId" column="prdCtgId"/>
+      <result property="prdCtgName" column="prdCtgName"/>
   </resultMap>
 
     <!-- 모든 상품 조회 (사업체 ID로 필터링) -->
@@ -28,15 +29,14 @@
     
     <!-- 상품 상세 정보 조회 -->
   	<!-- 상품번호(string) 전달받아서 해당 상품 찾아서 반환 (VO) -->
-  	<select id="detailViewProduct" parameterType="string"
-  				  resultType="com.spring_boot_final.metasumer.model.ProductVO">
+  	<select id="detailViewProduct" parameterType="string" resultType="com.spring_boot_final.metasumer.model.ProductVO">
   		SELECT * FROM product WHERE prdNo = #{prdNo}
   	</select>
 
     <!-- 상품 추가 -->
     <insert id="insertProduct" parameterType="com.spring_boot_final.metasumer.model.ProductVO">
-        INSERT INTO product (prdNo, prdName, prdPrice, prdStock, prdCategory, prdMaker, prdDescript, prdImage, bizId)
-        VALUES (#{prdNo}, #{prdName}, #{prdPrice}, #{prdStock}, #{prdCategory}, #{prdMaker}, #{prdDescript}, #{prdImage}, #{bizId})
+        INSERT INTO product (prdNo, prdName, prdPrice, prdStock, prdMaker, prdDescript, prdImage, bizId, prdCtgId)
+        VALUES (#{prdNo}, #{prdName}, #{prdPrice}, #{prdStock}, #{prdMaker}, #{prdDescript}, #{prdImage}, #{bizId}, #{prdCtgId})
     </insert>
 
     <!-- 상품 수정 -->
@@ -45,11 +45,11 @@
         SET prdName = #{prdName},
             prdPrice = #{prdPrice},
             prdStock = #{prdStock},
-            prdCategory = #{prdCategory},
             prdMaker = #{prdMaker},
             prdDescript = #{prdDescript},
             prdImage = #{prdImage},
-            bizId = #{bizId}
+            bizId = #{bizId},
+            prdCtgId = #{prdCtgId}
         WHERE prdNo = #{prdNo}
     </update>
 
@@ -57,7 +57,29 @@
     <delete id="deleteProduct" parameterType="String">
         DELETE FROM product WHERE prdNo = #{prdNo}
     </delete>
-
+    
+    <!-- 베스트 상품 조회 -->
+    <select id="getBestProduct" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT * FROM product ORDER BY prdName DESC LIMIT 8
+    </select>
+		
+		<!-- 신상품 조회 -->
+    <select id="getNewProduct" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT * FROM product ORDER BY prdNo DESC LIMIT 8
+    </select>
+    
+    <!-- 카테고리 목록 조회 -->
+    <select id="listAllCategories" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT prdCtgId, prdCtgName FROM prdCategory
+    </select>
+    
+    <!-- 카테고리별 상품 조회 -->
+		<select id="getProductsByCategory" parameterType="String" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+		    SELECT p.* 
+		    FROM product p
+		    JOIN prdCategory c ON p.prdCtgId = c.prdCtgId
+		    WHERE c.prdCtgName = #{category}
+		</select>
     
 
 </mapper>
