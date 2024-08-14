@@ -29,4 +29,6 @@ tbody tr:hover {
     background-color: #E0F4FF;
 }
 
-
+h1 {
+    text-align: center;
+}

@@ -56,14 +56,19 @@
 					    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
 					</c:if>
 					
-					
 					<!-- 댓글 작성 -->
 					<form id="commentForm">
 						<p>${sessionScope.memNickname}</p>
 				        <input type="hidden" name="memId" value="${sessionScope.sid}">
 				        <input type="hidden" name="recordNo" value="${mf.recordNo}">
 				        <input type="hidden" name="boardCtgId" value="${mf.boardCtgId}">
-				        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
+				        <input type="hidden" name="postAuthorId" value="${mf.memId}">
+				        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요." required></textarea>
+				    <label>
+				            <input type="checkbox" id="secretComment" name="secretComment">
+				            비밀댓글
+				        </label>
+				        
 				        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
 				    </form>
 	

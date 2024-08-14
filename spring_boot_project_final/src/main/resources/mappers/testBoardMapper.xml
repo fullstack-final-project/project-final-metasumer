@@ -11,8 +11,8 @@
 		memPwd=#{pwd}
 	</select>
 	
-    <select id="getUsermemNickname" parameterType="string" resultType="string">
-        SELECT memNickname
+    <select id="getUsermemNickname" parameterType="string" resultType="map">
+        SELECT memNickname, memType
         FROM member
         WHERE memId = #{id}
     </select>

@@ -82,18 +82,25 @@
                 </table>
 				
 				<div id="contentContainer">
-				<!-- 댓글 작성 -->
-				<form id="commentForm">
-						<p>${sessionScope.memNickname}</p>
-				        <input type="hidden" name="memId" value="${sessionScope.sid}">
-				        <input type="hidden" name="boardPostNo" value="${fb.boardPostNo}">
-				        <input type="hidden" name="boardCtgId" value="${fb.boardCtgId}">
-				        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
-				        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
-				    </form>
-
-			    <div id="commentList">
-			    </div>
+					<!-- 댓글 작성 -->
+					<form id="commentForm">
+							<p>${sessionScope.memNickname}</p>
+					        <input type="hidden" name="memId" value="${sessionScope.sid}">
+					        <input type="hidden" name="boardPostNo" value="${fb.boardPostNo}">
+					        <input type="hidden" name="boardCtgId" value="${fb.boardCtgId}">
+					        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
+					        
+					        <label>
+					            <input type="checkbox" id="secretComment" name="secretComment">
+					            비밀댓글
+					        </label>
+					        
+					        
+					        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
+					    </form>
+	
+				    <div id="commentList">
+				    </div>
 				</div>
 				
 				

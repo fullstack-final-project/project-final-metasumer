@@ -31,4 +31,7 @@ public interface IFreeBoardService {
 	// 자유게시판 검색
 	public ArrayList<FreeBoardVO> FreeBoardSearch(HashMap<String, Object> map);
 
+	// QnA
+	public ArrayList<FreeBoardVO> qnaList(String boardCtgId);
+
 }

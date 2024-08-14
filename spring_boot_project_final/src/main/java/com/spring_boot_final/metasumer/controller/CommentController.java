@@ -26,7 +26,9 @@ public class CommentController {
 	
 	@PostMapping("/board/addComment")
     @ResponseBody
-	public Map<String, String> selectMyFishRecords(@RequestParam String memId, @RequestParam String recordNo, @RequestParam String boardCtgId, @RequestParam String content) {
+	public Map<String, String> selectMyFishRecords(@RequestParam(value = "secret", defaultValue = "false") boolean secret, @RequestParam String memId, @RequestParam String recordNo, @RequestParam String boardCtgId, @RequestParam String content) {
+		
+		int secretResult = secret ? 1 : 0;
 		
 		CommentVO vo = new CommentVO();
 		
@@ -34,6 +36,7 @@ public class CommentController {
 		vo.setRecordNo(recordNo);
 		vo.setBoardCtgId(boardCtgId);
 		vo.setContent(content);
+		vo.setSecret(secretResult);
 		
 		cmService.addComment(vo);
 		
@@ -81,18 +84,18 @@ public class CommentController {
 
 	@PostMapping("/board/addCommentBoard")
     @ResponseBody
-	public Map<String, String> selectMyFishRecordsBoard(@RequestParam String memId, @RequestParam String boardPostNo, @RequestParam String boardCtgId, @RequestParam String content) {
-		System.out.println("확인!!!!!!!!!! " + memId);
-		System.out.println("boardPostNo 확인!!!!!!!!!! " + boardPostNo);
-		System.out.println("확인!!!!!!!!!! " + boardCtgId);
-		System.out.println("content 확인!!!!!!!!!! " + content);
+	public Map<String, String> selectMyFishRecordsBoard(@RequestParam(value = "secret", defaultValue = "false") boolean secret, @RequestParam String memId, @RequestParam String boardPostNo, @RequestParam String boardCtgId, @RequestParam String content) {
+		
+		int secretResult = secret ? 1 : 0;
 		
 		CommentVO vo = new CommentVO();
+		
 		
 		vo.setMemId(memId);
 		vo.setBoardPostNo(boardPostNo);
 		vo.setBoardCtgId(boardCtgId);
 		vo.setContent(content);
+		vo.setSecret(secretResult);
 		
 		cmService.addCommentBoard(vo);
 		

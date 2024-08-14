@@ -37,7 +37,12 @@
 		WHERE b.boardCtgId = #{boardCtgId}
 		ORDER BY b.createdDate DESC
 	</select>
-	
+	<select id="qnaList" resultMap="fbResult">
+		SELECT title, content, boardPostNo, boardCtgId
+		FROM board
+		WHERE boardCtgId = 3
+		ORDER BY createdDate DESC;
+	</select>
 
 	<select id="countTotalItems" resultType="int">
 		SELECT COUNT(*) FROM board WHERE boardCtgId = #{boardCtgId}

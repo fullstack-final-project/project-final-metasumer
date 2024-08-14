@@ -16,20 +16,24 @@ function confirmDelete() {
 
 function addComment() {
 
-	// 텍스트 영역의 값 가져오기
 	let content = $('#commentContent').val().trim();
 	    
-    // 값이 비어있는지 확인
     if (content === '') {
         alert('댓글 내용을 입력하세요.');
-        return; // 함수 종료
+        return;
     }
     
-
+    let secret = $('#secretComment').is(':checked') ? 'true' : 'false';
+    
+    let formData = new FormData($('#commentForm')[0]);
+    formData.append('secret', secret);
+    
     $.ajax({
         type: 'POST',
         url: '/board/addCommentBoard',
-        data: $('#commentForm').serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         dataType: 'json', 
         success: function(response) {
             if (response.status === "success") {

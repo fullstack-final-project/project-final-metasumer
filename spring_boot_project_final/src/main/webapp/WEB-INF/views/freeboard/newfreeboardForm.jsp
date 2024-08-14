@@ -46,14 +46,17 @@
                         <td><input type="number" id="price" name="price" min="0" step="100"/></td>
                     </tr>
                 </c:if>
+                <c:choose>
+            		<c:when test="${boardCtgId != 3}">
                     <tr>
 			            <td><label for="uploadFile">파일 업로드</label></td>
 			            <td>
 			                <input type="file" id="uploadFile" name="uploadFile" onchange="toggleDeleteButton()">
 			                <button id="deleteButton" class="btn" style="display: none;" onclick="resetFileInput()">첨부파일 삭제</button>
             			</td>
-			            
 			        </tr>
+			        </c:when>
+			     </c:choose>
                     <tr>
                         <td colspan="2">
                             <button type="submit" class="btn">저장</button>

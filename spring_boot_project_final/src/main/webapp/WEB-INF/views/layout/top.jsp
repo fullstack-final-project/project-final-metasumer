@@ -31,7 +31,7 @@
 					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
-					<a href="<c:url value='/member/logout'/>">로그아웃</a>
+					<a href="<c:url value='/test/logout'/>">로그아웃</a>
 				</c:if>			
 			</div> <!-- topMenuRightBox 종료 -->
 		</div>
@@ -72,30 +72,31 @@
 				</div>
 			</li>
 			<li class="mainMenuList">
-				<div class="mainMenuCtg" id="mainMenuCtg2" value="subListBox2">낚시 정보</div>
+				<div class="mainMenuCtg" id="mainMenuCtg2"><a href="<c:url value='/fishing/fishingCtgList/1/1001'/>">낚시 정보</a></div>
 				<div class="subMainMenu">
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox2">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">초보자 가이드</a></li>
-								<li class="subListItem"><a class="subListTxt">낚시 노하우</a></li>
-								<li class="subListItem"><a class="subListTxt">장비 사용법</a></li>
-								<li class="subListItem"><a class="subListTxt">실전 스킬</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishing/fishingCtgList/1/1001'/>">초보자 가이드</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishing/fishingCtgList/2/2001'/>">낚시 노하우</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishing/fishingCtgList/3/3001'/>">장비 사용법</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishing/fishingCtgList/4/4001'/>">실전 스킬</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</li>
 			<li class="mainMenuList">
-				<div class="mainMenuCtg" id="mainMenuCtg3">물고기 정보</div>
+				<div class="mainMenuCtg" id="mainMenuCtg3"><a href="<c:url value='/fish'/>">물고기 정보</a></div>
 				<div class="subMainMenu">
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox3">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">인기 어종</a></li>
-								<li class="subListItem"><a class="subListTxt">희귀 어종</a></li>
-								<li class="subListItem"><a class="subListTxt">전체 어종</a></li>
-								<li class="subListItem"><a class="subListTxt">해외 어종</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fish'/>">전체 어종</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value=' /fish/fishCtgList/3'/>">일반 어종</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fish/fishCtgList/1'/>">인기 어종</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fish/fishCtgList/2'/>">희귀 어종</a></li>
+								<li class="subListItem"><a class="subListTxt" >해외 어종</a></li>
 							</ul>
 						</div>
 					</div>
@@ -107,7 +108,7 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox4">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">낚시 용품</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/product/productList'/>">낚시 용품</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a></li>
 							</ul>
 						</div>

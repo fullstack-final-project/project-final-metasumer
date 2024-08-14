@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public interface ITestService {
 
@@ -8,6 +9,6 @@ public interface ITestService {
 	public String loginCheck(HashMap<String, Object> map);
 
 	// 사용자 이름을 반환
-	public String getUsermemNickname(String memId);
+	public Map<String, Object> getUsermemNickname(String memId);
 
 }

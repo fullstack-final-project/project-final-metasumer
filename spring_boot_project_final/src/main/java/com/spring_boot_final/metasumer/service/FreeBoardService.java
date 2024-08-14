@@ -60,4 +60,9 @@ public class FreeBoardService implements IFreeBoardService {
 		return dao.fleamarketList(boardCtgId);
 	}
 
+	@Override
+	public ArrayList<FreeBoardVO> qnaList(String boardCtgId) {
+		return dao.qnaList(boardCtgId);
+	}
+
 }

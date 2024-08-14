@@ -17,13 +17,27 @@
         <!-- top.jsp import -->
         <c:import url="/WEB-INF/views/layout/top.jsp"/>
         <section>
+            <h1>${fbList[0].boardCtgName} / ${boardCtgId} / ${sessionScope.memType}</h1>
          <div class="board-container">
-            <h1>${fbList[0].boardCtgName}</h1>
-            
-        <div class="button-container2">
-        	<a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${ boardCtgId }'/>">글쓰기</a>
-    	</div>
-				
+         
+         <c:choose>
+            <c:when test="${boardCtgId == 2 || boardCtgId == 3 || boardCtgId == 4}">
+                <div class="button-container2">
+                    <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${sessionScope.memType == 'admin' || sessionScope.memType == 'business'}">
+                        <div class="button-container2">
+                            <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
+                        </div>
+                    </c:when>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
+         
+         
 			<c:if test="${empty fbList}">
                 <p>데이터가 없습니다.</p>
             </c:if>	
