@@ -40,6 +40,14 @@ public class FreeBoardController {
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
 		try {
+			
+			if ("3".equals(boardCtgId)) {
+				ArrayList<FreeBoardVO> qnaList = fbService.qnaList(boardCtgId);
+				model.addAttribute("qnaList", qnaList);
+	            return "freeboard/qnaView";
+	        }
+			
+			
 			int pageSize = 10; // 한 페이지에 표시할 항목 수
 
 			if (page < 1) {

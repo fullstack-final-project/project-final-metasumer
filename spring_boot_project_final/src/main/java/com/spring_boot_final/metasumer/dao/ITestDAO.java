@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public interface ITestDAO {
 	
@@ -8,7 +9,7 @@ public interface ITestDAO {
 	public String loginCheck(HashMap<String, Object> map);
 
 	// 사용자 이름을 반환
-	public String getUsermemNickname(String memId);
+	public Map<String, Object> getUsermemNickname(String memId);
 
 
 }

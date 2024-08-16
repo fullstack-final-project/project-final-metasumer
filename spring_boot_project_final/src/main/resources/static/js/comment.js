@@ -16,21 +16,26 @@ function confirmDelete() {
 
 function addComment() {
 
-	// 텍스트 영역의 값 가져오기
 	let content = $('#commentContent').val().trim();
 	    
-    // 값이 비어있는지 확인
     if (content === '') {
         alert('댓글 내용을 입력하세요.');
-        return; // 함수 종료
+        return;
     }
+    
+    let secret = $('#secretComment').is(':checked') ? 'true' : 'false';
+    
+    let formData = new FormData($('#commentForm')[0]);
+    formData.append('secret', secret);
     
 
     $.ajax({
         type: 'POST',
         url: '/board/addComment',
         data: $('#commentForm').serialize(),
-        dataType: 'json', 
+        data: formData,
+        processData: false,
+        contentType: false, 
         success: function(response) {
             if (response.status === "success") {
                 $('#commentForm')[0].reset();
@@ -49,27 +54,66 @@ function addComment() {
 function loadComments() {
     let recordNo = $('input[name="recordNo"]').val();
     let currentUserId = $('input[name="sid"]').val();
+    let postAuthorId = $('input[name="postAuthorId"]').val();
     
     $.getJSON('/board/getComments/' + recordNo, function(data) {
         let commentHtml = '';
         $.each(data, function(index, comment) {
-            commentHtml += '<div class="comment">';
+        
+    	let memId = comment.memId;
+        	
+        	commentHtml += '<div class="comment">';
             commentHtml += '<div id="commentBox' + comment.commentNo + '">';
-            commentHtml += '<strong>' + comment.memNickname + ':</strong> ' + comment.content + '&nbsp;&nbsp;';
-
-            if (comment.memId === currentUserId) {
-                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
-                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
-            }
-            commentHtml += '</div>';
-            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
-            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
-            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
-            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
-            commentHtml += '</div>';
+        	commentHtml += '<strong>' + comment.memNickname + '</strong><br> '; 
+        	
+        	if(comment.secret === 1){
+	        		commentHtml += '<img src="/project_images/secret.png" width="20px">';
+        	
+        		if(currentUserId !== postAuthorId && currentUserId !== memId){
+	        		commentHtml += '&nbsp;&nbsp;비밀 댓글 입니다.';
+		            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+	        		
+        		} else{
+        		
+            		commentHtml += '&nbsp;&nbsp;' + comment.content + '&nbsp;&nbsp;';
+            		
+            		if (comment.memId === currentUserId) {
+		                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
+		                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
+		            }
             
-            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
-            commentHtml += '</div>';
+		            commentHtml += '</div>';
+		            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
+		            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
+		            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
+		            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
+		            commentHtml += '</div>';
+		            
+		            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+		            commentHtml += '</div>';
+        		
+        		}
+        	} else{
+        		
+        		commentHtml += '&nbsp;&nbsp;' + comment.content + '&nbsp;&nbsp;';
+            		
+        		if (comment.memId === currentUserId) {
+	                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
+	                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
+	            }
+        
+	            commentHtml += '</div>';
+	            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
+	            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
+	            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
+	            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
+	            commentHtml += '</div>';
+	            
+	            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+	            commentHtml += '</div>';
+        	}
+
+            
         });
         $('#commentList').html(commentHtml);
     });

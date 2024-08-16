@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,7 +21,7 @@ public class TestService implements ITestService {
 		return dao.loginCheck(map);
 	}
 
-	public String getUsermemNickname(String memId) {
+	public Map<String, Object> getUsermemNickname(String memId) {
 		return dao.getUsermemNickname(memId);
 	}
 

@@ -11,12 +11,25 @@ public class CommentVO {
 	private String boardCtgId;
 	private String recordNo;
 	private String boardPostNo;
+	private int secret;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdDate;
 
 	private String content;
 	private String memNickname;
+	
+	
+	
+	
+
+	public int getSecret() {
+		return secret;
+	}
+
+	public void setSecret(int secret) {
+		this.secret = secret;
+	}
 
 	public String getBoardPostNo() {
 		return boardPostNo;
