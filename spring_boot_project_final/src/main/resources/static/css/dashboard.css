@@ -4,24 +4,63 @@
 
 /* 전체적인 스타일 설정 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
 
 /* 컨테이너 스타일 */
 #wrap {
     width: 80%;
-    margin: 0 auto;
+    margin: 40px auto; /* 상하 여백 추가 */
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 8px;
 }
 
 /* 대시보드 제목 스타일 */
 #dashboard h1 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 24px; 
+    color: #333; 
+}
+
+.tab{
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+}
+
+/* 탭 버튼 스타일 */
+.tab button {
+    background-color: #E0F4FF;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 20px;
+    transition: background-color 0.3s ease; /* 부드러운 색상 전환 효과 */
+    font-size: 16px;
+    margin-right: 5px; /* 버튼 간 간격 추가 */
+    border-radius: 4px 4px 0 0; 
+}
+
+.tab button:hover {
+    background-color: #39A7FF;
+}
+
+.tab button.active {
+    background-color: #39A7FF;
+}
+
+h2 {
+		text-align:center;
+}
+
+/* 탭 내용 스타일 */
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-top: none;
+    border-radius: 0 4px 4px 4px; /* 탭 내용 상단 제외 둥글게 */
+    background-color: #fff;
 }
 
 /* 달력 스타일 */
@@ -37,6 +76,8 @@ body {
 #reservations h2 {
     margin-bottom: 20px;
     text-align: center;
+    font-size: 20px; 
+    color: #555; 
 }
 
 /* 테이블 스타일 */
@@ -45,6 +86,8 @@ body {
     margin-bottom: 1rem;
     background-color: transparent;
     border-collapse: collapse;
+    font-size: 14px; /* 기본 폰트 크기 */
+    border: 1px solid #ddd; /* 테이블 외곽선 추가 */
 }
 
 .table th,
@@ -57,6 +100,7 @@ body {
 .table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
+    background-color: #E0F4FF; /* 헤더 배경색 추가 */
 }
 
 .table tbody tr:hover {
@@ -65,10 +109,12 @@ body {
 
 /* 버튼 스타일 */
 .btn {
-    padding: 5px 10px;
+    padding: 8px 16px; /* 패딩 증가 */
     margin: 2px;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 14px; /* 폰트 크기 증가 */
+    transition: background-color 0.3s ease; /* 부드러운 색상 전환 효과 */
 }
 
 .btn-success {
@@ -93,30 +139,55 @@ body {
 
 /* FullCalendar 버튼 스타일 제거 */
 .fc-next-button,
-.fc-prev-button { /* prev 버튼도 같은 클래스이므로 같이 처리 */
-    background: none !important; /* 배경색 제거 */
-    border: none !important; /* 테두리 제거 */
-    color: inherit !important; /* 텍스트 색상 상속 */
-    box-shadow: none !important; /* 그림자 제거 */
-    padding: 0 !important; /* 패딩 제거 */
+.fc-prev-button {
+    background: none !important;
+    border: none !important;
+    color: inherit !important;
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
 .fc-next-button:hover,
-.fc-prev-button:hover { /* Hover 상태에서도 같은 스타일 유지 */
-    background: none !important; /* 마우스 오버 시 배경색 제거 */
-    border: none !important; /* 마우스 오버 시 테두리 제거 */
+.fc-prev-button:hover {
+    background: none !important;
+    border: none !important;
 }
 
 /* 일요일에 대한 텍스트 색상 설정 */
 .fc-sun {
-    color: red !important; /* 어두운 빨간색 텍스트 */
+    color: red !important;
 }
 
-
+/* FullCalendar 이벤트 타이틀 색상 */
 .fc-title {
-		color: black !important;
+    color: black !important;
 }
 
+/* 반응형 디자인: 작은 화면에서의 스타일 조정 */
+@media (max-width: 768px) {
+    #wrap {
+        width: 95%; /* 작은 화면에서의 너비 조정 */
+    }
+
+    .tab button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .tabcontent {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
 
 
 

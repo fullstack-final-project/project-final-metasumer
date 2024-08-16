@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+*{
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+}
+
+
+#wrap{
+	margin: 0 auto;
+	max-width: 65%;
+	padding: 20px;
+}
+
+section{
+	margin-top:20px;	
+}
+
+
+#wrap section header{
+	display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#wrap h2{
+    margin: 0 auto;
+    margin-top: 7px;
+}
+
+#wrap .fishingBanner{
+	width: 100%;
+	height: auto;
+}
+
+.fishingCtg{
+	display: flex;
+	margin-left: 0px;
+	margin-top: 20px;
+	align-items: center;
+}
+
+
+#fishingCtgBtn{
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+}
+
+#wrap .fishingBtn{
+    margin-right: 7px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 7px;
+}
+
+#wrap .fishingBtn:hover{
+	color: #39A7FF;
+}
+
+#wrap .fishingBtn:active, .fishingBtn.selectedItem{
+	color: #39A7FF;
+}
+
+#fishingContainer{
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 33px; 
+}
+
+#fishingSub{
+    width: 300px;
+}
+
+#fishingSub ul{
+    list-style-type: none;
+    border: 1px solid #39A7FF;
+    padding: 10px 25px;
+}
+
+#fishingSub a{
+    text-decoration: none;
+    color: black;
+    line-height: 2.5;
+}
+
+#fishingSub a:hover{
+    color: #39A7FF;
+}
+
+#fishingSub a:active, #fishingSub a.selectedSub {
+    color: #39A7FF;
+}
+
+#fishingBox{
+    flex: 1; 
+    margin-left: 62px;
+    margin-top: -10px;
+}
+
+#fishingBox h1{
+    color: #39A7FF;
+}
+
+#fishingBox hr{
+    background-color: #39A7FF;    
+    height: 1px;
+    border: 0;
+}
+
+#fishing-name{
+    display: flex;
+    align-items: center;
+    margin-bottom: -10px; 
+}
+
+#fishingBox img{
+    width: 7%;
+    height: auto;
+    margin-left: 10px;
+}
+
+#fishing-content{
+    margin-top: 30px;
+    margin-bottom: 45px;
+}

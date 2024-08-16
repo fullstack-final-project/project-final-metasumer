@@ -1,13 +1,14 @@
 package com.spring_boot_final.metasumer.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.service.ProductService;
@@ -16,40 +17,27 @@ import com.spring_boot_final.metasumer.service.ProductService;
 public class ProductController {
   @Autowired
   private ProductService prdService;
-  
-  // 상품 관리 폼 열기
-//  @RequestMapping("/productManagement")
-//  public String productManagement() {
-//    return "product/productManagement";
-//  }
+
   
   //사업체가 등록한 상품 조회
-  @RequestMapping("/product/listProductsByBizId")
-  public String listProductsByBizId(@RequestParam("bizId") String bizId, Model model) {
-      // 서비스에게 사업체 ID 전달하고, 해당 사업체의 상품 데이터 받아오기
-      ArrayList<ProductVO> prdList = prdService.listAllProductByBizId(bizId);
-      
-      // 뷰 페이지에 출력하기 위해 Model 설정
-      model.addAttribute("prdList", prdList);
-      
-      return "product/productListByBizId";
-  }
-  
-  // 모든 상품 조회
-  @RequestMapping("/product/productManagement")
-  public String listAllProduct(Model model) {
-      // 서비스에게 요청하여 전체 상품 데이터 받아오기
-      ArrayList<ProductVO> prdList = prdService.listAllProduct();
-      
-      // 뷰 페이지에 출력하기 위해 Model 설정
-      model.addAttribute("prdList", prdList);
-      
-      return "product/productManagement";
-  }
+//  @RequestMapping("/product/productManagement")
+//  public String listProductsByBizId(@RequestParam("bizId") Integer bizId, Model model) {
+//      // 서비스에게 사업체 ID 전달하고, 해당 사업체의 상품 데이터 받아오기
+//      ArrayList<ProductVO> prdList = prdService.listAllProductByBizId(bizId);
+//      
+//      // 뷰 페이지에 출력하기 위해 Model 설정
+//      model.addAttribute("prdList", prdList);
+//      
+//      return "product/productManagement";
+//  }
+ 
   
   //상품 등록 폼 열기
   @RequestMapping("/product/insertProductForm")
-  public String insertProductForm() {
+  public String insertProductForm(Model model) {
+    // 카테고리 목록을 서비스에서 가져옴
+    ArrayList<ProductVO> categoryList = prdService.listAllCategories();
+    model.addAttribute("categoryList", categoryList);
     return "product/insertProductForm";
   }  
   
@@ -91,9 +79,11 @@ public class ProductController {
   public String updateProductForm(@PathVariable String prdNo, Model model) {
     // 서비스에게 상품번호 전달하고, 해당 상품 데이터 받아오기
     ProductVO prd = prdService.detailViewProduct(prdNo);
+    ArrayList<ProductVO> categoryList = prdService.listAllCategories();
     
     // 뷰 페이지에 출력하기 위해 Model 설정
     model.addAttribute("prd", prd);
+    model.addAttribute("categoryList", categoryList);
     
     return "product/updateProductForm"; // 폼에 데이터 출력
   }
@@ -111,4 +101,40 @@ public class ProductController {
     prdService.deleteProduct(prdNo);  
     return "redirect:/product/productManagement";
   }
+  
+  //////////////////////////////////////////////////////////////
+  
+  //모든 상품 조회
+  @RequestMapping("/product/productManagement")
+  public String listAllProduct(Model model) {
+    // 서비스에게 요청하여 전체 상품 데이터 받아오기
+    ArrayList<ProductVO> prdList = prdService.listAllProduct();
+
+    // 뷰 페이지에 출력하기 위해 Model 설정
+    model.addAttribute("prdList", prdList);
+
+    return "product/productManagement";
+  }
+  
+  @RequestMapping("/product/productList")
+  public String productList(Model model) {
+      ArrayList<ProductVO> bestProducts = prdService.getBestProduct();
+      ArrayList<ProductVO> newProducts = prdService.getNewProduct();
+
+      // 카테고리별 상품 데이터 조회
+      Map<String, ArrayList<ProductVO>> categoryProducts = new HashMap<>();
+      categoryProducts.put("낚싯대", prdService.getProductsByCategory("낚싯대"));
+      categoryProducts.put("미끼", prdService.getProductsByCategory("미끼"));
+      categoryProducts.put("릴", prdService.getProductsByCategory("릴"));
+      categoryProducts.put("의류/장비", prdService.getProductsByCategory("의류/장비"));
+      categoryProducts.put("기타 액세서리", prdService.getProductsByCategory("기타 액세서리"));
+
+      model.addAttribute("bestProducts", bestProducts);
+      model.addAttribute("newProducts", newProducts);
+      model.addAttribute("categoryProducts", categoryProducts);
+
+      return "product/productList";
+  }
+  
+  
 }

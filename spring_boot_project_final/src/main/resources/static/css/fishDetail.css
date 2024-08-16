@@ -15,7 +15,7 @@ section{
 	margin-top:10px;	
 }
 
-#wrap header{
+#wrap section header{
 	display: flex;
     align-items: center;
     padding-bottom: 10px;

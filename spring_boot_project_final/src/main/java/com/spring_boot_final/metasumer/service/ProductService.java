@@ -16,7 +16,7 @@ import com.spring_boot_final.metasumer.model.ProductVO;
   IProductDAO dao;
 
   @Override
-  public ArrayList<ProductVO> listAllProductByBizId(String bizId) {
+  public ArrayList<ProductVO> listAllProductByBizId(Integer bizId) {
     return dao.listAllProductByBizId(bizId);
   }
   
@@ -44,5 +44,24 @@ import com.spring_boot_final.metasumer.model.ProductVO;
   public ProductVO detailViewProduct(String prdNo) {
     return dao.detailViewProduct(prdNo);
   }
+  
+  @Override
+    public ArrayList<ProductVO> getBestProduct() {
+      return dao.getBestProduct();
+    }
+  
+  @Override
+    public ArrayList<ProductVO> getNewProduct() {
+      return dao.getNewProduct();
+    }
+  
+  @Override
+    public ArrayList<ProductVO> listAllCategories() {
+      return dao.listAllCategories();
+    }
 
+  @Override
+    public ArrayList<ProductVO> getProductsByCategory(String category) {
+      return dao.getProductsByCategory(category);
+    }
 }

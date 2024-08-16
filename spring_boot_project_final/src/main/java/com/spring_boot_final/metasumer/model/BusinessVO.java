@@ -8,14 +8,13 @@ public class BusinessVO {
   private String bizAddress1;
   private String bizAddress2;
   private String bizRegImg; // 사업장 이미지
-  private String bizHp1;
-  private String bizHp2;
-  private String bizHp3;
+  private String bizHP1;
+  private String bizHP2;
+  private String bizHP3;
   private String memId;
   private Integer bizCtgId;
-
-  private BusinessEnums.MemType memType; // Enum 타입으로 설정(일반/사업자)
-
+  private String bizCtgName;
+  
   public Integer getBizId() {
     return bizId;
   }
@@ -72,28 +71,28 @@ public class BusinessVO {
     this.bizRegImg = bizRegImg;
   }
 
-  public String getBizHp1() {
-    return bizHp1;
+  public String getBizHP1() {
+    return bizHP1;
   }
 
-  public void setBizHp1(String bizHp1) {
-    this.bizHp1 = bizHp1;
+  public void setBizHP1(String bizHP1) {
+    this.bizHP1 = bizHP1;
   }
 
-  public String getBizHp2() {
-    return bizHp2;
+  public String getBizHP2() {
+    return bizHP2;
   }
 
-  public void setBizHp2(String bizHp2) {
-    this.bizHp2 = bizHp2;
+  public void setBizHP2(String bizHP2) {
+    this.bizHP2 = bizHP2;
   }
 
-  public String getBizHp3() {
-    return bizHp3;
+  public String getBizHP3() {
+    return bizHP3;
   }
 
-  public void setBizHp3(String bizHp3) {
-    this.bizHp3 = bizHp3;
+  public void setBizHP3(String bizHP3) {
+    this.bizHP3 = bizHP3;
   }
   
 
@@ -112,23 +111,15 @@ public class BusinessVO {
   public void setBizCtgId(Integer bizCtgId) {
     this.bizCtgId = bizCtgId;
   }
-
-  public BusinessEnums.MemType getMemType() {
-    return memType;
+  
+  public String getBizCtgName() {
+    return bizCtgName;
   }
 
-  public void setMemType(BusinessEnums.MemType memType) {
-    this.memType = memType;
+  public void setBizCtgName(String bizCtgName) {
+    this.bizCtgName = bizCtgName;
   }
 
 
-  ///////////////////////////////////////////////////////////////////
-
-  // enum 설정
-  public static class BusinessEnums {
-    public enum MemType {
-      general, business
-    }
-  }
 
 }
