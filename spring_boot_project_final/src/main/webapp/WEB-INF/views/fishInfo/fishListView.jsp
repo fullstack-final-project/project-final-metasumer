@@ -8,11 +8,9 @@
 		<title>어종 정보</title>
 		<!-- head.jsp import -->
         <c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/580a70d00e.js" crossorigin="anonymous"></script>
-        <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
         <script src="<c:url value='/js/fish.js'/>"></script>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishInfo.css'/>">
 	</head>
