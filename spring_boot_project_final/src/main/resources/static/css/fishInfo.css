@@ -5,6 +5,7 @@
     font-style: normal;
 }
 
+
 #wrap{
 	margin: 0 auto;
 	max-width: 65%;
@@ -15,7 +16,8 @@ section{
 	margin-top:20px;	
 }
 
-#wrap header{
+
+#wrap section header{
 	display: flex;
     align-items: center;
     padding-bottom: 10px;

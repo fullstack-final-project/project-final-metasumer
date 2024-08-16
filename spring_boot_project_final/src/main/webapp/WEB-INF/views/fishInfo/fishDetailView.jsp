@@ -11,7 +11,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-        <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishDetail.css'/>">
 	</head>
 	<body>
@@ -19,10 +18,10 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<br><br><br>
-			<header>
-			  <h2>${fish.fishName}</h2>
-			</header>
 			<section>
+			  <header>
+			    <h2>${fish.fishName}</h2>
+			  </header>
 			  <div class="fishDetailInfo">
 			    <div class="imageBox">
 			      <img src="<c:url value='/project_images/어종/${fish.fishImg}'/>">
