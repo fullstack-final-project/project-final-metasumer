@@ -42,9 +42,10 @@
 					<a class="btn" href="<c:url value='/freeboard/freeboardView/4'/>">고객센터</a>
 					<a class="btn" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a>
 					<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
-				</c:if>
-
-
+				</c:if>				
+				
+				
+				
         </section>
         
 			<!-- bottom.jsp import -->

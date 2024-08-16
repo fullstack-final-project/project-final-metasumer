@@ -31,8 +31,12 @@
             <input type="number" id="prdStock" name="prdStock" value="${prd.prdStock}" required>
             
             <label for="prdCategory">카테고리:</label>
-            <input type="text" id="prdCategory" name="prdCategory" value="${prd.prdCategory}" required>
-            
+            <select id="prdCtgId" name="prdCtgId" required>
+                <c:forEach var="category" items="${categoryList}">
+                    <option value="${category.prdCtgId}">${category.prdCtgName}</option>
+                </c:forEach>
+            </select>
+          
             <label for="prdMaker">제조사:</label>
             <input type="text" id="prdMaker" name="prdMaker" value="${prd.prdMaker}" required>
             

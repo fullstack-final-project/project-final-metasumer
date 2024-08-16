@@ -11,8 +11,6 @@ import com.spring_boot_final.metasumer.model.ReservationVO;
 
 @Service
 public class ReservationService implements IReservationService {
-  //DI 설정
-  // MyBatis인 경우에는 @Autowired만 사용하지 않고 @Quarlifier와 같이 사용
   @Autowired
   @Qualifier("IReservationDAO")
   IReservationDAO dao;

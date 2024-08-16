@@ -23,14 +23,9 @@ public class ReservationController {
         
     @RequestMapping("/")
     public String index() {
-      return "index";
+      return "test";
     }
     
-    // 사업자 메인 페이지
-    @RequestMapping("/businessMain")
-    public String businessMain() {
-      return "business/businessMain";
-    }
     
     // 예약 관리 대쉬보드
     @RequestMapping("/dashboard")
@@ -57,7 +52,6 @@ public class ReservationController {
     // 예약 확정
     @RequestMapping("/confirmReservation/{resNo}")
     public String confirmReservation(@PathVariable int resNo, @RequestParam int bizCtgId) {
-        // bizCtgId에 따라 다른 로직 수행
         reservationService.confirmReservation(resNo, bizCtgId);
         return "redirect:/business/dashboard?bizCtgId=" + bizCtgId;
     }
@@ -65,7 +59,6 @@ public class ReservationController {
     // 예약 취소
     @RequestMapping("/cancelReservation/{resNo}")
     public String cancelReservation(@PathVariable int resNo, @RequestParam int bizCtgId) {
-        // bizCtgId에 따라 다른 로직 수행
         reservationService.cancelReservation(resNo, bizCtgId);
         return "redirect:/business/dashboard?bizCtgId=" + bizCtgId;
     }

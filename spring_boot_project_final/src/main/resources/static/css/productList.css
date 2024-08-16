@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+
+.container {
+    max-width: 1256px; /* 최대 너비 설정 */
+    margin: 0 auto;
+    padding: 0 20px; /* 좌우 패딩 */
+}
+
+/*********** 1) Product List **********/
+
+.slider-container {
+    position: relative;
+}
+
+#productSection {
+    padding: 20px 0;
+}
+
+.product-slider {
+		position: relative;
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* 슬라이드 애니메이션 */
+    width: 100%; 
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.product-card {
+    flex: 1 0 18.4%; /* 한 줄에 5개의 카드 표시 */
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    margin: 0 10px; /* 카드 사이의 간격 */
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.product-card p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/*  prev/next 버튼 */
+#prevNextButtonBoxBest {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* 양 끝에 버튼 배치 */
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    pointer-events: none; /* 버튼 외부 클릭 방지 */
+    z-index: 10; /* 버튼이 다른 요소들 위에 오도록 설정 */
+    opacity:0.8;
+}
+
+#prevNextButtonBoxNew {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* 양 끝에 버튼 배치 */
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    pointer-events: none; /* 버튼 외부 클릭 방지 */
+    z-index: 10; /* 버튼이 다른 요소들 위에 오도록 설정 */
+    opacity:0.8;
+}
+
+#prevNextButtonBoxBest img, #prevNextButtonBoxNew img {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    pointer-events: auto; /* 버튼 클릭 가능 */
+}
+
+#prevNextButtonBoxBest {
+    left: 0;
+    right: 0;
+}
+
+#prevButtonBest {
+    margin-right: auto; /* 왼쪽 버튼을 왼쪽으로 이동 */
+}
+
+#nextButtonBest {
+    margin-left: auto; /* 오른쪽 버튼을 오른쪽으로 이동 */
+}
+
+#prevNextButtonBoxNew {
+    left: 0;
+    right: 0;
+}
+
+#prevButtonNew {
+    margin-right: auto; /* 왼쪽 버튼을 왼쪽으로 이동 */
+}
+
+#nextButtonNew {
+    margin-left: auto; /* 오른쪽 버튼을 오른쪽으로 이동 */
+}
+
+/* 카테고리 탭 스타일 */
+#categoryTabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+#categoryTabs li {
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+#categoryTabs li.active {
+    background: #007bff;
+    color: #fff;
+}
+
+/* 카테고리별 상품 표시 */
+.category-container {
+    display: flex;
+    flex-wrap: wrap; /* 한 줄에 5개씩 표시하고 넘으면 아래로 감 */
+    gap: 10px; /* 카드 사이의 간격 */
+    padding: 10px 0;
+}
+
+.category-container .product-card {
+    flex: 0 0 18%; /* 한 줄에 5개의 카드 표시, 크기 일정 */
+    margin: 10px 0.5%; /* 카드 사이의 간격 */
+    box-sizing: border-box; /* 패딩과 보더를 포함한 박스 크기 계산 */
+}
+
+/* 필터링 옵션 스타일 */
+#filterOptions {
+    margin-bottom: 20px;
+}
+
+#filterOptions select {
+    padding: 5px;
+    font-size: 16px;
+}
