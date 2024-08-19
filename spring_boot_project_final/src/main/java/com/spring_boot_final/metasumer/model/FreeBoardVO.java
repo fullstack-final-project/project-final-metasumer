@@ -10,6 +10,7 @@ public class FreeBoardVO {
 	private String memId;
 	private int boardCtgId;
 	private String boardCtgName;
+	private int completed;
 	
 	
 	private String title;
@@ -25,6 +26,12 @@ public class FreeBoardVO {
 	
 	
 	
+	public int getCompleted() {
+		return completed;
+	}
+	public void setCompleted(int completed) {
+		this.completed = completed;
+	}
 	public String getPrice() {
 		return price;
 	}

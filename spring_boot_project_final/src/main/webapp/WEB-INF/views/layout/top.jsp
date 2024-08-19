@@ -28,7 +28,7 @@
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
 					<a href="<c:url value='/purchase/reserve'/>">예약</a>
-					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
+					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">낚시갤러리</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/test/logout'/>">로그아웃</a>
@@ -109,7 +109,7 @@
 						<div class="subListBox" id="subListBox4">
 							<ul class="subList">
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/product/productList'/>">낚시 용품</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/0'/>">벼룩시장</a></li>
 							</ul>
 						</div>
 					</div>

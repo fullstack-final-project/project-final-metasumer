@@ -68,7 +68,7 @@
 					                   
                     <tr>
                         <td colspan="4">
-                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/freeboardView/${fb.boardCtgId }' />'">목록으로</button>
+                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/fleamarketList/${fb.boardCtgId }' />'">목록으로</button>
                         <c:if test="${sessionScope.sid eq fb.memId}">
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/updateBoardForm/${fb.boardPostNo}' />'">수정</button>
 							    <button type="button" class="btn" onclick="confirmDelete()">삭제</button>
@@ -88,6 +88,7 @@
 					        <input type="hidden" name="memId" value="${sessionScope.sid}">
 					        <input type="hidden" name="boardPostNo" value="${fb.boardPostNo}">
 					        <input type="hidden" name="boardCtgId" value="${fb.boardCtgId}">
+					        <input type="hidden" name="postAuthorId" value="${fb.memId}">
 					        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
 					        
 					        <label>
