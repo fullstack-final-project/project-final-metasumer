@@ -5,11 +5,12 @@ public class ProductVO {
   private String prdName; // 제품 이름
   private Integer prdPrice; // 가격
   private Integer prdStock; // 재고
-  private String prdCategory; // 카테고리
   private String prdMaker; // 제조사
   private String prdDescript; // 설명
   private String prdImage; // 이미지 URL
   private Integer bizId; // 사업체 ID
+  private Integer prdCtgId;
+  private String prdCtgName;
 
   public String getPrdNo() {
     return prdNo;
@@ -43,14 +44,6 @@ public class ProductVO {
     this.prdStock = prdStock;
   }
 
-  public String getPrdCategory() {
-    return prdCategory;
-  }
-
-  public void setPrdCategory(String prdCategory) {
-    this.prdCategory = prdCategory;
-  }
-
   public String getPrdMaker() {
     return prdMaker;
   }
@@ -82,5 +75,25 @@ public class ProductVO {
   public void setBizId(Integer bizId) {
     this.bizId = bizId;
   }
+
+  public Integer getPrdCtgId() {
+    return prdCtgId;
+  }
+
+  public void setPrdCtgId(Integer prdCtgId) {
+    this.prdCtgId = prdCtgId;
+  }
+
+  public String getPrdCtgName() {
+    return prdCtgName;
+  }
+
+  public void setPrdCtgName(String prdCtgName) {
+    this.prdCtgName = prdCtgName;
+  }
+  
+  
+  
+  
 
 }

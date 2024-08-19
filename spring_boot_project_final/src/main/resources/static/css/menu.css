@@ -19,7 +19,22 @@ a {
 	padding-right: 10px;
 }
 
+ .mainMenuFixed {
+ 	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+}
+
+.mainMenuShadow {
+	box-shadow: 0 3px 5px 0px gray;
+}
+
 /*********** 1) header **********/
+#headerBox {
+	background: white;
+}
+
 .topMenuBoth {
 	width: 100%;
 	position: relative;
@@ -88,13 +103,13 @@ a {
 }
 
 .infoMenuItem:hover {
-	color: #87C4FF;
+	color: #39A7FF;
 	cursor: pointer;
 }
 
 /********* 1-2) topMenuRightBox ********/
 #topMenuRightBox a:hover {
-	color: #87C4FF;
+	color: #39A7FF;
 }
 
 /********* 1-3) searchWrap ********/
@@ -107,12 +122,11 @@ a {
 
 #searchBox {
 	float: right;
-	height: 30px;
 	width: 300px;
 	background: white;
 	border-radius: 30px;
 	padding: 10px;
-	border: 1px solid #87C4FF;
+	border: 1px solid #39A7FF;
 }
 
 #searchTxt {
@@ -121,14 +135,14 @@ a {
 	outline: none;
 	float: left;
 	padding: 0 0 0 10px;
-	color: #87C4FF;
+	color: #39A7FF;
 	font-size: 16px;
 	line-height: 30px;
 	width: 200px;
 }
 
  .hideBtn { /* 버튼을 이미지로 대체하기 위해 가려줌 */
- 	color: #87C4FF;
+ 	color: #39A7FF;
  	float: right;
  	width: 40px;
  	height: 100%;
@@ -182,19 +196,21 @@ a {
 }
 
 .mainMenuCtg {
-	display: flex;
+	position: relative;
+	display: inline-block;
 	padding: 6px 0;
 	cursor: pointer;
 }
 
 .mainMenuCtg:hover {
-	color: #87C4FF;
+	color: #39A7FF;
 }
 
-
 .subMainMenu {
-	display: none;
+	display: flex;
 	position: absolute;
+	justify-content: center;
+  	align-items: center;
 	padding: 15px 0 15px 10px;
 	top: 100%;
 	right: 0;
@@ -205,18 +221,16 @@ a {
 	background: white;
 	z-index: 1;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-10px);
+	transition: transform 0.3s;
 }
 
-.mainMenuList:hover .subMainMenu {
-	display: block;
-}
-
-.subContainerBox {
-	display: flex;
-}
-
-.subListBox {
-	display: flex;
+.topMenuBoth:hover .subMainMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .subList {
@@ -240,10 +254,18 @@ a {
 	color: black;
 	display: block;
 	letter-spacing: -1px;
+	text-decoration : none;
 }
 
-.subListItem:hover {
-	color: #87C4FF;
+.subListItem a{
+	letter-spacing: -1px;
+	text-decoration : none;
+	font-weight: bold;
+	color: black;
+}
+
+.subListItem a:hover {
+	color: #39A7FF;
 	cursor: pointer;
 }
 
@@ -314,4 +336,24 @@ a {
 	font-size: 14px;
 	height: 40px;
 	line-height: 0;
+}
+
+#topBtn {
+	position: fixed;
+	right: 10px;
+	cursor: pointer;
+	z-index: 99;
+	bottom: 75px;
+}
+
+#chatbotBox {
+	position: fixed;
+	right: 10px;
+	cursor: pointer;
+	z-index: 99;
+	bottom: 30px;
+}
+
+#chatbotBox i {
+	padding-right: 5px;	
 }

@@ -62,9 +62,4 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 		return dao.MyFishRecordsList(memId);
 	}
 
-	@Override
-	public void deleteMyFishRecordsComment(String recordNo) {
-		dao.deleteMyFishRecordsComment(recordNo);
-	}
-
 }

@@ -22,9 +22,6 @@
         			<a class="btn btn-write" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">전체 기록보기</a>
         			<a class="btn btn-write" href="<c:url value='/myFishRecords/newMyFishRecordsForm/6'/>">글쓰기</a>
 				</div>
-				
-				<!-- 낚시 갤러리 본인 작성한 글 필터 추가  -->
-				
 				<div class="fish-container">
 				    <c:forEach items="${mfList}" var="mf">
 				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }' />'" style="cursor: pointer;">

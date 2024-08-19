@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 section {
-	width: 70%;
-	margin: 0 auto;
+    width: 70%; 
+    margin: 0 auto;
 }
 
 table {
@@ -23,7 +23,7 @@ table {
 	background-color: #E0F4FF;
 	color: #333333;
 	margin: 2px;
-	margin-bottom: 15px;
+	
 }
 
 .btn:hover {
@@ -31,40 +31,20 @@ table {
 }
 
 .button-container {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 	margin: 45px;
 	margin-bottom: 10px;
 }
-
 .button-container2 {
-	width: 60%;
-	text-align: right;
-	margin: 15px;
+    width: 60%;
+    text-align: right;
+    margin: 15px;
 }
+
 
 .board-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.nick {
-	overflow: hidden;
-}
-
-.nick p {
-	float: left;
-}
-
-.nick form {
-	float: left;
-	margin-left: 10px;
-}
-
-.com {
-	font-size: 10px;
-	padding: 5px;
-	display: inline-block;
-	justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

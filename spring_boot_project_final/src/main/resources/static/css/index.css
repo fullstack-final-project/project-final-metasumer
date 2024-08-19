@@ -1,0 +1,169 @@
+@charset "UTF-8";
+
+/**************   
+0. index 페이지 section 설정
+**************/
+
+
+
+
+/**************   
+1. 추천 광고, 이벤트 베너 (슬라이드쇼)
+**************/
+
+* {
+  box-sizing: border-box;
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+/**************   
+2. 실시간 HOT 키워드
+**************/
+
+/**************   
+3. 실시간 낚시터 상황
+**************/
+
+/**************   
+4. 베스트 낚시 기록 (전체 회원 대상)
+**************/
+
+
+.container {
+    width: 1240px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.menber_slick2 {
+    height: 130px;
+    margin: 30px auto 50px;
+}
+
+.menber_slick2 .slick-list,
+.menber_slick2 .slick-track,
+.menber_slick2 .slick-slide {
+    height: 100%;
+}
+
+.menber_slick2 .item>a {
+    display: block;
+    height: 100%;
+    position: relative;
+    padding: 0 2px;
+    box-sizing: border-box;
+}
+
+.menber_slick2 .thumb {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+.slick__box {
+    margin-top: 100px;
+}
+
+/**************   
+5. 베스트 업체 리스트
+**************/
+
+/**************   
+6. 최신 나의 낚시 기록 (전체 회원 대상)
+**************/
+
+/**************   
+7. 새로 나온 상품
+**************/
+
+/**************   
+8. 사용자 기반 추천 상품
+**************/
+
+/**************   
+1. 추천 광고, 이벤트 베너
+**************/

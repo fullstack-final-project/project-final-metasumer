@@ -82,43 +82,15 @@ public class FreeBoardController {
 	}
 
 	// 벼룩시장
-	@RequestMapping("/freeboard/fleamarketList/{completed}")
-	public String fleamarketList(@PathVariable int completed, Model model) {
+	@RequestMapping("/freeboard/fleamarketList/{boardCtgId}")
+	public String fleamarketList(@PathVariable String boardCtgId,Model model) {
 		
-		String boardCtgId = "5";
-		
-		ArrayList<FreeBoardVO> fbList;
-		
-		if(completed == 1) {
-			fbList = fbService.fleamarketList(boardCtgId, completed);
-		} else {
-			fbList = fbService.fleamarketList(boardCtgId, completed);
-		}
-		
+		ArrayList<FreeBoardVO> fbList = fbService.fleamarketList(boardCtgId);
 		model.addAttribute("fbList", fbList);
-		
 		
 		return "freeboard/fleamarketList";
 	}
-	
-	// 벼룩시장
-	@RequestMapping("/freeboard/fleamarketListcompleted/{completed}")
-	public String fleamarketcompleted(@PathVariable int completed, @RequestParam String boardPostNo) {
-		
-		if(completed == 1) {
-			completed = 0;
-		} else {
-			completed = 1;
-		}
-		
-		fbService.fleamarketcompleted(boardPostNo, completed);
-		
-		return "redirect:/freeboard/fleamarketList/" + completed;
-	}
-	
-	
-	
-	
+
 	@RequestMapping("/freeboard/newfreeboardForm/{boardCtgId}")
 	public String newfreeboradForm(@PathVariable String boardCtgId, HttpServletRequest request) {
 
@@ -137,7 +109,7 @@ public class FreeBoardController {
 	// 자유게시판 글 등록
 	@RequestMapping(value = "/freeboard/insertFreeBoard", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> insertFreeBoard(@RequestParam("title") String title, @RequestParam("completed") String completed,
+	public Map<String, String> insertFreeBoard(@RequestParam("title") String title,
 			@RequestParam("content") String content, @RequestParam("memId") String memId, @RequestParam(value = "price", required = false) String price,
 			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("uploadFile") MultipartFile file, Model model) {
 
@@ -163,7 +135,7 @@ public class FreeBoardController {
 			
 			String redirectUrl;
 	        if (boardCtgId == 5) {
-	            redirectUrl = "/freeboard/fleamarketList/" + completed; 
+	            redirectUrl = "/freeboard/fleamarketList/" + boardCtgId; 
 	        } else {
 	            redirectUrl = "/freeboard/freeboardView/" + boardCtgId; 
 	        }
@@ -257,8 +229,6 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/deleteBoard")
 	public String deleteFreeBoard(@RequestParam("boardPostNo") String boardPostNo,
 			@RequestParam("boardCtgId") int boardCtgId) {
-		
-		fbService.deleteFreeBoardComment(boardPostNo);
 		fbService.deleteFreeBoard(boardPostNo);
 		
 		

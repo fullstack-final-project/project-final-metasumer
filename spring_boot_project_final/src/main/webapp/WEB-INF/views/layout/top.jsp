@@ -28,7 +28,7 @@
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
 					<a href="<c:url value='/purchase/reserve'/>">예약</a>
-					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">낚시갤러리</a>
+					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/test/logout'/>">로그아웃</a>
@@ -55,8 +55,8 @@
 </header> <!-- header 끝 -->
 
 <nav>
-	<div id="mainMenuBox" class="topMenuBoth">
-		<ul id="mainMenuItem">
+	<div class="topMenuBoth" id="mainMenuBox" >
+		<ul class="mainMenuItem" id="mainMenuItem" >
 			<li class="mainMenuList">
 				<div class="mainMenuCtg" id="mainMenuCtg1">실시간 예약</div>
 				<div class="subMainMenu" id="subListBox1">
@@ -109,7 +109,7 @@
 						<div class="subListBox" id="subListBox4">
 							<ul class="subList">
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/product/productList'/>">낚시 용품</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/0'/>">벼룩시장</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a></li>
 							</ul>
 						</div>
 					</div>
@@ -138,14 +138,12 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox6">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">현재 위치</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location'/>">현재 위치</a></li>
 								<li class="subListItem"><a class="subListTxt">근처 낚시터</a></li>
-								<li class="subListItem"><a class="subListTxt">주변 먹거리</a></li>
-								<li class="subListItem"><a class="subListTxt">주변 놀거리</a></li>
-								<li class="subListItem"><a class="subListTxt">주변 숙박시설</a></li>
+								<li class="subListItem"><a class="subListTxt">주변 정보</a></li>
 								<li class="subListItem"><a class="subListTxt">교통 상황</a></li>
 								<li class="subListItem"><a class="subListTxt">전국 낚시터</a></li>
-								<li class="subListItem"><a class="subListTxt">해외 낚시터</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/intl'/>">해외 낚시터</a></li>
 							</ul>
 						</div>
 					</div>

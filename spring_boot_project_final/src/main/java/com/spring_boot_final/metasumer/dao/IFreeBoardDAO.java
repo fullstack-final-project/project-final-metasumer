@@ -15,7 +15,7 @@ public interface IFreeBoardDAO {
 	public ArrayList<FreeBoardVO> selectItemsForPage(int offset, int limit, String boardCtgId);
 	
 	// 벼룩시장 글 목록
-	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId, int completed);
+	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId);
 	
 	// 자유게시판 등록
 	public void insertFreeBoard(FreeBoardVO vo);
@@ -24,7 +24,6 @@ public interface IFreeBoardDAO {
 	public void updateFreeBoard(FreeBoardVO vo);
 	
 	// 자유게시판 삭제
-	public void deleteFreeBoardComment(String boardPostNo);
 	public void deleteFreeBoard(String boardPostNo);
 	
 	// 자유게시판 상세 보기
@@ -35,8 +34,5 @@ public interface IFreeBoardDAO {
 	
 	// QnA
 	public ArrayList<FreeBoardVO> qnaList(String boardCtgId);
-	
-	// 벼룩시장 거래 완료
-	public void fleamarketcompleted(String boardPostNo, int completed);
 	
 }

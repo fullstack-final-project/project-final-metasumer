@@ -2,15 +2,19 @@ package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
 
-import com.spring_boot_final.metasumer.model.ReservationVO;
+import com.spring_boot_final.metasumer.model.BusinessVO;
 
 public interface IBusinessService {
-  // 모든 예약 정보 불러오기
-  public ArrayList<ReservationVO> getAllReservations();
+
+  public BusinessVO getBusinessWithCategory(int bizId);
   
-  // 확정
-  public int confirmReservation(Integer resNo);
+  public ArrayList<BusinessVO> getAllBusiness();
   
-  // 취소
-  public int cancelReservation(Integer resNo);
+  public ArrayList<BusinessVO> getBusinessCategory();
+  
+  public void registerBusiness(BusinessVO vo);
+  
+  public void updateBusiness(BusinessVO vo);
+  
+  public void deleteBusiness(int bizId);
 }

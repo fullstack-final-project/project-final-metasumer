@@ -56,24 +56,13 @@ public class FreeBoardService implements IFreeBoardService {
 	}
 
 	@Override
-	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId, int completed) {
-		return dao.fleamarketList(boardCtgId, completed);
+	public ArrayList<FreeBoardVO> fleamarketList(String boardCtgId) {
+		return dao.fleamarketList(boardCtgId);
 	}
 
 	@Override
 	public ArrayList<FreeBoardVO> qnaList(String boardCtgId) {
 		return dao.qnaList(boardCtgId);
-	}
-
-	@Override
-	public void deleteFreeBoardComment(String boardPostNo) {
-		dao.deleteFreeBoardComment(boardPostNo);
-	}
-
-	@Override
-	public void fleamarketcompleted(String boardPostNo, int completed) {
-		dao.fleamarketcompleted(boardPostNo, completed);
-		
 	}
 
 }

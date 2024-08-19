@@ -17,7 +17,6 @@
 		<result property="uploadFile" column="uploadFile" />
 		<result property="memName" column="memName" />
 		<result property="price" column="price" />
-		<result property="completed" column="completed" />
 	</resultMap>
 
 	<select id="selectItemsForPage" resultMap="fbResult">
@@ -31,14 +30,13 @@
 	</select>
 	
 	<select id="fleamarketList" resultMap="fbResult">
-		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName, b.uploadFile, b.price, b.completed
+		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName, b.uploadFile, b.price
 		FROM board b
 		JOIN member m ON b.memId = m.memId
 		JOIN boardCtg c ON b.boardCtgId = c.boardCtgId
-		WHERE b.boardCtgId = #{boardCtgId} AND  b.completed = #{completed}
+		WHERE b.boardCtgId = #{boardCtgId}
 		ORDER BY b.createdDate DESC
 	</select>
-	
 	<select id="qnaList" resultMap="fbResult">
 		SELECT title, content, boardPostNo, boardCtgId
 		FROM board
@@ -70,18 +68,10 @@
 		WHERE boardPostNo = #{boardPostNo}
 	</update>
 	
-	<delete id="deleteFreeBoardComment" parameterType="map">
-		DELETE FROM comment WHERE boardPostNo = #{boardPostNo}
-	</delete>
-	
 	<delete id="deleteFreeBoard" parameterType="string">
 		DELETE FROM board WHERE boardPostNo = #{boardPostNo}
 	</delete>
-	
-	<update id="fleamarketcompleted">
-		UPDATE board
-		SET completed = #{completed}
-		WHERE boardPostNo = #{boardPostNo};
-	</update>
-	
+
+
+
 </mapper>

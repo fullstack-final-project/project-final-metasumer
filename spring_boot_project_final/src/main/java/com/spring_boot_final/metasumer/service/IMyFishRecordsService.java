@@ -21,7 +21,6 @@ public interface IMyFishRecordsService {
 	public void updateMyFishRecords(MyFishRecordsVO vo);
 
 	// 물고기기록 삭제
-	public void deleteMyFishRecordsComment(String recordNo);
 	public void deleteMyFishRecords(String recordNo);
 
 	// 물고기기록 상세 보기

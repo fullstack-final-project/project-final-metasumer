@@ -27,51 +27,76 @@
 			<!-- top 임포트 -->
 			<c:import url="/WEB-INF/views/layout/top.jsp" />
 			<section id="dashboard">
-				<h1>예약 현황</h1>
-	
-					<!-- 달력 부분 -->
+				<!-- bizCtgId에 따라 제목 변경 -->
+				<h1>
+					<c:choose>
+						<c:when test="${bizCtgId == 1}">
+							바다 낚시 예약 현황
+						</c:when>
+						<c:when test="${bizCtgId == 2}">
+							민물 낚시 예약 현황
+						</c:when>
+						<c:otherwise>
+							예약 현황
+						</c:otherwise>
+					</c:choose>
+				</h1>
+					
+				<!-- bizCtgId를 hidden input으로 추가 -->
+				<input type="hidden" id="bizCtgId" value="${bizCtgId}" />
+
+				<!-- 탭 네비게이션 -->
+				<div class="tab">
+					<button class="tablinks" data-target="reservationsTab">예약 목록</button>
+					<button class="tablinks" data-target="calendarTab">달력</button>
+				</div>
+
+				<!-- 예약 현황 탭 -->
+				<div id="calendarTab" class="tabcontent">
 					<div id="calendar"></div>
-	
-	
-					<!-- 예약 목록 부분 -->
-					<div id="reservations">
-						<h2>예약 목록</h2>
-						<table class="table resList">
-							<thead>
+				</div>
+
+				<!-- 예약 목록 탭 -->
+				<div id="reservationsTab" class="tabcontent">
+					<h2>예약 목록</h2>
+					<table class="table resList">
+						<thead>
+							<tr>
+								<th>예약 번호</th>
+								<th>예약자명</th>
+								<th>예약일</th>
+								<th>시간</th>
+								<th>상태</th>
+								<th>확인</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="reservation" items="${reservations}">
 								<tr>
-									<th>예약 번호</th>
-									<th>예약자명</th>
-									<th>예약일</th>
-									<th>시간</th>
-									<th>상태</th>
-									<th>확인</th>
+									<td>${reservation.resNo}</td>
+									<td>${reservation.memName}</td>
+									<td><fmt:formatDate value="${reservation.bizDate}"
+											pattern="yyyy-MM-dd" /></td>
+									<td><fmt:formatDate value="${reservation.bizStart}" pattern="HH:mm" />
+											 ~ 
+											<fmt:formatDate value="${reservation.bizEnd}" pattern="HH:mm" /></td>
+									<td>${reservation.resStatus}</td>
+									<td>
+										<!-- 확정 및 취소 버튼에 bizCtgId 전달 -->
+										<button class="btn btn-success"
+											onclick="confirmReservation(${reservation.resNo}, ${bizCtgId})">확정</button>
+										<button class="btn btn-cancel"
+											onclick="cancelReservation(${reservation.resNo}, ${bizCtgId})">취소</button>
+									</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="reservation" items="${reservations}">
-									<tr>
-										<td>${reservation.resNo}</td>
-										<td>${reservation.memName}</td>
-										<td><fmt:formatDate value="${reservation.bizDate}"
-												pattern="yyyy-MM-dd" /></td>
-										<td><fmt:formatDate value="${reservation.bizStart}" pattern="HH:mm" />
-												 ~ 
-               					<fmt:formatDate value="${reservation.bizEnd}" pattern="HH:mm" /></td>
-										<td>${reservation.resStatus}</td>
-										<td>
-											<button class="btn btn-success"
-												onclick="confirmReservation(${reservation.resNo})">확정</button>
-											<button class="btn btn-cancel"
-												onclick="cancelReservation(${reservation.resNo})">취소</button>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</section>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</section>
 			<!-- bottom 임포트 -->
 			<c:import url="/WEB-INF/views/layout/bottom.jsp" />
 		</div>
+		
 	</body>
 </html>

@@ -22,12 +22,11 @@
 				<form id="uploadFileForm" name="uploadFileForm" enctype="multipart/form-data">
 				<input type="hidden" name="memId" value="${memId}">
 				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
-				<input type="hidden" name="completed" value=0>
 				
 				
                 <table border="1">
                     <tr>
-                        <th colspan="2">${ boardCtgId }글쓰기 페이지${memId}</th>
+                        <th colspan="2">글쓰기 페이지${memId}</th>
                     </tr>
                     <tr>
                         <td>작성자</td>
@@ -44,7 +43,7 @@
                 <c:if test="${boardCtgId == 5}">
                     <tr>
                         <td><label for="price">가격</label></td>
-                        <td><input type="number" id="price" name="price" min="0" step="100" required/></td>
+                        <td><input type="number" id="price" name="price" min="0" step="100"/></td>
                     </tr>
                 </c:if>
                 <c:choose>

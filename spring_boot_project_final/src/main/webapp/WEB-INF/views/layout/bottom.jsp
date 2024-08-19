@@ -53,4 +53,10 @@
 			</ul>
 		</div>
 	</div>
+	<div id="topBtnBox">
+		<img src="<c:url value='/image/moveToTop.png"'/>" id="topBtn">
+	</div>
+	<div id="chatbotBox">
+		<i class="fa-solid fa-robot fa-2xl" style="color: #37a2f8;"></i>
+	</div>
 </footer> <!-- footer 끝 -->
