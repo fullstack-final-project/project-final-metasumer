@@ -41,14 +41,14 @@
 			  <main>
 			    <div class='fishBox'>
 			      <c:forEach var="fish" items="${fishList}">	
-			        <div id="fish" data-category="${fish.fishCtgId}">
-			          <div id="fishDetail">
+			        <div class="fishData" data-category="${fish.fishCtgId}">
+			          <div class="fishDetail">
 			            <div>
 			              <a href="<c:url value='/fish/detailViewFish/${fish.fishNo}' />">
 			                <img src="<c:url value='/project_images/어종/${fish.fishImg}' />">
 			              </a>
 			            </div>			            
-			            <p id="fishName">${fish.fishName}</p>			            
+			            <p class="fishName">${fish.fishName}</p>			            
 			          </div>
 			        </div>
 			      </c:forEach>

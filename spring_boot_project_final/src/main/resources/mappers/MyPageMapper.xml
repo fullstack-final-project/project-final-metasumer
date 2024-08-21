@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring_boot_final.metasumer.dao.IMyPageDAO">
+	<resultMap id="myPageRecords"
+		type="com.spring_boot_final.metasumer.model.MyPageVO">
+		<result property="myPageCtgId" column="myPageCtgId" />
+		<result property="myPageCtgName" column="myPageCtgName" />
+		<result property="recordNo" column="recordNo" />
+		<result property="memId" column="memId" />
+		<result property="memNickname" column="memNickname" />
+		<result property="title" column="title" />
+		<result property="createdDate" column="createdDate" />
+		<result property="uploadImage" column="uploadImage" />
+		<result property="fishName" column="fishName" />
+        <result property="fishSize" column="fishSize" />
+	</resultMap>
+
+	<select id="MyFishRecordsList" resultMap="myPageRecords">
+		SELECT f.recordNo, f.memId, m.memNickname, f.title, f.createdDate, f.uploadImage, f.fishName, f.fishSize
+        FROM myFishRecords f
+		JOIN member m ON f.memId = m.memId
+		WHERE f.memId = #{memId}
+		ORDER BY f.createdDate DESC
+	</select>
+	
+	<select id="MyFishRecordsPerPage" resultMap="myPageRecords">
+        SELECT f.recordNo, f.memId, m.memNickname, f.title, f.createdDate, f.uploadImage, f.fishName, f.fishSize
+        FROM myFishRecords f
+        JOIN member m ON f.memId = m.memId
+        WHERE f.memId = #{memId}
+        ORDER BY f.createdDate DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    
+    <select id="getRecordsCount" resultType="int">
+        SELECT COUNT(*) 
+        FROM myFishRecords 
+        WHERE memId = #{memId}
+    </select>
+
+	<select id="getFishNoByName" resultType="string">
+        SELECT fishNo
+        FROM fish_info
+        WHERE fishName = #{fishName}
+    </select>
+
+    <select id="getTideScore" resultType="int">
+        SELECT tideImportance
+        FROM tide_score
+        WHERE fishNo = #{fishNo} AND tide = #{tide}
+    </select>
+
+    <select id="getLocationScore" resultType="int">
+        SELECT locationImportance
+        FROM location_score
+        WHERE fishNo = #{fishNo} AND location = #{location}
+    </select>
+
+    <select id="getWeatherScore" resultType="int">
+        SELECT weatherImportance
+        FROM weather_score
+        WHERE fishNo = #{fishNo} AND weather = #{weather}
+    </select>
+
+    <select id="getCommonScore" resultType="int">
+        SELECT commonScore
+        FROM common_scores
+        WHERE importanceCtgId = #{importanceCtgId} AND commonValue = #{commonValue}
+    </select>
+</mapper>	
+	
