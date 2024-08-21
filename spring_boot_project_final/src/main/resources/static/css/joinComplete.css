@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.completion-container {
+    text-align: center;
+    padding: 40px 20px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.completion-container h1 {
+    margin-bottom: 20px;
+}
+
+.completion-container p {
+    margin-bottom: 30px;
+}

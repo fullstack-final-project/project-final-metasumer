@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/newfreeboardForm.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
-		<script src="<c:url value='/js/test.js'/>"></script>
+		<script src="<c:url value='/js/login.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
@@ -19,10 +19,9 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
-				<c:if test="${ empty sessionScope.sid }">
-                    <form id="loginForm" name="loginForm" action="<c:url value='/login'/>" method="post">
+                    <form id="loginForm" name="loginForm" action="<c:url value='/member/login'/>" method="post">
                         <table>
-                            <tr><th>ID</th><td><input type="text" id="id" name="id" required></td></tr>
+                            <tr><th>ID</th><td><input type="text" id="id" name="id" class="input_text" required></td></tr>
                             <tr><th>비밀번호</th><td><input type="password" id="pwd" name="pwd" autocomplete="off" required></td></tr>
                             <tr>
                                 <td colspan="2" align="center" id="button">
@@ -32,20 +31,7 @@
                             </tr>             
                         </table>
                     </form>
-				</c:if>
 	
-				<c:if test="${ not empty sessionScope.sid }">
-					${ sessionScope.memNickname }님 환영합니다!<br>
-					<a class="btn" href="<c:url value='/freeboard/freeboardView/1'/>">공지사항</a>
-					<a class="btn" href="<c:url value='/freeboard/freeboardView/2'/>">자유게시판</a>
-					<a class="btn" href="<c:url value='/freeboard/freeboardView/3'/>">자주묻는 질문</a>
-					<a class="btn" href="<c:url value='/freeboard/freeboardView/4'/>">고객센터</a>
-					<a class="btn" href="<c:url value='/freeboard/fleamarketList/5'/>">벼룩시장</a>
-					<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
-				</c:if>				
-				
-				
-				
         </section>
         
 			<!-- bottom.jsp import -->

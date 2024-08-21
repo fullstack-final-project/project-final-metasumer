@@ -13,11 +13,11 @@ import com.spring_boot_final.metasumer.model.MyFishRecordsVO;
 
 @Service
 public class MyFishRecordsService implements IMyFishRecordsService {
-	
+
 	@Autowired
 	@Qualifier("IMyFishRecordsDAO")
 	IMyFishRecordsDAO dao;
-	
+
 	@Override
 	public ArrayList<MyFishRecordsVO> listAllMyFishRecords() {
 		return dao.listAllMyFishRecords();
@@ -60,6 +60,11 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 	@Override
 	public ArrayList<MyFishRecordsVO> MyFishRecordsList(String memId) {
 		return dao.MyFishRecordsList(memId);
+	}
+
+	@Override
+	public void deleteMyFishRecordsComment(String recordNo) {
+		dao.deleteMyFishRecordsComment(recordNo);
 	}
 
 }
