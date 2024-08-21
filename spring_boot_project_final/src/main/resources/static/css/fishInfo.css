@@ -67,20 +67,20 @@ section{
     justify-content: flex-start; 
 }
 
-#wrap .fishBox #fish{
+#wrap .fishBox .fishData{
 	width: calc(33.333% - 20px);
 	box-sizing: border-box; 
     margin-bottom: 20px;
     position: relative; 
 }
 
-#wrap .fishBox #fish img{
+#wrap .fishBox .fishData img{
     width: 100%;
     height: auto;
     object-fit: cover;
 }
 
-#wrap .fishBox #fish img:hover{
+#wrap .fishBox .fishData img:hover{
     opacity: 0.8;
     cursor: pointer;
 }
@@ -119,8 +119,6 @@ section{
 	/*color: #39A7FF;*/
 	margin-top: 100px;
 }
-
-
 
 
 
