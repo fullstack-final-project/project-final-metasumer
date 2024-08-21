@@ -70,7 +70,7 @@ public class BusinessController {
       try {
           // 파일 저장
           String fileName = saveFile(file);
-          System.out.println("파일 저장 성공: " + fileName);
+          System.out.println("파일 등록 성공: " + fileName);
 
           // BusinessVO 객체 생성
           BusinessVO business = new BusinessVO();

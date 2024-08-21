@@ -45,7 +45,6 @@
 				</c:if>				
 				
 				
-				
         </section>
         
 			<!-- bottom.jsp import -->
