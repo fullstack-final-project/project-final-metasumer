@@ -4,57 +4,114 @@
  
  $(function() {
  
- 	let slideIndex = 1;
-	showSlides(slideIndex);
+ 
+ 	// 2. 실시간 HOT 키워드 - 유튜브 검색 결과 가져오기
+	function authenticate() {
+		return gapi.auth2.getAuthInstance()
+			.signIn({scope: "https://www.googleapis.com/auth/youtube.readonly"})
+	        .then(function() { console.log("Sign-in successful"); },
+	              function(err) { console.error("Error signing in", err); });
+	  }
+	  
+	  function loadClient() {
+	    gapi.client.setApiKey("AIzaSyDPfjeBY9xnb2Wg19QEFOkYYX8DY0LBNUY");
+	    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+	        .then(function() { console.log("GAPI client loaded for API"); },
+	              function(err) { console.error("Error loading GAPI client for API", err); });
+	  }
+	  
+	  function execute() {
+	    return gapi.client.youtube.search.list({
+	      "part": [
+	        "snippet"
+	      ],
+	      "maxResults": 5,
+	      "order": "viewCount",
+	      "publishedAfter": "2024-02-01T17:00:15Z",
+	      "q": "낚시"
+	    })
+	        .then(function(response) {
+	                // Handle the results here (response.result has the parsed body).
+	                console.log("Response", response);
+	              },
+	              function(err) { console.error("Execute error", err); });
+	  }
+	  gapi.load("client:auth2", function() {
+	    gapi.auth2.init({client_id: "340002655622-d8sjj83icmt5t60i1f65ctra8p73l3al.apps.googleusercontent.com"});
+	  }); 
+	// 2. 실시간 HOT 키워드 - 유튜브 검색 결과 가져오기 (끝)
 	
-	// Next/previous controls
-	function plusSlides(n) {
-	  showSlides(slideIndex += n);
-	}
 	
-	// Thumbnail image controls
-	function currentSlide(n) {
-	  showSlides(slideIndex = n);
-	}
+	// (시작) 3. 실시간 조황
+	var mapOptions = {
+		center: new naver.maps.LatLng(37.5666103, 126.9783882), /* 사용자 현재 위치 반영 필요 */
+	    zoom: 10,
+	    mapTypeControl: true,
+	    mapTypeControlOptions: {
+	        style: naver.maps.MapTypeControlStyle.BUTTON,
+	        position: naver.maps.Position.TOP_RIGHT
+	    },
+	    zoomControl: true,
+	    zoomControlOptions: {
+	        style: naver.maps.ZoomControlStyle.SMALL,
+	        position: naver.maps.Position.TOP_RIGHT
+	    },
+	    scaleControl: true,
+	    scaleControlOptions: {
+	        position: naver.maps.Position.RIGHT_CENTER
+	    },
+	    logoControl: true,
+	    logoControlOptions: {
+	        position: naver.maps.Position.TOP_LEFT
+	    },
+	    mapDataControl: true,
+	    mapDataControlOptions: {
+	        position: naver.maps.Position.BOTTOM_LEFT
+	    }
+	};
 	
-	function showSlides(n) {
-		let i;
-		let slides = document.getElementsByClassName("mySlides");
-		let dots = document.getElementsByClassName("demo");
-		let captionText = document.getElementById("caption");
-		
-		if (n > slides.length) {
-			slideIndex = 1; 
-		}
-		
-		if (n < 1) {
-			slideIndex = slides.length
-		}
-		
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";
-		}
-		for (i = 0; i < dots.length; i++) {
-			dots[i].className = dots[i].className.replace(" active", "");
-		}
-		
-		slides[slideIndex-1].style.display = "block";
-		dots[slideIndex-1].className += " active";
-		captionText.innerHTML = dots[slideIndex-1].alt;
+	var map = new naver.maps.Map('nowFishingMap', mapOptions);
+	
+	window.navermap_authFailure = function () {
+	    // 인증 실패 시 처리 코드 작성
+	   alert("네이버 지도가 연결되지 않았습니다.");
 	}
+	// 3. 실시간 조황 (끝)
 
-	// 센터모드 슬릭
+
+	// 4. 베스트 낚시 기록 (전체 회원 대상) / 6. 최신 낚시 기록 (전체 회원 대상)
 	$('.menber_slick2').slick({
         slidesToShow: 5,
         SlidesToScroll: 1,
         dots: false,
         arrows: true,
         infinite: true,
-        speed: 2000,
+        speed: 1000,
         autoplay: true,
         autoplaySpeed: 3000,
-        centerMode: true,
-        centerPadding: '5px'
+        pauseOnHover: true,
+        centerMode: true
     });
+    // 4. 베스트 낚시 기록 (전체 회원 대상) / 6. 최신 낚시 기록 (전체 회원 대상) : 끝
+    
+    
+    // (시작) 5. 베스트 업체
+    
+    /* 업체 카테고리 선택 */
+    const bestBizCtgList = document.querySelectorAll('.bestBizCtgBar .bestBiz');
+
+ 	bestBizCtgList.forEach( function(bestBiz, index) {
+ 		bestBiz.addEventListener('click', function() {
+ 			bestBizChange(index + 1);
+ 		});
+ 	});
+ 	
+ 	function bestBizChange(num) {
+ 		document.querySelector('.bestBiz.active').classList.remove('active');
+ 		document.querySelector('.bestBiz' + num).classList.add('active');
+ 	}
+    
+    // 5. 베스트 업체 (끝)
+  
  
  });

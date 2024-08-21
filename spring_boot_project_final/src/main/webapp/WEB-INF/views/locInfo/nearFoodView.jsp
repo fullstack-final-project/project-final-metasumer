@@ -4,11 +4,11 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>해외 낚시터</title>
+		<title>주변 먹거리</title>
 	</head>
 	<body>
 			<section>
-				해외 낚시터
+				주변 먹거리
 			</section>
 	</body>
 </html>

@@ -26,7 +26,7 @@
 	border-bottom: 1px solid #39A7FF;
 }
 
-#locationCtgList {
+.locCtgBar {
 	width: 100%;
 	position: relative;
 	display: flex;
@@ -40,21 +40,29 @@
 	cursor: pointer;
 }
 
-.locationItem {
-	list-style: none;
-	display: inline-block;
-	margin: 0 auto;
-}
-
-.locationItem a {
+.locCtg {
 	list-style: none;
 	text-decoration : none;
 	color: black;
 	font-weight: bold;
 	letter-spacing: -1px;
 	padding-right: 5px;
+	display: inline-block;
+	margin: 0 auto;
+	cursor: pointer;
 }
 
-.locationItem a:hover {
+.locCtg.active {
 	color: #39A7FF; 
+	text-shadow: -1px 0px #E0F4FF, 0px 1px #E0F4FF, 1px 0px #E0F4FF, 0px -1px #E0F4FF;
+}
+
+#nowLocationBox {
+	margin-top: 30px;
+}
+
+#locationMapBox {
+	 margin-top: 50px; 
+	 width: 100%;
+	 height: 700px;
 }

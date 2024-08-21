@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,9 +11,12 @@
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/index.css'/>">
+		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/all.css'/>">
 		<script src="<c:url value='/js/index.js'/>"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+		<script src="https://apis.google.com/js/api.js"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -20,118 +24,127 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
-				<div id="indexAdBox" class="indexSection">
-				  <!-- Full-width images with number text -->
-				  <div class="mySlides">
-				    <div class="numbertext">1 / 6</div>
-				      <img src="img_woods_wide.jpg" style="width:100%">
-				  </div>
+				<div id="eventAdBox" class="indexSection">
+					<div data-slider-id="vtqsjd"></div>
+					<div id="eventBannerBox"><script async src="https://sliderui.com/sliders/vtqsjd.js"></script></div>
+					<!-- https://sliderui.com/dashboard/sliders/vtqsjd -->
+				</div> <!-- eventAdBox 종료 : 1. 추천 광고, 이벤트 베너 (슬라이드쇼) -->
 				
-				  <div class="mySlides">
-				    <div class="numbertext">2 / 6</div>
-				      <img src="img_5terre_wide.jpg" style="width:100%">
-				  </div>
+				<div id="hotKeywordBox" class="indexSection">
+					<div class="sectionTitle">실시간 HOT 키워드/검색어 🔥</div>
+					<div class="keywordListWrap"> 
+						<div id="youtubeKeyword" class="keywordListItem">
+							<div class="keywordListTitle">유튜브</div>
+						</div>
+						<div id="instagramKeyword" class="keywordListItem">
+							<div class="keywordListTitle">인스타그램</div>
+						</div>
+						<div id="naverKeyword" class="keywordListItem">
+							<div class="keywordListTitle">네이버</div>
+						</div>
+					</div>
+				</div> <!-- hotKeywordBox 종료 : 2. 실시간 HOT 키워드 -->
 				
-				  <div class="mySlides">
-				    <div class="numbertext">3 / 6</div>
-				      <img src="img_mountains_wide.jpg" style="width:100%">
-				  </div>
+				<div id="nowFishingBox" class="indexSection">
+					<div class="sectionTitle">실시간 낚시 조황 정보 🗺️</div>
+					<div class="nowFishingWrap">
+						<div id="nowFishingInfo" class="nowFishingItem"></div>
+						<div id="nowFishingMap" class="nowFishingItem"></div>
+					</div>
+				</div> <!-- nowFishingBox 종료 : 3. 실시간 낚시터 상황 -->
 				
-				  <div class="mySlides">
-				    <div class="numbertext">4 / 6</div>
-				      <img src="img_lights_wide.jpg" style="width:100%">
-				  </div>
-				
-				  <div class="mySlides">
-				    <div class="numbertext">5 / 6</div>
-				      <img src="img_nature_wide.jpg" style="width:100%">
-				  </div>
-				
-				  <div class="mySlides">
-				    <div class="numbertext">6 / 6</div>
-				      <img src="img_snow_wide.jpg" style="width:100%">
-				  </div>
-				
-				  <!-- Next and previous buttons -->
-				  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-				  <a class="next" onclick="plusSlides(1)">&#10095;</a>
-				
-				  <!-- Image text -->
-				  <div class="caption-container">
-				    <p id="caption"></p>
-				  </div>
-				
-				  <!-- Thumbnail images -->
-				  <div class="row">
-				    <div class="column">
-				      <img class="demo cursor" src="img_woods.jpg" style="width:100%" onclick="currentSlide(1)" alt="The Woods">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="img_5terre.jpg" style="width:100%" onclick="currentSlide(2)" alt="Cinque Terre">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="img_mountains.jpg" style="width:100%" onclick="currentSlide(3)" alt="Mountains and fjords">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="img_lights.jpg" style="width:100%" onclick="currentSlide(4)" alt="Northern Lights">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="img_nature.jpg" style="width:100%" onclick="currentSlide(5)" alt="Nature and sunrise">
-				    </div>
-				    <div class="column">
-				      <img class="demo cursor" src="img_snow.jpg" style="width:100%" onclick="currentSlide(6)" alt="Snowy Mountains">
-				    </div>
-				  </div>
-				</div>
-				
-				<div id="hotKeywordBox">
-				</div> <!-- hotKeywordBox 종료 -->
-				
-				<div id="nowFishingBox">
-				</div> <!-- nowFishingBox 종료 -->
-				
-				<div id="fishRecordRankBox" class="center">
-					<div class="menber_slick2">
-						<c:forEach var="mfList" items="${mfList}" varStatus="mfListNum" >
-							<div class="item s${mfListNum.count}">
-			                    <a href="<c:url value='/myFishRecords/detailViewmyFishRecords/${mfList.recordNo}' />">
-			                        <div class="thumb" style="background-image:url('${mfList.uploadImage}');"></div>
-			                    </a>
-							</div>
-						</c:forEach>
+				<div id="fishRecordRankBox" class="indexSection fishRecordSeries">
+					<div class="sectionTitle">베스트 낚시 기록 - 사이즈 순위 🎣</div>
+					<div class="menber_slick2">	
+						<c:forEach items="${mfList}" var="mfList">
+					        <div class="fishRecordList slider-contents" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mfList.recordNo }' />'" style="cursor: pointer;">
+								<div id="fishRrdImgWrap">
+									<img src="<c:url value='/image/fish/${mfList.uploadImage}'/>" width="100%" height="200"></div><br>
+								<div class="fishRecordInfo">
+									<span id="fishRecordName" class="eachSectionEmphasisText">${mfList.fishName}</span>
+									<span id="fishRecordSize">${mfList.fishSize}cm</span></div>
+								<div class="fishRecordLoc">${mfList.location}</div>
+								<div class="fishRecordDate">
+									<fmt:formatDate value="${mfList.createdDate}" pattern="yyyy년 MM월 dd일" /></div>
+	    						<div class="fishRcdNickname">${mfList.memNickname}</div>
+					        </div>
+				    	</c:forEach>
 	            	</div>
-				</div> <!-- fishRecordRankBox 종료 -->
+				</div> <!-- fishRecordRankBox 종료 : 4. 베스트 낚시 기록 (전체 회원 대상) -->
 				
-				<div id="bestBusinessBox">
+				<div id="bestBusinessBox" class="indexSection">
+					<div class="sectionTitle">이달의 베스트 업체 🈺</div>
+					<div class="bestBizCtgBar">
+						<button class="bestBiz bestBiz1 active"><span>전체</span></button>
+						<button class="bestBiz bestBiz2"><span>낚시터</span></button>
+						<button class="bestBiz bestBiz3"><span>낚시용품</span></button>
+					</div>
 					<div class="bestBusinessList">
-						<c:forEach var="bizList" items="${bizList}" varStatus="bizListNum">
+						<c:forEach var="bizList" items="${bizList}" varStatus="bizListNum" begin="1" end="5">
 							<div class="bestBizItem">
-								<span>${bizListNum.count}위</span>
+								<div>
+									<img src="<c:url value='/image/fish/${bizList.bizRegImg}'/>" width="100%" height="200"></div><br>
+								<div><span class="eachSectionEmphasisText">${bizListNum.count}</span>위</div>
 								<div>${bizList.bizName}</div>
-								<div>${bizList.bizCtgId}</div>
-								<div>${bizList.bizCtgImg}</div>
-							</table>
+							</div>
 						</c:forEach>
 					</div>
-				</div> <!-- bestBusinessBox 종료 -->
+				</div> <!-- bestBusinessBox 종료 : 5. 베스트 업체 리스트 -->
 				
-				<div id="newFishRecordBox" class="center">
-					<div class="menber_slick2">
-						<c:forEach var="mfList" items="${mfList}" varStatus="mfListNum" >
-							<div class="item s${mfListNum.count}">
-			                    <a href="<c:url value='/myFishRecords/detailViewmyFishRecords/${mfList.recordNo}' />">
-			                        <div class="thumb" style="background-image:url('${mfList.uploadImage}');"></div>
-			                    </a>
+				<div id="newFishRecordBox" class="indexSection">
+					<div class="sectionTitle">최신 낚시 기록 📸</div>
+					<div class="menber_slick2">	
+						<c:forEach items="${newMfList}" var="newMfList">
+					        <div class="fishRecordList slider-contents" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${newMfList.recordNo}' />'" style="cursor: pointer;">
+								<div id="fishRrdImgWrap">
+									<img src="<c:url value='/image/fish/${newMfList.uploadImage}'/>"></div><br>
+								<div class="fishRecordTitle eachSectionEmphasisText">
+									<span>${newMfList.title}</span></div>
+								<div class="fishRecordLoc">${newMfList.location}</div>
+								<div class="fishRecordDate">
+									<fmt:formatDate value="${newMfList.createdDate}" pattern="yyyy년 MM월 dd일" /></div>
+	    						<div class="fishRcdNickname">${newMfList.memNickname}</div>
+					        </div>
+				    	</c:forEach>
+	            	</div>
+				</div> <!-- newFishRecordBox 종료 : 6. 최신 낚시 기록 (전체 회원 대상) -->
+				
+				<div id="newProductBox" class="indexSection">
+					<div class="sectionTitle">신상 낚시 용품 입고 🛍️</div>
+					<div class="newProductList">
+						<c:forEach var="newPrdList" items="${newPrdList}">
+							<div class="newPrdItem">
+								<img src="<c:url value='/image/fish/${newPrdList.prdImage}'/>"><br>
+								<div class="eachSectionEmphasisText">${newPrdList.prdName}</div>
+								<div>${newPrdList.prdMaker}</div>
+								<div>
+									<fmt:formatNumber type="number" maxFractionDigits="0" value="${newPrdList.prdPrice}" />원</div>
 							</div>
 						</c:forEach>
-	            	</div>
-				</div> <!-- newFishRecordBox 종료 -->
+					</div>
+				</div> <!-- newProductBox 종료 : 7. 새로 나온 상품 -->
 				
-				<div id="newProductBox">
-				</div> <!-- newProductBox 종료 -->
-				
-				<div id="userRecPrdBox">
-				</div>	 <!-- userRecPrdBox 종료 -->	
+				<div id="userRecPrdBox" class="indexSection">
+					<div class="sectionTitle">사용자 추천 아이템 🛒</div>
+					<div class="userRecPrdList">
+						<c:if test="${empty sessionScope.sid }">
+							<div class="userRecPrdItem">
+								회원가입 시 입력한 나의 관심사를 기반으로, 고객님 취향에 맞는 아이템을 추천해드립니다!
+							</div>
+						</c:if>
+						<c:if test="${not empty sessionScope.sid }">
+							<c:forEach var="recPrdList" items="${recPrdList}">
+								<div class="userRecPrdItem">
+									<img src="<c:url value='/image/fish/${recPrdList.prdImage}'/>"><br>
+									<div class="eachSectionEmphasisText">${recPrdList.prdName}</div>
+									<div>${recPrdList.prdMaker}</div>
+									<div>
+										<fmt:formatNumber type="number" maxFractionDigits="0" value="${recPrdList.prdPrice}" />원</div>
+								</div>
+							</c:forEach>
+						</c:if>
+					</div>
+				</div>	 <!-- userRecPrdBox 종료 : 8. 사용자 기반 추천 상품 -->	
 			
         	</section>
         

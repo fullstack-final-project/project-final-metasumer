@@ -4,110 +4,89 @@
 0. index 페이지 section 설정
 **************/
 
+@media (min-width: 1256px) {
+	.indexSection {
+		width: 1256px;
+		margin: 0 auto;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+}
 
-
+.sectionTitle {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: #39A7FF;
+	letter-spacing: -1px;
+}
 
 /**************   
 1. 추천 광고, 이벤트 베너 (슬라이드쇼)
 **************/
 
-* {
-  box-sizing: border-box;
+#eventBannerBox {
+	margin-bottom: 50px;
 }
 
-/* Position the image container (needed to position the left and right arrows) */
-.container {
-  position: relative;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Add a pointer when hovering over the thumbnail images */
-.cursor {
-  cursor: pointer;
-}
-
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 40%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* Container for image text */
-.caption-container {
-  text-align: center;
-  background-color: #222;
-  padding: 2px 16px;
-  color: white;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Six columns side by side */
-.column {
-  float: left;
-  width: 16.66%;
-}
-
-/* Add a transparency effect for thumnbail images */
-.demo {
-  opacity: 0.6;
-}
-
-.active,
-.demo:hover {
-  opacity: 1;
-}
 
 /**************   
 2. 실시간 HOT 키워드
 **************/
 
-/**************   
-3. 실시간 낚시터 상황
-**************/
+.keywordListWrap {
+	width: 100%;
+	padding-top: 30px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.keywordListItem {
+	display: inline-block;
+	width: 32%;
+	height: 400px;
+	border: 1px solid #39A7FF;
+}
+
+.keywordListTitle {
+	margin-top: 15px;
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
 
 /**************   
-4. 베스트 낚시 기록 (전체 회원 대상)
+3. 실시간 낚시터 상황 : 조황
+**************/
+
+#nowFishingBox {
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+
+.nowFishingWrap {
+	width: 100%;
+	padding-top: 30px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#nowFishingInfo {
+	display: inline-block;
+	width: 33%;
+	height: 400px;
+	border: 1px solid #39A7FF;
+}
+
+#nowFishingMap {
+	display: inline-block;
+	width: 64%;
+	height: 400px;
+	border: 1px solid #39A7FF;
+}
+
+/**************   
+4. 베스트 낚시 기록 (전체 회원 대상) / 6. 최신 낚시 기록 (전체 회원 대상)
 **************/
 
 
@@ -118,7 +97,7 @@
 }
 
 .menber_slick2 {
-    height: 130px;
+    height: 350px;
     margin: 30px auto 50px;
 }
 
@@ -126,6 +105,15 @@
 .menber_slick2 .slick-track,
 .menber_slick2 .slick-slide {
     height: 100%;
+}
+
+.menber_slick2 .slick-list {
+	margin: 0 -15px;
+}
+
+.menber_slick2 .slick-slide {
+	height: 350px;
+	margin: 0 15px;
 }
 
 .menber_slick2 .item>a {
@@ -148,22 +136,214 @@
     margin-top: 100px;
 }
 
+.slick-prev, .slick-next {
+	border: none;
+	background-color: transparent;
+}
+
+.slick-prev {
+	position: absolute;
+	left: 0;
+	top: 125px;
+	bottom: -20px;
+	z-index: 500;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	text-indent: -9999px; /*텍스트뒤로보내기 안보이게*/
+	opacity: 0.5;
+}
+
+.slick-prev::before {
+	content: '\f053';
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	text-indent: 0;
+	color: #39A7FF;
+	position: absolute;
+	left: 9px;
+	top: 0px;
+	font-size: 2em;
+	cursor:pointer;
+	text-shadow: -1px 0px #E0F4FF, 0px 1px #E0F4FF, 1px 0px #E0F4FF, 0px -1px #E0F4FF;
+}
+
+.slick-next {
+	position: absolute;
+	right: 0;
+	top: 125px;
+	bottom: -45px;
+	z-index: 500;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	text-indent: -9999px; /*텍스트 뒤로 치워버림*/
+	opacity: 0.5;
+}
+
+.slick-next::before {
+	content: '\f054';
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	text-indent: 0;
+	color: #39A7FF;
+	position: absolute;
+	left: 9px;
+	top: 0px;
+	font-size: 2em;
+	cursor:pointer;
+	text-shadow: -2px 0px #E0F4FF, 0px 2px #E0F4FF, 2px 0px #E0F4FF, 0px -2px #E0F4FF;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+	opacity: 1;
+}
+
+.fishRecordList {
+	overflow: hidden;
+	border: 1px solid transparent;
+}
+
+.fishRrdImgWrap {
+	overflow: hidden;
+}
+
+.fishRecordList:hover {
+	border: 1px solid #87C4FF;
+}
+
+.fishRecordList img {
+	width: 100%;
+	height: 200px;
+	transition-duration: 0.3s;
+}
+
+.fishRecordList img:hover {
+	transform: scale(1.2, 1.2); 
+	transition-duration: 0.5s;
+}
+
+.fishRecordList div {
+	padding-left: 10px;
+}
+
+#fishRecordName {
+	font-weight: bold;
+}
+
+.fishRecordTitle {
+	font-weight: bold;
+}
+
 /**************   
 5. 베스트 업체 리스트
 **************/
 
-/**************   
-6. 최신 나의 낚시 기록 (전체 회원 대상)
-**************/
+#bestBusinessBox {
+	margin-bottom: 40px;
+}
+
+.bestBizCtgBar {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 15px;
+	paddiing-bottom: 15px;
+}
+
+.bestBiz {
+	display: inline-block;
+	background-color: #gray;
+	border: 1px solid #87C4FF;
+	border-radius: 5px;
+	font-size: 14px;
+	letter-spacing: -1px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.bestBiz.active {
+	border: 1px solid #39A7FF;
+	background-color: #39A7FF;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+
+.bestBusinessList {	
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding: 15px 0;
+}
+
+.bestBizItem {	
+	width: 19%;
+	display: inline-block;
+}
+
+.eachSectionEmphasisText {
+	font-size: 16px;
+	color: #39A7FF;
+	font-weight: bold;
+}
 
 /**************   
 7. 새로 나온 상품
 **************/
 
+#newProductBox {
+	margin-bottom: 30px;
+}
+
+.newProductList {
+	padding-top: 30px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.newPrdItem {
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+
+.newPrdItem:hover {
+	border: 1px solid #39A7FF;
+}
+
+.newPrdItem img {
+	width: 200px;
+	height: 200px;
+}
+
 /**************   
 8. 사용자 기반 추천 상품
 **************/
+#userRecPrdBox {
+	margin-bottom: 30px;
+}
 
-/**************   
-1. 추천 광고, 이벤트 베너
-**************/
+.userRecPrdList {
+	padding-top: 30px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.userRecPrdItem {
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+
+.userRecPrdItem:hover {
+	border: 1px solid #39A7FF;
+}
+
+.userRecPrdItem img {
+	width: 200px;
+	height: 200px;
+}

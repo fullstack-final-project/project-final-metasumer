@@ -11,8 +11,9 @@
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/location.css'/>">
 		<script src="<c:url value='/js/location.js'/>"></script>
+		<script src="<c:url value='/js/locationTraffic.js'/>"></script>
 		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
-		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?clientId=sio4q1ij5f&submodules=geocoder"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f&amp;submodules=panorama,geocoder,drawing,visualization"></script>
 	</head>
 	<body>
 		<div id="wrap">
