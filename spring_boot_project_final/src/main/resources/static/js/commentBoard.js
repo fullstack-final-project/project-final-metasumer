@@ -53,27 +53,66 @@ function addComment() {
 function loadComments() {
     let boardPostNo = $('input[name="boardPostNo"]').val();
     let currentUserId = $('input[name="sid"]').val();
+    let postAuthorId = $('input[name="postAuthorId"]').val();
     
     $.getJSON('/board/getCommentsBoard/' + boardPostNo, function(data) {
         let commentHtml = '';
         $.each(data, function(index, comment) {
-            commentHtml += '<div class="comment">';
-            commentHtml += '<div id="commentBox' + comment.commentNo + '">';
-            commentHtml += '<strong>' + comment.memNickname + ':</strong> ' + comment.content + '&nbsp;&nbsp;';
-
-            if (comment.memId === currentUserId) {
-                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
-                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
-            }
-            commentHtml += '</div>';
-            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
-            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
-            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
-            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
-            commentHtml += '</div>';
             
-            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
-            commentHtml += '</div>';
+            let memId = comment.memId;
+        	
+        	commentHtml += '<div class="comment">';
+            commentHtml += '<div id="commentBox' + comment.commentNo + '">';
+        	commentHtml += '<strong>' + comment.memNickname + '</strong><br> '; 
+        	
+        	if(comment.secret === 1){
+	        		commentHtml += '<img src="/project_images/secret.png" width="20px">';
+        	
+        		if(currentUserId !== postAuthorId && currentUserId !== memId){
+	        		commentHtml += '&nbsp;&nbsp;비밀 댓글 입니다.';
+		            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+	        		
+        		} else{
+        		
+            		commentHtml += '&nbsp;&nbsp;' + comment.content + '&nbsp;&nbsp;';
+            		
+            		if (comment.memId === currentUserId) {
+		                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
+		                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
+		            }
+            
+		            commentHtml += '</div>';
+		            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
+		            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
+		            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
+		            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
+		            commentHtml += '</div>';
+		            
+		            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+		            commentHtml += '</div>';
+        		
+        		}
+        	} else{
+        		
+        		commentHtml += '&nbsp;&nbsp;' + comment.content + '&nbsp;&nbsp;';
+            		
+        		if (comment.memId === currentUserId) {
+	                commentHtml += '<button class="btn" type="button" onclick="showEditForm(' + comment.commentNo + ')">수정</button>';
+	                commentHtml += '<button class="btn" type="button" onclick="deleteComment(' + comment.commentNo + ')">삭제</button>';
+	            }
+        
+	            commentHtml += '</div>';
+	            commentHtml += '<div id="editComment' + comment.commentNo + '" style="display:none;">';
+	            commentHtml += '<textarea id="editContent' + comment.commentNo + '">' + comment.content + '</textarea>';
+	            commentHtml += '<button class="btn" type="button" onclick="saveComment(' + comment.commentNo + ')">저장</button>';
+	            commentHtml += '<button class="btn" type="button" onclick="cancelEdit(' + comment.commentNo + ')">취소</button>';
+	            commentHtml += '</div>';
+	            
+	            commentHtml += '<p><small>' + new Date(comment.createdDate).toLocaleString() + '</small></p>';
+	            commentHtml += '</div>';
+        	}
+
+            
         });
         $('#commentList').html(commentHtml);
     });

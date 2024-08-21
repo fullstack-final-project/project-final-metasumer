@@ -56,7 +56,7 @@
 
 	<!-- 댓글 목록 조회 -->
 	<select id="listAllCommentBoard" resultMap="cmResult">
-		SELECT c.commentNo, c.memId, c.boardCtgId, c.boardPostNo, c.createdDate, c.content, m.memNickname
+		SELECT c.commentNo, c.memId, c.boardCtgId, c.boardPostNo, c.createdDate, c.content, c.secret, m.memNickname
 		FROM comment c
 		JOIN member m ON c.memId = m.memId
 		WHERE c.boardPostNo = #{boardPostNo}

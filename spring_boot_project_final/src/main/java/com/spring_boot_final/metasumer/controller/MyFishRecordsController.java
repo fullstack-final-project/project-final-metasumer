@@ -164,6 +164,7 @@ public class MyFishRecordsController {
 	// 삭제
 	@RequestMapping("/myFishRecords/deletemyFishRecords")
 	public String deletemyFishRecords(@RequestParam("recordNo") String recordNo) {
+		mfService.deleteMyFishRecordsComment(recordNo);
 		mfService.deleteMyFishRecords(recordNo);
 		return "redirect:/myFishRecords/myFishRecordsListView";
 	}

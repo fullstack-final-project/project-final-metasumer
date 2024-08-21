@@ -34,11 +34,11 @@
 		            </tr>
 		            <tr>
 		                <th>제목</th>
-		                <td><input type="text" id="title" name="title" required></td>
+		                <td><input type="text" id="title" name="title" class="input_text" required></td>
 		            </tr>
 		            <tr>
 					    <th>날짜</th>
-					    <td><input type="date" id="createdDate" name="createdDate" required></td>
+					    <td><input type="date" id="createdDate" name="createdDate" class="input_text" required></td>
 					</tr>
 		            <tr>
 		                <th>내용</th>
@@ -53,23 +53,23 @@
 		            </tr>
 		            <tr>
 		                <th>물고기 이름</th>
-		                <td><input type="text" id="fishName" name="fishName"></td>
+		                <td><input type="text" id="fishName" name="fishName" class="input_text"></td>
 		            </tr>
 		            <tr>
 		                <th>물고기 크기</th>
-		                <td><input type="text" id="fishSize" name="fishSize"></td>
+		                <td><input type="text" id="fishSize" name="fishSize" class="input_text"></td>
 		            </tr>
 		            <tr>
 		                <th>사용 장비</th>
-		                <td><input type="text" id="equipment" name="equipment"></td>
+		                <td><input type="text" id="equipment" name="equipment" class="input_text"></td>
 		            </tr>
 		            <tr>
 		                <th>낚시 위치</th>
-		                <td><input type="text" id="location" name="location"></td>
+		                <td><input type="text" id="location" name="location" class="input_text"></td>
 		            </tr>
 		            <tr>
 		                <th>날씨</th>
-		                <td><input type="text" id="weather" name="weather"></td>
+		                <td><input type="text" id="weather" name="weather" class="input_text"></td>
 		            </tr>
 		            <tr>
 		            	<td colspan="2">

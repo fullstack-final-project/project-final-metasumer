@@ -48,3 +48,24 @@ table {
     flex-wrap: wrap;
     justify-content: center;
 }
+
+
+.nick {
+	overflow: hidden;
+}
+
+.nick p {
+	float: left;
+}
+
+.nick form {
+	float: left;
+	margin-left: 10px;
+}
+
+.com {
+	font-size: 10px;
+	padding: 5px;
+	display: inline-block;
+	justify-content: space-between;
+}
