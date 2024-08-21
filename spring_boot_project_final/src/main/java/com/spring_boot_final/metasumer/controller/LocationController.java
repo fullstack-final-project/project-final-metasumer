@@ -1,10 +1,18 @@
 package com.spring_boot_final.metasumer.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring_boot_final.metasumer.service.LocationSearchService;
 
 @Controller
 public class LocationController {
+	private LocationSearchService locationSearchService;
+	
+	public LocationController(LocationSearchService locationSearchService) {
+		this.locationSearchService = locationSearchService;
+	}
 
 	// 위치 정보 기본 페이지 : 현재 위치 정보 제공
 	@RequestMapping("/location/overview") 
@@ -14,7 +22,9 @@ public class LocationController {
 	
 	// 근처 낚시터
 	@RequestMapping("/location/nearFish")
-	public String nearFishingLocation() {
+	public String nearFishingLocation(Model model) {
+		String searchResult = locationSearchService.searchLoc();
+		model.addAttribute("searchResult", searchResult);
 		return "locInfo/nearFishView";
 	}
 	

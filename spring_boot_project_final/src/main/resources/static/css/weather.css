@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/* 전체 페이지 */
+.weatherWrap {
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+	line-height: 0;
+	padding: 20px 0;
+	background: white;
+}
+
+@media (min-width: 1256px) {
+	.weatherWrap {
+		width: 1256px;
+		margin: 0 auto;
+	}
+}
+
+
+
+/* 상단 카테고리 메뉴 박스 */
+#weatherCtgBox {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #39A7FF;
+}
+
+.weatherCtgBar {
+	width: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	line-height: 0;
+	background: white;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+.weatherCtg {
+	list-style: none;
+	text-decoration : none;
+	color: black;
+	font-weight: bold;
+	letter-spacing: -1px;
+	padding-right: 5px;
+	display: inline-block;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.weatherCtg.active {
+	color: #39A7FF; 
+	text-shadow: -1px 0px #E0F4FF, 0px 1px #E0F4FF, 1px 0px #E0F4FF, 0px -1px #E0F4FF;
+}
+
+#weatherMainBox {
+	margin-top: 30px;
+}
+
+#weatherInfoBox {
+	 margin-top: 50px; 
+	 width: 100%;
+	 height: 700px;
+}
+
+#weatherDetailBox table {
+	border: 1px solid #E0F4FF;
+	width: 500px;
+	height: 350px;
+	margin: 0 auto;
+	letter-spacing: -1px;
+}
+
+#weatherDetailBox table th {
+	color: #39A7FF; 
+	width: 100px;
+	font-weight: bold;
+}
+
+#weatherDetailBox table td {
+	padding-left: 10px;
+}
+
+#weatherDetailBox table tr:nth-child(2n) {
+	background-color: #E0F4FF;	
+}

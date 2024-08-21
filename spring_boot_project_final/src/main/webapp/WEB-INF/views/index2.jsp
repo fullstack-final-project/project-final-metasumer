@@ -35,12 +35,50 @@
 					<div class="keywordListWrap"> 
 						<div id="youtubeKeyword" class="keywordListItem">
 							<div class="keywordListTitle">유튜브</div>
+							<div class="keywordItem">
+								1. 실내 낚시터 <br>
+								2. 낚시대 <br>
+								3. 쏘가리 낚시 <br>
+								4. 낚시터 <br>
+								5. 낚시여행 <br>
+								6. 민물 낚시 <br>
+								7. 방파제 낚시 <br>
+								8. 낚시 캠핑장 <br>
+								9. 섬 낚시 <br>
+								10. 루어 낚시 <br>
+								
+							</div>
 						</div>
 						<div id="instagramKeyword" class="keywordListItem">
 							<div class="keywordListTitle">인스타그램</div>
+							<div class="keywordItem">
+								1. 실내 낚시터 <br>
+								2. 낚시대 <br>
+								3. 쏘가리 낚시 <br>
+								4. 낚시터 <br>
+								5. 낚시여행 <br>
+								6. 민물 낚시 <br>
+								7. 방파제 낚시 <br>
+								8. 낚시 캠핑장 <br>
+								9. 섬 낚시 <br>
+								10. 루어 낚시 <br>
+								
+							</div>
 						</div>
 						<div id="naverKeyword" class="keywordListItem">
 							<div class="keywordListTitle">네이버</div>
+							<div class="keywordItem">
+								1. 실내 낚시터 <br>
+								2. 낚시대 <br>
+								3. 쏘가리 낚시 <br>
+								4. 낚시터 <br>
+								5. 낚시여행 <br>
+								6. 민물 낚시 <br>
+								7. 방파제 낚시 <br>
+								8. 낚시 캠핑장 <br>
+								9. 섬 낚시 <br>
+								10. 루어 낚시 <br>
+							</div>
 						</div>
 					</div>
 				</div> <!-- hotKeywordBox 종료 : 2. 실시간 HOT 키워드 -->
@@ -48,7 +86,20 @@
 				<div id="nowFishingBox" class="indexSection">
 					<div class="sectionTitle">실시간 낚시 조황 정보 🗺️</div>
 					<div class="nowFishingWrap">
-						<div id="nowFishingInfo" class="nowFishingItem"></div>
+						<div id="nowFishingInfo" class="nowFishingItem">
+							<table id="nowFishingTable">
+								<tr><th>링크</th><th>장소</th><th>어종</th><th>날짜</th><th>사진</th></tr>
+								<c:forEach items="${newMfList}" var="newMfList" begin="1" end="5">
+									<tr>
+										<td><button onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ newMfList.recordNo }' />'">이동</button></td>
+										<td>${newMfList.location}</td>
+										<td>${newMfList.fishName}</td>
+										<td><fmt:formatDate value="${newMfList.createdDate}" pattern="yyyy-MM-dd" /></td>
+										<td><img src="<c:url value='/image/fish/${newMfList.uploadImage}'/>" width="100%" height="50"></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
 						<div id="nowFishingMap" class="nowFishingItem"></div>
 					</div>
 				</div> <!-- nowFishingBox 종료 : 3. 실시간 낚시터 상황 -->
