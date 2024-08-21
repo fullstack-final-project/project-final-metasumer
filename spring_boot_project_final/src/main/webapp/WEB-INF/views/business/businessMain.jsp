@@ -20,14 +20,14 @@
          		<div class="card-content">
 	             <h2>바다낚시</h2>
 	             <p>바다낚시 관련 상품과 판매 내역을 관리하세요.</p>
-	             <a href="<c:url value='/business/dashboard?bizCtgId=1'/>" class="btn">자세히 보기</a>
+	             <a href="<c:url value='/business/dashboard'/>" class="btn">자세히 보기</a>
             </div>
          </div>
          <div id="freshWaterFishing" class="card">
          		<div class="card-content">
 	             <h2>민물낚시</h2>
 	             <p>민물낚시 관련 상품과 판매 내역을 관리하세요.</p>
-	             <a href="<c:url value='/business/dashboard?bizCtgId=2'/>" class="btn">자세히 보기</a>
+	             <a href="<c:url value='/business/dashboard'/>" class="btn">자세히 보기</a>
 	           </div>  
          </div>
          <div id="sale" class="card">

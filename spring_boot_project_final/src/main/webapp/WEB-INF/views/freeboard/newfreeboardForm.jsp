@@ -22,6 +22,7 @@
 				<form id="uploadFileForm" name="uploadFileForm" enctype="multipart/form-data">
 				<input type="hidden" name="memId" value="${memId}">
 				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
+				<input type="hidden" name="completed" value="0">
 				
 				
                 <table border="1">
@@ -34,7 +35,7 @@
                     </tr>
                     <tr>
                         <td><label for="title">제목</label></td>
-                        <td><input type="text" id="title" name="title" required></td>
+                        <td><input type="text" id="title" name="title" class="input_text" required></td>
                     </tr>
                     <tr>
                         <td><label for="content">내용</label></td>
@@ -46,8 +47,7 @@
                         <td><input type="number" id="price" name="price" min="0" step="100"/></td>
                     </tr>
                 </c:if>
-                <c:choose>
-            		<c:when test="${boardCtgId != 3}">
+                <c:if test="${boardCtgId != 3}">
                     <tr>
 			            <td><label for="uploadFile">파일 업로드</label></td>
 			            <td>
@@ -55,8 +55,7 @@
 			                <button id="deleteButton" class="btn" style="display: none;" onclick="resetFileInput()">첨부파일 삭제</button>
             			</td>
 			        </tr>
-			        </c:when>
-			     </c:choose>
+			    </c:if>
                     <tr>
                         <td colspan="2">
                             <button type="submit" class="btn">저장</button>
@@ -65,8 +64,6 @@
                     </tr>
                 </table>
             </form>
-				
-				
 				
 				
 				

@@ -21,10 +21,16 @@ public class FreeBoardVO {
 	private String uploadFile;
 	private String memNickname;
 	private String price;
+	private int completed;
 	
 	
 	
-	
+	public int getCompleted() {
+		return completed;
+	}
+	public void setCompleted(int completed) {
+		this.completed = completed;
+	}
 	public String getPrice() {
 		return price;
 	}

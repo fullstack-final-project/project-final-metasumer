@@ -75,6 +75,7 @@
                             <form id="deleteForm" action="<c:url value='/freeboard/deleteBoard' />" method="post">
 							    <input type="hidden" name="boardPostNo" value="${fb.boardPostNo}" />
 							    <input type="hidden" name="boardCtgId" value="${fb.boardCtgId}" />
+							    <input type="hidden" name="completed" value="${fb.completed}" />
 							</form>
 						</c:if>
                         </td>
@@ -88,6 +89,7 @@
 					        <input type="hidden" name="memId" value="${sessionScope.sid}">
 					        <input type="hidden" name="boardPostNo" value="${fb.boardPostNo}">
 					        <input type="hidden" name="boardCtgId" value="${fb.boardCtgId}">
+					        <input type="hidden" name="postAuthorId" value="${fb.memId}">
 					        <textarea id="commentContent" name="content" placeholder="댓글을 입력하세요..." required></textarea>
 					        
 					        <label>

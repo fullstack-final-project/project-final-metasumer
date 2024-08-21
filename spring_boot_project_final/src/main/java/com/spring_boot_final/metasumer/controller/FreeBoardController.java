@@ -40,14 +40,13 @@ public class FreeBoardController {
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
 		try {
-			
+
 			if ("3".equals(boardCtgId)) {
 				ArrayList<FreeBoardVO> qnaList = fbService.qnaList(boardCtgId);
 				model.addAttribute("qnaList", qnaList);
-	            return "freeboard/qnaView";
-	        }
-			
-			
+				return "freeboard/qnaView";
+			}
+
 			int pageSize = 10; // 한 페이지에 표시할 항목 수
 
 			if (page < 1) {
@@ -82,13 +81,37 @@ public class FreeBoardController {
 	}
 
 	// 벼룩시장
-	@RequestMapping("/freeboard/fleamarketList/{boardCtgId}")
-	public String fleamarketList(@PathVariable String boardCtgId,Model model) {
-		
-		ArrayList<FreeBoardVO> fbList = fbService.fleamarketList(boardCtgId);
+	@RequestMapping("/freeboard/fleamarketList/{completed}")
+	public String fleamarketList(@PathVariable int completed, Model model) {
+
+		String boardCtgId = "5";
+
+		ArrayList<FreeBoardVO> fbList;
+
+		if (completed == 1) {
+			fbList = fbService.fleamarketList(boardCtgId, completed);
+		} else {
+			fbList = fbService.fleamarketList(boardCtgId, completed);
+		}
+
 		model.addAttribute("fbList", fbList);
-		
+
 		return "freeboard/fleamarketList";
+	}
+
+	// 벼룩시장
+	@RequestMapping("/freeboard/fleamarketListcompleted/{completed}")
+	public String fleamarketcompleted(@PathVariable int completed, @RequestParam String boardPostNo) {
+
+		if (completed == 1) {
+			completed = 0;
+		} else {
+			completed = 1;
+		}
+
+		fbService.fleamarketcompleted(boardPostNo, completed);
+
+		return "redirect:/freeboard/fleamarketList/" + completed;
 	}
 
 	@RequestMapping("/freeboard/newfreeboardForm/{boardCtgId}")
@@ -109,9 +132,10 @@ public class FreeBoardController {
 	// 자유게시판 글 등록
 	@RequestMapping(value = "/freeboard/insertFreeBoard", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> insertFreeBoard(@RequestParam("title") String title,
-			@RequestParam("content") String content, @RequestParam("memId") String memId, @RequestParam(value = "price", required = false) String price,
-			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("uploadFile") MultipartFile file, Model model) {
+	public Map<String, String> insertFreeBoard(@RequestParam("title") String title, @RequestParam(value = "completed", required = false) int completed,
+			@RequestParam("content") String content, @RequestParam("memId") String memId,
+			@RequestParam(value = "price", required = false) String price, @RequestParam("boardCtgId") int boardCtgId,
+			@RequestParam(value = "uploadFile", required = false) MultipartFile file, Model model) {
 
 		Map<String, String> response = new HashMap<>();
 
@@ -120,28 +144,30 @@ public class FreeBoardController {
 			vo.setTitle(title);
 			vo.setContent(content);
 			vo.setBoardCtgId(boardCtgId);
+			vo.setCompleted(completed);
 			vo.setMemId(memId);
-			
+
 			if (price != null && !price.isEmpty()) {
-	            vo.setPrice(price);
-	        }
-			
+				vo.setPrice(price);
+			}
+
 			if (file != null && !file.isEmpty()) {
 				String savedFileName = saveFile(file);
 				vo.setUploadFile(savedFileName);
 			}
 
 			fbService.insertFreeBoard(vo);
-			
-			String redirectUrl;
-	        if (boardCtgId == 5) {
-	            redirectUrl = "/freeboard/fleamarketList/" + boardCtgId; 
-	        } else {
-	            redirectUrl = "/freeboard/freeboardView/" + boardCtgId; 
-	        }
 
-	        response.put("status", "success");
-	        response.put("redirectUrl", redirectUrl);
+			String redirectUrl;
+			
+			if (boardCtgId == 5) {
+				redirectUrl = "/freeboard/fleamarketList/" + completed; 
+			} else {
+				redirectUrl = "/freeboard/freeboardView/" + boardCtgId;
+			}
+
+			response.put("status", "success");
+			response.put("redirectUrl", redirectUrl);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -191,7 +217,8 @@ public class FreeBoardController {
 
 	@RequestMapping("freeboard/updateFreeBoard")
 	public String updateFreeBoard(@RequestParam("boardPostNo") String boardPostNo, @RequestParam("title") String title,
-			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("content") String content, @RequestParam(value = "price", required = false) String price,
+			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("content") String content,
+			@RequestParam(value = "price", required = false) String price,
 			@RequestParam("uploadFile") MultipartFile file) {
 
 		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
@@ -200,10 +227,10 @@ public class FreeBoardController {
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setBoardPostNo(boardPostNo);
-		
+
 		if (price != null && !price.isEmpty()) {
-            vo.setPrice(price);
-        }
+			vo.setPrice(price);
+		}
 
 		try {
 			if (file != null && !file.isEmpty()) {
@@ -219,24 +246,25 @@ public class FreeBoardController {
 		}
 
 		if (boardCtgId == 5) {
-	        return "redirect:/freeboard/fleamarketList/" + boardCtgId;
-	    } else {
-	        return "redirect:/freeboard/freeboardView/" + boardCtgId;
-	    }
+			return "redirect:/freeboard/fleamarketList/" + boardCtgId;
+		} else {
+			return "redirect:/freeboard/freeboardView/" + boardCtgId;
+		}
 	}
 
 	// 삭제
 	@RequestMapping("/freeboard/deleteBoard")
-	public String deleteFreeBoard(@RequestParam("boardPostNo") String boardPostNo,
+	public String deleteFreeBoard(@RequestParam("boardPostNo") String boardPostNo, @RequestParam("completed") int completed,
 			@RequestParam("boardCtgId") int boardCtgId) {
+		
+		fbService.deleteFreeBoardComment(boardPostNo);
 		fbService.deleteFreeBoard(boardPostNo);
-		
-		
+
 		if (boardCtgId == 5) {
-	        return "redirect:/freeboard/fleamarketList/" + boardCtgId;
-	    } else {
-	        return "redirect:/freeboard/freeboardView/" + boardCtgId;
-	    }
+			return "redirect:/freeboard/fleamarketList/" + completed;
+		} else {
+			return "redirect:/freeboard/freeboardView/" + boardCtgId;
+		}
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {

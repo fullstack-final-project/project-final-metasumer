@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.spring_boot_final.metasumer.dao.IFishingSpotDAO">
+  	<resultMap id="fishingSpotResult" type="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        <id property="spotId" column="spotId"/>
+        <result property="spotName" column="spotName"/>
+        <result property="spotType" column="spotType"/>
+        <result property="spotDescription" column="spotDescription"/>
+        <result property="spotPrice" column="spotPrice"/>
+        <result property="spotImage" column="spotImage"/>
+        <result property="openingTime" column="openingTime"/>
+        <result property="closingTime" column="closingTime"/>
+        <result property="spotZipcode" column="spotZipcode"/>
+        <result property="spotAddress1" column="spotAddress1"/>
+        <result property="spotAddress2" column="spotAddress2"/>
+        <result property="spotHP1" column="spotHP1"/>
+        <result property="spotHP2" column="spotHP2"/>
+        <result property="spotHP3" column="spotHP3"/>
+        <result property="spotFacility" column="spotFacility"/>
+        <result property="bizId" column="bizId"/>
+    </resultMap>
+    
+  	<!-- 낚시터 리스트를 타입에 따라 조회 -->
+    <select id="getFishingSpotsByType" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        SELECT *
+        FROM fishingSpot 
+        WHERE spotType = #{spotType}
+    </select>
+    
+    <!-- 낚시터 상세 조회 -->
+    <select id="detailFishingSpot" resultType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        SELECT 
+            spotId, spotName, spotType, spotDescription, spotPrice, 
+            spotImage, openingTime, closingTime, spotZipcode, 
+            spotAddress1, spotAddress2, spotHP1, spotHP2, spotHP3, 
+            spotFacility, bizId
+        FROM 
+            fishingSpot 
+        WHERE 
+            spotId = #{spotId}
+    </select>
+  </mapper>
+  
+  
