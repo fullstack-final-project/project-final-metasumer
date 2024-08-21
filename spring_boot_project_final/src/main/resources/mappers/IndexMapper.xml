@@ -6,20 +6,48 @@
 
 <mapper namespace="com.spring_boot_final.metasumer.dao.IIndexDAO">
 
+	<!-- 전체 회원 기록 불러오기 : 크기순으로 나열 -->
 	<select id="listBestMemFishRecords" resultType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
-		SELECT f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
+		SELECT f.recordNo, f.title,  f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
 		FROM myFishRecords f
 	    JOIN member m ON f.memId = m.memId
-		ORDER BY fishSize DESC
+		ORDER BY fishSize*1 DESC
 		LIMIT 10 
 	</select>
 	
+	<!-- 베스트 업체 리스트 불러오기 : 임의로 선정 -->
 	<select id="listBestBusinessRank" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
-		SELECT bizId, bizName, bizRegImg, bizCtgId
+		SELECT *
 		FROM business
 		ORDER BY bizId
-		LIMIT 5
+		LIMIT 10
 	</select>
 	
+	<!-- 최신 회원 기록 불러오기 : 날짜순으로 나열 -->
+	<select id="listNewMemFishRecords" resultType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+		SELECT f.recordNo, f.title,  f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
+		FROM myFishRecords f
+	    JOIN member m ON f.memId = m.memId
+		ORDER BY createdDate*1 DESC
+		LIMIT 10 
+	</select>
+	
+	<!-- 신상품 불러오기 : 상품번호로 나열, 상품 카테고리 중 1번(낚시용품)만 선택 -->
+	<select id="listNewProducts" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+		SELECT *
+		FROM product
+		WHERE prdCtgId='1'
+		ORDER BY prdNo*1 DESC	
+		LIMIT 6
+	</select>
+	
+	<!-- 사용자 기반 추천 상품 : 알고리즘 사용 예정 (현재는 임의로 추출중) -->
+	<select id="listUserRecProducts" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+		SELECT *
+		FROM product
+		WHERE prdCtgId='1'
+		ORDER BY prdNo*1 ASC	
+		LIMIT 6
+	</select>
 	
 </mapper>

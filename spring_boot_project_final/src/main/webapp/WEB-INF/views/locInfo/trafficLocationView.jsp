@@ -10,7 +10,7 @@
 		<title>어사모: 위치 정보</title>
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/location.css'/>">
-		<script src="<c:url value='/js/location.js'/>"></script>
+		<script src="<c:url value='/js/locationTraffic.js'/>"></script>
 		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
 		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f&amp;submodules=panorama,geocoder,drawing,visualization"></script>
 	</head>
@@ -28,9 +28,9 @@
 							<li data-tab="/location/nearFood" class="locCtg3 locCtg" >주변 먹거리</li>
 							<li data-tab="/location/nearPlay" class="locCtg4 locCtg" >주변 놀거리</li>
 							<li data-tab="/location/nearHotel" class="locCtg5 locCtg" >주변 숙박시설</li>
-							<li data-tab="/location/traffic" class="locCtg6 locCtg" >교통 상황</li>
+							<li data-tab="/location/traffic" class="locCtg6 locCtg active" >교통 상황</li>
 							<li data-tab="/location/nationwide" class="locCtg7 locCtg" >전국 낚시터</li>
-							<li data-tab="/location/intl" class="locCtg8 locCtg active" >해외 낚시터</li>	
+							<li data-tab="/location/intl" class="locCtg8 locCtg" >해외 낚시터</li>	
 						</ul>
 					</div>
 					<div id="locationMainBox">

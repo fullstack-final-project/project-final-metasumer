@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_final.metasumer.dao.IIndexDAO;
 import com.spring_boot_final.metasumer.model.BusinessVO;
 import com.spring_boot_final.metasumer.model.MyFishRecordsVO;
+import com.spring_boot_final.metasumer.model.ProductVO;
 
 @Service
 public class IndexService implements IIndexService {
@@ -25,6 +26,21 @@ public class IndexService implements IIndexService {
 	@Override
 	public ArrayList<BusinessVO> listBestBusinessRank() {
 		return dao.listBestBusinessRank();
+	}
+
+	@Override
+	public ArrayList<MyFishRecordsVO> listNewMemFishRecords() {
+		return dao.listNewMemFishRecords();
+	}
+
+	@Override
+	public ArrayList<ProductVO> listNewProducts() {
+		return dao.listNewProducts();
+	}
+
+	@Override
+	public ArrayList<ProductVO> listUserRecProducts() {
+		return dao.listUserRecProducts();
 	}
 
 }

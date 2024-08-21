@@ -1,10 +1,10 @@
 /**
- * location.js
+ * locationTraffic.js
  */
  
  $(document).ready(function() {
  	
- 	/* (시작) 0. 탭 메뉴 선택 시 각 탭 사이트로 이동 */
+ 	/*  0. (시작) 탭 메뉴 선택 시 각 탭 사이트로 이동 */
  	const locCtgItem = document.querySelectorAll('.locCtg');
  	
  	locCtgItem.forEach( function(item, index) {
@@ -63,7 +63,12 @@
 	    mapDataControlOptions: {
 	        position: naver.maps.Position.BOTTOM_LEFT
 	    },
-	    mapTypeId: naver.maps.MapTypeId.NORMAL
+	    mapTypeId: naver.maps.MapTypeId.NORMAL,
+	    mapTypes: new naver.maps.MapTypeRegistry({
+        	'normal': naver.maps.NaverStyleMapTypeOptions.getNormalMap({
+            	overlayType: 'bg.ol.ts.ctt.lko'
+			})
+        })
 	};
 	
 	let map = new naver.maps.Map('locationMapBox', mapOptions);
@@ -101,7 +106,6 @@
 	
 	    infowindow.open(map, location);
 	   // console.log('Coordinates: ' + location.toString()); // 현재 위치 좌표
-	    coordinateToAddress();
 	    // naver.maps.onJSContentLoaded = coordinateToAddress;
 	}
 
@@ -112,120 +116,6 @@
 	        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
 	
 	    infowindow.open(map, center);
-	}
-	
-	function coordinateToAddress() { // 좌표 데이터 넘겨서 주소값 받아오기
-	    naver.maps.Service.reverseGeocode({
-	        location: location,
-	    }, function(status, response) {
-	        if (status === naver.maps.Service.Status.ERROR) {
-	            return alert('Something Wrong!');
-	        }
-	
-	        var items = response.v2.results,
-	            address = '',
-	            htmlAddresses = [];
-			
-			// console.log(items); // 결과 json 데이터로 확인
-			
-	        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
-	            item = items[i];
-	            address = makeAddress(item) || '';
-	            addrType = item.name === 'roadaddr' ? '[도로명 주소]' : '[지번 주소]';
-	
-	            htmlAddresses.push(
-	            	'<span style="font-weight:bold;">' + addrType +'</span>  '+ address + '\n');
-	        }
-			
-			$('#nowLocationBox').html();
-			if (htmlAddresses[4] != undefined) { // 도로명주소와 지번주소 둘 다 표시
-		        $('#nowLocationBox').html(
-		            '<div style="padding-left:10px; min-width:200px; line-height:150%;">' +
-		            '<h4 style="margin-top:5px;">현재 나의 위치 주소 : </h4>' + 
-		            htmlAddresses[3] + htmlAddresses[4] + '</div>'
-		        ); 
-			} else { // 도로명주소가 안 나오는 경우 지번주소만 표시
-				$('#nowLocationBox').html(
-		            '<div style="padding:10px;min-width:200px;line-height:150%;">' +
-		            '<h4 style="margin-top:5px;">현재 위치 : </h4>' + 
-		            htmlAddresses[3] + '</div>'
-		        ); 
-			}
-	    });
-	}
-	
-	function makeAddress(item) { // 전달받은 json 데이터로 주소 만들기
-	    if (!item) {
-	        return;
-	    }
-	
-	    var name = item.name,
-	        region = item.region,
-	        land = item.land,
-	        isRoadAddress = name === 'roadaddr';
-	
-	    var sido = '', sigugun = '', dongmyun = '', ri = '', rest = '';
-	
-	    if (hasArea(region.area1)) {
-	        sido = region.area1.name;
-	    }
-	
-	    if (hasArea(region.area2)) {
-	        sigugun = region.area2.name;
-	    }
-	
-	    if (hasArea(region.area3)) {
-	        dongmyun = region.area3.name;
-	    }
-	
-	    if (hasArea(region.area4)) {
-	        ri = region.area4.name;
-	    }
-	
-	    if (land) {
-	        if (hasData(land.number1)) {
-	            if (hasData(land.type) && land.type === '2') {
-	                rest += '산';
-	            }
-	
-	            rest += land.number1;
-	
-	            if (hasData(land.number2)) {
-	                rest += ('-' + land.number2);
-	            }
-	        }
-	
-	        if (isRoadAddress === true) {
-	            if (checkLastString(dongmyun, '면')) {
-	                ri = land.name;
-	            } else {
-	                dongmyun = land.name;
-	                ri = '';
-	            }
-	
-	            if (hasAddition(land.addition0)) {
-	                rest += ' ' + land.addition0.value;
-	            }
-	        }
-	    }
-	
-	    return [sido, sigugun, dongmyun, ri, rest].join(' ');
-	}
-	
-	function hasArea(area) { // 주소 제작용 함수
-	    return !!(area && area.name && area.name !== '');
-	}
-	
-	function hasData(data) { // 주소 제작용 함수
-	    return !!(data && data !== '');
-	}
-	
-	function checkLastString (word, lastString) { // 주소 제작용 함수
-	    return new RegExp(lastString + '$').test(word);
-	}
-	
-	function hasAddition (addition) { // 주소 제작용 함수
-	    return !!(addition && addition.value);
 	}
 	
 	if (navigator.geolocation) {
@@ -245,27 +135,6 @@
     }
 
  	/* 2. 네이버 지도 API 호출 관련 : 지도 설정 값 및 호출 함수 (끝) */
- 
- 	
- 	/* (시작) 상단 탭 메뉴 클릭 시 해당 내용 아래에 노출
- 	$('.locationItem').on('click', function() {
- 		event.preventDefault();
- 		
- 		let activeTab = $(this).attr('data-tab');
- 		
- 		$.ajax({
- 			url: activeTab,
- 			type: 'get',
- 			dataType: 'html',
- 			success: function(data) {
- 				$('#locationMainBox').html(data);
- 			},
- 			error: function() {
- 				alert('불러오기 실패');
- 			}
- 		});
- 		
- 	});
- 	(끝) 상단 탭 메뉴 클릭 시 해당 내용 아래에 노출 */
+
  	
  });
