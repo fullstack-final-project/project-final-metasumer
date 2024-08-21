@@ -8,8 +8,7 @@
 		<title>낚시용품 리스트</title>
 		<!-- head.jsp import -->
 		<c:import url="/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="stylesheet" type="text/css"
-			href="<c:url value='/css/productList.css'/>" />
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/productList.css'/>" />
 		<script src="<c:url value='/js/productList.js'/>"></script>
 	</head>
 	<body>

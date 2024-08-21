@@ -19,20 +19,15 @@ public class ReservationService implements IReservationService {
   public ArrayList<ReservationVO> getAllReservations() {
     return dao.getAllReservations();
   }
-  
+
   @Override
-  public ArrayList<ReservationVO> listReservationByCategory(Integer bizCtgId) {
-    return dao.listReservationByCategory(bizCtgId);
+  public int confirmReservation(Integer resNo) {
+    return dao.confirmReservation(resNo);
   }
 
   @Override
-  public int confirmReservation(Integer resNo, Integer bizCtgId) {
-    return dao.confirmReservation(resNo, bizCtgId);
-  }
-
-  @Override
-  public int cancelReservation(Integer resNo, Integer bizCtgId) {
-    return dao.cancelReservation(resNo, bizCtgId);
+  public int cancelReservation(Integer resNo) {
+    return dao.cancelReservation(resNo);
   }
 
 }
