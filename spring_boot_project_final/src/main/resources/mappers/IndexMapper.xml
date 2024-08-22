@@ -36,7 +36,6 @@
 	<select id="listNewProducts" resultType="com.spring_boot_final.metasumer.model.ProductVO">
 		SELECT *
 		FROM product
-		WHERE prdCtgId='1'
 		ORDER BY prdNo*1 DESC	
 		LIMIT 6
 	</select>
@@ -45,8 +44,7 @@
 	<select id="listUserRecProducts" resultType="com.spring_boot_final.metasumer.model.ProductVO">
 		SELECT *
 		FROM product
-		WHERE prdCtgId='1'
-		ORDER BY prdNo*1 ASC	
+		ORDER BY prdPrice*1 DESC	
 		LIMIT 6
 	</select>
 	
