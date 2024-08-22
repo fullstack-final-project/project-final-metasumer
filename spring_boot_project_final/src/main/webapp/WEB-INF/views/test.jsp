@@ -44,6 +44,10 @@
 					<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">물고기기록</a>
 				</c:if>				
 				
+				<a href="<c:url value='/business/businessMain'/>">사업자 메인 페이지</a><br>
+				<a href="<c:url value='/business/registerBusinessForm'/>">업체 등록</a><br>
+				<a href="<c:url value='/fishingSpot/freshwater'/>">민물 낚시</a><br>
+				<a href="<c:url value='/fishingSpot/saltwater'/>">바다 낚시</a><br>
 				
         </section>
         

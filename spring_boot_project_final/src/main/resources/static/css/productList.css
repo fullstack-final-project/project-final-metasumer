@@ -26,6 +26,7 @@
     box-sizing: border-box;
 }
 
+
 .product-card {
     flex: 1 0 18.4%; /* 한 줄에 5개의 카드 표시 */
     box-sizing: border-box;

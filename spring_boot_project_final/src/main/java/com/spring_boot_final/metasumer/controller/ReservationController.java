@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_final.metasumer.model.ReservationVO;
 import com.spring_boot_final.metasumer.service.ReservationService;
@@ -31,6 +32,18 @@ public class ReservationController {
         model.addAttribute("reservations", reservations);
         return "business/dashboard";
     }
+    
+    // 모든 예약 정보 조회
+    @RequestMapping("/listAllReservations")
+    public @ResponseBody ArrayList<ReservationVO> listAllReservations() {
+        return reservationService.getAllReservations();
+    }
+    
+    // 사업자별 예약 정보 조회(로그인 후 사용)
+//    @RequestMapping("/listReservationsByBizId/{bizId}")
+//    public @ResponseBody ArrayList<ReservationVO> listReservationsByBizId(@PathVariable int bizId) {
+//        return reservationService.getReservationsByBusiness(bizId);
+//    }
     
 
     // 예약 확정

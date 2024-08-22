@@ -1,16 +1,16 @@
 /**
- * businessRegister.js
+ * insertProduct.js
  */
-
-$(document).ready(function() {
-    $("#registerForm").submit(function(event) {
+ 
+ $(document).ready(function() {
+    $("#insertForm").submit(function(event) {
         event.preventDefault();
         
         let formData = new FormData(this);
         
         $.ajax({
             type: "POST",
-            url: "/business/register",
+            url: "/product/insertProduct",
             data: formData,
             processData: false,
             contentType: false,

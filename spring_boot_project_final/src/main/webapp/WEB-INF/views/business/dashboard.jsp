@@ -38,7 +38,7 @@
 					<button class="tablinks" data-target="calendarTab">달력</button>
 				</div>
 
-				<!-- 예약 현황 탭 -->
+				<!-- 달력 탭 -->
 				<div id="calendarTab" class="tabcontent">
 					<div id="calendar"></div>
 				</div>
@@ -69,11 +69,10 @@
 											<fmt:formatDate value="${reservation.resEnd}" pattern="HH:mm" /></td>
 									<td>${reservation.resStatus}</td>
 									<td>
-										<!-- 확정 및 취소 버튼에 bizCtgId 전달 -->
-										<button class="btn btn-success"
-											onclick="confirmReservation(${reservation.resNo})">확정</button>
-										<button class="btn btn-cancel"
-											onclick="cancelReservation(${reservation.resNo})">취소</button>
+										<button class="btn btn-success"onclick="confirmReservation(${reservation.resNo})"
+                    	<c:if test="${reservation.resStatus == 'confirmed'}">disabled</c:if>>확정</button>
+               			<button class="btn btn-cancel"onclick="cancelReservation(${reservation.resNo})"
+                    	<c:if test="${reservation.resStatus == 'cancelled'}">disabled</c:if>>취소</button>
 									</td>
 								</tr>
 							</c:forEach>
