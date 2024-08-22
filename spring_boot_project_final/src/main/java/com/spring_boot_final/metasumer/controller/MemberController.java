@@ -30,6 +30,7 @@ public class MemberController {
 	@Autowired
 	MemberService mbService;
 	
+
 	@RequestMapping("/member/loginForm")
 	public String loginForm() {
 		return "member/loginForm";
