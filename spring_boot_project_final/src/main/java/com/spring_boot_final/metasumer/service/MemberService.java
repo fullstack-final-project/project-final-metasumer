@@ -72,4 +72,9 @@ public class MemberService implements IMemberService {
         dao.saveInterests(memId, tagIds);
 	}
 
+	@Override
+	public ArrayList<MemberVO> userTagList(String memId) {
+		return dao.userTagList(memId);
+	}
+
 }

@@ -31,4 +31,7 @@ public interface IMemberDAO {
 	// 관심사 태그 저장
 	public void saveInterests(String memId, List<String> tagIds);
 	
+	// 사용자 관심사 태그 조회
+	public ArrayList<MemberVO> userTagList(String memId);
+	
 }

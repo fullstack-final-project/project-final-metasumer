@@ -1,5 +1,5 @@
 /**
- * 		정규화 모음
+ * 	비밀번호 아이디 위주 정규화
  */
  
  $(document).ready(function() {
