@@ -26,9 +26,12 @@ public interface IMemberService {
 
 	// 관심사 태그 목록 가져오기
 	public ArrayList<MemberVO> tagList();
+
 	public ArrayList<MemberVO> categoryList();
 
 	// 관심사 태그 저장
 	public void saveInterests(String memId, List<String> tagIds);
 
+	// 사용자 관심사 태그 조회
+	public ArrayList<MemberVO> userTagList(String memId);
 }

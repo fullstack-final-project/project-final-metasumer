@@ -44,7 +44,7 @@
                 <c:if test="${boardCtgId == 5}">
                     <tr>
                         <td><label for="price">가격</label></td>
-                        <td><input type="number" id="price" name="price" min="0" step="100"/></td>
+                        <td><input type="number" id="price" name="price" min="0" step="100" required/></td>
                     </tr>
                 </c:if>
                 <c:if test="${boardCtgId != 3}">

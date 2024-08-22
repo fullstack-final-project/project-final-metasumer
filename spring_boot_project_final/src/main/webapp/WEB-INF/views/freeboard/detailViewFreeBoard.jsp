@@ -68,7 +68,7 @@
 					                   
                     <tr>
                         <td colspan="4">
-                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/freeboardView/${fb.boardCtgId }' />'">목록으로</button>
+                            <button type="button" class="btn" onclick="history.back()">목록으로</button>
                         <c:if test="${sessionScope.sid eq fb.memId}">
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/updateBoardForm/${fb.boardPostNo}' />'">수정</button>
 							    <button type="button" class="btn" onclick="confirmDelete()">삭제</button>

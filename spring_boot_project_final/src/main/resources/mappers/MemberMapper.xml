@@ -39,6 +39,14 @@
         FROM interesttag
   	</select>
   	
+  	<select id="userTagList" resultMap="mbResult">
+  		SELECT m.memId, t.tagId, t.tagName,c.categoryName
+		FROM memberInterest m
+		JOIN interesttag t ON m.tagId = t.tagId
+		JOIN interestcategory c ON t.interestId = c.interestId
+		WHERE m.memId = #{memId}
+  	</select>
+  	
   	<insert id="saveInterests" parameterType="map">
         INSERT INTO memberInterest (memId, tagId)
         VALUES
