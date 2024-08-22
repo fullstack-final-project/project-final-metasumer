@@ -33,19 +33,18 @@
 
 	/* 2. (시작) 현재 위치 데이터로 받아서 날씨로 알려줌 */
  	const getWeatherByCurrentLocation = async (lat, lon) => {
-		let url = 'https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=kr&appid={19d78b702ef255e0d5bb81968100e305}&units=metric';
+		let url = 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&lang=kr&appid=19d78b702ef255e0d5bb81968100e305&units=metric';
 		let response = await fetch(url);
 		let data = await response.json();
-		console.log("현재 날씨", data);
+		let jsonString = JSON.stringify(data);
+		let jsonData = JSON.parse(jsonString);
 		
-		let jsonData = JSON.parse(data);
 		$('.item1').text(jsonData.name);
-		
-		var sunriseTime = moment(jsonData.sys.sunrise).format("YYYY-MM-DD HH:mm:ss")
-		var sunsetTime = moment(jsonData.sys.sunset).format("HH:mm:ss")
+		var sunriseTime = Unix_timestamp(jsonData.sys.sunrise);
+		var sunsetTime = Unix_timestamp(jsonData.sys.sunset);
 		$('.item4').text("일출 : " + sunriseTime + ", 일몰 : " + sunsetTime);
 		
-		$('.item5').text("현재 온도 : " + jsonData.main.temp + " ℃, 체감 온도 : " + jsonData.main.feels_like + " ℃");
+		$('.item5').text("현재 온도 : " + jsonData.main.temp + " ℃, 체감 온도 : " + jsonData.main.temp_max + " ℃");
 		$('.item6').text(jsonData.weather[0].description);
 		$('.item7').text(jsonData.main.humidity + " %");
 		$('.item8').text(jsonData.wind.speed + " m/s");
@@ -56,7 +55,7 @@
  		navigator.geolocation.getCurrentPosition( (position) => {
  			let lat = position.coords.latitude;
  			let lon = position.coords.longitude;
- 			console.log("현재 위치", lat, lon);
+ 			// console.log("현재 위치", lat, lon);
  			$('.item2').text(lat);
  			$('.item3').text(lon);
  			
@@ -64,6 +63,18 @@
  		});
  	}
  	
+ 	// 타임스탬프 값을 년월일로 변환
+	function Unix_timestamp(t){
+	    var date = new Date(t*1000);
+	    var year = date.getFullYear();
+	    var month = "0" + (date.getMonth()+1);
+	    var day = "0" + date.getDate();
+	    var hour = "0" + date.getHours();
+	    var minute = "0" + date.getMinutes();
+	    var second = "0" + date.getSeconds();
+	    return year + "-" + month.substr(-2) + "-" + day.substr(-2) + " " + hour.substr(-2) + ":" + minute.substr(-2) + ":" + second.substr(-2);
+	}
+	 	
  	getCurrentLocation();
  	
  	/* 2. 현재 위치 데이터로 받아서 날씨로 알려줌 (끝)  */
