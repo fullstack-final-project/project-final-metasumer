@@ -29,12 +29,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService mbService;
-
-	@RequestMapping("/")
-	public String index() {
-		return "index2";
-	}
-
+	
 	@RequestMapping("/member/loginForm")
 	public String loginForm() {
 		return "member/loginForm";
