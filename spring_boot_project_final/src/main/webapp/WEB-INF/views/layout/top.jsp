@@ -8,13 +8,13 @@
 			<div id="topMenuLeftBox">
 				<div id="logoBox">
 					<a href="<c:url value='/'/>" id="logoItem">
-						<img alt="로고 이미지" src="image/logo.png" id="logoImg">
+						<img alt="로고 이미지" src="/project_images/logo.png" id="logoImg">
 					</a>
 				</div> <!-- logoBox 종료 -->
 				<div id="infoMenuBox">
-					<a href="<c:url value='/info/locationNow'/>">
+					<a href="<c:url value='/location/overview'/>">
 						<span class="infoMenuItem">현재 나의 위치</span></a>
-					<a href="<c:url value='/info/weatherNow'/>">
+					<a href="<c:url value='/weather/current'/>">
 						<span class="infoMenuItem">현재 날씨</span></a>
 				</div> <!-- infoMenuBox 종료 -->
 			</div> <!-- topMenuLeftBox 종료 -->
@@ -27,7 +27,7 @@
 				<!-- 로그인 성공하는 경우 : 로그아웃, 장바구니, 마이페이지, 게시판 등 보여줌 -->
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
-					<a href="<c:url value='/purchase/reserve'/>">예약</a>
+					<a href="<c:url value='/dashboard'/>">예약</a>
 					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">낚시갤러리</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
@@ -64,9 +64,9 @@
 					<div class="subContainerBox">
 						<div class="subListBox">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">민물 낚시</a></li>
-								<li class="subListItem"><a class="subListTxt">바다 낚시</a></li>
-								<li class="subListItem"><a class="subListTxt">실내 낚시</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishingSpot/freshwater'/>">민물 낚시</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishingSpot/saltwater'/>">바다 낚시</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/fishingSpot/freshwater'/>">실내 낚시</a></li>
 							</ul>
 						</div>
 					</div>
@@ -122,12 +122,12 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox5">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">물때</a></li>
-								<li class="subListItem"><a class="subListTxt">현재 위치 날씨</a></li>
-								<li class="subListItem"><a class="subListTxt">기상 특보</a></li>
-								<li class="subListItem"><a class="subListTxt">전국 날씨</a></li>
-								<li class="subListItem"><a class="subListTxt">해외 낚시</a></li>
-								<li class="subListItem"><a class="subListTxt">바다 낚시 지수</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/tidetable'/>">물때</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/current'/>">현재 위치 날씨</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/warning'/>">기상 특보</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/nationwide'/>">전국 날씨</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/overseas'/>">해외 낚시</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/factor'/>">바다 낚시 지수</a></li>
 							</ul>
 						</div>
 					</div>
@@ -139,11 +139,11 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox6">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location'/>">현재 위치</a></li>
-								<li class="subListItem"><a class="subListTxt">근처 낚시터</a></li>
-								<li class="subListItem"><a class="subListTxt">주변 정보</a></li>
-								<li class="subListItem"><a class="subListTxt">교통 상황</a></li>
-								<li class="subListItem"><a class="subListTxt">전국 낚시터</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/overview'/>">현재 위치</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/nearFish'/>">근처 낚시터</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/nearFood'/>">주변 정보</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/traffic'/>">교통 상황</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/nationwide'/>">전국 낚시터</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/intl'/>">해외 낚시터</a></li>
 							</ul>
 						</div>

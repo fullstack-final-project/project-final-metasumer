@@ -81,14 +81,14 @@
 
 #nowFishingInfo {
 	display: inline-block;
-	width: 33%;
+	width: 30%;
 	height: 400px;
 	border: 1px solid #39A7FF;
 }
 
 #nowFishingMap {
 	display: inline-block;
-	width: 64%;
+	width: 67%;
 	height: 400px;
 	border: 1px solid #39A7FF;
 }
@@ -211,6 +211,7 @@
 .fishRecordList {
 	overflow: hidden;
 	border: 1px solid transparent;
+	opacity: 0.7;
 }
 
 .fishRrdImgWrap {
@@ -218,7 +219,7 @@
 }
 
 .fishRecordList:hover {
-	border: 1px solid #87C4FF;
+	opacity: 1;
 }
 
 .fishRecordList img {
@@ -228,8 +229,9 @@
 }
 
 .fishRecordList img:hover {
-	transform: scale(1.2, 1.2); 
+	/* transform: scale(1.2, 1.2); */ 
 	transition-duration: 0.5s;
+	opacity: 1;
 }
 
 .fishRecordList div {

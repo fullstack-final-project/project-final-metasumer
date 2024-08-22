@@ -95,7 +95,7 @@
 										<td>${newMfList.location}</td>
 										<td>${newMfList.fishName}</td>
 										<td><fmt:formatDate value="${newMfList.createdDate}" pattern="yyyy-MM-dd" /></td>
-										<td><img src="<c:url value='/image/fish/${newMfList.uploadImage}'/>" width="100%" height="50"></td>
+										<td><img src="<c:url value='/project_images/${newMfList.uploadImage}'/>" width="100%" height="66"></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -110,10 +110,10 @@
 						<c:forEach items="${mfList}" var="mfList">
 					        <div class="fishRecordList slider-contents" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mfList.recordNo }' />'" style="cursor: pointer;">
 								<div id="fishRrdImgWrap">
-									<img src="<c:url value='/image/fish/${mfList.uploadImage}'/>" width="100%" height="200"></div><br>
+									<img src="<c:url value='/project_images/${mfList.uploadImage}'/>" width="100%" height="200"></div><br>
 								<div class="fishRecordInfo">
 									<span id="fishRecordName" class="eachSectionEmphasisText">${mfList.fishName}</span>
-									<span id="fishRecordSize">${mfList.fishSize}cm</span></div>
+									<span id="fishRecordSize">${mfList.fishSize}</span></div>
 								<div class="fishRecordLoc">${mfList.location}</div>
 								<div class="fishRecordDate">
 									<fmt:formatDate value="${mfList.createdDate}" pattern="yyyy년 MM월 dd일" /></div>
@@ -134,7 +134,7 @@
 						<c:forEach var="bizList" items="${bizList}" varStatus="bizListNum" begin="1" end="5">
 							<div class="bestBizItem">
 								<div>
-									<img src="<c:url value='/image/fish/${bizList.bizRegImg}'/>" width="100%" height="200"></div><br>
+									<img src="<c:url value='/project_images/${bizList.bizRegImg}'/>" width="100%" height="200"></div><br>
 								<div><span class="eachSectionEmphasisText">${bizListNum.count}</span>위</div>
 								<div>${bizList.bizName}</div>
 							</div>
@@ -148,7 +148,7 @@
 						<c:forEach items="${newMfList}" var="newMfList">
 					        <div class="fishRecordList slider-contents" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${newMfList.recordNo}' />'" style="cursor: pointer;">
 								<div id="fishRrdImgWrap">
-									<img src="<c:url value='/image/fish/${newMfList.uploadImage}'/>"></div><br>
+									<img src="<c:url value='/project_images/${newMfList.uploadImage}'/>"></div><br>
 								<div class="fishRecordTitle eachSectionEmphasisText">
 									<span>${newMfList.title}</span></div>
 								<div class="fishRecordLoc">${newMfList.location}</div>
@@ -173,7 +173,7 @@
 					<div class="newProductList">
 						<c:forEach var="newPrdList" items="${newPrdList}">
 							<div class="newPrdItem">
-								<img src="<c:url value='/image/fish/${newPrdList.prdImage}'/>"><br>
+								<img src="<c:url value='/project_images/${newPrdList.prdImage}'/>"><br>
 								<div class="eachSectionEmphasisText">${newPrdList.prdName}</div>
 								<div>${newPrdList.prdMaker}</div>
 								<div>
@@ -194,7 +194,7 @@
 						<c:if test="${not empty sessionScope.sid }">
 							<c:forEach var="recPrdList" items="${recPrdList}">
 								<div class="userRecPrdItem">
-									<img src="<c:url value='/image/fish/${recPrdList.prdImage}'/>"><br>
+									<img src="<c:url value='/project_images/${recPrdList.prdImage}'/>"><br>
 									<div class="eachSectionEmphasisText">${recPrdList.prdName}</div>
 									<div>${recPrdList.prdMaker}</div>
 									<div>
