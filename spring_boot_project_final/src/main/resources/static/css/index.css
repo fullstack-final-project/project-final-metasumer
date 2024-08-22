@@ -305,6 +305,33 @@
 	margin-bottom: 30px;
 }
 
+.newPrdCtgBar {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 15px;
+	paddiing-bottom: 15px;
+}
+
+.newPrd {
+	display: inline-block;
+	background-color: #gray;
+	border: 1px solid #87C4FF;
+	border-radius: 5px;
+	font-size: 14px;
+	letter-spacing: -1px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.newPrd.active {
+	border: 1px solid #39A7FF;
+	background-color: #39A7FF;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+
 .newProductList {
 	padding-top: 30px;
 	width: 100%;

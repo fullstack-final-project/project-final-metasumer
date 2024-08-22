@@ -113,5 +113,22 @@
     
     // 5. 베스트 업체 (끝)
   
+      // (시작) 7. 신상 낚시 용품 입고
+    
+    /* 업체 카테고리 선택 */
+    const newPrdCtgList = document.querySelectorAll('.newPrdCtgBar .newPrd');
+
+ 	newPrdCtgList.forEach( function(newPrd, index) {
+ 		newPrd.addEventListener('click', function() {
+ 			newPrdChange(index + 1);
+ 		});
+ 	});
+ 	
+ 	function newPrdChange(num) {
+ 		document.querySelector('.newPrd.active').classList.remove('active');
+ 		document.querySelector('.newPrd' + num).classList.add('active');
+ 	}
+    
+    // 7. 신상 낚시 용품 입고 (끝)
  
  });
