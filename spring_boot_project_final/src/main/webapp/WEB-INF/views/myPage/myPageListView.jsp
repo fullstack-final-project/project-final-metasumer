@@ -27,7 +27,7 @@
 			  </header>
 			  <div class="myPageCtg">
 			    <div id='myPageCtgBtn'>
-			      <button class='myPageBtn' data-category='1'>회원 정보 수정</button>
+			      <button class='myPageBtn' data-category='1' onclick="location.href='/myPage/checkPwdForm'">회원 정보 수정</button>
 			      <button class='myPageBtn' data-category='2'>장바구니</button>
 			      <button class='myPageBtn' data-category='3'>나의 예약</button>
 			    </div>
@@ -67,7 +67,7 @@
                   </div>
 			 	</div>	
 			 	<div id="showAll">
-			 	  <a class="showBtn" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">나의 물고기 기록 모두보기 ></a>	  
+			 	  <a class="showBtn" href="<c:url value='/myFishRecords/myFishRecordsList'/>">나의 물고기 기록 모두보기 ></a>	  
 			    </div>
 			</section>
 			<!-- bottom.jsp import -->
