@@ -161,7 +161,15 @@
 				</div> <!-- newFishRecordBox 종료 : 6. 최신 낚시 기록 (전체 회원 대상) -->
 				
 				<div id="newProductBox" class="indexSection">
-					<div class="sectionTitle">신상 낚시 용품 입고 🛍️</div>
+					<div class="sectionTitle">신상 낚시 용품 입고 🛍️
+					</div><div class="newPrdCtgBar">
+						<button class="newPrd newPrd1 active"><span>전체</span></button>
+						<button class="newPrd newPrd2"><span>낚시대</span></button>
+						<button class="newPrd newPrd3"><span>릴</span></button>
+						<button class="newPrd newPrd4"><span>미끼</span></button>
+						<button class="newPrd newPrd5"><span>의류/장비</span></button>
+						<button class="newPrd newPrd6"><span>기타</span></button>
+					</div>
 					<div class="newProductList">
 						<c:forEach var="newPrdList" items="${newPrdList}">
 							<div class="newPrdItem">

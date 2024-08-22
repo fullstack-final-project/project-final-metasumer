@@ -25,7 +25,7 @@ public class IndexController {
 	@Autowired
 	IndexService iService;
 	
-	@RequestMapping("/index2")
+	@RequestMapping("/")
 	public String tempIndex(Model model) {
 		ArrayList<MyFishRecordsVO> mfList = iService.listBestMemFishRecords();
 		ArrayList<BusinessVO> bizList = iService.listBestBusinessRank();
@@ -39,7 +39,7 @@ public class IndexController {
 		model.addAttribute("newPrdList", newPrdList);
 		model.addAttribute("recPrdList", recPrdList);
 		
-		return "index2";
+		return "index";
 	}
 	
 }
