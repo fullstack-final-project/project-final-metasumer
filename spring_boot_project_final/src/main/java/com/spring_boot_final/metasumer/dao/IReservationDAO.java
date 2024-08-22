@@ -11,11 +11,8 @@ public interface IReservationDAO {
  // 일반회원
  public ArrayList<ReservationVO> getAllReservations();
  
- // 사업자
- public ArrayList<ReservationVO> listReservationByCategory(Integer bizCtgId);
-  
- public int confirmReservation(@Param("resNo") int resNo, @Param("bizCtgId") int bizCtgId);
+ public int confirmReservation(@Param("resNo") int resNo);
  
- public int cancelReservation(@Param("resNo") int resNo, @Param("bizCtgId") int bizCtgId);
+ public int cancelReservation(@Param("resNo") int resNo);
  
 }

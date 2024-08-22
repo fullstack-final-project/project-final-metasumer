@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_final.metasumer.model.ReservationVO;
 import com.spring_boot_final.metasumer.service.ReservationService;
@@ -29,38 +26,25 @@ public class ReservationController {
     
     // 예약 관리 대쉬보드
     @RequestMapping("/dashboard")
-    public String showDashboard(Model model, @RequestParam(value = "bizCtgId", defaultValue = "1") int bizCtgId) {
-        ArrayList<ReservationVO> reservations = reservationService.listReservationByCategory(bizCtgId);
+    public String showDashboard(Model model) {
+        ArrayList<ReservationVO> reservations = reservationService.getAllReservations();
         model.addAttribute("reservations", reservations);
-        model.addAttribute("bizCtgId", bizCtgId);
         return "business/dashboard";
-    }
-    
-    @RequestMapping("/listReservationByCategory")
-    @ResponseBody
-    public ArrayList<ReservationVO> listReservationByCategory(@RequestParam(value = "bizCtgId", defaultValue = "1") int bizCtgId) {
-        return reservationService.listReservationByCategory(bizCtgId);
-    }
-    
-    @GetMapping("/getReservations")
-    @ResponseBody
-    public ArrayList<ReservationVO> getReservations() {
-        return reservationService.getAllReservations();
     }
     
 
     // 예약 확정
     @RequestMapping("/confirmReservation/{resNo}")
-    public String confirmReservation(@PathVariable int resNo, @RequestParam int bizCtgId) {
-        reservationService.confirmReservation(resNo, bizCtgId);
-        return "redirect:/business/dashboard?bizCtgId=" + bizCtgId;
+    public String confirmReservation(@PathVariable int resNo) {
+        reservationService.confirmReservation(resNo);
+        return "redirect:/business/dashboard";
     }
 
     // 예약 취소
     @RequestMapping("/cancelReservation/{resNo}")
-    public String cancelReservation(@PathVariable int resNo, @RequestParam int bizCtgId) {
-        reservationService.cancelReservation(resNo, bizCtgId);
-        return "redirect:/business/dashboard?bizCtgId=" + bizCtgId;
+    public String cancelReservation(@PathVariable int resNo) {
+        reservationService.cancelReservation(resNo);
+        return "redirect:/business/dashboard";
     }
     
  ///////////////////////////////////////////////////////////////////////////

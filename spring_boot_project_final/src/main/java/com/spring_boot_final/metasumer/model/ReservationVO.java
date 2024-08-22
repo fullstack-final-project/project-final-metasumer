@@ -4,218 +4,101 @@ import java.sql.Time;
 import java.util.Date;
 
 public class ReservationVO {
-  private Integer resNo; // 예약 번호
-  private String resType; // 카테고리 (배낚시/낚시터)
-  private String memId; // 회원 ID
-  private String memName;
-  private Integer bizId; // 사업체 ID
-  private Date bizDate; // 예약일
-  private Time bizStart; // 시작 시간
-  private Time bizEnd; // 끝나는 시간
-  private Integer resNum; // 예약 인원수
-  private Integer bizPrice; // 사업체 가격
-  private String bizCoupon; // 사용된 쿠폰
-  private String bizResId; // 사업체 예약 ID
-  private ReservationStatus resStatus; // Enum 타입으로 예약 상태
-  private Integer bizCtgId;
-
-  public Integer getResNo() {
+  private int resNo;            // 예약 번호
+  private String memId;         // 회원 ID
+  private String memName;       // 회원 이름
+  private int areaId;           // 낚시자리 ID
+  private Date resDate;         // 예약 날짜
+  private Time resStart;      // 예약 시작 시간
+  private Time resEnd;        // 예약 종료 시간
+  private int resNum;           // 예약 인원 수
+  private int resPrice;         // 예약 금액
+  private String resCoupon;     // 쿠폰 코드
+  private String resStatus;     // 예약 상태
+  private int bizId;            // 사업자 ID
+  private int spotId;           // 낚시터 ID
+  
+  public int getResNo() {
     return resNo;
   }
-
-
-
-
-  public void setResNo(Integer resNo) {
+  public void setResNo(int resNo) {
     this.resNo = resNo;
   }
-
-
-
-
-  public String getResType() {
-    return resType;
-  }
-
-
-
-
-  public void setResType(String resType) {
-    this.resType = resType;
-  }
-
-
-
-
   public String getMemId() {
     return memId;
   }
-
-
-
-
   public void setMemId(String memId) {
     this.memId = memId;
   }
-
-
-
-
   public String getMemName() {
     return memName;
   }
-
-
-
-
   public void setMemName(String memName) {
     this.memName = memName;
   }
-
-
-
-
-  public Integer getBizId() {
-    return bizId;
+  public int getAreaId() {
+    return areaId;
   }
-
-
-
-
-  public void setBizId(Integer bizId) {
-    this.bizId = bizId;
+  public void setAreaId(int areaId) {
+    this.areaId = areaId;
   }
-
-
-
-
-  public Date getBizDate() {
-    return bizDate;
+  public Date getResDate() {
+    return resDate;
   }
-
-
-
-
-  public void setBizDate(Date bizDate) {
-    this.bizDate = bizDate;
+  public void setResDate(Date resDate) {
+    this.resDate = resDate;
   }
-
-
-
-
-  public Time getBizStart() {
-    return bizStart;
+  public Time getResStart() {
+    return resStart;
   }
-
-
-
-
-  public void setBizStart(Time bizStart) {
-    this.bizStart = bizStart;
+  public void setResStart(Time resStart) {
+    this.resStart = resStart;
   }
-
-
-
-
-  public Time getBizEnd() {
-    return bizEnd;
+  public Time getResEnd() {
+    return resEnd;
   }
-
-
-
-
-  public void setBizEnd(Time bizEnd) {
-    this.bizEnd = bizEnd;
+  public void setResEnd(Time resEnd) {
+    this.resEnd = resEnd;
   }
-
-
-
-
-  public Integer getResNum() {
+  public int getResNum() {
     return resNum;
   }
-
-
-
-
-  public void setResNum(Integer resNum) {
+  public void setResNum(int resNum) {
     this.resNum = resNum;
   }
-
-
-
-
-  public Integer getBizPrice() {
-    return bizPrice;
+  public int getResPrice() {
+    return resPrice;
   }
-
-
-
-
-  public void setBizPrice(Integer bizPrice) {
-    this.bizPrice = bizPrice;
+  public void setResPrice(int resPrice) {
+    this.resPrice = resPrice;
   }
-
-
-
-
-  public String getBizCoupon() {
-    return bizCoupon;
+  public String getResCoupon() {
+    return resCoupon;
   }
-
-
-
-
-  public void setBizCoupon(String bizCoupon) {
-    this.bizCoupon = bizCoupon;
+  public void setResCoupon(String resCoupon) {
+    this.resCoupon = resCoupon;
   }
-
-
-
-
-  public String getBizResId() {
-    return bizResId;
-  }
-
-
-
-
-  public void setBizResId(String bizResId) {
-    this.bizResId = bizResId;
-  }
-
-
-
-
-  public ReservationStatus getResStatus() {
+  public String getResStatus() {
     return resStatus;
   }
-
-
-
-
-  public void setResStatus(ReservationStatus resStatus) {
+  public void setResStatus(String resStatus) {
     this.resStatus = resStatus;
   }
+  public int getBizId() {
+    return bizId;
+  }
+  public void setBizId(int bizId) {
+    this.bizId = bizId;
+  }
+  public int getSpotId() {
+    return spotId;
+  }
+  public void setSpotId(int spotId) {
+    this.spotId = spotId;
+  }
   
-
-  public Integer getBizCtgId() {
-    return bizCtgId;
-  }
-
-
-
-
-  public void setBizCtgId(Integer bizCtgId) {
-    this.bizCtgId = bizCtgId;
-  }
-
-
-
-  public enum ReservationStatus {
-    pending, // 승인 대기
-    confirmed, // 확정
-    cancelled // 취소
-  }
-
+  
+  
+  
+  
 }

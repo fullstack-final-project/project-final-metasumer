@@ -35,7 +35,7 @@
 			        <button class='fishingBtn' data-category='3'>장비 사용법</button>
 			      </a>
 			      <a href="/fishing/fishingCtgList/4/4001">
-			        <button class='fishingBtn' data-category='4'>실전 방법</button>
+			        <button class='fishingBtn' data-category='4'>실전 스킬</button>
 			      </a>
 			    </div>			    
 			  </div>
@@ -61,11 +61,31 @@
 			              </div>
 			              <hr>
 			              <div id="fishing-content">			              			              
-			                ${fishing.fishingDescription}
+			                ${fishing.fishingDescription}			            
 			                <c:choose>
+			                  <c:when test="${fishing.fishingDetailCtgId == 2001}">
+			                    <iframe width="750" height="415" src="https://www.youtube.com/embed/AnRNgGdbIe4?si=wbRs8lMiP6Snlcgk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			                  </c:when>
+			                  <c:when test="${fishing.fishingDetailCtgId == 2002}">
+			                    <iframe width="750" height="415" src="https://www.youtube.com/embed/TGagjB5-f8w?si=j25bZZhRg68iok2j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			                  </c:when>
+			                  <c:when test="${fishing.fishingDetailCtgId == 2003}">
+			                    <iframe width="750" height="415" src="https://www.youtube.com/embed/jhts6mXIxM0?si=4KhSo_SdxVzW_6zm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			                  </c:when>
 			                  <c:when test="${fishing.fishingDetailCtgId == 2004}">
 			                    <iframe width="750" height="415" src="https://www.youtube.com/embed/sB6HUJliQrs?si=oBfATgTjn92ykAKm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 			                  </c:when>
+			                  <c:when test="${fishing.fishingCtgId == 3}">
+			                    <br><br>
+			                    <h3 id="h3Refer">추천 상품</h3>
+			                    <div id="fishingPrdImg"> <!-- 그냥 예시임 -->
+			                      <c:forEach var="cnt" begin="1" end="3" step="1">
+			                        <a href="###">
+			                          <img src="<c:url value='/project_images/상품/${fishing.fishingDetailCtgId}_${cnt}.jpg'/>">
+			                        </a>
+			                      </c:forEach>			                      
+			                    </div>
+			                  </c:when>			                  
 			                </c:choose>			                
 			              </div>			            			            
 			            </div>

@@ -5,10 +5,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+	   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<title>어사모: 위치 정보</title>
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/location.css'/>">
 		<script src="<c:url value='/js/location.js'/>"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f&amp;submodules=panorama,geocoder,drawing,visualization"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -16,14 +20,23 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
-				<script>
-  (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-    key: "AIzaSyCUEQpKhFKAnI8fDb2pB-cPDdiC6sdhhrI",
-    v: "weekly",
-    // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-    // Add other bootstrap parameters as needed, using camel case.
-  });
-</script>
+				<div class="locationWrap">
+					<div id="locationCtgBox">
+						<ul id="locationCtgList" class="locCtgBar">
+							<li data-tab="/location/overview" class="locCtg1 locCtg" >현재 위치</li>
+							<li data-tab="/location/nearFish" class="locCtg2 locCtg" >근처 낚시터</li>
+							<li data-tab="/location/nearFood" class="locCtg3 locCtg" >주변 먹거리</li>
+							<li data-tab="/location/nearPlay" class="locCtg4 locCtg" >주변 놀거리</li>
+							<li data-tab="/location/nearHotel" class="locCtg5 locCtg" >주변 숙박시설</li>
+							<li data-tab="/location/traffic" class="locCtg6 locCtg" >교통 상황</li>
+							<li data-tab="/location/nationwide" class="locCtg7 locCtg" >전국 낚시터</li>
+							<li data-tab="/location/intl" class="locCtg8 locCtg active" >해외 낚시터</li>	
+						</ul>
+					</div>
+					<div id="locationMainBox">
+						<div id="locationMapBox"></div>
+					</div>
+				</div>
 			</section>
         
 			<!-- bottom.jsp import -->
