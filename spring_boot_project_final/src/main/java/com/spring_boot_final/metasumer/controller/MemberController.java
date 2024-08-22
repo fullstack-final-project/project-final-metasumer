@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService mbService;
-
+	
 	@RequestMapping("/member/loginForm")
 	public String loginForm() {
 		return "member/loginForm";
@@ -39,6 +40,39 @@ public class MemberController {
 		return "member/joinForm";
 	}
 	
+	@RequestMapping("/member/selectedTagsView/{memId}")
+	public String selectedTagsView(Model model, @PathVariable("memId") String memId) {
+		
+		ArrayList<MemberVO> usList = mbService.userTagList(memId);
+		
+		model.addAttribute("usList",usList); 
+		
+		return "member/selectedTagsView";
+	}
+	
+	/* userTagList */
+	// 사용자 관심사 태그 저장된 부분 가져오기
+	@RequestMapping("/member/userInterestTag")
+	public String userInterestTag(Model model, HttpSession session) {
+		 
+		String memId = (String) session.getAttribute("sid");
+		 
+		 if (memId == null) {
+		    return "redirect:/member/loginForm";
+		 }
+		 
+		ArrayList<MemberVO> usList = mbService.userTagList(memId);
+		
+		model.addAttribute("usList",usList); 
+		
+		if (usList.isEmpty()) {
+	        return "redirect:/member/userTagSelection";
+	    } else {
+	        return "redirect:/member/selectedTagsView/"+ memId;
+	    }
+	}
+	
+	// 관심사 태그 가져오기
 	@RequestMapping("/member/userTagSelection")
 	public String userTagSelection(Model model) {
 		
@@ -52,6 +86,7 @@ public class MemberController {
 		return "member/userTagSelection";
 	}
 	
+	// 관심사 태그 등록
 	@RequestMapping(value = "/member/submitInterest", method = RequestMethod.POST)
 	@ResponseBody 
 	public Map<String, String> submitInterest(@RequestBody TagRequest request) {
