@@ -137,7 +137,7 @@
 								<div>
 									<img src="<c:url value='/project_images/${bizList.bizRegImg}'/>" width="100%" height="200"></div><br>
 								<div><span class="eachSectionEmphasisText">${bizListNum.count}</span>위</div>
-								<div>${bizList.bizName}</div>
+								<div>${bizList.businessName}</div>
 							</div>
 						</c:forEach>
 					</div>
