@@ -19,9 +19,12 @@
 		<div id="wrap">
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
-			<section>
-							<input type="hidden" name="sid" value="${sessionScope.sid}" />
-                            <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView' />'">목록으로</button>
+			<section>		
+				<input type="hidden" name="sid" value="${sessionScope.sid}" />
+                <div id="btn_box">
+                    <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView' />'">목록으로</button>
+                </div>        
+                            
                         <c:if test="${sessionScope.sid eq mf.memId}">
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/updatemyFishRecordsForm/${mf.recordNo}' />'">수정</button>
 							<button type="button" class="btn" onclick="confirmDelete()">삭제</button>
@@ -56,6 +59,9 @@
 					    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
 					</c:if>
 					
+					
+					<c:choose>
+					    <c:when test="${not empty sessionScope.sid}">
 					<!-- 댓글 작성 -->
 					<form id="commentForm">
 						<p>${sessionScope.memNickname}</p>
@@ -71,6 +77,11 @@
 				        
 				        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
 				    </form>
+				    </c:when>
+					    <c:otherwise>
+					        <p>로그인 후 댓글을 작성할 수 있습니다.</p>
+					    </c:otherwise>
+					</c:choose>
 	
 				    <div id="commentList">
 				    </div>

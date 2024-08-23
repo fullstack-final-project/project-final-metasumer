@@ -17,25 +17,29 @@
         <!-- top.jsp import -->
         <c:import url="/WEB-INF/views/layout/top.jsp"/>
         <section>
-            <h1>${fbList[0].boardCtgName} / ${boardCtgId} / ${sessionScope.memType}</h1>
+            <h1>${fbList[0].boardCtgName}</h1>
          <div class="board-container">
-         
          <c:choose>
-            <c:when test="${boardCtgId == 2 || boardCtgId == 3 || boardCtgId == 4}">
-                <div class="button-container2">
-                    <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <c:choose>
-                    <c:when test="${sessionScope.memType == 'admin' || sessionScope.memType == 'business'}">
-                        <div class="button-container2">
-                            <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
-                        </div>
-                    </c:when>
-                </c:choose>
-            </c:otherwise>
-        </c:choose>
+		    <c:when test="${sessionScope.sid != null}">
+		        <c:choose>
+		        
+		            <c:when test="${boardCtgId == 2 || boardCtgId == 3 || boardCtgId == 4}">
+		                <div class="button-container2">
+		                    <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
+		                </div>
+		            </c:when>
+		            <c:otherwise>
+		                <c:choose>
+		                    <c:when test="${sessionScope.memType == 'admin' || sessionScope.memType == 'business'}">
+		                        <div class="button-container2">
+		                            <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${boardCtgId}'/>">글쓰기</a>
+		                        </div>
+		                    </c:when>
+		                </c:choose>
+		            </c:otherwise>
+		        </c:choose>
+		    </c:when>
+		</c:choose>
          
          
 			<c:if test="${empty fbList}">
@@ -56,12 +60,26 @@
                 <tbody>
                     <c:set var="counter" value="${(currentPage - 1) * 10 + 1}" />
                     <c:forEach items="${fbList}" var="fb">
-                        <tr onclick="location.href='<c:url value='/freeboard/detailViewFreeBoard/${ fb.boardPostNo}' />'" style="cursor: pointer;">
-                            <td>${counter}</td>
-                            <td>${fb.memNickname}</td>
-                            <td>${fb.title}</td>
-                            <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
-                        </tr>
+                    
+                        <c:choose>
+				            <c:when test="${not empty sessionScope.sid}">
+				                <tr onclick="location.href='<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}' />'" style="cursor: pointer;">
+				                    <td>${counter}</td>
+				                    <td>${fb.memNickname}</td>
+				                    <td>${fb.title}</td>
+				                    <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
+				                </tr>
+				            </c:when>
+				            <c:otherwise>
+				                <tr onclick="alert('로그인 하세요');">
+                    				<td>${counter}</td>
+				                    <td>${fb.memNickname}</td>
+				                    <td>${fb.title}</td>
+				                    <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
+				                </tr>
+				            </c:otherwise>
+				        </c:choose>	
+                        
                         <c:set var="counter" value="${counter + 1}" />
                     </c:forEach>
                 </tbody>

@@ -41,9 +41,14 @@ public class MemberController {
 		return "member/joinForm";
 	}
 	
+	@RequestMapping("/member/businessAuth")
+	public String businessAuth() {
+		return "member/businessAuth";
+	}
+	
 	@RequestMapping("/member/selectedTagsView/{memId}")
-	public String selectedTagsView(Model model, @PathVariable("memId") String memId) {
-		
+	public String selectedTagsView(Model model, @PathVariable("memId") String memId) 
+	{
 		ArrayList<MemberVO> usList = mbService.userTagList(memId);
 		
 		model.addAttribute("usList",usList); 
@@ -51,7 +56,6 @@ public class MemberController {
 		return "member/selectedTagsView";
 	}
 	
-	/* userTagList */
 	// 사용자 관심사 태그 저장된 부분 가져오기
 	@RequestMapping("/member/userInterestTag")
 	public String userInterestTag(Model model, HttpSession session) {

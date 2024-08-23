@@ -18,10 +18,12 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
+        		<c:if test="${not empty sessionScope.sid}">
 				<div class="button-container">
         			<a class="btn btn-write" href="<c:url value='/myFishRecords/myFishRecordsListView'/>">전체 기록보기</a>
         			<a class="btn btn-write" href="<c:url value='/myFishRecords/newMyFishRecordsForm/6'/>">글쓰기</a>
 				</div>
+        		</c:if>
 				<div class="fish-container">
 				    <c:forEach items="${mfList}" var="mf">
 				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }' />'" style="cursor: pointer;">

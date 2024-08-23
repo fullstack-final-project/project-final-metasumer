@@ -10,12 +10,26 @@ body {
 }
 
 form {
-    text-align: center;
+	text-align: center;
 }
 
 section {
 	width: 100%;
 	max-width: 70%;
+}
+
+.header-actions {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.header-actions h1 {
+	margin-right: auto;
+}
+
+.header-actions .btn {
+	margin-left: 10px;
 }
 
 .container {
@@ -39,25 +53,54 @@ section {
 }
 
 .tags-container {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .tag-item {
-    margin: 5px;
-    padding: 10px;
-    transition: color 0.3s ease;
+	margin: 5px;
+	padding: 10px;
+	transition: color 0.3s ease;
 }
 
 .tag-item:hover {
-    color: #39A7FF;
+	color: #39A7FF;
 }
 
 .tag-item label {
-    font-size: 1em;
-    color: inherit;
+	font-size: 1em;
+	color: inherit;
 }
 
 .tag-item input[type="checkbox"] {
-    margin-right: 5px;
+	margin-right: 5px;
+}
+
+#userTagList {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+}
+
+.userItem {
+	padding: 10px;
+	border: 1px solid #87C4FF;
+	width: 200px;
+	height: 200px;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #000;
+	text-align: center;
+}
+
+.userItem:hover {
+	background-color: #87C4FF;
+	color: white;
+	font-weight: bold;
 }

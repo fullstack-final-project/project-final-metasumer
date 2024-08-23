@@ -3,6 +3,8 @@
 	flex-wrap: wrap;
 	gap: 20px;
 	justify-content: space-between;
+	width: 90%;
+	margin: 0 auto;
 }
 
 .item {
@@ -50,4 +52,20 @@ p {
 	width: 100%;
 	display: block;
 	box-sizing: border-box;
+}
+
+h1 {
+	text-align: center;
+}
+
+#btn_container {
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.right-buttons {
+	display: flex;
 }

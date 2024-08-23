@@ -23,6 +23,7 @@
 					<p>회원가입이 성공적으로 완료되었습니다. 아래 버튼을 클릭하여 이동하세요.</p>
 					<a href="<c:url value='/'/>" class="btn">홈으로 가기</a>
 					<a href="<c:url value='/member/loginForm'/>" class="btn">로그인</a>
+					<a href="<c:url value='/member/businessAuth'/>" class="btn">사업자 인증하기</a>
 				</div>
 				
 			</section>

@@ -19,10 +19,15 @@
 			<section>
 				
 				<h1>벼룩시장</h1>
-				<a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${ fbList[0].boardCtgId }'/>">글쓰기</a>
-				<a class="btn" href="<c:url value='/freeboard/fleamarketList/0'/>">거래가능</a>
-				<a class="btn" href="<c:url value='/freeboard/fleamarketList/1'/>">거래완료</a>
-
+				<div id="btn_container">
+					<c:if test="${not empty sessionScope.sid}">
+					    <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${fbList[0].boardCtgId}'/>">글쓰기</a>
+					</c:if>
+					<div class="right-buttons">
+						<a class="btn" href="<c:url value='/freeboard/fleamarketList/0'/>">거래가능</a>
+						<a class="btn" href="<c:url value='/freeboard/fleamarketList/1'/>">거래완료</a>
+					</div>
+				</div>
 			    <div class="container">
 				    <c:forEach items="${fbList}" var="fb">
 				        <div class="item">
@@ -39,7 +44,16 @@
 
 					            <div class="text-content">
 					                <h2>${fb.title}</h2>
-					                <p><fmt:formatNumber value="${fb.price}" type="number" maxFractionDigits="0"/> 원</p>
+					                
+					                <c:choose>
+									    <c:when test="${not empty sessionScope.sid}">
+									        <p><fmt:formatNumber value="${fb.price}" type="number" maxFractionDigits="0"/> 원</p>
+									    </c:when>
+									    <c:otherwise>
+									        <p>로그인이 필요합니다.</p>
+									    </c:otherwise>
+									</c:choose>
+					                
 					                <div class="nick">
 						                <p>${fb.memNickname}</p>
 						                <c:if test="${sessionScope.sid eq fb.memId and fb.completed == 0}">

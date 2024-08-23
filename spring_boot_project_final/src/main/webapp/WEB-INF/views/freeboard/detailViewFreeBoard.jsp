@@ -42,7 +42,14 @@
 				<c:if test="${fb.boardCtgId == 5}">
                     <tr>
                         <th>가격</th>
-                        <td><fmt:formatNumber value="${fb.price}" type="number" maxFractionDigits="0"/> 원</td>
+                        <c:choose>
+						    <c:when test="${not empty sessionScope.sid}">
+						        <td><fmt:formatNumber value="${fb.price}" type="number" maxFractionDigits="0"/> 원</td>
+						    </c:when>
+						    <c:otherwise>
+						        <td>로그인이 필요합니다.</td>
+						    </c:otherwise>
+						</c:choose>
                     </tr>
                 </c:if>	
 					
@@ -82,6 +89,8 @@
                     </tr>
                 </table>
 				
+				<c:choose>
+					    <c:when test="${not empty sessionScope.sid}">
 				<div id="contentContainer">
 					<!-- 댓글 작성 -->
 					<form id="commentForm">
@@ -96,11 +105,13 @@
 					            <input type="checkbox" id="secretComment" name="secretComment">
 					            비밀댓글
 					        </label>
-					        
-					        
 					        <button class="btn" type="button" onclick="addComment()">댓글 추가</button>
 					    </form>
-	
+						</c:when>
+					    <c:otherwise>
+					        <p style="text-align: center;">로그인 후 댓글을 작성할 수 있습니다.</p>
+					    </c:otherwise>
+					</c:choose>
 				    <div id="commentList">
 				    </div>
 				</div>

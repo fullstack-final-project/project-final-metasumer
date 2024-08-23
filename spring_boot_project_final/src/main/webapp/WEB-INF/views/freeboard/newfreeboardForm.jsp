@@ -44,7 +44,7 @@
                 <c:if test="${boardCtgId == 5}">
                     <tr>
                         <td><label for="price">가격</label></td>
-                        <td><input type="number" id="price" name="price" min="0" step="100" required/></td>
+                        <td><input type="number" id="price" name="price" min="0" step="100" class="input_num" required/></td>
                     </tr>
                 </c:if>
                 <c:if test="${boardCtgId != 3}">
@@ -57,10 +57,10 @@
 			        </tr>
 			    </c:if>
                     <tr>
-                        <td colspan="2">
+                        <th colspan="2">
                             <button type="submit" class="btn">저장</button>
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/freeboard/freeboardView/${ boardCtgId }'/>'">취소</button>
-                        </td>
+                        </th>
                     </tr>
                 </table>
             </form>

@@ -20,13 +20,14 @@
 			
 			<section>
                     <form id="loginForm" name="loginForm" action="<c:url value='/member/login'/>" method="post">
+                    <br>
                         <table>
                             <tr><th>ID</th><td><input type="text" id="id" name="id" class="input_text" required></td></tr>
                             <tr><th>비밀번호</th><td><input type="password" id="pwd" name="pwd" autocomplete="off" required></td></tr>
                             <tr>
                                 <td colspan="2" align="center" id="button">
-                                    <br><input type="submit" value="로그인">
-                                    <input type="reset" value="취소">
+                                    <input type="submit" class="btn" value="로그인">
+                                    <input type="reset" class="btn" value="취소">
                                 </td>
                             </tr>             
                         </table>
