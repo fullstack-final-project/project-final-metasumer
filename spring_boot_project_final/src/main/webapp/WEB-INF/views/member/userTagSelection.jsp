@@ -45,10 +45,8 @@
 				            </div>
 				    	</div>
 				     </c:forEach>
-				     <div id="btn_box">
 				     <button type="button" class="btn" id="submitBtn">저장</button>
 				     <button type="button" class="btn" onclick="window.location.href='/'">취소</button>
-				     </div>
 				</form>
 				
 				

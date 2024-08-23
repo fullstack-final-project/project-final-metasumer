@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+* {
+    font-family: "Noto Sans KR", sans-serif;
+    font-style: normal;
+}
+
+#wrap {
+    margin: 0 auto;
+    max-width: 65%;
+    padding: 20px;
+}
+
+section {
+    margin-top: 20px;
+}
+
+#wrap section header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#wrap h2 {
+    margin: 0 auto;
+    margin-top: 7px;
+}
+
+#pwdCheck{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#pwdCheck img{
+	width: 10%;
+	height: auto;
+}
+
+#pwdCheck b{
+	color: #39A7FF;
+}
+
+#idPwdCheck{
+	width: 23%;
+	text-align: left;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+#idPwdCheck b{
+	color: black;
+}
+
+#checkBtn{
+	margin-top: 18px;
+}
+
+#cancelChkBtn{
+	background-color: white;
+	color: #39A7FF;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+#confirmBtn{
+	background-color: #39A7FF;
+	color: white;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #39A7FF;
+	font-weight: bold;
+}
+
+/* 회원정보 수정 form */
+input{ 
+	border: 1px solid #ccc;
+	padding: 4px;
+	/*height: 20px;*/
+}
+
+#updateMemTable{
+	margin: 0 auto;
+	text-align: left;	
+	border-collapse: collapse;
+}
+
+#updateMemTable th, #updateMemTable td{
+	padding: 12px;
+	font-size: 15px;
+}
+
+#updateMemBtn{
+	text-align: center;
+	margin-top: 25px;
+}
+
+#searchZipBtn {
+	height: 29px;
+	cursor: pointer;
+}
+
+#emailDomain{
+	height: 29px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+#cancelUpdateBtn{
+	background-color: white;
+	color: #39A7FF;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+#updateBtn{
+	background-color: #39A7FF;
+	color: white;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #39A7FF;
+	font-weight: bold;
+}
+
+#completeUpdate{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#completeUpdate img{
+	margin-top: 20px;
+	width: 10%;
+	height: auto;
+}
+
+#myPageBtn{
+	background-color: white;
+	color: #39A7FF;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+#homeBtn{
+	background-color: #39A7FF;
+	color: white;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #39A7FF;
+	font-weight: bold;
+}

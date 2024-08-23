@@ -6,11 +6,15 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>회원가입 완료</title>
+		<title>관리자 페이지</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
-		<link rel="stylesheet" type="text/css" href="<c:url value='/css/joinComplete.css'/>">
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
+		<style type="text/css">
+			h1 {
+				text-align: center;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="wrap">
@@ -18,13 +22,8 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				
-				<div class="completion-container">
-					<h1>회원가입이 완료되었습니다!</h1>
-					<p>회원가입이 성공적으로 완료되었습니다. 아래 버튼을 클릭하여 이동하세요.</p>
-					<a href="<c:url value='/'/>" class="btn">홈으로 가기</a>
-					<a href="<c:url value='/member/loginForm'/>" class="btn">로그인</a>
-					<a href="<c:url value='/member/businessAuth'/>" class="btn">사업자 인증하기</a>
-				</div>
+				<h1>관리자 페이지</h1>
+				<h1>구현 예정</h1>
 				
 			</section>
 			<!-- bottom.jsp import -->

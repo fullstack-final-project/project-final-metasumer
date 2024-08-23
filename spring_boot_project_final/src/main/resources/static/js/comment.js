@@ -46,7 +46,7 @@ function addComment() {
             }
         },
         error: function() {
-            alert("댓글 연결 실패");
+            alert("로그인 하세요.");
         }
     });
 }

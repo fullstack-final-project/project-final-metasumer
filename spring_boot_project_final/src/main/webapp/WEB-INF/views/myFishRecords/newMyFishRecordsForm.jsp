@@ -57,7 +57,7 @@
 		            </tr>
 		            <tr>
 		                <th>물고기 크기</th>
-		                <td><input type="text" id="fishSize" name="fishSize" class="input_text"></td>
+		                <td><input type="number" id="fishSize" name="fishSize" class="input_num">cm</td>
 		            </tr>
 		            <tr>
 		                <th>사용 장비</th>

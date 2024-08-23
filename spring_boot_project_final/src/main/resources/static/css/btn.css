@@ -7,6 +7,8 @@ section {
 
 table {
 	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 10px; 
 }
 
 .btn {
@@ -37,9 +39,8 @@ table {
 	margin-bottom: 10px;
 }
 .button-container2 {
-    width: 60%;
+    width: 80%;
     text-align: right;
-    margin: 15px;
 }
 
 
@@ -68,4 +69,10 @@ table {
 	padding: 5px;
 	display: inline-block;
 	justify-content: space-between;
+}
+
+#btn_box{
+	margin-top:10px;
+	width: 90%;
+	text-align: right;
 }

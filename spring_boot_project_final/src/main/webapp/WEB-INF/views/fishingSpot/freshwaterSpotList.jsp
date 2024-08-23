@@ -15,7 +15,7 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section class="content-container">
-				<h1>민물 낚시터</h1>
+				<h1>민물 낚시</h1>
 	
 				<!-- 전체 콘텐츠 컨테이너 -->
 				<div class="main-content">

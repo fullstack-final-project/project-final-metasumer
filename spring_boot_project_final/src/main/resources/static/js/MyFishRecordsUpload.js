@@ -10,6 +10,11 @@ $(document).ready(function(){
 	    event.preventDefault();
 	    
 	    let formData = new FormData(this);
+
+        let fishSize = $("#fishSize").val();
+        if (fishSize) {
+            formData.set("fishSize", `${fishSize}cm`);
+        }
 	    
 	    $.ajax({
 	        type: "post",
@@ -44,7 +49,7 @@ function previewImage(event) {
         reader.onload = function() {
             var img = document.createElement("img");
             img.src = reader.result;
-            img.style.maxWidth = "300px"; // 이미지의 최대 너비 설정
+            img.style.maxWidth = "300px";
             
             var imageBox = document.getElementById("imageBox");
             imageBox.innerHTML = "";

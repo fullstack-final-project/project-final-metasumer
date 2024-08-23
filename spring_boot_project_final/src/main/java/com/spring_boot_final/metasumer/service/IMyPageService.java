@@ -1,7 +1,9 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
 
 public interface IMyPageService {
@@ -34,5 +36,14 @@ public interface IMyPageService {
 
 	// 물고기 별 공통 점수
 	public Integer getCommonScore(String importanceCtgId, String commonValue);
+
+	// 회원 정보
+	public MemberVO getMemberInfo(String memId);
+	
+	// 비밀번호 체크
+	public String passwordCheck(HashMap<String, Object> map);
+	
+	// 회원 정보 수정
+	public boolean updateMemberInfo(HashMap<String, Object> map);
 
 }

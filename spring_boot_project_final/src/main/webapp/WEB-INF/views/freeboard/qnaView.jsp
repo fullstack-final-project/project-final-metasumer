@@ -29,7 +29,6 @@
         <c:import url="/WEB-INF/views/layout/top.jsp"></c:import>
         <section>
         <h1>[자주 묻는 질문]</h1>
-        <p>${sessionScope.memType}</p>
         <c:if test="${sessionScope.memType eq 'admin'}">
              <a class="btn" href="<c:url value='/freeboard/newfreeboardForm/${ boardCtgId }'/>">글쓰기</a>
         </c:if>

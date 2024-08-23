@@ -72,5 +72,31 @@
         FROM common_scores
         WHERE importanceCtgId = #{importanceCtgId} AND commonValue = #{commonValue}
     </select>
+    
+    <!-- 회원정보 반환 -->
+  	<select id="getMemberInfo" parameterType="string" resultType="com.spring_boot_final.metasumer.model.MemberVO">
+  		SELECT memId, memPwd, memName, memEmail, memNickName, memGender, memHP, memZipcode, memAddress1, memAddress2
+  		FROM member
+  		WHERE memId = #{memId}	
+  	</select>
+  	
+  	<!-- 비밀번호 확인 -->
+  	<select id="passwordCheck" parameterType="hashmap" resultType="string">
+  		SELECT memPwd FROM member WHERE memId=#{id}
+  	</select>
+  	
+  	<!-- 회원정보 수정 -->
+  	<update id="updateMemberInfo" parameterType="hashmap">
+        UPDATE member 
+        SET memName = #{updateName},
+            memNickname = #{updateNickName},
+            memHP = CONCAT(#{hp1}, '-', #{hp2}, '-', #{hp3}),
+            memEmail = #{updateEmail},
+            memGender = #{updateGender},
+            memZipcode = #{updateMemZipcode},
+            memAddress1 = #{updateMemAddress1},
+            memAddress2 = #{updateMemAddress2}
+        WHERE memId = #{memId}
+    </update>
 </mapper>	
 	

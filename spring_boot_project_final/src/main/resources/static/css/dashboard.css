@@ -2,19 +2,6 @@
 
 /* dashboard.css  */
 
-/* 전체적인 스타일 설정 */
-body {
-    margin: 0;
-    padding: 0;
-}
-
-/* 컨테이너 스타일 */
-#wrap {
-    width: 80%;
-    margin: 40px auto; /* 상하 여백 추가 */
-    padding: 20px;
-    background-color: #fff;
-}
 
 /* 대시보드 제목 스타일 */
 #dashboard h1 {
@@ -66,6 +53,8 @@ h2 {
 /* 달력 스타일 */
 #calendar {
     margin-bottom: 40px;
+    width: 70%;
+    margin: 0 auto;
 }
 
 /* 예약 목록 스타일 */
@@ -82,7 +71,8 @@ h2 {
 
 /* 테이블 스타일 */
 .table {
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     margin-bottom: 1rem;
     background-color: transparent;
     border-collapse: collapse;
@@ -165,27 +155,22 @@ h2 {
 
 /* 반응형 디자인: 작은 화면에서의 스타일 조정 */
 @media (max-width: 768px) {
-    #wrap {
-        width: 95%; /* 작은 화면에서의 너비 조정 */
+    #dashboard {
+        width: 95%;
+        margin: 0 auto; /* 중앙 정렬 */
     }
 
-    .tab button {
-        padding: 10px;
-        font-size: 14px;
+    .tab {
+        justify-content: center; /* 가운데 정렬 */
     }
 
     .tabcontent {
         padding: 15px;
+        align-items: center; /* 가운데 정렬 */
     }
 
-    .table th, .table td {
-        padding: 8px;
-        font-size: 12px;
-    }
-
-    .btn {
-        padding: 6px 12px;
-        font-size: 12px;
+    .table {
+        margin: 0 auto; /* 가운데 정렬 */
     }
 }
 

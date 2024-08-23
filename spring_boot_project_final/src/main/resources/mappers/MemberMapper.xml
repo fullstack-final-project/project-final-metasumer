@@ -40,7 +40,7 @@
   	</select>
   	
   	<select id="userTagList" resultMap="mbResult">
-  		SELECT m.memId, t.tagId, t.tagName,c.categoryName
+  		SELECT m.memId, t.tagId, t.tagName, t.interestId,c.categoryName
 		FROM memberInterest m
 		JOIN interesttag t ON m.tagId = t.tagId
 		JOIN interestcategory c ON t.interestId = c.interestId

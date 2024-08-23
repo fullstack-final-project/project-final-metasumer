@@ -7,46 +7,28 @@
 		
 		<!-- 모든 사업체 조회 -->
 		<select id="getAllBusiness" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
-        SELECT b.*, c.bizCtgName
-        FROM business b
-        JOIN bizCategory c ON b.bizCtgId = c.bizCtgId
+        SELECT * FROM business
     </select>
 
-  	<!-- 사업체 상세 정보 및 카테고리 조회 -->
-	  <select id="getBusinessWithCategory" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
-	    SELECT b.*, c.bizCtgName
-	    FROM business b
-	    JOIN bizCategory c ON b.bizCtgId = c.bizCtgId
-	    WHERE b.bizId = #{bizId}
-		</select>
-		
-		<!-- 모든 사업체 카테고리 조회 -->
-    <select id="getBusinessCategory" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
-        SELECT bizCtgId, bizCtgName FROM bizCategory
-    </select>
-		
 		<!-- 업체 등록 -->
     <insert id="registerBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
-        INSERT INTO business (bizName, bizRegNum, bizZipcode, bizAddress1, bizAddress2, 
-                              bizRegImg, bizHP1, bizHP2, bizHP3, memId, bizCtgId)
-        VALUES (#{bizName}, #{bizRegNum}, #{bizZipcode}, #{bizAddress1}, #{bizAddress2},
-                #{bizRegImg}, #{bizHP1}, #{bizHP2}, #{bizHP3}, #{memId}, #{bizCtgId})
+        INSERT INTO business (memId, businessName, authStatus, authDate, authDetails, 
+                              bizRegNumber, businessType, bizRegImg)
+        VALUES (#{memId}, #{businessName}, #{authStatus}, #{authDate}, #{authDetails},
+                #{bizRegNumber}, #{businessType}, #{bizRegImg})
     </insert>
     
-		<!-- 업체 수정 -->
+    <!-- 업체 수정 -->
     <update id="updateBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
         UPDATE business
-        SET bizName = #{bizName},
-            bizRegNum = #{bizRegNum},
-            bizZipcode = #{bizZipcode},
-            bizAddress1 = #{bizAddress1},
-            bizAddress2 = #{bizAddress2},
-            bizRegImg = #{bizRegImg},
-            bizHP1 = #{bizHP1},
-            bizHP2 = #{bizHP2},
-            bizHP3 = #{bizHP3},
-            memId = #{memId},
-            bizCtgId = #{bizCtgId}
+        SET memId = #{memId},
+            businessName = #{businessName},
+            authStatus = #{authStatus},
+            authDate = #{authDate},
+            authDetails = #{authDetails},
+            bizRegNumber = #{bizRegNumber},
+            businessType = #{businessType},
+            bizRegImg = #{bizRegImg}
         WHERE bizId = #{bizId}
     </update>
 

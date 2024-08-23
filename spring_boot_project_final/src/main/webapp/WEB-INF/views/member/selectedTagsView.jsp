@@ -22,13 +22,18 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				
-				<h1>${sessionScope.memNickname}님의 관심사</h1>
+				<div class="header-actions">
+				    <h1>${sessionScope.memNickname}님의 관심사</h1>
+				    <button type="button" class="btn" onclick="window.location.href='/member/selectedTagEdit'">수정</button>
+				    <button type="button" class="btn" onclick="history.back()">취소</button>
+				</div>
 				
+              	<ul id="userTagList">
                 <c:forEach items="${usList}" var="us">
-                   <li>${us.tagName}</li>
+                    <li class="userItem">${us.tagName}</li>
                 </c:forEach>
-				
-				
+            	</ul>
+                	
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>
