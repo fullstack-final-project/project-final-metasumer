@@ -115,7 +115,7 @@ public class MemberController {
 	    
 	    return response;
 	}
-
+	
     public static class TagRequest {
     	
         private String memId;
@@ -127,6 +127,23 @@ public class MemberController {
         public List<String> getTags() { return tags; }
         public void setTags(List<String> tags) { this.tags = tags; }
     }
+    
+    // 관심사 추가 창
+    @RequestMapping("/member/newSelectedTags/{memId}")
+	public String newSelectedTags(@PathVariable("memId") String memId, Model model) {
+    	
+    	ArrayList<MemberVO> caList = mbService.categoryList();
+		ArrayList<MemberVO> tagList = mbService.tagList();
+		
+		model.addAttribute("caList",caList); 
+		model.addAttribute("tagList",tagList);
+		
+    	ArrayList<MemberVO> newList = mbService.newtagList(memId);
+		model.addAttribute("newList",newList); 
+    	
+    	
+		return "member/newSelectedTags";
+	}
 
 	
 	@RequestMapping("/member/joinComplete")

@@ -77,4 +77,9 @@ public class MemberService implements IMemberService {
 		return dao.userTagList(memId);
 	}
 
+	@Override
+	public ArrayList<MemberVO> newtagList(String memId) {
+		return dao.newtagList(memId);
+	}
+
 }

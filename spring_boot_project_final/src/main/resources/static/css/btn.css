@@ -76,3 +76,9 @@ table {
 	width: 90%;
 	text-align: right;
 }
+
+.btn_box_center{
+	margin-top:10px;
+	width: 90%;
+	text-align: center;
+}

@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/userTagSelection.css'/>">
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
-		<script src="<c:url value='/js/userTagSelection.js'/>"></script>
+		<script src="<c:url value='/js/selectedTagsView.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
@@ -21,16 +21,19 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
-				
+				<input type="hidden" id="memId" value="${sessionScope.memId}"/>
 				<div class="header-actions">
 				    <h1>${sessionScope.memNickname}님의 관심사</h1>
-				    <button type="button" class="btn" onclick="window.location.href='/member/selectedTagEdit'">수정</button>
+				   	<button type="button" id="editBtn" class="btn">수정</button>
+                	<button type="button" id="doneBtn" class="btn" style="display:none;">완료</button>
+                	<button type="button" id="addBtn" class="btn" style="display:none;">추가</button>
 				    <button type="button" class="btn" onclick="history.back()">취소</button>
 				</div>
 				
               	<ul id="userTagList">
                 <c:forEach items="${usList}" var="us">
-                    <li class="userItem">${us.tagName}</li>
+                    <li class="userItem">${us.tagName}
+                    <button class="delete-button" style="display:none;">삭제</button></li>
                 </c:forEach>
             	</ul>
                 	
