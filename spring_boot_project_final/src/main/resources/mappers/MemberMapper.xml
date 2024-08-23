@@ -38,6 +38,13 @@
   		SELECT interestId, tagName, tagId
         FROM interesttag
   	</select>
+
+	<select id="newtagList" resultMap="mbResult">
+  		SELECT t.tagId, t.tagName, t.interestId
+		FROM interesttag t
+		LEFT JOIN memberInterest m ON t.tagId = m.tagId AND m.memId = #{memId}
+		WHERE m.tagId IS NULL;
+  	</select>
   	
   	<select id="userTagList" resultMap="mbResult">
   		SELECT m.memId, t.tagId, t.tagName, t.interestId,c.categoryName
@@ -80,5 +87,6 @@
         FROM member
         WHERE memNickname = #{memNickname}
     </select>
+    
 	
 </mapper>
