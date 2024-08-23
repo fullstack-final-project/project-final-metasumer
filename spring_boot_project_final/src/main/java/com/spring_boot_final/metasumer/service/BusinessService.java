@@ -15,22 +15,12 @@ public class BusinessService implements IBusinessService {
   @Autowired
   @Qualifier("IBusinessDAO")
   IBusinessDAO dao;
-  
-  @Override
-  public BusinessVO getBusinessWithCategory(int bizId) {
-    return dao.getBusinessWithCategory(bizId);
-  }
 
   @Override
   public ArrayList<BusinessVO> getAllBusiness() {
     return dao.getAllBusiness();
   }
 
-  @Override
-  public ArrayList<BusinessVO> getBusinessCategory() {
-    return dao.getBusinessCategory();
-  }
-  
   @Override
   public void registerBusiness(BusinessVO vo) {
     dao.registerBusiness(vo);

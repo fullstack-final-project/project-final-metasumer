@@ -1,14 +1,20 @@
 package com.spring_boot_final.metasumer.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.service.ProductService;
@@ -41,12 +47,52 @@ public class ProductController {
     return "product/insertProductForm";
   }  
   
-  // 상품 등록 
   @RequestMapping("/product/insertProduct")
-  public String insertProduct(ProductVO vo) {
-    prdService.insertProduct(vo);   
-    return "redirect:/product/productManagement";
+  @ResponseBody
+  public Map<String, Object> registerProduct(@RequestParam("prdNo") String prdNo,
+                                             @RequestParam("prdImage") MultipartFile file,
+                                             @RequestParam("prdName") String prdName,
+                                             @RequestParam("prdPrice") Integer prdPrice,
+                                             @RequestParam("prdStock") Integer prdStock,
+                                             @RequestParam("prdMaker") String prdMaker,
+                                             @RequestParam("prdDescript") String prdDescript,
+                                             @RequestParam("bizId") Integer bizId,
+                                             @RequestParam("prdCtgId") Integer prdCtgId) {
+      Map<String, Object> response = new HashMap<>();
+      try {
+          // 파일 저장
+          String fileName = saveFile(file);
+          System.out.println("파일 등록 성공: " + fileName);
+
+          // ProductVO 객체 생성
+          ProductVO product = new ProductVO();
+          product.setPrdNo(prdNo);
+          product.setPrdName(prdName);
+          product.setPrdPrice(prdPrice);
+          product.setPrdStock(prdStock);
+          product.setPrdMaker(prdMaker);
+          product.setPrdDescript(prdDescript);
+          product.setPrdImage(fileName);
+          product.setBizId(bizId);
+          product.setPrdCtgId(prdCtgId);
+
+          // 제품 등록
+          prdService.insertProduct(product);
+
+          response.put("status", "success");
+          response.put("redirectUrl", "/product/productManagement");
+      } catch (IOException e) {
+          e.printStackTrace();
+          response.put("status", "fail");
+          response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
+      } catch (Exception e) {
+          e.printStackTrace();
+          response.put("status", "fail");
+          response.put("error", "제품 등록 중 오류 발생: " + e.getMessage());
+      }
+      return response;
   }
+ 
   
   // 상품 등록(로그인 했을 경우 bizId 처리: 추후에 사용)
 //  @RequestMapping("/product/insertProduct")
@@ -134,6 +180,21 @@ public class ProductController {
       model.addAttribute("categoryProducts", categoryProducts);
 
       return "product/productList";
+  }
+  
+  private String saveFile(MultipartFile file) throws IOException {
+    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
+
+    String originalFileName = file.getOriginalFilename();
+    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+
+    UUID uuid = UUID.randomUUID();
+    String savedFileName = uuid.toString() + "_" + originalFileName;
+    File uploadFile = new File(uploadPath + savedFileName);
+
+    file.transferTo(uploadFile);
+
+    return savedFileName;
   }
   
   

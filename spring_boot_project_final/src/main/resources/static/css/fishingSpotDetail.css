@@ -99,7 +99,7 @@ h2 {
 }
 
 /* 낚시터 구역 정보 섹션 스타일 */
-.spot-areas {
+.spot-areas, .spot-description, .spot-facilities {
     margin: 20px;
 }
 
@@ -167,11 +167,12 @@ h2 {
     padding: 10px; 
     font-size: 16px; 
     border-radius: 5px; /
-    cursor: pointer; 
+     
 }
 
 .modal-button:hover {
     background-color: #61c5fa; /* 호버 시 배경색 변경 */
+    cursor: pointer;
 }
 
 /* 체크박스 스타일 */
@@ -264,7 +265,7 @@ input[type="checkbox"] {
     z-index: 102; /* 모달 콘텐츠 위에 표시되도록 */
 }
 
-#confirmSelection {
+#confirmSelectionBtn {
     background-color: #09a4f7;
     border: none;
     color: white; /* 흰색 글자 */
@@ -279,7 +280,7 @@ input[type="checkbox"] {
     white-space: nowrap; /* 텍스트가 줄 바꿈 없이 한 줄로 표시되도록 설정 */
 }
 
-#confirmSelection:hover {
+#confirmSelectionBtn:hover {
     background-color: #61c5fa;
 }
 

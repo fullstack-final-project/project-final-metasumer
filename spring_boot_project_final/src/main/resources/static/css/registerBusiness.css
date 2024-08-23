@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* registerBusiness.css */
+
+/* 등록 섹션 스타일 */
+#register-business {
+    background: #fff;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#register-business h1 {
+    margin-top: 0;
+}
+일 */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group select {
+   
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="file"] {
+    padding: 0;
+}
+
+#registerBtn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+#registerBtn:hover {
+    background: #0056b3;
+}
+

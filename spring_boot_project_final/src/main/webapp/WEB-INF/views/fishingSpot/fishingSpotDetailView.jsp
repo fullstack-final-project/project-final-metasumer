@@ -32,7 +32,7 @@
                 <div class="spot-details">
                     <h1>${spot.spotName}</h1>
                     <p class="address">${spot.spotAddress1} ${spot.spotAddress2}</p>
-                    <p class="price">가격: ${spot.spotPrice}원</p>
+                    <p class="price">가격: ${spot.spotPrice}원~</p>
                     <p class="hours"><fmt:formatDate value="${spot.openingTime}" pattern="HH:mm" />
 											 - 
 											<fmt:formatDate value="${spot.closingTime}" pattern="HH:mm" /></p>
@@ -46,7 +46,7 @@
 						
 						<!-- 낚시터 구역 정보 섹션 -->
 						<section class="spot-areas">
-						    <h2>낚시터 구역 정보</h2>
+						    <h2>상품 정보</h2>
 						    <c:forEach var="area" items="${areas}">
 						        <div class="area-item" data-checkbox-id="area_${area.areaId}">
 						            <h3>${area.areaName}</h3>
@@ -100,7 +100,7 @@
 						            </form>
 						        </div>
 						        <div class="confirmSelection">
-						            <button type="button" id="confirmSelection">상품선택</button>
+						            <button type="button" id="confirmSelectionBtn">상품선택</button>
 						        </div>
 						    </div>
 						</div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
 import com.spring_boot_final.metasumer.service.MyPageService;
 
@@ -34,24 +35,33 @@ public class MyPageController {
 
 		int recordsPerPage = 4;
 		int totalRecords = myPageService.getRecordsCount(memId); // 총 기록 수
-        int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
+        
+        if (totalRecords > 0) {
+            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
 
-        // 페이지 범위 초과 방지
-        if (page > totalPages) {
-            page = totalPages;
-        } else if (page < 1) {
-            page = 1;
+            // 페이지 범위 초과 방지
+            if (page > totalPages) {
+                page = totalPages;
+            } else if (page < 1) {
+                page = 1;
+            }
+
+            int offset = (page - 1) * recordsPerPage;
+            
+            ArrayList<MyPageVO> mfList = myPageService.MyFishRecordsPerPage(memId, offset, recordsPerPage);
+            
+            model.addAttribute("mfList", mfList);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages); 
+        } else {
+            // 기록이 없을 경우 빈 리스트와 기본 페이지 정보를 설정
+            model.addAttribute("mfList", new ArrayList<MyPageVO>());
+            model.addAttribute("currentPage", 1);
+            model.addAttribute("totalPages", 1);
         }
+    	
+        return "myPage/myPageListView";
 
-        int offset = (page - 1) * recordsPerPage;
-        
-        ArrayList<MyPageVO> mfList = myPageService.MyFishRecordsPerPage(memId, offset, recordsPerPage);
-        
-        model.addAttribute("mfList", mfList);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages); 	
-		
-		return "myPage/myPageListView";
 	}
 	
 	@RequestMapping("/member/myPageCountData")
@@ -63,23 +73,32 @@ public class MyPageController {
 
 	    int recordsPerPage = 4;
 	    int totalRecords = myPageService.getRecordsCount(memId); // 총 기록 수
-	    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
-
-	    // 페이지 범위 초과 방지
-	    if (page > totalPages) {
-	        page = totalPages;
-	    } else if (page < 1) {
-	        page = 1;
-	    }
-
-	    int offset = (page - 1) * recordsPerPage;
-	    ArrayList<MyPageVO> mfList = myPageService.MyFishRecordsPerPage(memId, offset, recordsPerPage);
-
+	    
 	    Map<String, Object> data = new HashMap<>();
 	    
-	    data.put("mfList", mfList);
-	    data.put("currentPage", page);
-	    data.put("totalPages", totalPages);
+	    if (totalRecords > 0) {
+            int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
+
+            // 페이지 범위 초과 방지
+            if (page > totalPages) {
+                page = totalPages;
+            } else if (page < 1) {
+                page = 1;
+            }
+
+            int offset = (page - 1) * recordsPerPage;
+            
+            ArrayList<MyPageVO> mfList = myPageService.MyFishRecordsPerPage(memId, offset, recordsPerPage);                       
+    	    
+    	    data.put("mfList", mfList);
+    	    data.put("currentPage", page);
+    	    data.put("totalPages", totalPages);
+        } else {
+            // 기록이 없을 경우 빈 리스트와 기본 페이지 정보를 설정
+        	data.put("mfList", new ArrayList<MyPageVO>());
+        	data.put("currentPage", 1);
+        	data.put("totalPages", 1);
+        }	    
 
 	    return data;
 	}
@@ -171,5 +190,74 @@ public class MyPageController {
 
         return successRate;
     }
+	
+	// 회원 정보 수정
+	@RequestMapping("/myPage/checkPwdForm")
+	public String checkPassword(Model model,
+                                HttpSession session) {
+        String memId = (String)session.getAttribute("sid");	          		
+		
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);		
+		
+		// model 설정
+		model.addAttribute("memVo", memVo);		
+				
+		return "myPage/checkPwdForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/myPage/checkPwd")
+	public String loginCheck(@RequestParam HashMap<String, Object> param,
+							 HttpSession session) {
+		String result = myPageService.passwordCheck(param);
+		
+		return result;
+	}
+	
+	@RequestMapping("/myPage/updateMemberForm")
+	public String updateMember(Model model,
+                               HttpSession session) {
+        String memId = (String)session.getAttribute("sid");	          		
+		
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);
+		// 전화번호 설정
+		String[] hp = (memVo.getMemHP()).split("-");
+		
+		// model 설정
+		model.addAttribute("memVo", memVo);
+		model.addAttribute("hp1", hp[0]);
+		model.addAttribute("hp2", hp[1]);
+		model.addAttribute("hp3", hp[2]);
+		return "myPage/updateMemberForm";
+	}
+	
+	// 회원정보 수정
+	@ResponseBody
+	@RequestMapping("/myPage/updateComplete")
+	public String updateComplete(@RequestParam HashMap<String, Object> param,
+                                 HttpSession session) {
+		String memId = (String)session.getAttribute("sid");
+	    param.put("memId", memId);
+	    
+	    String result = "fail";
+	    
+	    // DB 업데이트 서비스 호출
+	    boolean updateSuccess = myPageService.updateMemberInfo(param);
+	    
+	    if(updateSuccess) {
+	    	result = "success";
+	    }
+	    
+	    return result;
+	}
+	
+	// 회원정보 수정 완료
+	@RequestMapping("/myPage/updateCompleteForm")
+	public String updateCompleteForm() {
+		
+		return "myPage/updateCompleteForm";
+	}
 
 }
