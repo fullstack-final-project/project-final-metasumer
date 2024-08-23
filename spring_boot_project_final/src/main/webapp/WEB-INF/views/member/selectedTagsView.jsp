@@ -24,7 +24,7 @@
 				
 				<div class="header-actions">
 				    <h1>${sessionScope.memNickname}님의 관심사</h1>
-				    <button type="button" class="btn" onclick="window.location.href='/'">수정</button>
+				    <button type="button" class="btn" onclick="window.location.href='/member/selectedTagEdit'">수정</button>
 				    <button type="button" class="btn" onclick="history.back()">취소</button>
 				</div>
 				

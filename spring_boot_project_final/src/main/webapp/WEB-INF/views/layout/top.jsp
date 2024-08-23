@@ -27,6 +27,12 @@
 				<!-- 로그인 성공하는 경우 : 로그아웃, 장바구니, 마이페이지, 게시판 등 보여줌 -->
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
+					<c:if test="${sessionScope.memType eq 'admin'}">
+						<a href="<c:url value='/member/adminPage'/>">관리자 페이지</a>
+					</c:if>
+					<c:if test="${sessionScope.memType eq 'business'}">
+						<a href="<c:url value='/business/businessMain'/>">사업자 페이지</a>
+					</c:if>
 					<a href="<c:url value='/dashboard'/>">예약</a>
 					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">낚시갤러리</a>
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
