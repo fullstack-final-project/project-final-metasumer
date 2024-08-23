@@ -33,18 +33,10 @@ public class BusinessController {
   
   // 사업체 등록 폼 열기
   @RequestMapping("/registerBusinessForm")
-  public String registerBusinessForm(Model model) {
-    ArrayList<BusinessVO> bizCategories = businessService.getBusinessCategory();
-    model.addAttribute("bizCategories", bizCategories);
-    return "business/registerBusiness";
-}
-  
-  @RequestMapping("/detail")
-  public String getBusinessWithCategory(@RequestParam("bizId") int bizId, Model model) {
-      BusinessVO business = businessService.getBusinessWithCategory(bizId);
-      model.addAttribute("business", business);
-      return "business/detail";
+  public String registerBusinessForm() {
+      return "business/registerBusiness";
   }
+  
 
   @RequestMapping("/getAllBusiness")
   public String getAllBusiness(Model model) {
@@ -57,15 +49,11 @@ public class BusinessController {
   @ResponseBody
   public Map<String, Object> registerBusiness(@RequestParam("memId") String memId,
                                               @RequestParam("bizRegImg") MultipartFile file,
-                                              @RequestParam("bizName") String bizName,
-                                              @RequestParam("bizRegNum") String bizRegNum,
-                                              @RequestParam("bizZipcode") String bizZipcode,
-                                              @RequestParam("bizAddress1") String bizAddress1,
-                                              @RequestParam("bizAddress2") String bizAddress2,
-                                              @RequestParam("bizHP1") String bizHP1,
-                                              @RequestParam("bizHP2") String bizHP2,
-                                              @RequestParam("bizHP3") String bizHP3,
-                                              @RequestParam("bizCtgId") Integer bizCtgId) {
+                                              @RequestParam("businessName") String businessName,
+                                              @RequestParam(value = "authStatus", defaultValue = "pending") String authStatus, // 기본값 설정
+                                              @RequestParam("bizRegNumber") String bizRegNumber,
+                                              @RequestParam("authDetails") String authDetails,
+                                              @RequestParam("businessType") String businessType) {
       Map<String, Object> response = new HashMap<>();
       try {
           // 파일 저장
@@ -75,15 +63,11 @@ public class BusinessController {
           // BusinessVO 객체 생성
           BusinessVO business = new BusinessVO();
           business.setMemId(memId);
-          business.setBizName(bizName);
-          business.setBizRegNum(bizRegNum);
-          business.setBizZipcode(bizZipcode);
-          business.setBizAddress1(bizAddress1);
-          business.setBizAddress2(bizAddress2);
-          business.setBizHP1(bizHP1);
-          business.setBizHP2(bizHP2);
-          business.setBizHP3(bizHP3);
-          business.setBizCtgId(bizCtgId);
+          business.setBusinessName(businessName);
+          business.setAuthStatus(authStatus); // String 값 사용
+          business.setBizRegNumber(bizRegNumber);
+          business.setAuthDetails(authDetails);
+          business.setBusinessType(businessType); // String 값 사용
           business.setBizRegImg(fileName);
 
           // 비즈니스 등록
@@ -93,6 +77,12 @@ public class BusinessController {
           response.put("redirectUrl", "/business/businessMain");
       } catch (IOException e) {
           e.printStackTrace();
+          response.put("status", "fail");
+          response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
+      } catch (Exception e) {
+          e.printStackTrace();
+          response.put("status", "fail");
+          response.put("error", "비즈니스 등록 중 오류 발생: " + e.getMessage());
       }
       return response;
   }
@@ -111,7 +101,7 @@ public class BusinessController {
   }
   
   private String saveFile(MultipartFile file) throws IOException {
-    String uploadPath = "C:/springWorkspace/metasumer_images/";
+    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
 
     String originalFileName = file.getOriginalFilename();
     originalFileName = originalFileName.replace("[", "_").replace("]", "_");

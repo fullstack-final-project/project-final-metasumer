@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var modalButton = document.getElementById("productSelectionButton");
     var modal = document.getElementById("areaModal");
     var closeModal = document.querySelector("#areaModal .close");
-    var confirmSelectionButton = document.getElementById("confirmSelection");
+    var confirmSelectionButton = document.getElementById("confirmSelectionBtn");
 
     // 모달 창 열기
     if (modalButton) {
@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (modal) {
                 modal.style.display = "none";
                 resetSelectedAreas();
+                updateConfirmButton();
             }
         };
     }
@@ -53,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (event.target === modal) {
             modal.style.display = "none";
             resetSelectedAreas();
+            updateConfirmButton();
         }
     };
     
@@ -61,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         item.addEventListener('click', function() {
             var checkboxId = item.getAttribute('data-checkbox-id');
             openModalWithSelection(checkboxId);
+            updateConfirmButton();
         });
     });
 });
@@ -70,6 +73,7 @@ function toggleCheckbox(checkboxId) {
     var checkbox = document.getElementById(checkboxId);
     if (checkbox) {
         checkbox.checked = !checkbox.checked; // 현재 체크 상태를 반전시킴
+        updateConfirmButton();
     }
 }
 
@@ -83,6 +87,7 @@ function openModalWithSelection(checkboxId) {
     if (modal) {
         modal.style.display = "block";
     }
+    updateConfirmButton();
 }
 
 // 체크박스 상태 초기화 함수
@@ -91,12 +96,30 @@ function resetSelectedAreas() {
     selectedAreas.forEach(function(checkbox) {
         checkbox.checked = false; // 모든 체크박스를 비선택 상태로 설정
     });
+    updateConfirmButton();
+}
+
+// 확인 버튼 상태 업데이트 함수
+function updateConfirmButton() {
+    var selectedAreas = document.querySelectorAll('input[name="selectedAreas"]:checked');
+    var confirmButton = document.getElementById('confirmSelectionBtn');
+    
+    if (selectedAreas.length > 0) {
+        confirmButton.disabled = false;
+        confirmButton.style.backgroundColor = '#09a4f7'; // 활성화 시 녹색
+        confirmButton.textContent = `상품 바로 결제(${selectedAreas.length})`;
+    } else {
+        confirmButton.disabled = true;
+        confirmButton.style.backgroundColor = '#ccc'; // 비활성화 시 회색
+        confirmButton.textContent = '상품 선택하기';
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+// 달력
 $(document).ready(function() {
-    const openWeatherApiKey = 'be9293c13315be192e4cfe3bd8c023dd'; // OpenWeatherMap API 키
+    const openWeatherApiKey = 'd6ddebb97bbcd461c92b8454bf5bb2af'; // OpenWeatherMap API 키
 
     // 현재 위치를 가져오는 함수
     function getCurrentLocation() {
@@ -126,19 +149,19 @@ $(document).ready(function() {
                 appid: openWeatherApiKey
             },
             success: function(response) {
-                // 응답 데이터의 구조를 확인합니다
-                console.log(response);
+                console.log(response); // 응답 데이터의 구조를 확인합니다
 
                 if (response && response.list && response.list.length > 0) {
                     const events = [];
                     // 현재 날씨 정보를 가져와서 이벤트로 추가 (3시간 간격의 첫 번째 데이터 사용)
                     const weatherData = response.list[0];
                     const iconCode = weatherData.weather[0].icon; // 날씨 아이콘 코드
-                    const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`; // 아이콘 URL
+                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`; // 아이콘 URL
 
                     events.push({
-                        title: '', // 제목을 비워둡니다
+                        title: '현재 날씨', 
                         start: moment().format('YYYY-MM-DD'),
+                        description: weatherData.weather[0].description, // 날씨 설명 추가
                         icon: iconUrl // 현재 날씨 아이콘 URL
                     });
                     renderCalendar(events);
@@ -159,15 +182,15 @@ $(document).ready(function() {
         $('#calendar').fullCalendar({
             locale: 'ko',
             events: events,
-            eventContent: function(event) {
-                if (event.icon) {
+            eventContent: function(arg) {
+                if (arg.event.extendedProps.icon) {
                     return {
-                        html: `<div class="fc-icon">
-                                <img src="${event.icon}" alt="Weather Icon" style="width: 30px; height: 30px;"/>
-                            </div>`
+                        html: `<div class="fc-event-icon">
+                                <img src="${arg.event.extendedProps.icon}" alt="Weather Icon" style="width: 30px; height: 30px;"/>
+                            </div><div class="fc-event-title">${arg.event.title}</div>`
                     };
                 }
-                return { html: '' };
+                return { html: `<div class="fc-event-title">${arg.event.title}</div>` };
             },
             headerToolbar: {
                 left: 'prev,next today',
@@ -180,6 +203,7 @@ $(document).ready(function() {
         });
     }
 
-    // 페이지가 로드되면 위치를 가져오고 캘린더를 초기화합니다.
+    // 페이지가 로드되면 위치를 가져오고 캘린더을 초기화합니다.
     getCurrentLocation();
 });
+

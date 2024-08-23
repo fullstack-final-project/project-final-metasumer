@@ -16,7 +16,7 @@
     gap: 20px; /* 필터와 리스트 사이의 간격 */
 }
 
-/* 왼쪽 낚시터 리스트 영역 */
+/* 낚시터 리스트 영역 */
 .spots-list {
     flex: 1; /* 남은 공간을 차지하도록 설정 */
     display: flex;
@@ -26,9 +26,9 @@
 
 /* 오른쪽 필터 옵션 영역 */
 .filter-container {
-   	position: fixed; /* 스크롤 시 고정 */
-   	right: 12%;
-    width: 25%; /* 필터 옵션 영역의 너비 */
+   	position: fixed; 
+   	right: 18%;
+    width: 20%; /* 필터 옵션 영역의 너비 */
     height: 100vh; /* 전체 뷰포트 높이 */
     padding: 20px 0; /* 상하 패딩 */
     
@@ -64,7 +64,7 @@
 /* 낚시터 컨테이너 */
 .spot-container {
 		position: fixed; /* 화면에 고정 */
-		width: calc(60% - 10px); /* 두 개의 항목이 한 줄에 배치되도록 조정 */
+		width: calc(60% - 10px); 
     position: relative;
     margin-bottom: 20px;
     background: white;

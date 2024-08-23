@@ -9,6 +9,7 @@
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<script src="<c:url value='/js/businessRegister.js' />"></script>
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/registerBusiness.css'/>" />
 	</head>
 	<body>
 		<div id="wrap">
@@ -21,44 +22,29 @@
             		<input type="hidden" id="memId" name="memId" value="biz123" />
             		
                 <div class="form-group">
-                    <label for="bizName">사업체명:</label>
-                    <input type="text" id="bizName" name="bizName" required>
+                    <label for="businessName">사업체명:</label>
+                    <input type="text" id="businessName" name="businessName" required>
                 </div>
                 <div class="form-group">
-                    <label for="bizRegNum">사업자 등록번호:</label>
-                    <input type="text" id="bizRegNum" name="bizRegNum" required>
+                    <label for="bizRegNumber">사업자 등록번호:</label>
+                    <input type="text" id="bizRegNumber" name="bizRegNumber" required>
                 </div>
                 <div class="form-group">
-                    <label for="bizZipcode">우편번호:</label>
-                    <input type="text" id="bizZipcode" name="bizZipcode">
+                    <label for="authDetails">사업자 설명:</label>
+                    <textarea id="authDetails" name="authDetails" rows="4"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="bizAddress1">주소:</label>
-                    <input type="text" id="bizAddress1" name="bizAddress1">
-                </div>
-                <div class="form-group">
-                    <label for="bizAddress2">상세 주소:</label>
-                    <input type="text" id="bizAddress2" name="bizAddress2">
+                    <label for="businessType">사업자 유형:</label>
+                    <select id="businessType" name="businessType" required>
+                        <option value="sale">판매</option>
+                        <option value="reservation">예약</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="bizRegImg">사업자 등록증 이미지:</label>
                     <input type="file" id="bizRegImg" name="bizRegImg" required>
                 </div>
-                <div class="form-group">
-                    <label for="bizHP1">대표 연락처:</label>
-                    <input type="text" id="bizHP1" name="bizHP1" placeholder="010" required> -
-                    <input type="text" id="bizHP2" name="bizHP2" placeholder="1234" required> -
-                    <input type="text" id="bizHP3" name="bizHP3" placeholder="5678" required>
-                </div>
-                <div class="form-group">
-                    <label for="bizCtgId">사업체 카테고리:</label>
-                    <select id="bizCtgId" name="bizCtgId" required>
-                        <c:forEach var="category" items="${bizCategories}">
-                            <option value="${category.bizCtgId}">${category.bizCtgName}</option>
-                        </c:forEach>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">등록</button>
+                <button id="registerBtn" type="submit" class="btn btn-primary">등록</button>
             </form>
         </section>
 			<!-- bottom.jsp import -->
