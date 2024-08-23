@@ -46,6 +46,11 @@ public class MemberController {
 		return "member/businessAuth";
 	}
 	
+	@RequestMapping("/member/adminPage")
+	public String adminPage() {
+		return "member/adminPage";
+	}
+	
 	@RequestMapping("/member/selectedTagsView/{memId}")
 	public String selectedTagsView(Model model, @PathVariable("memId") String memId) 
 	{
