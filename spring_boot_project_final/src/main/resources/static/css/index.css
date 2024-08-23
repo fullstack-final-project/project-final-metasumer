@@ -81,16 +81,21 @@
 
 #nowFishingInfo {
 	display: inline-block;
-	width: 30%;
+	width: 50%;
 	height: 400px;
 	border: 1px solid #39A7FF;
 }
 
 #nowFishingMap {
 	display: inline-block;
-	width: 67%;
+	width: 45%;
 	height: 400px;
 	border: 1px solid #39A7FF;
+}
+
+#nowFishingTable td,
+#nowFishingTable th  {
+	padding-left: 10px;
 }
 
 /**************   

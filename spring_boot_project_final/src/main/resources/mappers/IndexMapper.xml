@@ -12,7 +12,6 @@
 		FROM myFishRecords f
 	    JOIN member m ON f.memId = m.memId
 		ORDER BY fishSize*1 DESC
-		LIMIT 10 
 	</select>
 	
 	<!-- 베스트 업체 리스트 불러오기 : 임의로 선정 -->
@@ -29,7 +28,6 @@
 		FROM myFishRecords f
 	    JOIN member m ON f.memId = m.memId
 		ORDER BY createdDate*1 DESC
-		LIMIT 10 
 	</select>
 	
 	<!-- 신상품 불러오기 : 상품번호로 나열, 상품 카테고리 중 1번(낚시용품)만 선택 -->
