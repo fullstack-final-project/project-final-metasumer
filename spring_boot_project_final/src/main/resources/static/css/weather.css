@@ -62,6 +62,12 @@
 }
 
 #weatherInfoBox {
+	margin: 0 auto;
+	width: 500px;
+	height: 700px;
+}
+
+#weatherDetailBox {
 	 margin-top: 50px; 
 	 width: 100%;
 	 height: 700px;
@@ -69,7 +75,7 @@
 
 #weatherDetailBox table {
 	border: 1px solid #E0F4FF;
-	width: 500px;
+	width: 400px;
 	height: 350px;
 	margin: 0 auto;
 	letter-spacing: -1px;
@@ -87,4 +93,16 @@
 
 #weatherDetailBox table tr:nth-child(2n) {
 	background-color: #E0F4FF;	
+}
+
+#weatherMapWrap {
+	display: inline-block;
+	width: 500px;
+	height: 500px;
+	float: right;
+}
+
+#weatherMapBox {
+	width: 100%;
+	height: 100%;
 }

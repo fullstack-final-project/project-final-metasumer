@@ -113,14 +113,40 @@
     
     // 5. 베스트 업체 (끝)
   
-      // (시작) 7. 신상 낚시 용품 입고
-    
-    /* 업체 카테고리 선택 */
-    const newPrdCtgList = document.querySelectorAll('.newPrdCtgBar .newPrd');
 
- 	newPrdCtgList.forEach( function(newPrd, index) {
- 		newPrd.addEventListener('click', function() {
+    
+
+
+    
+	 
+ 	
+ 	
+
+ 
+ });
+ 
+ document.addEventListener('DOMContentLoaded', function() {
+ 	 // (시작) 7. 신상 낚시 용품 입고
+ 	/* 업체 카테고리 선택 */
+ 	const newPrdCtgList = document.querySelectorAll('.newPrdCtgBar .newPrd');
+    const newPrdList = document.querySelectorAll('.newPrdItem');
+
+ 	newPrdCtgList.forEach( function(newPrdCtg, index) {
+ 		newPrdCtg.addEventListener('click', function() {
+ 			
+ 			const prdCtg = this.getAttribute('data-tab');
+ 			
  			newPrdChange(index + 1);
+ 			
+ 			newPrdList.forEach( function(newPrd) {	
+ 				const itemPrdCtg = document.getElementById('prdCtgIdItem');
+ 				
+ 				if (newPrd.getAttribute('data-category') == prdCtg) {
+ 					newPrd.setAttribute('display', 'inline-block');
+ 				} else {
+ 					newPrd.setAttribute('display', 'none');
+ 				}
+ 			});
  		});
  	});
  	
@@ -128,7 +154,5 @@
  		document.querySelector('.newPrd.active').classList.remove('active');
  		document.querySelector('.newPrd' + num).classList.add('active');
  	}
-    
-    // 7. 신상 낚시 용품 입고 (끝)
- 
+     // 7. 신상 낚시 용품 입고 (끝)
  });

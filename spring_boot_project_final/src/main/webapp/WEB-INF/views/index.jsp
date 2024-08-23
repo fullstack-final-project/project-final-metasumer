@@ -87,14 +87,15 @@
 					<div class="sectionTitle">실시간 낚시 조황 정보 🗺️</div>
 					<div class="nowFishingWrap">
 						<div id="nowFishingInfo" class="nowFishingItem">
-							<table id="nowFishingTable">
-								<tr><th>링크</th><th>장소</th><th>어종</th><th>날짜</th><th>사진</th></tr>
+							<table id="nowFishingTable"> 
+								<tr><th>게시글</th><th>장소</th><th>어종</th><th>크기</th><th>날짜</th><th>사진</th></tr>
 								<c:forEach items="${newMfList}" var="newMfList" begin="1" end="5">
 									<tr>
-										<td><button onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ newMfList.recordNo }' />'">이동</button></td>
+										<td><button onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ newMfList.recordNo }' />'">상세보기</button></td>
 										<td>${newMfList.location}</td>
 										<td>${newMfList.fishName}</td>
-										<td><fmt:formatDate value="${newMfList.createdDate}" pattern="yyyy-MM-dd" /></td>
+										<td>${newMfList.fishSize}</td>
+										<td><fmt:formatDate value="${newMfList.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
 										<td><img src="<c:url value='/project_images/${newMfList.uploadImage}'/>" width="100%" height="66"></td>
 									</tr>
 								</c:forEach>
@@ -136,7 +137,7 @@
 								<div>
 									<img src="<c:url value='/project_images/${bizList.bizRegImg}'/>" width="100%" height="200"></div><br>
 								<div><span class="eachSectionEmphasisText">${bizListNum.count}</span>위</div>
-								<div>${bizList.bizName}</div>
+								<div>${bizList.businessName}</div>
 							</div>
 						</c:forEach>
 					</div>
@@ -163,18 +164,19 @@
 				<div id="newProductBox" class="indexSection">
 					<div class="sectionTitle">신상 낚시 용품 입고 🛍️
 					</div><div class="newPrdCtgBar">
-						<button class="newPrd newPrd1 active"><span>전체</span></button>
-						<button class="newPrd newPrd2"><span>낚시대</span></button>
-						<button class="newPrd newPrd3"><span>릴</span></button>
-						<button class="newPrd newPrd4"><span>미끼</span></button>
-						<button class="newPrd newPrd5"><span>의류/장비</span></button>
-						<button class="newPrd newPrd6"><span>기타</span></button>
+						<button data-tab="default" class="newPrd newPrd1 active"><span>전체</span></button>
+						<button data-tab="1" class="newPrd newPrd2"><span>낚시대</span></button>
+						<button data-tab="2" class="newPrd newPrd3"><span>릴</span></button>
+						<button data-tab="3" class="newPrd newPrd4"><span>미끼</span></button>
+						<button data-tab="4" class="newPrd newPrd5"><span>의류/장비</span></button>
+						<button data-tab="5" class="newPrd newPrd6"><span>기타</span></button>
 					</div>
 					<div class="newProductList">
 						<c:forEach var="newPrdList" items="${newPrdList}">
-							<div class="newPrdItem">
+							<div class="newPrdItem" data-category="${newPrdList.prdCtgId}" onclick="location.href='<c:url value='/product/detailViewProduct/${newPrdList.prdNo}' />'" style="cursor: pointer;">
 								<img src="<c:url value='/project_images/${newPrdList.prdImage}'/>"><br>
 								<div class="eachSectionEmphasisText">${newPrdList.prdName}</div>
+								<div id="prdCtgIdItem" style="display:none;">${newPrdList.prdCtgId}</div>
 								<div>${newPrdList.prdMaker}</div>
 								<div>
 									<fmt:formatNumber type="number" maxFractionDigits="0" value="${newPrdList.prdPrice}" />원</div>
@@ -193,7 +195,7 @@
 						</c:if>
 						<c:if test="${not empty sessionScope.sid }">
 							<c:forEach var="recPrdList" items="${recPrdList}">
-								<div class="userRecPrdItem">
+								<div class="userRecPrdItem" onclick="location.href='<c:url value='/product/detailViewProduct/${recPrdList.prdNo}' />'" style="cursor: pointer;">
 									<img src="<c:url value='/project_images/${recPrdList.prdImage}'/>"><br>
 									<div class="eachSectionEmphasisText">${recPrdList.prdName}</div>
 									<div>${recPrdList.prdMaker}</div>

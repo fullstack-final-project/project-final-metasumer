@@ -11,6 +11,8 @@
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/weather.css'/>">
 		<script src="<c:url value='/js/weather.js'/>"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?clientId=sio4q1ij5f&submodules=geocoder"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -34,14 +36,19 @@
 							<div id="weatherDetailBox">
 								<table>
 									<tr><th>현재 위치</th><td class="item1"></td></tr>
-									<tr><th>위도</th><td class="item2"></td></tr>
-									<tr><th>경도</th><td class="item3"></td></tr>
-									<tr><th>일출/일몰</th><td class="item4"></td></tr>
-									<tr><th>기온</th><td class="item5"></td></tr>
+									<!-- <tr><th>위도</th><td class="item2"></td></tr> -->
+									<!-- <tr><th>경도</th><td class="item3"></td></tr> -->
+									<tr><th>일출 시간</th><td class="item4"></td></tr>
+									<tr><th>일몰 시간</th><td class="item9"></td></tr>
+									<tr><th>현재 온도</th><td class="item5"></td></tr>
+									<tr><th>체감 온도</th><td class="item10"></td></tr>
 									<tr><th>날씨</th><td class="item6"></td></tr>
 									<tr><th>습도</th><td class="item7"></td></tr>
 									<tr><th>바람</th><td class="item8"></td></tr>
 								</table>
+							</div>
+							<div id="weatherMapWrap" style="display:none;">
+								<div id="weatherMapBox"></div>
 							</div>
 						</div>
 					</div>
