@@ -13,7 +13,7 @@
 }
 
 section{
-	margin-top:20px;	
+	margin-top: -40px;	
 }
 
 
@@ -81,6 +81,15 @@ section{
 }
 
 #wrap .fishBox .fishData img:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+#fishDetail img{
+	width: 33.3%;
+}
+
+#fishDetail img:hover{
     opacity: 0.8;
     cursor: pointer;
 }

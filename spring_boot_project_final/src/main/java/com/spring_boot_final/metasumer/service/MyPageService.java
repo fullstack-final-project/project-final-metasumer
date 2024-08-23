@@ -1,12 +1,15 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring_boot_final.metasumer.dao.IMyPageDAO;
+import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
 
 @Service
@@ -14,6 +17,9 @@ public class MyPageService implements IMyPageService {
 	@Autowired
 	@Qualifier("IMyPageDAO")
     IMyPageDAO dao;
+	
+	@Autowired
+	PasswordEncoder pwdEncoder;
 
 	@Override
 	public ArrayList<MyPageVO> MyFishRecordsList(String memId) {
@@ -63,6 +69,31 @@ public class MyPageService implements IMyPageService {
 	@Override
 	public Integer getCommonScore(String importanceCtgId, String commonValue) {
 		return dao.getCommonScore(importanceCtgId, commonValue);
+	}
+
+	@Override
+	public MemberVO getMemberInfo(String memId) {
+		return dao.getMemberInfo(memId);
+	}
+
+	@Override
+	public String passwordCheck(HashMap<String, Object> map) {
+        String encodedPwd = dao.passwordCheck(map);
+              
+	    String result = "fail";
+	    
+	    if (encodedPwd != null && pwdEncoder.matches((String)map.get("pwd"), encodedPwd)) {
+	        result = "success";
+	    }
+	    
+	    return result;
+	}
+
+	@Override
+	public boolean updateMemberInfo(HashMap<String, Object> map) {
+		boolean result = dao.updateMemberInfo(map);
+	    
+	    return result;
 	}
 
 }
