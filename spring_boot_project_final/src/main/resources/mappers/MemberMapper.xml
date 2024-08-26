@@ -61,6 +61,13 @@
             (#{memId}, #{tagId})
         </foreach>
     </insert>
+    
+    <!-- 관심사 삭제 -->
+    <delete id="deleteInterests">
+    	DELETE FROM memberInterest
+		WHERE memId = #{memId};
+    </delete>
+    
 	
     <select id="getUsermemNickname" parameterType="string" resultType="map">
         SELECT memNickname, memType

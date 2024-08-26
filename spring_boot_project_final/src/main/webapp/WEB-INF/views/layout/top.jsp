@@ -28,7 +28,7 @@
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
 					<c:if test="${sessionScope.memType eq 'admin'}">
-						<a href="<c:url value='/member/adminPage'/>">관리자 페이지</a>
+						<a href="<c:url value='/admin/adminPage'/>">관리자 페이지</a>
 					</c:if>
 					<c:if test="${sessionScope.memType eq 'business'}">
 						<a href="<c:url value='/business/businessMain'/>">사업자 페이지</a>

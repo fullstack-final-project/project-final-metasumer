@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_final.metasumer.model.MemberVO;
+import com.spring_boot_final.metasumer.model.TagRequestVO;
 import com.spring_boot_final.metasumer.service.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -99,14 +100,15 @@ public class MemberController {
 	// 관심사 태그 등록
 	@RequestMapping(value = "/member/submitInterest", method = RequestMethod.POST)
 	@ResponseBody 
-	public Map<String, String> submitInterest(@RequestBody TagRequest request) {
-	    Map<String, String> response = new HashMap<>();
+	public Map<String, String> submitInterest(@RequestBody TagRequestVO request) {
+	    
+		Map<String, String> response = new HashMap<>();
 	    
 	    try {
 	        String memId = request.getMemId();
-	        List<String> tagIds = request.getTags();
+	        List<String> tags = request.getTags();
 	        
-	        mbService.saveInterests(memId, tagIds);
+	        mbService.saveInterests(memId, tags);
 	        response.put("redirectUrl", "/");
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -116,17 +118,41 @@ public class MemberController {
 	    return response;
 	}
 	
-    public static class TagRequest {
-    	
-        private String memId;
-        private List<String> tags;
+	// 관심사 태그 수정
+	@RequestMapping(value = "/member/tagsEdit", method = RequestMethod.POST)
+	@ResponseBody 
+	public Map<String, String> tagsEdit(@RequestBody TagRequestVO request) {
 
-        public String getMemId() { return memId; }
-        public void setMemId(String memId) { this.memId = memId; }
-
-        public List<String> getTags() { return tags; }
-        public void setTags(List<String> tags) { this.tags = tags; }
-    }
+		String memId = request.getMemId();
+		List<String> tags = request.getTags();
+		List<String> newTags = request.getNewTags();
+		mbService.deleteInterests(memId);
+		
+		
+		Map<String, String> response = new HashMap<>();
+	    
+	    try {
+        List<String> allTags = new ArrayList<>();
+        
+        if (tags != null) {
+            allTags.addAll(tags);
+        }
+        
+        if (newTags != null) {
+            allTags.addAll(newTags);
+        }
+        
+        mbService.saveInterests(memId, allTags);
+        response.put("redirectUrl", "/member/selectedTagsView/" + memId);
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	        response.put("error", "저장 실패");
+	    }
+	    
+	    return response;
+		
+	}
+	
     
     // 관심사 추가 창
     @RequestMapping("/member/newSelectedTags/{memId}")

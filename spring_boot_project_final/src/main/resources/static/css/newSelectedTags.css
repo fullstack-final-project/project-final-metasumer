@@ -55,10 +55,6 @@ input[type="checkbox"]:disabled {
 	accent-color: #FFEED9;
 }
 
-.disabled-tag {
-	color: #FFEED9;
-}
-
 h1 {
 	color: #FFFFFF;
 	font-size: 1.5em;

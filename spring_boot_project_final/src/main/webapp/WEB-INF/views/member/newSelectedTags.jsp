@@ -37,7 +37,11 @@
 			                        <input type="checkbox" disabled />${t.tagName}
 			                    </c:when>
 			                    <c:otherwise>
-			                        <label><input type="checkbox" id="tag_${t.tagId}" name="selectedTags" value="${t.tagId}" />${t.tagName}</label>
+			                        <label>
+									    <input type="checkbox" id="tag_${t.tagId}" name="tagName" value="${t.tagName}" />
+									    ${t.tagName}
+									<input type="hidden" name="tagId" value="${t.tagId}" />
+									</label>
 			                    </c:otherwise>
 			                </c:choose>
 			            </c:if>
