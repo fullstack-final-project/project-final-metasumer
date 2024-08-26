@@ -82,4 +82,9 @@ public class MemberService implements IMemberService {
 		return dao.newtagList(memId);
 	}
 
+	@Override
+	public void deleteInterests(String memId) {
+		dao.deleteInterests(memId);
+	}
+
 }
