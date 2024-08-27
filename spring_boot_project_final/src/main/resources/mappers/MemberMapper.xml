@@ -61,6 +61,13 @@
             (#{memId}, #{tagId})
         </foreach>
     </insert>
+    
+    <!-- 관심사 삭제 -->
+    <delete id="deleteInterests">
+    	DELETE FROM memberInterest
+		WHERE memId = #{memId};
+    </delete>
+    
 	
     <select id="getUsermemNickname" parameterType="string" resultType="map">
         SELECT memNickname, memType
@@ -87,6 +94,14 @@
         FROM member
         WHERE memNickname = #{memNickname}
     </select>
+    
+    <insert id="insertBusinessAuth" parameterType="com.spring_boot_final.metasumer.model.BusinessAuthVO">
+	    INSERT INTO metasumer.business (
+	        memId, businessName, authStatus, authDate, bizRegNumber, businessType, bizRegImg, delegate, businessAddress, businessCategory, issueDate
+	    ) VALUES (
+	        #{memId}, #{businessName}, #{authStatus}, CURRENT_DATE, #{bizRegNumber}, #{businessType}, #{bizRegImg}, #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate}
+	    );
+	</insert>
     
 	
 </mapper>

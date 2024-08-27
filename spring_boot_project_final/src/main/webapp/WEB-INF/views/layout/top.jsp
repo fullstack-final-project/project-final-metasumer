@@ -28,7 +28,7 @@
 				<c:if test="${not empty sessionScope.sid }">
 					<!-- ${sessionScope.sid}님 환영합니다!  -->
 					<c:if test="${sessionScope.memType eq 'admin'}">
-						<a href="<c:url value='/member/adminPage'/>">관리자 페이지</a>
+						<a href="<c:url value='/admin/adminPage'/>">관리자 페이지</a>
 					</c:if>
 					<c:if test="${sessionScope.memType eq 'business'}">
 						<a href="<c:url value='/business/businessMain'/>">사업자 페이지</a>
@@ -38,6 +38,7 @@
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/member/userInterestTag'/>">낚시 취향</a>
+					<a href="<c:url value='/memberOcr/businessAuth'/>">사업자등록</a>
 					<a href="<c:url value='/member/logout'/>">로그아웃</a>
 				</c:if>			
 			</div> <!-- topMenuRightBox 종료 -->

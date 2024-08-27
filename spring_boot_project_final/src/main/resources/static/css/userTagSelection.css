@@ -76,7 +76,7 @@ section {
 	margin-right: 5px;
 }
 
-#userTagList {
+#userTagList, #tagsContainer ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
@@ -99,8 +99,16 @@ section {
 	text-align: center;
 }
 
+.userNewItem{
+	border: 1px solid #FFAB40;
+}
+
 .userItem:hover {
 	background-color: #87C4FF;
 	color: white;
 	font-weight: bold;
+}
+
+.userNewItem:hover{
+	background-color: #FFAB40;
 }

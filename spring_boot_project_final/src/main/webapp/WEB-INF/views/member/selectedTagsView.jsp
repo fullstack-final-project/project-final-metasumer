@@ -27,16 +27,16 @@
 				   	<button type="button" id="editBtn" class="btn">수정</button>
                 	<button type="button" id="doneBtn" class="btn" style="display:none;">완료</button>
                 	<button type="button" id="addBtn" class="btn" style="display:none;">추가</button>
-				    <button type="button" class="btn" onclick="history.back()">취소</button>
 				</div>
 				
               	<ul id="userTagList">
                 <c:forEach items="${usList}" var="us">
-                    <li class="userItem">${us.tagName}
+                    <li class="userItem" data-tag-id="${us.tagId}">${us.tagName}
                     <button class="delete-button" style="display:none;">삭제</button></li>
                 </c:forEach>
             	</ul>
-                	
+            	
+            	 <div id="tagsContainer"></div>
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>

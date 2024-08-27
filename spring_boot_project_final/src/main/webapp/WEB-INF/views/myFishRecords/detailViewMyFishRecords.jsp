@@ -23,8 +23,7 @@
 				<input type="hidden" name="sid" value="${sessionScope.sid}" />
                 <div id="btn_box">
                     <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView' />'">목록으로</button>
-                </div>        
-                            
+                        
                         <c:if test="${sessionScope.sid eq mf.memId}">
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/updatemyFishRecordsForm/${mf.recordNo}' />'">수정</button>
 							<button type="button" class="btn" onclick="confirmDelete()">삭제</button>
@@ -32,6 +31,7 @@
 							    <input type="hidden" name="recordNo" value="${mf.recordNo}" />
 							</form>
 						</c:if>
+						</div>
 				<table>
 					<tr>
 						<th>작성자</th>
