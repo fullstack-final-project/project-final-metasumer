@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring_boot_final.metasumer.dao.IMemberDAO;
+import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 @Service
@@ -85,6 +86,11 @@ public class MemberService implements IMemberService {
 	@Override
 	public void deleteInterests(String memId) {
 		dao.deleteInterests(memId);
+	}
+
+	@Override
+	public void insertBusinessAuth(BusinessAuthVO vo) {
+		dao.insertBusinessAuth(vo);
 	}
 
 }

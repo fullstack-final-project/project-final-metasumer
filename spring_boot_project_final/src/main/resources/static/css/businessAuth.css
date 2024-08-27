@@ -1,0 +1,108 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+section {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+#guide {
+	font-weight: bold;
+	color: red;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+#ocrFormContainer {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-bottom: 20px;
+	border: 1px solid #39A7FF;
+	border-radius: 8px;
+	padding: 20px;
+	background-color: #fbfbfb;
+}
+
+#ocrForm {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+}
+
+#ocrForm input[type="file"] {
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 12px;
+	font-size: 16px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.ocrImage {
+	max-width: 100%;
+	height: auto;
+}
+
+.container {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+	border: 1px solid #39A7FF;
+	border-radius: 8px;
+	padding: 20px;
+	background-color: #fbfbfb;
+}
+
+.image-box {
+	flex: 1 1 300px;
+}
+
+.results-container {
+	flex: 2 1 600px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.result-item {
+	text-align: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.result-item label {
+    flex: 0 0 100px;
+    font-weight: bold;
+}
+
+.result-item input[type="text"] {
+    flex: 1;
+    max-width: 300px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-radio-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-buttons {
+    margin-bottom: 10px;
+}
+
+#businessCategory {
+    margin-top: 10px;
+}

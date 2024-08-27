@@ -13,5 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 		// 맵핑 이름 : project_images
 		registry.addResourceHandler("/project_images/**")
 		.addResourceLocations("file:///D:/springWorkspace/metasumer_images/");
+		registry.addResourceHandler("/ocr_image/**")
+		.addResourceLocations("file:///D:/springWorkspace/metasumer_images/upload/");
 	}
 }
