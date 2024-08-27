@@ -2,7 +2,7 @@
  * location.js
  */
  
- $(document).ready(function() {
+$(document).ready(function() {
  	
  	/* (시작) 0. 탭 메뉴 선택 시 각 탭 사이트로 이동 */
  	const locCtgItem = document.querySelectorAll('.locCtg');
@@ -20,6 +20,8 @@
  	
  	locCtgList.forEach( function(locCtg, index) {
  		locCtg.addEventListener('click', function() {
+ 			event.preventDefault();
+ 			
  			locCtgChange(index + 1);
  		});
  	});
