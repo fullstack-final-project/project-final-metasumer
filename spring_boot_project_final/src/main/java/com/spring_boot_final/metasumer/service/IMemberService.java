@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 public interface IMemberService {
@@ -40,4 +41,7 @@ public interface IMemberService {
 
 	// 관심사 태그 삭제
 	public void deleteInterests(String memId);
+
+	// 사업자 신청 등록
+	public void insertBusinessAuth(BusinessAuthVO vo);
 }

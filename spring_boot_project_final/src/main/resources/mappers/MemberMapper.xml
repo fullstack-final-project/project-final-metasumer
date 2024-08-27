@@ -95,5 +95,13 @@
         WHERE memNickname = #{memNickname}
     </select>
     
+    <insert id="insertBusinessAuth" parameterType="com.spring_boot_final.metasumer.model.BusinessAuthVO">
+	    INSERT INTO metasumer.business (
+	        memId, businessName, authStatus, authDate, bizRegNumber, businessType, bizRegImg, delegate, businessAddress, businessCategory, issueDate
+	    ) VALUES (
+	        #{memId}, #{businessName}, #{authStatus}, CURRENT_DATE, #{bizRegNumber}, #{businessType}, #{bizRegImg}, #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate}
+	    );
+	</insert>
+    
 	
 </mapper>

@@ -38,6 +38,7 @@
 					<a href="<c:url value='/product/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/member/userInterestTag'/>">낚시 취향</a>
+					<a href="<c:url value='/memberOcr/businessAuth'/>">사업자등록</a>
 					<a href="<c:url value='/member/logout'/>">로그아웃</a>
 				</c:if>			
 			</div> <!-- topMenuRightBox 종료 -->
