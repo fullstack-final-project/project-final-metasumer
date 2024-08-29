@@ -14,6 +14,7 @@
 		    defer
 		    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUEQpKhFKAnI8fDb2pB-cPDdiC6sdhhrI&callback=initMap"
 		  ></script>
+		<script src="<c:url value='/js/location.js'/>"></script></head>
 		<script src="<c:url value='/js/locationIntl.js'/>"></script></head>
 	<body>
 		<div id="wrap">
