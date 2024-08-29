@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+/* 전체 페이지 */
+
+.safetyWrap {
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+	line-height: 0;
+	padding: 20px 0;
+	background: white;
+}
+
+@media (min-width: 1256px) {
+	.safetyWrap {
+		width: 1256px;
+		margin: 0 auto;
+	}
+}
+
+/* 상단 카테고리 메뉴 박스 */
+
+#safetyCtgBox {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #39A7FF;
+}
+
+.safetyCtgBar {
+	width: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	line-height: 0;
+	background: white;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+.safetyCtg {
+	list-style: none;
+	text-decoration : none;
+	color: black;
+	font-weight: bold;
+	letter-spacing: -1px;
+	padding-right: 5px;
+	display: inline-block;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.safetyCtg.active {
+	color: #39A7FF; 
+	text-shadow: -1px 0px #E0F4FF, 0px 1px #E0F4FF, 1px 0px #E0F4FF, 0px -1px #E0F4FF;
+}
+
+/* safetyInfo.jsp */
+
+#safetyGifBox {
+	padding: 10px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+	grid-gap: 20px;
+	gap: 20px;
+	padding-bottom: 50px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #39A7FF;
+}
+
+.safetyGifItem {
+	width: 100%;
+	border-radius: 5px; 
+	border:1px solid #39A7FF;
+	letter-spacing: -1px;
+    overflow: hidden;
+    margin: 0 auto;	
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.safetyGifItem div {
+}
+
+.gifBox img {
+	width: 100%;
+	height: 398.67px;
+    object-fit: cover;
+}
+
+.gifTitleBox {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+	color: #39A7FF;
+	height: 30px;
+	line-height: 30px;
+}
+
+.gifBriefBox {
+	margin: 0 10px 20px 10px;
+	font-size: 18px;
+	/*overflow: hidden;*/
+	text-overflow:clip;
+	/*overflow-wrap: break-word; */
+	/*word-break: break-all;*/
+	/*height: 100px;*/	
+	line-height: 20px;
+}
+
+#copyrightBox {
+	margin-top: 10px;
+	width: 100%;
+	font-size: 10px;
+	white-space: nowrap;
+	overflow: visible;
+}
+
+#copyrightBox span a {
+	color: #39A7FF;
+	text-decoration : underline;
+}
+
+#safetyYoutubeBox div {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#safetyYoutubeBox iframe {
+	margin:15px;
+}
+
+/* emergencyInfo.jsp */
+
+#safetyTelBox {
+	width: 100%;
+	margin: 0 auto;
+}
+
+#safetyTelBox table {
+	margin-top: 30px;
+	width: 100%;
+	border: 1px solid #39A7FF;
+	border-radius: 5px; 
+	font-size: 18px;
+}
+
+#safetyTelBox table th {
+	font-weight: normal;	
+}
+
+#safetyTelBox table td,
+#safetyTelBox table th {
+	height: 30px;
+	padding: 10px 0 10px 10px;
+}
+
+#safetyTelBox table a {
+	color: #39A7FF;
+	text-decoration : underline;
+}
+
+#safetyTelBox table td:first-child {
+	color: #39A7FF;
+}
+
+#safetyTelBox table td:first-child,
+#safetyTelBox table td:nth-child(2) {
+	font-weight: bold;
+}
+
+#safetyTelBox table tr:nth-child(2n) {
+	background-color: #E0F4FF;
+}
