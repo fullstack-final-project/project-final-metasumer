@@ -12,6 +12,9 @@ public interface IMemberDAO {
 
 	// 로그인 체크
 	public String loginCheck(HashMap<String, Object> map);
+	
+	// 로그인 카운트
+	public void loginCount(String memId);
 
 	// 사용자 닉네임을 반환
 	public Map<String, Object> getUsermemNickname(String memId);
@@ -44,5 +47,8 @@ public interface IMemberDAO {
 
 	// 사업자 신청 등록
 	public void insertBusinessAuth(BusinessAuthVO vo);
+	
+	// 사업자 신청 시 아이디/검토중 확인
+	public int checkMemId(String memId);
 
 }

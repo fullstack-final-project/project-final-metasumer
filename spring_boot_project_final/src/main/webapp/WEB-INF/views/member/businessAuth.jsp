@@ -29,13 +29,14 @@
             </div>
             
             <form id="businessAuthForm" action="/memberOcr/insertBusinessAuth" method="post">
+            <p id="guide">*내용을 검토한 후, 오류가 있는 부분을 수정해 주세요.</p>
             <div class="container">
                 <div id="imageBox" class="image-box">
                 </div>
                    <div id="resultsContainer" class="results-container">
                    		<input type="hidden" name="memId" value="${memId}">
                    		<input type="hidden" name="authStatus" value="pending">
-               			 <input type="hidden" id="bizRegImg" name="bizRegImg" value="">
+               			<input type="hidden" id="bizRegImg" name="bizRegImg" value="">
                    		
                    
 	                    <div class="result-item">

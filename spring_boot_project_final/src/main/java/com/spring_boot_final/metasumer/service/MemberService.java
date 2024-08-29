@@ -93,4 +93,15 @@ public class MemberService implements IMemberService {
 		dao.insertBusinessAuth(vo);
 	}
 
+	@Override
+	public void loginCount(String memId) {
+		dao.loginCount(memId);
+	}
+
+	@Override
+	public int checkMemId(String memId) {
+		return dao.checkMemId(memId);
+		
+	}
+
 }

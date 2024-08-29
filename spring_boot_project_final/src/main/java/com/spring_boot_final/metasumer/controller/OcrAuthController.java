@@ -54,6 +54,16 @@ public class OcrAuthController {
 		return result;
 	}
 	
+	@RequestMapping("/memberOcr/checkMemId")
+	@ResponseBody
+	public String checkMemId(@RequestParam("memId") String memId) {
+		
+		int check = mbService.checkMemId(memId);
+		String response = (check > 0) ? "pending" : "success";
+		
+		return response;
+	}
+	
 	@RequestMapping("/memberOcr/insertBusinessAuth")
 	public String insertBusinessAuth(@RequestParam("memId") String memId, @RequestParam("businessName") String businessName, @RequestParam("bizRegNumber") String bizRegNumber,
 									@RequestParam("businessType") String businessType, @RequestParam("delegate") String delegate, @RequestParam("businessAddress") String businessAddress,

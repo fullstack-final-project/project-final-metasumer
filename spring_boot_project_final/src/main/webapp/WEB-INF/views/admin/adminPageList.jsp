@@ -8,7 +8,7 @@
 		<meta charset="UTF-8">
 		<title>관리자 페이지</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
-		<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminPage.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminPageList.css'/>">
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		
@@ -16,19 +16,19 @@
 	<body>
 		<div id="wrap">
 			<!-- top.jsp import -->
-			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
-			
 			<section>
-				<h2>관리자 페이지</h2>
-					<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
-				<div>
-					<h3>게시판 사용량, 로그인량 등 측정 그래프 예정</h3>
+				<div id="menuContainer">
+				    <ul>
+				        <li><a href="<c:url value='/admin/adminPage'/>">통계</a></li>
+				        <li><a href="<c:url value='/admin/memberManagement/general'/>">일반 회원 관리</a></li>
+				        <li><a href="<c:url value='/admin/businessManagement'/>">사업자 회원 관리</a></li>
+				        <li><a href="<c:url value='/admin/memberManagement/admin'/>">관리자 관리</a></li>
+				        <li><a href="<c:url value='/admin/postOps'/>">게시물 관리</a></li>
+				    </ul>
 				</div>
-				
 			</section>
 			<!-- bottom.jsp import -->
-			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>
 		</div>
 	</body>
 </html>
