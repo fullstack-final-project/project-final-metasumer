@@ -8,9 +8,6 @@
 		<title>회원 정보</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/checkPwd.css'/>">
         <script src="/js/checkPwd.js"></script>	
 	</head>
@@ -34,7 +31,7 @@
 			          비밀번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="pwd" name="pwd" autocomplete="off" required>
 			        </div>
 			        <div id="checkBtn">
-			          <button id="cancelChkBtn">취소</button>
+			          <button id="cancelChkBtn" type="button">취소</button>
 			          <input id="confirmBtn" type="submit" value="확인">
 			        </div>
 			    </div>
