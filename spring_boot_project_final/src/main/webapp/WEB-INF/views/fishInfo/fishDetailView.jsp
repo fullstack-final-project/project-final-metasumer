@@ -8,9 +8,6 @@
 		<title>어종 설명</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishDetail.css'/>">
 	</head>
 	<body>

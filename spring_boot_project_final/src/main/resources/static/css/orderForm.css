@@ -1,0 +1,244 @@
+@charset "UTF-8";
+
+.container {
+    display: flex;
+}
+
+.left {
+    flex: 1;
+}
+
+#orderForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+        
+#orderForm h3 { 
+	margin-top:20px;
+	font-size: 17px;
+}
+
+#orderForm h4{
+	text-align: left;
+}
+
+table { 
+	width:900px; 
+	margin-top:20px; 
+	border-collapse: collapse;
+}
+
+table caption { 
+	font-size: 15px; 
+    font-weight: 600; 
+    margin-bottom: 10px;
+}	
+
+table tr { height:30px; }
+
+
+table th, td { 
+	padding:10px;
+	font-size: 13px;
+}
+
+table th { 
+	color: black; 
+	width: 100px; 
+}	
+
+table td { 
+	text-align: left;
+	width: 300px; 
+}	
+
+input, select { 
+	text-align:left; 
+	height: 25px; 
+	margin: 2px 0;
+	border: 1px solid #ddd;
+}
+
+.ordInfoTable th, .ordInfoTable td {
+    border: 1px solid #ddd; 
+    padding: 10px;
+    font-size: 13px;
+}
+
+#kakao{
+	height: 20px;
+}
+
+#payco{
+	height: 17px;
+}
+
+#ordReceiver {
+	width: 80px;
+}
+
+#ordRcvAddress1, #ordRcvAddress2 {
+	width: 300px;
+}
+
+#submit {
+	background-color: #39A7FF;
+	color: white;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid;
+	text-align: center;
+	margin-left: 392px;
+}
+
+#cancelBtn {
+	background-color: white;
+	color: #39A7FF;
+	height: 39px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #ddd;
+	text-align: center;
+	float: right;
+	margin-left: 270px;
+}
+
+#searchZipBtn {
+	height: 26px;
+	cursor: pointer;
+}
+
+.orderProductTable{
+	border-collapse: collapse;
+	margin-bottom: 40px;
+	border: 1px solid #ddd; 
+}
+
+.orderProductTable th, .orderProductTable td{
+	font-size: 12px;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd; 
+    border-top: 1px solid black;
+}
+
+#commonPrd{
+	font-size: 12px;
+	border: 1px solid #ddd;
+	background: #f7f7f7;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+#prdInfo{
+	width:700px;
+}
+
+#prdAmount{
+	width:20px;
+}
+.orderProductTable img{
+    width: 100px;
+    height: auto;
+}
+
+.orderProductTable .name{
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+small{
+	font-size:11px;
+	font-weight: normal;
+}
+
+.orderProductTable .quantity{
+    width: 23px;
+    height: 13px;
+    padding: 5px;
+    font-size: 11px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    appearance: none; 
+    margin-top: -6px;
+}
+
+.orderProductTable .quantity input.quantity {
+    width: 50px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+
+.orderProductTable .price, 
+.orderProductTable .points, 
+.orderProductTable .delivery{
+    padding: 10px;
+}
+
+.order{
+	font-size: 11px;
+	background: black;
+	color: white;
+	border:none;
+	padding: 6px 15px;
+	cursor: pointer;
+}
+
+.orderTable2 {
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.orderTable2 th{
+	font-size: 15px;
+	margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;  
+    border-top: 1px solid black; 
+}
+
+.orderTable2 td{
+	font-size: 13px;
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; 
+    border-top: 1px solid black; 
+}
+
+#tableId {
+	width: 30px;
+	font-weight: bold;
+}
+
+.totalPrice{
+	width: 200px;
+	font-weight: bold;
+}
+
+.totalAmount{
+	font-weight: bold;
+}
+
+.totalShipping{
+	width:200px;
+}
+
+.ordPayTable {
+	border-top: 1px solid black;
+}
+
+.ordPayTable input[type="radio"] {
+    margin-right: 7px;
+}
+
+#ordPays{
+	width: 30px;
+	font-weight: bold;
+}

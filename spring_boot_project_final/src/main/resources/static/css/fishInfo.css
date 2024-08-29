@@ -1,19 +1,10 @@
 @charset "UTF-8";
 
-*{
-    font-family: "Noto Sans KR", sans-serif;
-    font-style: normal;
-}
-
-
-#wrap{
-	margin: 0 auto;
-	max-width: 65%;
-	padding: 20px;
-}
-
 section{
-	margin-top: -40px;	
+	margin: 0 auto;
+	max-width: 66%;
+	padding: 20px;
+	margin-top: -60px;	
 }
 
 
