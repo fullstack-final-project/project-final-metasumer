@@ -35,13 +35,13 @@ public class MyPageController {
 
 		int recordsPerPage = 4;
 		int totalRecords = myPageService.getRecordsCount(memId); // 총 기록 수
-        
+       
         if (totalRecords > 0) {
             int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
 
             // 페이지 범위 초과 방지
             if (page > totalPages) {
-                page = totalPages;
+                page = totalPages; 
             } else if (page < 1) {
                 page = 1;
             }
@@ -255,9 +255,23 @@ public class MyPageController {
 	
 	// 회원정보 수정 완료
 	@RequestMapping("/myPage/updateCompleteForm")
-	public String updateCompleteForm() {
-		
+	public String updateCompleteForm() {		
 		return "myPage/updateCompleteForm";
+	}
+	
+	// 나의 예약
+	
+	@RequestMapping("/myPage/reservation")
+	public String reservation(Model model, HttpSession session) {	
+        String memId = (String)session.getAttribute("sid");	          		
+		
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);
+		
+		// model 설정
+		model.addAttribute("memVo", memVo);
+		
+		return "myPage/reservationListView";
 	}
 
 }
