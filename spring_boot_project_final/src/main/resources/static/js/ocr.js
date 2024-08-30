@@ -40,7 +40,31 @@
     });
     
         
-    $('#businessAuthForm').on('submit', function(event) {
+     $('#businessAuthForm').on('submit', function(event) {
+        event.preventDefault();
+
+        let memId = $('input[name="memId"]').val();
+
+        $.ajax({
+            type: "post",
+            url: "/memberOcr/checkMemId",
+            data: { memId: memId },
+            success: function(response) {
+                if (response === 'success') {
+                    validateAndSubmitForm();
+                } else {
+                    alert('검토 중인 아이디가 있습니다. 신청할 수 없습니다.');
+                    resetForm();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+                alert('서버 오류가 발생했습니다.');
+            }
+        });
+    });
+
+    function validateAndSubmitForm() {
         const radioButtons = document.getElementsByName('businessType');
         let isChecked = false;
 
@@ -51,15 +75,26 @@
             }
         }
 
+        let bizRegImg = $('#bizRegImg').val();
+        if (bizRegImg === '') {
+            alert('사업자 등록증 이미지를 첨부해 주세요.');
+            return;
+        }
+
         if (!isChecked) {
             alert('업태를 선택해 주세요.');
-            event.preventDefault();
-        } else {
-            // 업태가 선택되었을 때
-            alert('신청이 완료되었습니다.');
+            return;
         }
-        
-    });
+
+        $('#businessAuthForm').off('submit').submit();
+        alert('신청이 완료되었습니다.');
+    }
+    
+    function resetForm() {
+        $('#businessAuthForm')[0].reset();
+        $('#imageBox').empty();
+        $('#bizRegImg').val('');
+    }
 });
 
 // 필드 값을 추출

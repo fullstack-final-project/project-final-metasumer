@@ -184,17 +184,24 @@ public class MemberController {
 		String result = mbService.loginCheck(param);
 		
 		if (result.equals("success")) {
-			
+
 			String memId = (String) param.get("id");
 			
 			Map<String, Object> userDetails = mbService.getUsermemNickname(memId);
 	        String memNickname = (String) userDetails.get("memNickname");
 	        String memType = (String) userDetails.get("memType");
+	        String status = (String) userDetails.get("status");
+	        
+	        if(status.equals("inactive") ) {
+	            return "inactive";
+	        }
 	        
 	        session.setAttribute("sid", memId);
 	        session.setAttribute("memId", memId);
 	        session.setAttribute("memNickname", memNickname);
 	        session.setAttribute("memType", memType);
+	        
+	        mbService.loginCount(memId);
 		}
 		
 		return result;

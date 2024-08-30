@@ -23,8 +23,18 @@ public class FreeBoardVO {
 	private String price;
 	private int completed;
 	
+	private int postId;
 	
 	
+	
+	
+	
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
 	public int getCompleted() {
 		return completed;
 	}

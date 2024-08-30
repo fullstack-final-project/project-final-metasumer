@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BusinessAuthVO {
 	
+	private String bizId;
 	private String memId;
 	private String businessName;
 	private String bizRegNumber;
@@ -16,7 +17,45 @@ public class BusinessAuthVO {
 	private String authStatus;
 	private Date authDate;
 	
+	private String memName;
+	private String memEmail;
+	private String memType;
+	private String status;
 	
+	
+	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getBizId() {
+		return bizId;
+	}
+	public void setBizId(String bizId) {
+		this.bizId = bizId;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	public String getMemEmail() {
+		return memEmail;
+	}
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
+	public String getMemType() {
+		return memType;
+	}
+	public void setMemType(String memType) {
+		this.memType = memType;
+	}
 	public Date getAuthDate() {
 		return authDate;
 	}
