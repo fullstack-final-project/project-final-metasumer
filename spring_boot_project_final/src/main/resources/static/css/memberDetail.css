@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #39A7FF;
+}
+
+table th {
+    color: #333;
+    font-weight: bold;
+    background-color: #E0F4FF;
+}
+
+form select {
+	width: 40%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 40px;
+    box-sizing: border-box;
+}
+

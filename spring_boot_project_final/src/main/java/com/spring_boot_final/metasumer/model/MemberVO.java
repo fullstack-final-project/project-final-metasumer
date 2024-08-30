@@ -17,7 +17,7 @@ public class MemberVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String memJoinDate;
 	private String memType;
-	
+	private String status;
 	
 	 
 	private String categoryName;
@@ -27,6 +27,15 @@ public class MemberVO {
 	
 	
 	
+	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getTagId() {
 		return tagId;
 	}

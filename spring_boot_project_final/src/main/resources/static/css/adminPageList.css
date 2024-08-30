@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+section {
+	text-align: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+#menuContainer {
+	border: 1px solid #39A7FF;
+	padding: 20px;
+	margin: 20px 0;
+	display: flex;
+	justify-content: center;
+}
+
+#menuContainer ul {
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	gap: 20px;
+	width: 100%;
+	max-width: 1200px;
+	justify-content: space-between;
+}
+
+#menuContainer li {
+	flex: 1;
+	text-align: center;
+}
+
+#menuContainer a {
+	text-decoration: none;
+	color: #000;
+}
+
+#menuContainer a:hover {
+	color: #39A7FF;
+}
+
+.right-align {
+	display: inline-block;
+	text-align: right;
+	width: 90%;
+}
+
+.red-text {
+	text-decoration: underline;
+	color: red;
+	font-size: 20px;
+}
+
+.pagination {
+	margin: 20px 0;
+}
+
+.pagination .active {
+	font-weight: bold;
+}
+
+.pagination a {
+	margin: 0 5px;
+	text-decoration: none;
+	color: #007bff;
+}
+
+.pagination a.current {
+	font-weight: bold;
+	color: #333;
+}
+
+
+#statusMessage {
+	display: none;
+}
+
+.filter-container {
+	width: 95%;
+	margin: 10px 0;
+	text-align: right;
+}
+
+form select {
+	width: 40%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	height: 40px;
+	box-sizing: border-box;
+}
+
+#memberIdCell:hover {
+	background-color: #FFEED9;
+	color: #39A7FF;
+	text-decoration: underline;
+}
+
+table th, td {
+	text-align: center;
+}
+
+#lastColumn {
+	padding: 0;
+    width: 200px;
+}
+form{
+	padding: 0;
+}

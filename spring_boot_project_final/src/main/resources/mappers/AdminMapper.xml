@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring_boot_final.metasumer.dao.IAdminDAO">
+	<resultMap id="mbResult"
+		type="com.spring_boot_final.metasumer.model.MemberVO">
+		<result property="memId" column="memId" />
+		<result property="memPwd" column="memPwd" />
+		<result property="memName" column="memName" />
+		<result property="memEmail" column="memEmail" />
+		<result property="memNickname" column="memNickname" />
+		<result property="memHP" column="memHP" />
+		<result property="memZipcode" column="memZipcode" />
+		<result property="memAddress1" column="memAddress1" />
+		<result property="memAddress2" column="memAddress2" />
+		<result property="memGender" column="memGender" />
+		<result property="memJoinDate" column="memJoinDate" />
+		<result property="memType" column="memType" />
+		<result property="categoryName" column="categoryName" />
+		<result property="tagName" column="tagName" />
+		<result property="tagId" column="tagId" />
+		<result property="status" column="status" />
+	</resultMap>
+	<resultMap id="businessResultMap"
+		type="com.spring_boot_final.metasumer.model.BusinessAuthVO">
+		<result property="bizId" column="bizId" />
+		<result property="memId" column="memId" />
+		<result property="businessName" column="businessName" />
+		<result property="authStatus" column="authStatus" />
+		<result property="authDate" column="authDate" />
+		<result property="bizRegNumber" column="bizRegNumber" />
+		<result property="businessType" column="businessType" />
+		<result property="bizRegImg" column="bizRegImg" />
+		<result property="delegate" column="delegate" />
+		<result property="businessAddress" column="businessAddress" />
+		<result property="businessCategory" column="businessCategory" />
+		<result property="issueDate" column="issueDate" />
+		<result property="memName" column="memName" />
+		<result property="memEmail" column="memEmail" />
+		<result property="memType" column="memType" />
+	</resultMap>
+
+	<select id="memberList" resultMap="mbResult">
+		SELECT *
+		FROM member
+		WHERE
+		memType = #{memType}
+		ORDER BY memJoinDate DESC
+		LIMIT #{limit} OFFSET
+		#{offset}
+	</select>
+
+	<select id="countMembers" parameterType="string"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE memType = #{memType}
+	</select>
+
+	<select id="businessList" resultMap="businessResultMap">
+		SELECT b.bizId, b.memId,
+		b.businessName, b.authStatus, b.authDate,
+		b.bizRegNumber,
+		b.businessType, b.bizRegImg, b.delegate,
+		b.businessAddress,
+		b.businessCategory, b.issueDate, m.memName,
+		m.memEmail, m.memType,
+		m.status
+		FROM business b
+		JOIN member m ON b.memId = m.memId
+		WHERE
+		m.memType = 'business'
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
+
+	<select id="countbusiness" resultType="int">
+		SELECT count(*)
+		FROM
+		business b
+		JOIN member m ON b.memId = m.memId
+		WHERE m.memType =
+		'business'
+	</select>
+
+	<update id="updateMemberStatus">
+		UPDATE member
+		SET status = #{status}
+		WHERE memId =
+		#{memId}
+	</update>
+
+	<update id="updateMemberType">
+		UPDATE member
+		SET memType = #{memType}
+		WHERE memId =
+		#{memId}
+	</update>
+
+	<select id="countBusinessAuth" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		business
+		WHERE authStatus = 'pending'
+	</select>
+
+	<select id="getTotalBusinessAuthCount" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM business
+	</select>
+
+	<select id="getPendingBusinessAuth" resultType="map">
+		SELECT *
+		FROM
+		business
+		WHERE
+		(#{authStatus} IS NULL OR #{authStatus} = '' OR
+		authStatus = #{authStatus})
+		ORDER BY
+		CASE
+		WHEN authStatus = 'pending'
+		THEN 1
+		WHEN authStatus = 'rejected' THEN 2
+		WHEN authStatus = 'approved'
+		THEN 3
+		ELSE 4
+		END,
+		issueDate ASC
+		LIMIT #{pageSize} OFFSET #{start}
+	</select>
+
+	<update id="updateAuthStatus">
+		UPDATE business
+		SET authStatus = #{authStatus},
+		authDate = CURRENT_DATE
+		WHERE bizId = #{bizId}
+	</update>
+
+	<select id="memberDetail" resultMap="mbResult">
+		SELECT *
+		FROM member
+		WHERE
+		memId = #{memId}
+	</select>
+
+	<select id="businessDetail" resultMap="businessResultMap">
+		SELECT b.bizId, b.memId,
+		b.businessName, b.authStatus, b.authDate,
+		b.bizRegNumber,
+		b.businessType, b.bizRegImg, b.delegate,
+		b.businessAddress,
+		b.businessCategory, b.issueDate, m.memName,
+		m.memEmail, m.memType,
+		m.status
+		FROM business b
+		JOIN member m ON b.memId = m.memId
+		WHERE m.memId
+		= #{memId} AND b.bizId = #{bizId};
+	</select>
+
+	<select id="getPostsList" parameterType="map"
+		resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		SELECT title, content, createdDate, boardCtgId, memId, memNickname, postId
+		FROM (
+		SELECT b.title, b.content, b.createdDate, b.boardCtgId, b.memId,
+		m.memNickname, b.boardPostNo AS postId
+		FROM board b
+		JOIN member m ON b.memId = m.memId
+		WHERE b.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL
+		1 DAY)
+
+		UNION ALL
+
+		SELECT r.title, r.content, r.createdDate, r.boardCtgId, r.memId,
+		m.memNickname, r.recordNo AS postId
+		FROM myFishRecords r
+		JOIN member m ON r.memId = m.memId
+		WHERE r.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL
+		1 DAY)
+		) AS combined
+		ORDER BY createdDate DESC
+		LIMIT #{size} OFFSET #{offset};
+	</select>
+
+	<select id="getPostsCount" parameterType="map" resultType="int">
+		SELECT COUNT(*)
+		FROM (
+		SELECT 1
+		FROM board
+		WHERE createdDate BETWEEN
+		#{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1
+		DAY)
+
+		UNION ALL
+
+		SELECT 1
+		FROM myFishRecords
+		WHERE createdDate BETWEEN #{startDate} AND
+		DATE_ADD(#{endDate}, INTERVAL 1
+		DAY)
+		) AS total
+	</select>
+
+
+
+
+
+
+</mapper>
