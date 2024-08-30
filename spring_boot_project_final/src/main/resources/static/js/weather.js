@@ -9,7 +9,7 @@
  	
  	weatherCtgItem.forEach( function(item, index) {
 		item.addEventListener('click', function() {
-			window.weatheration.href = $(this).attr('data-tab');
+			window.location.href = $(this).attr('data-tab');
 		});
 	});
 	/* 0. 탭 메뉴 선택 시 각 탭 사이트로 이동 (끝) */
@@ -60,7 +60,7 @@
  	/* 2. 현재 위치 데이터로 받아서 날씨로 알려줌 (끝) */
  	
  	
- 	/* 3. (시작) 현재 위치 데이터로 받아서 날씨로 알려줌 */
+ 	/* 3. (시작) 현재 위치 데이터로 받아서 날씨 확인 */
  	let defaultPos = new naver.maps.LatLng(37.5666103, 126.9783882);
  	let mapOptions = { // map setting 설정값 저장 변수
 	    zoom: 13, // 지도의 초기 줌 레벨
@@ -287,8 +287,23 @@
 	 	
  	getCurrentLocation();
  	
- 	/* 2. 현재 위치 데이터로 받아서 날씨로 알려줌 (끝)  */
+ 	/* 3. 현재 위치 데이터로 받아서 날씨 확인 (끝)  */
  	
  	
+ 	/* 4. (시작) 기상 특보에서 각 특보 내용 색상 설정  */
+ 	const subtitleList = document.querySelectorAll('.subtitle');
+ 	
+ 	subtitleList.forEach( function(subtitle, index) {
+ 		if( subtitle.innerText.includes('강풍') ) {
+ 			$(this).classList.add('gale');
+ 			alert("있는뎅");
+ 		} else {
+ 			alert("없네용");
+ 		}
+ 		
+ 		console.log(subtitle.innerText + "dfds");
+ 	});
+ 	
+ 	/* 4. 기상 특보에서 각 특보 내용 색상 설정 (끝)  */
  	
  });
