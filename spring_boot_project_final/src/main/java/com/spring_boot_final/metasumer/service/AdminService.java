@@ -83,13 +83,26 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public ArrayList<FreeBoardVO> getPostsList(LocalDate startDate,LocalDate endDate, int size, int offset) {
-		return dao.getPostsList(startDate, endDate, size, offset);
+	public ArrayList<FreeBoardVO> getPostsList(Integer boardCategory, LocalDate startDate,LocalDate endDate, int size, int offset) {
+		return dao.getPostsList(boardCategory, startDate, endDate, size, offset);
 	}
 
 	@Override
-	public int getPostsCount(LocalDate startDate, LocalDate endDate) {
-		return dao.getPostsCount(startDate, endDate);
+	public int getPostsCount(Integer boardCategory, LocalDate startDate, LocalDate endDate) {
+		return dao.getPostsCount(boardCategory, startDate, endDate);
 	}
+
+	@Override
+	public void updatePostStatus(int boardPostNo, String status) {
+		dao.updatePostStatus(boardPostNo, status);
+	}
+
+	@Override
+	public void updateMyFishRecordsPostStatus(int recordNo, String status) {
+		dao.updateMyFishRecordsPostStatus(recordNo, status);
+	}
+
+	
+	
 
 }

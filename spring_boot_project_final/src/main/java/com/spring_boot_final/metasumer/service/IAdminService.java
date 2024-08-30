@@ -44,6 +44,10 @@ public interface IAdminService {
 	public ArrayList<BusinessAuthVO> businessDetail(String memId, String bizId);
 
 	// 게시물 관리
-    public ArrayList<FreeBoardVO> getPostsList(LocalDate startDate, LocalDate endDate, int size, int offset);
-    public int getPostsCount(LocalDate startDate, LocalDate endDate);
+    public ArrayList<FreeBoardVO> getPostsList(Integer boardCategory, LocalDate startDate, LocalDate endDate, int size, int offset);
+    public int getPostsCount(Integer boardCategory, LocalDate startDate, LocalDate endDate);
+    
+    // 게시판 글 비활성화 하기
+    public void updatePostStatus(int boardPostNo, String status);
+ 	public void updateMyFishRecordsPostStatus(int recordNo, String status);
 }

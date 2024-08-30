@@ -18,24 +18,27 @@
 		<result property="memName" column="memName" />
 		<result property="price" column="price" />
 		<result property="completed" column="completed" />
+		<result property="views" column="views" />
 	</resultMap>
 	
 	<select id="selectItemsForPage" resultMap="fbResult">
-		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName
+		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName, b.views
 		FROM board b
 		JOIN member m ON b.memId = m.memId
 		JOIN boardCtg c ON b.boardCtgId = c.boardCtgId
 		WHERE b.boardCtgId = #{boardCtgId}
+		AND b.status != 'inactive'
 		ORDER BY b.createdDate DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
 	<select id="fleamarketList" resultMap="fbResult">
-		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName, b.uploadFile, b.price, b.completed
+		SELECT b.boardPostNo, m.memNickname, b.memId, b.title, b.createdDate, b.boardCtgId, c.boardCtgName, b.uploadFile, b.price, b.completed, b.views
 		FROM board b
 		JOIN member m ON b.memId = m.memId
 		JOIN boardCtg c ON b.boardCtgId = c.boardCtgId
 		WHERE b.boardCtgId = #{boardCtgId} AND  b.completed = #{completed}
+		AND b.status != 'inactive'
 		ORDER BY b.createdDate DESC
 	</select>
 	
@@ -43,11 +46,12 @@
 		SELECT title, content, boardPostNo, boardCtgId
 		FROM board
 		WHERE boardCtgId = 3
+		AND status != 'inactive'
 		ORDER BY createdDate DESC;
 	</select>
 
 	<select id="countTotalItems" resultType="int">
-		SELECT COUNT(*) FROM board WHERE boardCtgId = #{boardCtgId}
+		SELECT COUNT(*) FROM board WHERE boardCtgId = #{boardCtgId} AND status != 'inactive'
 	</select>
 
 	<insert id="insertFreeBoard"
@@ -58,7 +62,7 @@
 
 	<select id="detailViewFreeBoard" parameterType="string"
 		resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
-		SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname, b.price
+		SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname, b.price, b.views
 		FROM board b
 		JOIN member m ON b.memId = m.memId
 		WHERE b.boardPostNo = #{boardPostNo}
@@ -82,6 +86,13 @@
 		UPDATE board
 		SET completed = #{completed}
 		WHERE boardPostNo = #{boardPostNo};
+	</update>
+	
+	<update id="countViews">
+	    UPDATE board
+	    SET views = views + 1
+	    WHERE boardPostNo = #{boardPostNo}
+	    AND memId != #{sidmemId};
 	</update>
 
 </mapper>

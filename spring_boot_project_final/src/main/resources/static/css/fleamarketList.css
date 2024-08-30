@@ -69,3 +69,10 @@ h1 {
 .right-buttons {
 	display: flex;
 }
+
+.viewsP {
+	color: #555;
+	margin-top: 20px;
+	transform: skew(-10deg);
+	font-weight: bold;
+}
