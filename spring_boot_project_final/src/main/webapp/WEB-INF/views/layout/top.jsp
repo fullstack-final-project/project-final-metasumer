@@ -165,8 +165,8 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox7">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">안전 수칙</a></li>
-								<li class="subListItem"><a class="subListTxt">비상 연락처</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/safety/overview'/>">안전 수칙</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/safety/ERinfo'/>">비상 연락처</a></li>
 							</ul>
 						</div>
 					</div>
