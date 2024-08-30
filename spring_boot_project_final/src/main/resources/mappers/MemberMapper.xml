@@ -28,10 +28,22 @@
 	<select id="loginCheck" parameterType="hashmap" resultType="string">
   		SELECT memPwd FROM member WHERE memId=#{id}
   	</select>
+  	
+  	<update id="loginCount">
+	    UPDATE member
+	    SET login_count = login_count + 1
+	    WHERE memId = #{id}
+	</update>
 
 	<select id="categoryList" resultMap="mbResult">
   		SELECT interestId, categoryName
         FROM interestcategory
+  	</select>
+  	
+	<select id="checkMemId" resultType="int">
+  		SELECT COUNT(*)
+        FROM business
+        WHERE memId = #{id}
   	</select>
   	
 	<select id="tagList" resultMap="mbResult">
@@ -70,7 +82,7 @@
     
 	
     <select id="getUsermemNickname" parameterType="string" resultType="map">
-        SELECT memNickname, memType
+        SELECT memNickname, memType, status
         FROM member
         WHERE memId = #{id}
     </select>
@@ -96,7 +108,7 @@
     </select>
     
     <insert id="insertBusinessAuth" parameterType="com.spring_boot_final.metasumer.model.BusinessAuthVO">
-	    INSERT INTO metasumer.business (
+	    INSERT INTO business (
 	        memId, businessName, authStatus, authDate, bizRegNumber, businessType, bizRegImg, delegate, businessAddress, businessCategory, issueDate
 	    ) VALUES (
 	        #{memId}, #{businessName}, #{authStatus}, CURRENT_DATE, #{bizRegNumber}, #{businessType}, #{bizRegImg}, #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate}
