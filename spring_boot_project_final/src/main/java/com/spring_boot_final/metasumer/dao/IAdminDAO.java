@@ -25,7 +25,7 @@ public interface IAdminDAO {
 	public int countBusinessAuth();
 	
 	// 사업자 신청 조회
-	public ArrayList<HashMap<String, Object>> getPendingBusinessAuth(int start, int pageSize, String authStatus);
+	public ArrayList<BusinessAuthVO> getPendingBusinessAuth(int start, int pageSize, String authStatus);
 	public int getTotalBusinessAuthCount();
 	
 	// authStatus 상태 바꾸기

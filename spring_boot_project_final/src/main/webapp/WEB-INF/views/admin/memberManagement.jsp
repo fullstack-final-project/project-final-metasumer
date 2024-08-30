@@ -28,7 +28,7 @@
 	
 	            <c:choose>
 				    <c:when test="${memList[0].memType == 'admin'}">
-				        <a href="<c:url value='/admin/createAdminId'/>" class="btn-create-admin">관리자 아이디 만들기</a>
+				        <a href="<c:url value='/admin/newAdminAccount'/>" class="btn-create-admin">관리자 계정 만들기</a>
 				    </c:when>
 				</c:choose>
 		

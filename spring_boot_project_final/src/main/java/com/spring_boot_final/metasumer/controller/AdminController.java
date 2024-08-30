@@ -29,6 +29,10 @@ public class AdminController {
 	public String adminPage() {
 		return "admin/adminPage";
 	}
+	@RequestMapping("/admin/newAdminAccount")
+	public String newAdminAccount() {
+		return "admin/newAdminAccount";
+	}
 
 	@RequestMapping("/admin/memberManagement/{memType}")
 	public String memberManagement(Model model, @PathVariable("memType") String memType,
@@ -99,7 +103,7 @@ public class AdminController {
 
 		int totalItems = adminService.getTotalBusinessAuthCount();
 
-		ArrayList<HashMap<String, Object>> authList = adminService.getPendingBusinessAuth(start, pageSize, authStatus);
+		ArrayList<BusinessAuthVO> authList = adminService.getPendingBusinessAuth(start, pageSize, authStatus);
 
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 

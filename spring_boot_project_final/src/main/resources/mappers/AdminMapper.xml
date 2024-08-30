@@ -108,24 +108,19 @@
 		FROM business
 	</select>
 
-	<select id="getPendingBusinessAuth" resultType="map">
-		SELECT *
-		FROM
-		business
-		WHERE
-		(#{authStatus} IS NULL OR #{authStatus} = '' OR
-		authStatus = #{authStatus})
-		ORDER BY
-		CASE
-		WHEN authStatus = 'pending'
-		THEN 1
-		WHEN authStatus = 'rejected' THEN 2
-		WHEN authStatus = 'approved'
-		THEN 3
-		ELSE 4
-		END,
-		issueDate ASC
-		LIMIT #{pageSize} OFFSET #{start}
+	<select id="getPendingBusinessAuth" resultMap="businessResultMap">
+	    SELECT bizId, memId, businessName, bizRegNumber, delegate, businessCategory, businessType, authStatus
+	    FROM business
+	    WHERE (#{authStatus} IS NULL OR #{authStatus} = '' OR authStatus = #{authStatus})
+	    ORDER BY
+	        CASE
+	        WHEN authStatus = 'pending' THEN 1
+	        WHEN authStatus = 'rejected' THEN 2
+	        WHEN authStatus = 'approved' THEN 3
+	        ELSE 4
+	        END,
+	        issueDate ASC
+	    LIMIT #{pageSize} OFFSET #{start}
 	</select>
 
 	<update id="updateAuthStatus">

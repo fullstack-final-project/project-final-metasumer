@@ -32,7 +32,7 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> getPendingBusinessAuth(int start, int pageSize, String authStatus) {
+	public ArrayList<BusinessAuthVO> getPendingBusinessAuth(int start, int pageSize, String authStatus) {
 		return dao.getPendingBusinessAuth(start, pageSize, authStatus);
 	}
 
