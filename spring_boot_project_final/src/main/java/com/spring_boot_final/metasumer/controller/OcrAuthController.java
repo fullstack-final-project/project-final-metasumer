@@ -53,6 +53,17 @@ public class OcrAuthController {
 
 		return result;
 	}
+
+	
+	@RequestMapping("/memberOcr/checkMemId")
+	@ResponseBody
+	public String checkMemId(@RequestParam("memId") String memId) {
+		
+		int check = mbService.checkMemId(memId);
+		String response = (check > 0) ? "pending" : "success";
+		
+		return response;
+	}
 	
 	@RequestMapping("/memberOcr/checkMemId")
 	@ResponseBody

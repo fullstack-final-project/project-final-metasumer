@@ -10,10 +10,12 @@
 		<title>어사모: 위치 정보</title>
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/location.css'/>">
-		<script src="<c:url value='/js/location.js'/>"></script>
-		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
-		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f&amp;submodules=panorama,geocoder,drawing,visualization"></script>
-	</head>
+		 <script
+		    defer
+		    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUEQpKhFKAnI8fDb2pB-cPDdiC6sdhhrI&callback=initMap"
+		  ></script>
+		<script src="<c:url value='/js/location.js'/>"></script></head>
+		<script src="<c:url value='/js/locationIntl.js'/>"></script></head>
 	<body>
 		<div id="wrap">
 			<!-- top.jsp import -->
@@ -33,8 +35,8 @@
 							<li data-tab="/location/intl" class="locCtg8 locCtg active" >해외 낚시터</li>	
 						</ul>
 					</div>
-					<div id="locationMainBox">
-						<div id="locationMapBox"></div>
+					<div class="mapBox">
+					    <div id="map" style="height:700px; width:100%"></div>
 					</div>
 				</div>
 			</section>

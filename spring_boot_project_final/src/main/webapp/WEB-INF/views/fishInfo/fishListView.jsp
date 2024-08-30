@@ -8,9 +8,6 @@
 		<title>어종 정보</title>
 		<!-- head.jsp import -->
         <c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <script src="<c:url value='/js/fish.js'/>"></script>
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishInfo.css'/>">
 	</head>
@@ -22,7 +19,7 @@
 			<section>
 			  <header>
 			    <h2>어종 정보</h2>
-			  </header>
+			  </header>			  
 			  <img src="/image/fishBanner2.jpg" class="fishBanner">
 			  <div class="fishCtg">
 			    <div id='fishCtgBtn'>

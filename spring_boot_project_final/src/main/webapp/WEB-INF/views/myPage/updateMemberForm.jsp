@@ -8,9 +8,6 @@
 		<title>회원 정보 수정</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<c:url value='/css/checkPwd.css'/>">
         <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script src="<c:url value='/js/searchZip.js'/>"></script>
@@ -107,7 +104,7 @@
 			      </tr>
 			    </table>
 			    <div id="updateMemBtn">
-			      <button id="cancelUpdateBtn">취소</button>
+			      <button id="cancelUpdateBtn" type="button">취소</button>
 			      <input id="updateBtn" type="submit" value="수정">
 			    </div>
 			  </form>
