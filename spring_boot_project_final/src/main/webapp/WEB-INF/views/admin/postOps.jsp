@@ -77,10 +77,10 @@
 			                    <td>
 								    <c:choose>
 									    <c:when test="${po.boardCtgId == 6}">
-									        <a href="<c:url value='/myFishRecords/detailViewmyFishRecords/${po.postId}' />">${po.title}</a>
+									        <a href="<c:url value='/myFishRecords/detailViewmyFishRecords/${po.postId}/${ sessionScope.sid }' />">${po.title}</a>
 									    </c:when>
 									    <c:otherwise>
-									        <a href="<c:url value='/freeboard/detailViewFreeBoard/${po.postId}' />">${po.title}</a>
+									        <a href="<c:url value='/freeboard/detailViewFreeBoard/${po.postId}/${ sessionScope.sid }' />">${po.title}</a>
 									    </c:otherwise>
 									</c:choose>
 			                    </td>

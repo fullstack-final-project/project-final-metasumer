@@ -31,6 +31,7 @@ public class AdminController {
 	}
 	@RequestMapping("/admin/newAdminAccount")
 	public String newAdminAccount() {
+		
 		return "admin/newAdminAccount";
 	}
 

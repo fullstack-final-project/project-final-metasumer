@@ -24,15 +24,7 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				<h2>사업자 신청 리스트</h2>
-				<div id="menuContainer">
-				    <ul>
-				        <li><a href="<c:url value='/admin/adminPage'/>">통계</a></li>
-				        <li><a href="<c:url value='/admin/memberManagement/general'/>">일반 회원 관리</a></li>
-				        <li><a href="<c:url value='/admin/businessManagement'/>">사업자 회원 관리</a></li>
-				        <li><a href="<c:url value='/admin/memberManagement/admin'/>">관리자 관리</a></li>
-				        <li><a href="<c:url value='/admin/postOps'/>">게시물 관리</a></li>
-				    </ul>
-				</div>
+				<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
 				<span id="statusMessage">${statusMessage}</span>
 					
