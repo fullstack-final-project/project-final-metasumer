@@ -284,5 +284,13 @@ input[type="checkbox"] {
     background-color: #61c5fa;
 }
 
-
-
+.fc-div {
+    background-color: #98d9fc;
+    border: none;
+    height: 50px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    padding: 0 10px; 
+}

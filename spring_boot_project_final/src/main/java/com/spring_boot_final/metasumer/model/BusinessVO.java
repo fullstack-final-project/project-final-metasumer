@@ -3,15 +3,19 @@ package com.spring_boot_final.metasumer.model;
 import java.util.Date;
 
 public class BusinessVO {
-  private int bizId;                // 인증 ID
-  private String memId;              // 회원 ID
-  private String businessName;       // 사업체 이름
-  private String authStatus;         // 인증 상태
-  private Date authDate;             // 인증 날짜
-  private String authDetails;        // 사업자 설명란
-  private String bizRegNumber;       // 사업자 등록 번호
-  private String businessType;       // 사업자 유형
-  private String bizRegImg;          // 사업자 등록증 이미지 경로
+  private int bizId; // 비즈니스 ID
+  private String memId; // 회원 ID
+  private String businessName; // 사업자 이름
+  private String authStatus; // 인증 상태 ('pending', 'approved', 'rejected')
+  private Date authDate; // 인증 날짜
+  private String bizRegNumber; // 사업자 등록 번호
+  private String businessType; // 사업 유형 ('sale', 'reservation')
+  private String bizRegImg; // 사업자 등록 이미지 URL
+  private String delegate; // 대표자 이름
+  private String businessAddress; // 사업장 소재지
+  private String businessCategory; // 업태
+  private String issueDate; // 발행일
+  
   public int getBizId() {
     return bizId;
   }
@@ -42,12 +46,6 @@ public class BusinessVO {
   public void setAuthDate(Date authDate) {
     this.authDate = authDate;
   }
-  public String getAuthDetails() {
-    return authDetails;
-  }
-  public void setAuthDetails(String authDetails) {
-    this.authDetails = authDetails;
-  }
   public String getBizRegNumber() {
     return bizRegNumber;
   }
@@ -66,6 +64,31 @@ public class BusinessVO {
   public void setBizRegImg(String bizRegImg) {
     this.bizRegImg = bizRegImg;
   }
+  public String getDelegate() {
+    return delegate;
+  }
+  public void setDelegate(String delegate) {
+    this.delegate = delegate;
+  }
+  public String getBusinessAddress() {
+    return businessAddress;
+  }
+  public void setBusinessAddress(String businessAddress) {
+    this.businessAddress = businessAddress;
+  }
+  public String getBusinessCategory() {
+    return businessCategory;
+  }
+  public void setBusinessCategory(String businessCategory) {
+    this.businessCategory = businessCategory;
+  }
+  public String getIssueDate() {
+    return issueDate;
+  }
+  public void setIssueDate(String issueDate) {
+    this.issueDate = issueDate;
+  }
+
   
   
 

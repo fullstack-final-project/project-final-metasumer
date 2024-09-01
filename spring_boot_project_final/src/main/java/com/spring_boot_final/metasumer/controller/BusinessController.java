@@ -50,10 +50,14 @@ public class BusinessController {
   public Map<String, Object> registerBusiness(@RequestParam("memId") String memId,
                                               @RequestParam("bizRegImg") MultipartFile file,
                                               @RequestParam("businessName") String businessName,
-                                              @RequestParam(value = "authStatus", defaultValue = "pending") String authStatus, // 기본값 설정
+                                              @RequestParam(value = "authStatus", defaultValue = "pending") String authStatus,
                                               @RequestParam("bizRegNumber") String bizRegNumber,
-                                              @RequestParam("authDetails") String authDetails,
-                                              @RequestParam("businessType") String businessType) {
+                                              @RequestParam("businessType") String businessType,
+                                              @RequestParam("delegate") String delegate,
+                                              @RequestParam("businessAddress") String businessAddress,
+                                              @RequestParam("businessCategory") String businessCategory,
+                                              @RequestParam("issueDate") String issueDate) {
+   
       Map<String, Object> response = new HashMap<>();
       try {
           // 파일 저장
@@ -66,9 +70,12 @@ public class BusinessController {
           business.setBusinessName(businessName);
           business.setAuthStatus(authStatus); // String 값 사용
           business.setBizRegNumber(bizRegNumber);
-          business.setAuthDetails(authDetails);
           business.setBusinessType(businessType); // String 값 사용
           business.setBizRegImg(fileName);
+          business.setDelegate(delegate); // 대표자 설정
+          business.setBusinessAddress(businessAddress); // 사업장 소재지 설정
+          business.setBusinessCategory(businessCategory); // 업태 설정
+          business.setIssueDate(issueDate); // 발행일 설정
 
           // 비즈니스 등록
           businessService.registerBusiness(business);

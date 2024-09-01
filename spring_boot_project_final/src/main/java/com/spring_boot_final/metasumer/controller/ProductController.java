@@ -92,6 +92,21 @@ public class ProductController {
       }
       return response;
   }
+  
+  private String saveFile(MultipartFile file) throws IOException {
+    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
+
+    String originalFileName = file.getOriginalFilename();
+    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+
+    UUID uuid = UUID.randomUUID();
+    String savedFileName = uuid.toString() + "_" + originalFileName;
+    File uploadFile = new File(uploadPath + savedFileName);
+
+    file.transferTo(uploadFile);
+
+    return savedFileName;
+  }
  
   
   // 상품 등록(로그인 했을 경우 bizId 처리: 추후에 사용)
@@ -110,10 +125,10 @@ public class ProductController {
   @RequestMapping("/product/detailViewProduct/{prdNo}")
   public String detailViewProduct(@PathVariable String prdNo, Model model) {
     // 서비스에게 상품번호 전달하고, 해당 상품 데이터 받아오기
-    ProductVO prd = prdService.detailViewProduct(prdNo);
+    ProductVO product = prdService.detailViewProduct(prdNo);
     
     // 뷰 페이지에 출력하기 위해 Model 설정
-    model.addAttribute("prd", prd);
+    model.addAttribute("product", product);
     
     return "product/productDetailView";
   }
@@ -162,6 +177,7 @@ public class ProductController {
     return "product/productManagement";
   }
   
+  // 상품 리스트
   @RequestMapping("/product/productList")
   public String productList(Model model) {
       ArrayList<ProductVO> bestProducts = prdService.getBestProduct();
@@ -182,20 +198,8 @@ public class ProductController {
       return "product/productList";
   }
   
-  private String saveFile(MultipartFile file) throws IOException {
-    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
-
-    String originalFileName = file.getOriginalFilename();
-    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
-
-    UUID uuid = UUID.randomUUID();
-    String savedFileName = uuid.toString() + "_" + originalFileName;
-    File uploadFile = new File(uploadPath + savedFileName);
-
-    file.transferTo(uploadFile);
-
-    return savedFileName;
-  }
+ ///////////////////////////////////////////////////////////////////////////////////////////
+ 
   
   
 }

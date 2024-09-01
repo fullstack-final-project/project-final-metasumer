@@ -37,4 +37,7 @@ public interface IMemberService {
 
 	// 사용자 관심사 있는거 빼고 태그 가져오기
 	public ArrayList<MemberVO> newtagList(String memId);
+	
+	// 회원정보 조회
+	public MemberVO getMemberById(String memId);
 }

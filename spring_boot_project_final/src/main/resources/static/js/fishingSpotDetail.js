@@ -118,92 +118,115 @@ function updateConfirmButton() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 // 달력
-$(document).ready(function() {
-    const openWeatherApiKey = 'd6ddebb97bbcd461c92b8454bf5bb2af'; // OpenWeatherMap API 키
 
-    // 현재 위치를 가져오는 함수
-    function getCurrentLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                fetchWeatherData(lat, lon);
-            }, function(error) {
-                console.error("위치 정보를 가져오는 데 실패했습니다: " + error.message);
-                alert("위치 정보를 가져오는 데 실패했습니다.");
-            });
-        } else {
-            alert("Geolocation을 지원하지 않는 브라우저입니다.");
-        }
-    }
+const apiKey = 'be9293c13315be192e4cfe3bd8c023dd'; // OpenWeatherMap API 키를 여기에 입력하세요
 
-    // OpenWeatherMap의 Forecast API를 사용하여 날씨 정보를 가져오는 함수
-    function fetchWeatherData(lat, lon) {
-        $.ajax({
-            url: 'https://api.openweathermap.org/data/2.5/forecast',
-            data: {
-                lat: lat,
-                lon: lon,
-                units: 'metric',
-                lang: 'kr',
-                appid: openWeatherApiKey
-            },
-            success: function(response) {
-                console.log(response); // 응답 데이터의 구조를 확인합니다
+// 7일간의 날씨 데이터를 가져오는 함수
+function fetchWeatherData(lat, lon) {
+    $.ajax({
+        url: 'https://api.openweathermap.org/data/2.5/forecast',
+        data: {
+            lat: lat,
+            lon: lon,
+            units: 'metric', // 섭씨 온도
+            lang: 'kr', // 한국어
+            appid: apiKey
+        },
+        success: function(response) {
+            console.log(response); // 응답 데이터의 구조를 확인합니다
 
-                if (response && response.list && response.list.length > 0) {
-                    const events = [];
-                    // 현재 날씨 정보를 가져와서 이벤트로 추가 (3시간 간격의 첫 번째 데이터 사용)
-                    const weatherData = response.list[0];
-                    const iconCode = weatherData.weather[0].icon; // 날씨 아이콘 코드
-                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`; // 아이콘 URL
+            if (response && response.list && response.list.length > 0) {
+                const events = [];
+                const dateMap = {};
 
-                    events.push({
-                        title: '현재 날씨', 
-                        start: moment().format('YYYY-MM-DD'),
-                        description: weatherData.weather[0].description, // 날씨 설명 추가
-                        icon: iconUrl // 현재 날씨 아이콘 URL
-                    });
-                    renderCalendar(events);
-                } else {
-                    console.error("응답 데이터의 구조가 예상과 다릅니다.");
-                    alert("날씨 정보를 가져오는 데 실패했습니다.");
+                // 데이터 집계
+                response.list.forEach(function(entry) {
+                    const date = entry.dt_txt.split(' ')[0]; // 날짜만 추출 (YYYY-MM-DD)
+                    const temp = entry.main.temp;
+                    const description = entry.weather[0].description;
+
+                    if (!dateMap[date]) {
+                        dateMap[date] = {
+                            temp: temp,
+                            description: description
+                        };
+                    } else {
+                        // 온도와 설명을 집계하여 평균값을 사용할 수도 있습니다
+                        // 이 예제에서는 최신 데이터를 사용하고 있습니다
+                        dateMap[date].temp = temp;
+                        dateMap[date].description = description;
+                    }
+                });
+
+                // 이벤트 생성
+                for (const date in dateMap) {
+                    if (dateMap.hasOwnProperty(date)) {
+                        const { temp, description } = dateMap[date];
+                        events.push({
+                            title: ``,
+                            start: date,
+                            description: `${description}`, // 날씨 설명
+                            temp: temp // 온도
+                        });
+                    }
                 }
-            },
-            error: function(xhr) {
-                console.error("API 호출 오류: " + xhr.responseText);
+
+                renderCalendar(events);
+            } else {
+                console.error("응답 데이터의 구조가 예상과 다릅니다.");
                 alert("날씨 정보를 가져오는 데 실패했습니다.");
             }
-        });
-    }
+        },
+        error: function(xhr) {
+            console.error("API 호출 오류: " + xhr.responseText);
+            alert("날씨 정보를 가져오는 데 실패했습니다.");
+        }
+    });
+}
 
-    // FullCalendar를 초기화하고 날씨 정보를 이벤트로 추가하는 함수
-    function renderCalendar(events) {
-        $('#calendar').fullCalendar({
-            locale: 'ko',
-            events: events,
-            eventContent: function(arg) {
-                if (arg.event.extendedProps.icon) {
-                    return {
-                        html: `<div class="fc-event-icon">
-                                <img src="${arg.event.extendedProps.icon}" alt="Weather Icon" style="width: 30px; height: 30px;"/>
-                            </div><div class="fc-event-title">${arg.event.title}</div>`
-                    };
-                }
-                return { html: `<div class="fc-event-title">${arg.event.title}</div>` };
-            },
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            initialView: 'dayGridMonth',
-            editable: true,
-            selectable: true
-        });
-    }
+// FullCalendar를 초기화하고 날씨 정보를 이벤트로 추가하는 함수
+function renderCalendar(events) {
+    $('#calendar').fullCalendar({
+        locale: 'ko',
+        events: events,
+        eventRender: function(event, element) {
+            // 이벤트 제목 설정
+            element.find('.fc-title').html(`${event.title}`);
 
-    // 페이지가 로드되면 위치를 가져오고 캘린더을 초기화합니다.
+            // 이벤트 내용 추가
+            element.append(`<div class="fc-div">${event.description}</div>`);
+        },
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'month',
+        editable: true,
+        selectable: true
+    });
+}
+
+// 위치를 가져오고 날씨 정보를 요청하는 함수
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                fetchWeatherData(lat, lon); // 위치를 이용해 날씨 정보를 가져옵니다.
+            },
+            function(error) {
+                console.error("위치 정보를 가져오는 데 실패했습니다: " + error.message);
+                alert("위치 정보를 가져오는 데 실패했습니다.");
+            }
+        );
+    } else {
+        alert("이 브라우저는 위치 정보를 지원하지 않습니다.");
+    }
+}
+
+// 페이지가 로드되면 위치를 가져오고 캘린더을 초기화합니다.
+$(document).ready(function() {
     getCurrentLocation();
 });
-

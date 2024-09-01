@@ -11,27 +11,31 @@
     </select>
 
 		<!-- 업체 등록 -->
-    <insert id="registerBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
-        INSERT INTO business (memId, businessName, authStatus, authDate, authDetails, 
-                              bizRegNumber, businessType, bizRegImg)
-        VALUES (#{memId}, #{businessName}, #{authStatus}, #{authDate}, #{authDetails},
-                #{bizRegNumber}, #{businessType}, #{bizRegImg})
-    </insert>
-    
-    <!-- 업체 수정 -->
-    <update id="updateBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
-        UPDATE business
-        SET memId = #{memId},
-            businessName = #{businessName},
-            authStatus = #{authStatus},
-            authDate = #{authDate},
-            authDetails = #{authDetails},
-            bizRegNumber = #{bizRegNumber},
-            businessType = #{businessType},
-            bizRegImg = #{bizRegImg}
-        WHERE bizId = #{bizId}
-    </update>
-
+		<insert id="registerBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
+		    INSERT INTO business (memId, businessName, authStatus, authDate,
+		                          bizRegNumber, businessType, bizRegImg,
+		                          delegate, businessAddress, businessCategory, issueDate)
+		    VALUES (#{memId}, #{businessName}, #{authStatus}, #{authDate},
+		            #{bizRegNumber}, #{businessType}, #{bizRegImg},
+		            #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate})
+		</insert>
+		
+		<!-- 업체 수정 -->
+		<update id="updateBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
+		    UPDATE business
+		    SET memId = #{memId},
+		        businessName = #{businessName},
+		        authStatus = #{authStatus},
+		        authDate = #{authDate},
+		        bizRegNumber = #{bizRegNumber},
+		        businessType = #{businessType},
+		        bizRegImg = #{bizRegImg},
+		        delegate = #{delegate},
+		        businessAddress = #{businessAddress},
+		        businessCategory = #{businessCategory},
+		        issueDate = #{issueDate}
+		    WHERE bizId = #{bizId}
+		</update>
 		<!-- 업체 삭제 -->
     <delete id="deleteBusiness" parameterType="String">
         DELETE FROM business WHERE bizId = #{bizId}
