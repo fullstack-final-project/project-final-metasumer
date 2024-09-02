@@ -98,5 +98,18 @@
             memAddress2 = #{updateMemAddress2}
         WHERE memId = #{memId}
     </update>
+    
+    <!-- 예약 내역 조회 -->
+  	<select id="reservationList" parameterType="map" resultType="com.spring_boot_final.metasumer.model.ReservationListVO">
+        SELECT r.memName, r.resDate, r.resStart, r.resEnd, r.resNum, r.resPrice, fs.spotName, fs.spotDescription, fs.spotImage,
+               fs.spotAddress1, fs.spotAddress2, fs.spotHP1, fs.spotHP2, fs.spotHP3
+        FROM reservation r, fishingspot fs
+        WHERE r.spotId = fs.spotId 
+        AND r.memId = #{memId}
+        <if test="startDate != null">
+            AND REPLACE(r.resDate, '-', '') BETWEEN #{startDate} AND #{endDate}
+        </if>
+        ORDER BY r.resNo DESC;
+    </select> 
 </mapper>	
 	

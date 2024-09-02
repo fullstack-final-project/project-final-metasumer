@@ -10,7 +10,7 @@
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/orderList.css'/>">
-		<!-- <script src="/js/orderList.js"></script>  -->
+	    <script src="/js/orderList.js"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -34,7 +34,7 @@
 			    <div id="orderList">
 			      <div id="orderFilter">
 			        <p>주문 내역</p><hr>
-			        <button data-period="3m">3개월</button>
+			        <button data-period="3m" class="active">3개월</button>
 			        <button data-period="6m">6개월</button>
 			        <button data-period="1y">1년</button>
 			        <button data-period="3y">3년</button>
@@ -90,8 +90,7 @@
 			            <c:set var="prevOrdNo" value="${currentOrdNo}" />
 			          </c:forEach>	
 			        </c:if>			       				        			        		          				         
-			      </div>
-			      
+			      </div>			      
 			    </div>
 			  </div>
 			</section>

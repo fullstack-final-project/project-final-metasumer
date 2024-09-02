@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_final.metasumer.dao.IMyPageDAO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
+import com.spring_boot_final.metasumer.model.ReservationListVO;
 
 @Service
 public class MyPageService implements IMyPageService {
@@ -94,6 +95,11 @@ public class MyPageService implements IMyPageService {
 		boolean result = dao.updateMemberInfo(map);
 	    
 	    return result;
+	}
+
+	@Override
+	public ArrayList<ReservationListVO> reservationList(String memId, String startDate, String endDate) {
+		return dao.reservationList(memId, startDate, endDate);
 	}
 
 }
