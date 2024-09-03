@@ -76,4 +76,9 @@ public class FreeBoardService implements IFreeBoardService {
 
 	}
 
+	@Override
+	public void countViews(String sidmemId, String boardPostNo) {
+		dao.countViews(sidmemId, boardPostNo);
+	}
+
 }

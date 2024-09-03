@@ -94,11 +94,11 @@ public class MyFishRecordsController {
 		return response;
 	}
 
-	@RequestMapping("/myFishRecords/detailViewmyFishRecords/{recordNo}")
-	public String detailViewmyFishRecords(@PathVariable String recordNo, Model model) {
+	@RequestMapping("/myFishRecords/detailViewmyFishRecords/{recordNo}/{sidmemId}")
+	public String detailViewmyFishRecords(@PathVariable String recordNo, @PathVariable String sidmemId, Model model) {
 
 		MyFishRecordsVO mf = mfService.detailViewMyFishRecords(recordNo);
-
+		mfService.countViews(recordNo, sidmemId);
 		model.addAttribute("mf", mf);
 
 		return "myFishRecords/detailViewMyFishRecords";
@@ -115,7 +115,7 @@ public class MyFishRecordsController {
 
 	@RequestMapping("/myFishRecords/updatemyFishRecords")
 	public String updateFreeBoard(@RequestParam("title") String title, @RequestParam("content") String content,
-			@RequestParam("recordNo") int recordNo, @RequestParam("uploadFile") MultipartFile image,
+			@RequestParam("recordNo") String recordNo, @RequestParam("uploadFile") MultipartFile image,
 			@RequestParam("fishName") String fishName, @RequestParam("fishSize") String fishSize,
 			@RequestParam("equipment") String equipment, @RequestParam("location") String location,
 			@RequestParam("weather") String weather,

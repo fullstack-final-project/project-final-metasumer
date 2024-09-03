@@ -36,18 +36,23 @@
 					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>
-						<th>위치</th>
-						<td>${ mf.location }</td>
 						<th>날짜</th>
 						<td><fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
+						<th>조회수</th>
+						<td>${ mf.views }</td>
 					</tr>
 					<tr>
+						<th>위치</th>
+						<td>${ mf.location }</td>
+						<th>장비</th>
+						<td colspan="3">${ mf.equipment }</td>
+						
+					</tr>
+					<tr>	
 						<th>어종</th>
 						<td>${ mf.fishName }</td>
 						<th>크기</th>
 						<td>${ mf.fishSize }</td>
-						<th>장비</th>
-						<td>${ mf.equipment }</td>
 						<th>날씨</th>
 						<td>${ mf.weather }</td>
 					</tr>

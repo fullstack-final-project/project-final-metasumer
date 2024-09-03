@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class MyFishRecordsVO {
-	private int recordNo;
+	private String recordNo;
 	private String memId;
 	private String memNickname;
 	private int boardCtgId;
@@ -22,12 +22,25 @@ public class MyFishRecordsVO {
 	private String location; // 위치
 	private String weather; // 날씨
 	private String tag;
+	
+	private int views;
+	
+	
+	
 
-	public int getRecordNo() {
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
+	public String getRecordNo() {
 		return recordNo;
 	}
 
-	public void setRecordNo(int recordNo) {
+	public void setRecordNo(String recordNo) {
 		this.recordNo = recordNo;
 	}
 

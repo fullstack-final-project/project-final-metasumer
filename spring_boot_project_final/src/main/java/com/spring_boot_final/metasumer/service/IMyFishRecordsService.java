@@ -22,6 +22,7 @@ public interface IMyFishRecordsService {
 
 	// 물고기기록 삭제
 	public void deleteMyFishRecordsComment(String recordNo);
+
 	public void deleteMyFishRecords(String recordNo);
 
 	// 물고기기록 상세 보기
@@ -32,5 +33,8 @@ public interface IMyFishRecordsService {
 
 	// 내가 쓴 기록만
 	public ArrayList<MyFishRecordsVO> MyFishRecordsList(String memId);
+
+	// 조회수
+	public void countViews(String recordNo, String sidmemId);
 
 }

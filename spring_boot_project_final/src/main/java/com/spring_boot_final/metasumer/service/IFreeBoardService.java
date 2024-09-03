@@ -24,6 +24,7 @@ public interface IFreeBoardService {
 
 	// 자유게시판 삭제
 	public void deleteFreeBoardComment(String boardPostNo);
+
 	public void deleteFreeBoard(String boardPostNo);
 
 	// 자유게시판 상세 보기
@@ -34,8 +35,11 @@ public interface IFreeBoardService {
 
 	// QnA
 	public ArrayList<FreeBoardVO> qnaList(String boardCtgId);
-	
+
 	// 벼룩시장 거래 완료
-		public void fleamarketcompleted(String boardPostNo, int completed);
+	public void fleamarketcompleted(String boardPostNo, int completed);
+
+	// 조회수
+	public void countViews(String sidmemId, String boardPostNo);
 
 }

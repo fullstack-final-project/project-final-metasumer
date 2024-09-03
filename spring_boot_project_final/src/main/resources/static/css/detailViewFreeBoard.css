@@ -8,7 +8,7 @@ table {
 
 #contentContainer {
 	margin: 0 auto;
-    width: 80%;
+	width: 80%;
 }
 
 table, th, td {
@@ -22,15 +22,12 @@ table, th, td {
 	line-height: 2;
 }
 
-thead th {
-	border-top: 2px solid #87C4FF;
-}
-
-tbody tr:last-child td {
+tbody tr:last-child td th {
 	border-bottom: 2px solid #87C4FF;
 }
 
 th {
+	width: 15%;
 	background-color: #E0F4FF;
 }
 
@@ -44,4 +41,9 @@ th {
 	resize: none;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	margin-bottom: 10px;
+}
+
+.tdWidth {
+	width: 20%;
+	overflow: hidden;
 }

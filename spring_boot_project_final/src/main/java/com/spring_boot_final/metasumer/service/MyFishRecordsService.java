@@ -67,4 +67,10 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 		dao.deleteMyFishRecordsComment(recordNo);
 	}
 
+	@Override
+	public void countViews(String recordNo, String sidmemId) {
+		dao.countViews(recordNo, sidmemId);
+		
+	}
+
 }

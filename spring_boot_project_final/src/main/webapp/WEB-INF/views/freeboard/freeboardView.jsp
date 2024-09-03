@@ -55,6 +55,7 @@
                         <th>작성자</th>
                         <th>제목</th>
                         <th>작성 날짜</th>
+                        <th>조회수</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,11 +64,12 @@
                     
                         <c:choose>
 				            <c:when test="${not empty sessionScope.sid}">
-				                <tr onclick="location.href='<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}' />'" style="cursor: pointer;">
+				                <tr onclick="location.href='<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}/${sessionScope.sid}' />'" style="cursor: pointer;">
 				                    <td>${counter}</td>
 				                    <td>${fb.memNickname}</td>
 				                    <td>${fb.title}</td>
 				                    <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
+				                    <td>${fb.views}</td>
 				                </tr>
 				            </c:when>
 				            <c:otherwise>
@@ -76,6 +78,7 @@
 				                    <td>${fb.memNickname}</td>
 				                    <td>${fb.title}</td>
 				                    <td><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></td>
+				                    <td>${fb.views}</td>
 				                </tr>
 				            </c:otherwise>
 				        </c:choose>	

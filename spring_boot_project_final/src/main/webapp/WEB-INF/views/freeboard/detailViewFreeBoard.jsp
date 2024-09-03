@@ -27,7 +27,9 @@
                     </tr>
                     <tr>
                     	<th>제목</th>
-                    	<td colspan="3">${ fb.title }</td>
+                    	<td>${ fb.title }</td>
+                    	<th>조회수</th>
+                    	<td class="tdWidth">${ fb.views }</td>
                     </tr>
                     <tr>
                         <th>작성자</th>
