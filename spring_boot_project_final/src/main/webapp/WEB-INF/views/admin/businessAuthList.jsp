@@ -24,15 +24,7 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				<h2>사업자 신청 리스트</h2>
-				<div id="menuContainer">
-				    <ul>
-				        <li><a href="<c:url value='/admin/adminPage'/>">통계</a></li>
-				        <li><a href="<c:url value='/admin/memberManagement/general'/>">일반 회원 관리</a></li>
-				        <li><a href="<c:url value='/admin/businessManagement'/>">사업자 회원 관리</a></li>
-				        <li><a href="<c:url value='/admin/memberManagement/admin'/>">관리자 관리</a></li>
-				        <li><a href="<c:url value='/admin/postOps'/>">게시물 관리</a></li>
-				    </ul>
-				</div>
+				<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
 				<span id="statusMessage">${statusMessage}</span>
 					
@@ -51,10 +43,10 @@
                     <thead>
                         <tr>
                         	<th>순번</th>
+                        	<th>회원ID</th>
                             <th>업체명</th>
                             <th>사업자 등록번호</th>
                             <th>대표자</th>
-                            <th>사업장 주소</th>
                             <th>업태</th>
                             <th>사업 유형</th>
                             <th>승인상태</th>
@@ -64,26 +56,26 @@
                         <c:forEach items="${authList}" var="at" varStatus="status">
                             <tr>
                             	<td>${(currentPage - 1) * pageSize + status.index + 1}</td>
-                                <td>${at['businessName']}</td>
-                                <td>${at['bizRegNumber']}</td>
-                                <td>${at['delegate']}</td>
-                                <td>${at['businessAddress']}</td>
-                                <td>${at['businessCategory']}</td>
+                                <td id="memberIdCell" onclick="location.href='<c:url value='/admin/businessDetail/${at.memId}/${at.bizId}' />'">${at.memId}</td>
+                                <td>${at.businessName}</td>
+                                <td>${at.bizRegNumber}</td>
+                                <td>${at.delegate}</td>
+                                <td>${at.businessCategory}</td>
                                 <td>
 								    <c:choose>
-								        <c:when test="${at['businessType'] == 'sale'}">판매 사업자</c:when>
-								        <c:when test="${at['businessType'] == 'reservation'}">예약 사업자</c:when>
+								        <c:when test="${at.businessType == 'sale'}">판매 사업자</c:when>
+								        <c:when test="${at.businessType == 'reservation'}">예약 사업자</c:when>
 								    </c:choose>
 								</td>
                                 <td id="lastColumn">
                                     <form action="<c:url value='/admin/updateAuthStatus'/>" method="post">
-                                        <input type="hidden" name="bizId" value="${at['bizId']}">
-                                        <input type="hidden" name="memId" value="${at['memId']}">
+                                        <input type="hidden" name="bizId" value="${at.bizId}">
+                                        <input type="hidden" name="memId" value="${at.memId}">
                                         <input type="hidden" id="memType" name="memType" value="">
                                         <select name="authStatus">
-								            <option value="pending" ${at['authStatus'] == 'pending' ? 'selected' : ''}>검토 중</option>
-								            <option value="approved" ${at['authStatus'] == 'approved' ? 'selected' : ''}>승인</option>
-								            <option value="rejected" ${at['authStatus'] == 'rejected' ? 'selected' : ''}>거부</option>
+								            <option value="pending" ${at.authStatus == 'pending' ? 'selected' : ''}>검토 중</option>
+								            <option value="approved" ${at.authStatus == 'approved' ? 'selected' : ''}>승인</option>
+								            <option value="rejected" ${at.authStatus == 'rejected' ? 'selected' : ''}>거부</option>
 								        </select>
                                         <input type="submit" value="변경">
                                     </form>
