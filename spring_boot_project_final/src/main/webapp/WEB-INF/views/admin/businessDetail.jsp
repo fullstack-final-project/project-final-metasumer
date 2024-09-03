@@ -50,10 +50,25 @@
 						<td>${bs.delegate}</td>
 					</tr>
 					<tr>	
-						<th colspan="4">사업장 주소</th>
+						<th colspan="3">사업장 주소</th>
+						<th>사업자 승인 상태</th>
+						
 					</tr>
 					<tr>	
-						<td colspan="4">${bs.businessAddress}</td>
+						<td colspan="3">${bs.businessAddress}</td>
+						<td id="lastColumn">
+                            <form action="<c:url value='/admin/updateAuthStatus'/>" method="post">
+                                <input type="hidden" name="bizId" value="${bs.bizId}">
+                                <input type="hidden" name="memId" value="${bs.memId}">
+                                <input type="hidden" id="memType" name="memType" value="">
+                                <select name="authStatus">
+						            <option value="pending" ${bs.authStatus == 'pending' ? 'selected' : ''}>검토 중</option>
+						            <option value="approved" ${bs.authStatus == 'approved' ? 'selected' : ''}>승인</option>
+						            <option value="rejected" ${bs.authStatus == 'rejected' ? 'selected' : ''}>거부</option>
+						        </select>
+                                <input type="submit" value="변경">
+                            </form>
+                        </td>
 					</tr>
 					<tr>
 						<th>사업 유형</th>
