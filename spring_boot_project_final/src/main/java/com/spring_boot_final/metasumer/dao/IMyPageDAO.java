@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
+import com.spring_boot_final.metasumer.model.ReservationListVO;
 
 public interface IMyPageDAO {
 	// 내가 쓴 물고기 기록
@@ -45,5 +46,9 @@ public interface IMyPageDAO {
 	
 	// 회원 정보 수정
 	public boolean updateMemberInfo(HashMap<String, Object> map);
+	
+	// 나의 예약
+	// 예약 내역 필터링해서 조회
+    public ArrayList<ReservationListVO> reservationList(String memId, String startDate, String endDate);
 
 }

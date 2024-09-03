@@ -1,6 +1,8 @@
 package com.spring_boot_final.metasumer.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.MyPageVO;
+import com.spring_boot_final.metasumer.model.ReservationListVO;
 import com.spring_boot_final.metasumer.service.MyPageService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -259,19 +262,45 @@ public class MyPageController {
 		return "myPage/updateCompleteForm";
 	}
 	
-	// 나의 예약
-	
+	// 나의 예약	
 	@RequestMapping("/myPage/reservation")
-	public String reservation(Model model, HttpSession session) {	
-        String memId = (String)session.getAttribute("sid");	          		
+	public String reservation(String period, Model model, HttpSession session) {	
+        String memId = (String)session.getAttribute("sid");	   
+        
+        LocalDate now = LocalDate.now();
+	    String startDate = null;
+	    String endDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+	    if (period != null) {
+	        switch (period) {
+	            case "3m":
+	                startDate = now.minusMonths(3).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "6m":
+	                startDate = now.minusMonths(6).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusMonths(3).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "1y":
+	                startDate = now.minusYears(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusMonths(6).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "3y":
+	                startDate = now.minusYears(3).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusYears(1).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	        }
+	    }
+
+	    ArrayList<ReservationListVO> reservationList = myPageService.reservationList(memId, startDate, endDate);
 		
 		// 회원 정보 가져오기
 		MemberVO memVo = myPageService.getMemberInfo(memId);
 		
 		// model 설정
 		model.addAttribute("memVo", memVo);
+		model.addAttribute("reservationList", reservationList);
 		
 		return "myPage/reservationListView";
-	}
+	} 
 
 }
