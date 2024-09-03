@@ -5,16 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 public interface IMemberService {
 
 	// 로그인 체크
 	public String loginCheck(HashMap<String, Object> map);
-
-	// 로그인 카운트
-	public void loginCount(String memId);
 
 	// 사용자 이름을 반환
 	public Map<String, Object> getUsermemNickname(String memId);
@@ -41,13 +37,7 @@ public interface IMemberService {
 
 	// 사용자 관심사 있는거 빼고 태그 가져오기
 	public ArrayList<MemberVO> newtagList(String memId);
-
-	// 관심사 태그 삭제
-	public void deleteInterests(String memId);
-
-	// 사업자 신청 등록
-	public void insertBusinessAuth(BusinessAuthVO vo);
-
-	// 사업자 신청 시 아이디/검토중 확인
-	public int checkMemId(String memId);
+	
+	// 회원정보 조회
+	public MemberVO getMemberById(String memId);
 }
