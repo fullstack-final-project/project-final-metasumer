@@ -23,8 +23,29 @@ public class FreeBoardVO {
 	private String price;
 	private int completed;
 	
+	private int postId;
+	private int views;
+	private String status;
 	
 	
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
 	public int getCompleted() {
 		return completed;
 	}
