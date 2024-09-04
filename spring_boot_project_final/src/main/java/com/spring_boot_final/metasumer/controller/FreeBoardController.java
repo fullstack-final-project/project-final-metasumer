@@ -243,6 +243,7 @@ public class FreeBoardController {
 			}
 
 			fbService.updateFreeBoard(vo);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

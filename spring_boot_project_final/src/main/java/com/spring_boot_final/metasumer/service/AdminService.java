@@ -3,6 +3,8 @@ package com.spring_boot_final.metasumer.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -100,6 +102,21 @@ public class AdminService implements IAdminService {
 	@Override
 	public void updateMyFishRecordsPostStatus(int recordNo, String status) {
 		dao.updateMyFishRecordsPostStatus(recordNo, status);
+	}
+
+	@Override
+	public List<Map<String, Object>> getTopMembersByLoginCount() {
+		return dao.getTopMembersByLoginCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> getPostCount() {
+		return dao.getPostCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> getTopPostsCount() {
+		return dao.getTopPostsCount();
 	}
 
 	

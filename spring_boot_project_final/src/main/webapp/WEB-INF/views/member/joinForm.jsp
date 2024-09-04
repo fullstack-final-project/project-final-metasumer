@@ -24,10 +24,14 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
-               <h1>회원가입</h1>
-                    
+                <h1><c:choose>
+		                <c:when test="${sessionScope.memType == 'admin'}">관리자 계정 생성</c:when>
+		                <c:otherwise>회원가입</c:otherwise>
+		            </c:choose>
+	            </h1>
                <form id="joinForm" name="joinForm" method="post" action="<c:url value='/member/join'/>">
-               <input type="hidden" name="memType" value="general">
+               <input type="hidden" name="memType" value="<c:out value='${sessionScope.memType == "admin" ? "admin" : "general"}'/>">
+               <input type="hidden" name="sessionMemType" value="<c:out value='${sessionScope.memType == "admin" ? "admin" : "general"}'/>">
 		        	<table>
 			            <tr>
 			            	<th> 성명</th>
@@ -102,6 +106,20 @@
 						            <input type="radio" id="F" name="memGender" value="F" required>
 						            여
 						        </label>
+						    </td>
+						</tr>
+						<tr>
+						    <th>생년월일</th>
+						    <td>
+						        <select id="birthYear" name="birthYear" required>
+						            <option value="">연도</option>
+						        </select>
+						        <select id="birthMonth" name="birthMonth" required>
+						            <option value="">월</option>
+						        </select>
+						        <select id="birthDay" name="birthDay" required>
+						            <option value="">일</option>
+						        </select>
 						    </td>
 						</tr>
 	                    <tr>

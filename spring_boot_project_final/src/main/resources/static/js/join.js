@@ -1,5 +1,50 @@
 $(document).ready(function() {
 
+    function initializeDateSelectors() {
+        const currentYear = new Date().getFullYear();
+        const yearSelect = $('#birthYear');
+        const monthSelect = $('#birthMonth');
+        const daySelect = $('#birthDay');
+
+        for (let year = 1900; year <= currentYear; year++) {
+            yearSelect.append(`<option value="${year}">${year}</option>`);
+        }
+
+        for (let month = 1; month <= 12; month++) {
+            monthSelect.append(`<option value="${month < 10 ? '0' + month : month}">${month < 10 ? '0' + month : month}</option>`);
+        }
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+
+        yearSelect.val(year);
+        monthSelect.val(month < 10 ? '0' + month : month);
+        updateDays();
+        daySelect.val(day < 10 ? '0' + day : day);
+    }
+
+    function updateDays() {
+        const year = $('#birthYear').val();
+        const month = $('#birthMonth').val();
+        const daySelect = $('#birthDay');
+
+        daySelect.empty().append('<option value="">일</option>');
+
+        if (year && month) {
+            const daysInMonth = new Date(year, month, 0).getDate();
+            for (let day = 1; day <= daysInMonth; day++) {
+                daySelect.append(`<option value="${day < 10 ? '0' + day : day}">${day < 10 ? '0' + day : day}</option>`);
+            }
+        }
+    }
+
+    initializeDateSelectors();
+
+    $('#birthYear, #birthMonth').on('change', updateDays);
+
+
     let memEmail = $('#memEmail');
     let emailDomain = $('#emailDomain');
     let custom = 'custom';

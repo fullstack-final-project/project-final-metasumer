@@ -7,7 +7,6 @@ table {
 }
 
 table, th, td {
-	border-top: 1px solid #87C4FF;
 	border-bottom: 1px solid #87C4FF;
 	border-left: none;
 	border-right: none;
@@ -24,8 +23,7 @@ tbody tr:last-child td {
 	border-bottom: 2px solid #87C4FF;
 }
 
-.input_text, input[type="file"], textarea, input[type="password"],
-	input[type="email"], .hp, .input_num {
+#id, #pwd{
 	width: 60%;
 	padding: 10px;
 	border: 1px solid #ccc;
@@ -35,28 +33,21 @@ tbody tr:last-child td {
 	font-size: 15px;
 }
 
-.input_text:focus, input[type="file"]:focus, input[type="email"]:focus,
-	textarea:focus, .hp:focus, input[type="password"]:focus, .input_num:focus {
+#id:focus, #pwd:focus{
 	border-color: transparent;
 	background-color: #E0F4FF;
 	outline: none;
 }
-
-/* 파일 업로드 버튼 스타일 */
-input[type="file"] {
-	padding: 6px;
+#findLinks {
+    text-align: right;
 }
 
-.hp {
-	width: 100px;
-	text-align: center;
+#findLinks a {
+    color: #39A7FF;
+    text-decoration: none;
 }
 
-h2 {
-	text-align: center;
+#findLinks a:hover {
+    text-decoration: underline;
+    color: #FFAB40;
 }
-
-.input_num{
-	width: 200px;
-}
-

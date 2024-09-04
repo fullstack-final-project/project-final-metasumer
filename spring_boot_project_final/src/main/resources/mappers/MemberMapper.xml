@@ -19,6 +19,7 @@
 		<result property="memAddress2" column="memAddress2" />
 		<result property="memGender" column="memGender" />
 		<result property="memJoinDate" column="memJoinDate" />
+		<result property="birthDate" column="birthDate" />
 		<result property="memType" column="memType" />
 		<result property="categoryName" column="categoryName" />
 		<result property="tagName" column="tagName" />
@@ -29,6 +30,24 @@
   		SELECT memPwd FROM member WHERE memId=#{id}
   	</select>
   	
+  	<update id="loginLoss">
+	    UPDATE member
+	    SET  loss_count =  loss_count + 1
+	    WHERE memId = #{memId}
+	</update>
+	
+	<select id="getLossCount" resultType="int">
+	    SELECT loss_count
+	    FROM member
+	    WHERE memId = #{memId}
+	</select>
+	
+	<update id="updateLossStatus">
+	    UPDATE member
+	    SET status = 'inactive'
+	    WHERE memId = #{memId} AND loss_count >= 5
+	</update>
+	
   	<update id="loginCount">
 	    UPDATE member
 	    SET login_count = login_count + 1
@@ -74,7 +93,6 @@
         </foreach>
     </insert>
     
-    <!-- 관심사 삭제 -->
     <delete id="deleteInterests">
     	DELETE FROM memberInterest
 		WHERE memId = #{memId};
@@ -89,9 +107,9 @@
     
     <insert id="insertMember" parameterType="com.spring_boot_final.metasumer.model.MemberVO">
     INSERT INTO member (
-        memId, memPwd, memName, memEmail, memNickname, memHP, memZipcode, memAddress1, memAddress2, memGender, memJoinDate, memType
+        memId, memPwd, memName, memEmail, memNickname, memHP, memZipcode, memAddress1, memAddress2, memGender, memJoinDate, memType, birthDate
     ) VALUES (
-        #{memId}, #{memPwd}, #{memName}, #{memEmail}, #{memNickname}, #{memHP}, #{memZipcode}, #{memAddress1}, #{memAddress2}, #{memGender}, CURDATE(), #{memType}
+        #{memId}, #{memPwd}, #{memName}, #{memEmail}, #{memNickname}, #{memHP}, #{memZipcode}, #{memAddress1}, #{memAddress2}, #{memGender}, CURDATE(), #{memType}, #{birthDate}
     );
 	</insert>
 	
@@ -114,6 +132,30 @@
 	        #{memId}, #{businessName}, #{authStatus}, CURRENT_DATE, #{bizRegNumber}, #{businessType}, #{bizRegImg}, #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate}
 	    );
 	</insert>
+	
+	<select id="findId" resultType="string">
+	    SELECT memId
+	    FROM member
+	    WHERE memName = #{memName}
+	      AND birthDate = #{birthDate}
+	      AND memHP = #{memHP}
+	      AND memEmail = #{memEmail}
+	</select>
+	
+	<select id="findPasswordCount" resultType="int">
+  		SELECT COUNT(*)
+        FROM member
+        WHERE memId = #{memId}
+          AND birthDate = #{birthDate}
+	      AND memName = #{memName}
+	      AND memEmail = #{memEmail}
+  	</select>
+  	
+  	<update id="findUpdatePassword">
+        UPDATE member
+        SET memPwd = #{newPassword}
+        WHERE memId = #{memId}
+    </update>
     
 	
 </mapper>

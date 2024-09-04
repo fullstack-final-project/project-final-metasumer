@@ -3,6 +3,8 @@ package com.spring_boot_final.metasumer.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
@@ -20,7 +22,7 @@ public interface IAdminService {
 
 	public int countbusiness();
 
-	// 회원 비활성화 하기
+	// 회원 활성화/비활성화 하기
 	public void updateMemberStatus(String memId, String status);
 
 	// 사업자 회원 신청 카운트
@@ -44,10 +46,22 @@ public interface IAdminService {
 	public ArrayList<BusinessAuthVO> businessDetail(String memId, String bizId);
 
 	// 게시물 관리
-    public ArrayList<FreeBoardVO> getPostsList(Integer boardCategory, LocalDate startDate, LocalDate endDate, int size, int offset);
-    public int getPostsCount(Integer boardCategory, LocalDate startDate, LocalDate endDate);
-    
-    // 게시판 글 비활성화 하기
-    public void updatePostStatus(int boardPostNo, String status);
- 	public void updateMyFishRecordsPostStatus(int recordNo, String status);
+	public ArrayList<FreeBoardVO> getPostsList(Integer boardCategory, LocalDate startDate, LocalDate endDate, int size,
+			int offset);
+
+	public int getPostsCount(Integer boardCategory, LocalDate startDate, LocalDate endDate);
+
+	// 게시판 글 비활성화 하기
+	public void updatePostStatus(int boardPostNo, String status);
+
+	public void updateMyFishRecordsPostStatus(int recordNo, String status);
+
+	// 회원 활동량 TOP10
+	public List<Map<String, Object>> getTopMembersByLoginCount();
+
+	// 2주간 게시판 게시물, 댓글 통계
+	public List<Map<String, Object>> getPostCount();
+
+	// 2주간 게시물 중에 조회수/댓글 수 통계 TOP10
+	public List<Map<String, Object>> getTopPostsCount();
 }

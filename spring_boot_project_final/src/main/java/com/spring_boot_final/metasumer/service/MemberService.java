@@ -1,18 +1,23 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring_boot_final.metasumer.dao.IMemberDAO;
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
+
+import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class MemberService implements IMemberService {
@@ -103,5 +108,51 @@ public class MemberService implements IMemberService {
 		return dao.checkMemId(memId);
 		
 	}
+
+	@Override
+	public void loginLoss(String memId) {
+		dao.loginLoss(memId);
+	}
+
+	@Override
+	public int getLossCount(String memId) {
+		return dao.getLossCount(memId);
+	}
+
+	@Override
+	public void updateLossStatus(String memId) {
+		dao.updateLossStatus(memId);
+	}
+
+	@Override
+	public String findId(String memName, String birthDate, String memHP, String memEmail) {
+		return dao.findId(memName, birthDate, memHP, memEmail);
+	}
+
+	@Override
+	public int findPasswordCount(String memId, String birthDate, String memName, String memEmail) {
+		return dao.findPasswordCount(memId, birthDate, memName, memEmail);
+	}
+
+	@Override
+	public void findUpdatePassword(String memId, String newPassword) {
+		dao.findUpdatePassword(memId, newPassword);
+	}
+
+	@Autowired
+    private JavaMailSender mailSender;
+    
+    public void sendMail(String to, String subject, String body) {
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(body, true);
+            mailSender.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
