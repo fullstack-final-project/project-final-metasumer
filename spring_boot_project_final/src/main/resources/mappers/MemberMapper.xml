@@ -42,6 +42,12 @@
 	    WHERE memId = #{memId}
 	</select>
 	
+	<update id="lossCountReset">
+	    UPDATE member
+	    SET  loss_count =  0
+	    WHERE memId = #{memId}
+	</update>
+	
 	<update id="updateLossStatus">
 	    UPDATE member
 	    SET status = 'inactive'

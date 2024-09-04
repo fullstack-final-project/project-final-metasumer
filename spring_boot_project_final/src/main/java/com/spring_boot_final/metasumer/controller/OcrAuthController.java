@@ -53,7 +53,6 @@ public class OcrAuthController {
 
 		return result;
 	}
-
 	
 	
 	@RequestMapping("/memberOcr/checkMemId")

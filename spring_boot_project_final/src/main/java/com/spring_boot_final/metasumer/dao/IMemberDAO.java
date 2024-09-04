@@ -25,6 +25,9 @@ public interface IMemberDAO {
 	// 로그인 실패 횟수 조회
 	public int getLossCount(String memId);
 	
+	// 로그인 시 실패 횟수 리셋
+	public void lossCountReset(String memId);
+	
 	// 로그인 5회 실패시
 	public void updateLossStatus(String memId);
 	

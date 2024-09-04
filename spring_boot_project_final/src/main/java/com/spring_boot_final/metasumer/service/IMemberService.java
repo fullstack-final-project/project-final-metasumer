@@ -29,6 +29,9 @@ public interface IMemberService {
 	// 로그인 실패 횟수 조회
 	public int getLossCount(String memId);
 
+	// 로그인 시 실패 횟수 리셋
+	public void lossCountReset(String memId);
+
 	// 로그인 5회 실패시
 	public void updateLossStatus(String memId);
 
@@ -66,5 +69,6 @@ public interface IMemberService {
 
 	// 비밀번호 찾기
 	public int findPasswordCount(String memId, String birthDate, String memName, String memEmail);
+
 	public void findUpdatePassword(String memId, String newPassword);
 }

@@ -27,11 +27,13 @@ body section {
 
 #emptyBox{
 	text-align: center;
+	margin: 0 auto;
 }
 
 #emptyBox img{
 	width: 15%;
 	height: auto;
+	margin-top: 70px;
 }
 
 #emptyBox p{
@@ -48,6 +50,7 @@ body section {
 	font-size: 18px;
 	cursor: pointer;
 	margin-top: 10px;
+	margin-bottom: 70px;
 }
 
 .shippingType{
@@ -132,6 +135,15 @@ input[type=checkbox]{
 	margin-top: 20px;
 	margin-bottom: 20px;
 	margin-left: 23px;
+}
+
+#emptyBox{
+	width: 60%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eeeeee;
 }
 
 .prdName{

@@ -155,4 +155,9 @@ public class MemberService implements IMemberService {
         }
     }
 
+	@Override
+	public void lossCountReset(String memId) {
+		dao.lossCountReset(memId);
+	}
+
 }

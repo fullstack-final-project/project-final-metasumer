@@ -21,22 +21,22 @@
 			    <h2>장바구니</h2>
 			  </header>
 			  <div id="cartContainer">
-			    <div id="cartList">
+			    <div id="cartList">			      
 			      <c:if test="${empty cartList}">
 			        <div id="emptyBox">
 			          <img src="<c:url value='/image/noOrder.png' />">
 			          <p id='emptyMessage'>장바구니가 비어있습니다.</p>
 			          <button>베스트 상품 보기</button>
-			        </div>
+			        </div>				        	        			                           
 			      </c:if>
-			      <c:if test="${not empty cartList}">
+			      <c:if test="${not empty cartList}">			       
 			        <div id="selectionActions">
                       <input type="checkbox" id="selectAll" checked> 전체선택
                       <button id="deleteSelected" type="button">선택삭제</button>
-                    </div>	
+                    </div>
 				  <form id="cartForm" method="post" action="<c:url value='/myPage/orderForm'/>"> 				  				                    
-				    <div class="cartItem">
-				      <div class="prdInfo">
+				    <div class="cartItem">				 
+				      <div class="prdInfo">				      
 				        <div class="shippingType">
 				          <p>일반배송(${prdCount})</p><hr>
 				        </div>
@@ -76,7 +76,9 @@
 						    <p><span class="totalAmount"><fmt:formatNumber value="${totalPrice + totalShipping}" pattern="#,###" />원</span></p>
 						</div>
 				      </div>
-				    </div>					  					    				    				    
+				      	
+				    </div>	
+				   			  					    				    				    
                     <div id="fixedSummary">
 					   <div id="deliveryInfo">
 							<h3><img src="<c:url value='/image/location.png' />" class="locationLogo" style="vertical-align: middle"> 배송지(기본)</h3>
@@ -97,12 +99,12 @@
 							<button id="orderAll">
 						      <span class="totalAmountOrder"><fmt:formatNumber value="${totalPrice + totalShipping}" pattern="#,###" />원 주문하기</span>
 						    </button>
-						</div>					    
-					</div>										    
+						</div>												    
+					</div>													    
 				  </form>
-			    </c:if>
-			   </div>
-			  </div>			  
+			     </c:if>
+			   </div>		  
+			  </div>			
 			</section>					
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		

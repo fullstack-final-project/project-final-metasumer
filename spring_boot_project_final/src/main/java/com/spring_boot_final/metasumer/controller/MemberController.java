@@ -205,6 +205,7 @@ public class MemberController {
 				session.setAttribute("memType", memType);
 
 				mbService.loginCount(memId);
+				mbService.lossCountReset(memId);
 			} else {
 				mbService.loginLoss(memId);
 				int lossCount = mbService.getLossCount(memId);

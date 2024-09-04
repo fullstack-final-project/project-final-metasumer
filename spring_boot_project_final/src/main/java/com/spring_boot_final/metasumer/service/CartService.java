@@ -26,9 +26,12 @@ public class CartService implements ICartService {
 	}
 
 	@Override
-	public int checkPrdInCart(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int checkPrdInCart(String prdNo, String memId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("prdNo", prdNo);
+		map.put("memId", memId);
+		
+		return dao.checkPrdInCart(map);
 	}
 
 	@Override
@@ -88,15 +91,10 @@ public class CartService implements ICartService {
 	public void deleteCartAfterOrder(ArrayList<Integer> cartNos, String memId) {
 		// TODO Auto-generated method stub
 		
-	}
+	}	
 
 	@Override
-	public ArrayList<OrderProductVO> orderList(String memId) {
-		return dao.orderList(memId);
-	}
-
-	@Override
-	public ArrayList<OrderProductVO> orderListByPeriod(String memId, String period) {
-		return dao.orderListByPeriod(memId, period);
+	public ArrayList<OrderProductVO> orderListFiltered(String memId, String startDate, String endDate) {
+		return dao.orderListFiltered(memId, startDate, endDate);
 	}
 }
