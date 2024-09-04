@@ -342,7 +342,6 @@ public class MemberController {
 	                + "<p>임시 비밀번호를 사용하여 로그인 후, 반드시 새로운 비밀번호로 변경해 주세요.</p>"
 	                + "<p>문제가 발생하거나 추가 지원이 필요하시면, 언제든지 고객센터로 문의해 주세요.</p>"
 	                + "<p>감사합니다.</p>"
-	                + "<p>고객센터</p>"
 	                + "</body></html>";
 
 	            mbService.sendMail(memEmail, subject, body);
