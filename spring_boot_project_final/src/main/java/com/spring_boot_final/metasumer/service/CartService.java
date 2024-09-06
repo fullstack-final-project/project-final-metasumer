@@ -97,4 +97,10 @@ public class CartService implements ICartService {
 	public ArrayList<OrderProductVO> orderListFiltered(String memId, String startDate, String endDate) {
 		return dao.orderListFiltered(memId, startDate, endDate);
 	}
+
+	@Override
+	public void deleteCartItem(String memId, int cartNo) {
+		dao.deleteCartItem(memId, cartNo);
+		
+	}
 }

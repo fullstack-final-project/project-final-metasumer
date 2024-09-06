@@ -20,9 +20,25 @@ public class FishController {
 	FishService fishService;
 	
 	@RequestMapping("/fish")
-	public String fishInfo(Model model) {
-		ArrayList<FishVO> fishList = fishService.listAllFish();
-		model.addAttribute("fishList", fishList);
+	public String fishInfo(@RequestParam(defaultValue="1") int page, Model model) {		
+		int fishPerPage = 9; // 한 페이지에 출력할 물고기 수	    	    
+	    int totalFishCount = fishService.getFishCount(); // 총 어종 수
+	    int totalPages = (int) Math.ceil((double) totalFishCount / fishPerPage); // 총 페이지 수
+	    
+	    // 페이지 초과 방지
+	    if (page > totalPages) {
+            page = totalPages; 
+        } else if (page < 1) {
+            page = 1;
+        }
+	    
+	    int offset = (page - 1) * fishPerPage;
+	    
+	    ArrayList<FishVO> fishList = fishService.listAllFish(offset, fishPerPage);
+	    
+	    model.addAttribute("fishList", fishList);	      	    
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);		
 		
 		return "fishInfo/fishListView";
 	}

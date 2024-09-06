@@ -3,8 +3,8 @@
 section{
 	margin: 0 auto;
 	max-width: 66%;
-	padding: 20px;
-	margin-top:10px;	
+	/*padding: 20px;*/
+	margin-top: -25px;	
 }
 
 #wrap section header{

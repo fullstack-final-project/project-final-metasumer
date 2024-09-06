@@ -45,8 +45,8 @@
 				            <input type="checkbox" class="itemCheckbox" name="cartNo" value="${prd.cartNo}" checked>					          
 				            <div class="prdOption">		          
 				              <a href="#">${prd.prdName}<p>사용자가 선택한 상품 옵션</p></a>
-				            </div>				            
-				            <img src="<c:url value='/image/close.png' />" class="closeBtn" data-cartNo="${prd.cartNo}">				           
+				            </div>					            			            
+				            <img src="<c:url value='/image/close2.png' />" class="closeBtn" data-cartNo="${prd.cartNo}">				           
 				          </div>					          			          
 				          <div class="prdDetail">
 				            <img src="<c:url value='/project_images/${prd.prdImage}' />">					            		            
@@ -58,7 +58,7 @@
 							<input type="number" name="cartQty" value="${prd.cartQty}" class="quantity" min="1">
                             <input type="hidden" name="cartNo" value="${prd.cartNo}">									                      			                         
 							<button class="qtyUpdate" type="button">변경</button>
-					      </div>							  
+					      </div>					  
 				        </c:forEach>
 				        
 				        <c:set var="totalPrice" value="0" />

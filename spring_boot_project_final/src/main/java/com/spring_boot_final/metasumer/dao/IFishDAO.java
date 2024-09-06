@@ -7,7 +7,10 @@ import com.spring_boot_final.metasumer.model.FishVO;
 
 public interface IFishDAO {
 	// 전체 어종 조회
-	public ArrayList<FishVO> listAllFish();
+	public ArrayList<FishVO> listAllFish(int offset, int limit);
+	
+	// pagination(어종 수)
+	public int getFishCount();
 	
 	// 카테고리 별 어종 조회
 	public ArrayList<FishVO> fishCtgList(String fishCtgId);

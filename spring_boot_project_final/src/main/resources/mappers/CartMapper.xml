@@ -47,6 +47,11 @@
   		</foreach>
   	</delete>
   	
+  	<delete id="deleteCartItem" parameterType="map">
+        DELETE FROM cart
+        WHERE cartNo = #{cartNo} AND memId = #{memId}
+    </delete>
+  	
   	<!-- ////////////주문서/////////////// -->
   	
   	<!-- 회원정보 반환 -->

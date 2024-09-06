@@ -51,6 +51,11 @@
 			      </c:forEach>
 			    </div>
 			  </main>
+			  <div class="pagination">
+                <c:forEach var="page" begin="1" end="${totalPages}">
+                  <a href="?page=${page}" class="${currentPage == page ? 'active' : ''}">${page}</a>
+                </c:forEach>
+              </div>
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		

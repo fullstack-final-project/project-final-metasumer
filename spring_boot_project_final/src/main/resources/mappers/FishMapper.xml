@@ -20,8 +20,16 @@
   
     <!-- 전체 어종 조회 -->
     <select id="listAllFish" resultMap="fishResult">
-  		SELECT * FROM fish_info ORDER BY fishNo
+  		SELECT * 
+  		FROM fish_info 
+  		ORDER BY fishNo
+  		LIMIT #{limit} OFFSET #{offset}
   	</select>
+  	
+  	<!-- 총 어종 수 조회 -->
+    <select id="getFishCount" resultType="int">
+        SELECT COUNT(*) FROM fish_info
+    </select>
     
     <!-- 카테고리 별 어종 조회  -->
   	<select id="fishCtgList" resultMap="fishResult">

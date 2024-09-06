@@ -28,6 +28,9 @@ public interface ICartService {
 	// 장바구니 수량 변경
 	public void updateCart(CartVO vo);
 	
+	// 장바구니 번호에 따른 삭제
+	public void deleteCartItem(String memId, int cartNo);
+	
 	// 주문서
 	// 회원정보에 따른 주문서
 	public MemberVO getMemberInfo(String memId);
