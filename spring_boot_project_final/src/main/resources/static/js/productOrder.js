@@ -44,53 +44,41 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
-// 결제 방법 선택
-document.addEventListener('DOMContentLoaded', function() {
-    const options = document.querySelectorAll('.payment-option');
-
-    options.forEach(option => {
-        option.addEventListener('click', function() {
-            // 모든 옵션에서 active 클래스 제거
-            options.forEach(opt => opt.classList.remove('active'));
-
-            // 클릭한 옵션에 active 클래스 추가
-            this.classList.add('active');
-
-            // 선택된 결제 방법의 값을 저장 (예: hidden input에 저장)
-            const selectedValue = this.getAttribute('data-value');
-            console.log('선택된 결제 방법:', selectedValue);
-
-            // hidden input에 선택된 값을 저장 (폼 데이터로 전달하기 위해)
-            document.getElementById('selectedPaymentMethod').value = selectedValue;
+document.addEventListener("DOMContentLoaded", function() {
+    // 결제 방법 선택을 초기화
+    function initializePaymentMethod() {
+        // 모든 결제 옵션을 비활성화 상태로 설정
+        var paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(function(option) {
+            option.classList.remove('active');
         });
-    });
-});
 
-// 페이지 렌더링 시 "신용카드" 선택
-document.addEventListener('DOMContentLoaded', function() {
-    const options = document.querySelectorAll('.payment-option');
-
-    function setInitialSelection() {
-        const defaultOption = document.querySelector('.payment-option[data-value="card"]');
-
-        if (defaultOption) {
-            defaultOption.classList.add('active');
-            document.getElementById('selectedPaymentMethod').value = 'card';
+        // 신용카드 옵션을 활성화 상태로 설정
+        var creditCardOption = document.getElementById('creditCardOption');
+        if (creditCardOption) {
+            creditCardOption.classList.add('active');
         }
     }
 
-    setInitialSelection();
-
-    options.forEach(option => {
-        option.addEventListener('click', function() {
-            options.forEach(opt => opt.classList.remove('active'));
-           
-            this.classList.add('active');
-
-            const selectedValue = this.getAttribute('data-value');
-            document.getElementById('selectedPaymentMethod').value = selectedValue;
+    // 결제 방법을 클릭할 때 활성화 상태를 변경
+    function setupPaymentOptionListeners() {
+        var paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(function(option) {
+            option.addEventListener('click', function() {
+                // 모든 결제 옵션의 active 클래스를 제거
+                paymentOptions.forEach(function(opt) {
+                    opt.classList.remove('active');
+                });
+                
+                // 클릭된 결제 옵션에 active 클래스를 추가
+                this.classList.add('active');
+            });
         });
-    });
+    }
+
+    // 페이지가 로드되면 결제 방법을 초기화 및 리스너 설정
+    initializePaymentMethod();
+    setupPaymentOptionListeners();
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

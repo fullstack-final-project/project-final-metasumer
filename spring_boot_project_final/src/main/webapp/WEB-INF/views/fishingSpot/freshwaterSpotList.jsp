@@ -22,7 +22,7 @@
 					<!-- 왼쪽 낚시터 리스트 영역 -->
 					<div class="spots-list">
 						<c:forEach var="spot" items="${spots}">
-							<a href="<c:url value='/detailFishingSpot/${spot.spotId}'/>">
+							<a href="<c:url value='/detailFishingSpot/${spot.spotId}?bizId=${spot.bizId}'/>">
 								<div class="spot-container">
 									<img class="spot-image"
 										src="<c:url value='/project_images/${spot.spotImage}'/>"

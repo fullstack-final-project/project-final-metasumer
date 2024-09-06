@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.spring_boot_final.metasumer.dao.IOrderDAO;
+import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.OrderVO;
 
 @Service
@@ -17,5 +18,10 @@ public class OrderService implements IOrderService {
   @Override
   public void saveOrder(OrderVO order) {
     dao.saveOrder(order);
+  }
+  
+  @Override
+  public MemberVO getMemberById(String memId) {
+    return dao.getMemberById(memId);
   }
 }

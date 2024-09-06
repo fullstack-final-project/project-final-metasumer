@@ -137,7 +137,7 @@
 	               	<h2>결제 방법</h2>
 									<div class="payment">
 									    <ul class="payment-methods">
-									        <li class="payment-option" data-value="card">
+									        <li class="payment-option" data-value="card" id="creditCardOption">
 									            <img src="/images/card.png" alt="신용카드">
 									            <span>신용카드</span>
 									        </li>

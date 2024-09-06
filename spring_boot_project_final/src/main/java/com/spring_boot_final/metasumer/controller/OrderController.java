@@ -1,7 +1,11 @@
 package com.spring_boot_final.metasumer.controller;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring_boot_final.metasumer.model.FishingSpotAreaVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.OrderVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
+import com.spring_boot_final.metasumer.model.ReservationVO;
 import com.spring_boot_final.metasumer.model.SalesVO;
-import com.spring_boot_final.metasumer.service.MemberService;
+import com.spring_boot_final.metasumer.service.FishingSpotService;
 import com.spring_boot_final.metasumer.service.OrderService;
 import com.spring_boot_final.metasumer.service.ProductService;
+import com.spring_boot_final.metasumer.service.ReservationService;
 import com.spring_boot_final.metasumer.service.SalesService;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,16 +31,17 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class OrderController {
   @Autowired
-  private MemberService memberService;
-  
-  @Autowired
   private ProductService prdService;
-  
   @Autowired
   private OrderService orderService;
-  
   @Autowired
   private SalesService salesService;
+  @Autowired
+  private ReservationService reservationService;
+  @Autowired
+  private FishingSpotService fishingSpotService;
+  
+  
   
   @RequestMapping("/order/productOrder")
   public String productOrder(@RequestParam("prdNo") String prdNo,
@@ -43,7 +51,7 @@ public class OrderController {
       String memId = (String) session.getAttribute("memId");
  
       if (memId != null) {
-          MemberVO member = memberService.getMemberById(memId);
+          MemberVO member = orderService.getMemberById(memId);
           model.addAttribute("member", member);
           
           ProductVO product = prdService.detailViewProduct(prdNo);
@@ -121,6 +129,75 @@ public class OrderController {
       
       return new ModelAndView("redirect:/product/productList");
   }
+  
+  ////////////////////////////////////////////////////////////
+  // 예약
+  @RequestMapping("/order/reservationComplete")
+  public String reservationComplete(
+      @RequestParam(value = "spotId", defaultValue = "0") int spotId,
+      @RequestParam(value = "resDate", defaultValue = "1970-01-01") String resDateString,
+      @RequestParam(value = "bizId", defaultValue = "0") int bizId,
+      @RequestParam(value = "areaId") String[] areaIds,
+      @RequestParam(value = "resQuantity") int[] resQuantities, // 각 구역별 수량 배열
+      @RequestParam(value = "finalTotalPrice", defaultValue = "0") int finalTotalPrice,
+      @RequestParam(value = "resNum", defaultValue = "1") int resNum,
+      HttpSession session,
+      Model model
+) {
+  String memId = (String) session.getAttribute("memId");
+
+  // 문자열을 Date 객체로 변환
+  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  java.sql.Date resDate = null;
+  try {
+      resDate = new java.sql.Date(dateFormat.parse(resDateString).getTime());
+  } catch (ParseException e) {
+      e.printStackTrace();
+      return "error";
+  }
+
+  // areaId에 대한 정보를 미리 가져오기
+  Map<Integer, FishingSpotAreaVO> areaMap = new HashMap<>();
+  for (String areaIdStr : areaIds) {
+      int areaId = Integer.parseInt(areaIdStr.trim());
+      FishingSpotAreaVO area = fishingSpotService.getFishingSpotAreaById(areaId);
+      if (area != null) {
+          areaMap.put(areaId, area);
+      }
+  }
+
+  // 각 구역별로 예약을 처리
+  for (int i = 0; i < areaIds.length; i++) {
+      int areaId = Integer.parseInt(areaIds[i]);
+      int quantity = resQuantities[i];  // 해당 구역의 수량을 가져옴
+      FishingSpotAreaVO area = areaMap.get(areaId);
+
+      if (area != null) {
+          ReservationVO reservation = new ReservationVO();
+
+          reservation.setMemId(memId);
+          reservation.setMemName(orderService.getMemberById(memId).getMemName());
+          reservation.setSpotId(spotId);
+          reservation.setResDate(resDate);
+          reservation.setResNum(resNum);  // resNum 값이 제대로 전달되도록 처리
+          reservation.setResPrice(area.getAreaPrice() * quantity);  // 구역 가격 * 수량
+          reservation.setResCoupon(""); // 쿠폰 정보가 있는 경우 추가
+          reservation.setResStatus("pending");
+          reservation.setBizId(bizId);
+          reservation.setResQuantity(quantity);  // 각 구역별 수량 저장
+          reservation.setAreaId(areaId);
+          reservation.setResStart(area.getStartTime());
+          reservation.setResEnd(area.getEndTime());
+
+          // Reservation 테이블에 저장
+          reservationService.saveReservation(reservation);
+      }
+  }
+
+  model.addAttribute("message", "결제되었습니다.");
+  return "redirect:/";
+}
+
   
 }
 

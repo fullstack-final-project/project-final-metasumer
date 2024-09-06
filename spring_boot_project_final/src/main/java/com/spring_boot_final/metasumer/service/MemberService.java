@@ -83,9 +83,5 @@ public class MemberService implements IMemberService {
 		return dao.newtagList(memId);
 	}
 	
-	@Override
-	public MemberVO getMemberById(String memId) {
-	  return dao.getMemberById(memId);
-	}
 
 }

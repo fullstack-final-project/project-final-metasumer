@@ -10,5 +10,9 @@
         VALUES (#{prdNo}, #{quantity}, #{orderDate}, #{buyerName}, #{buyerHP}, #{buyerEmail}, #{shippingZipcode}, #{shippingAddress1}, #{shippingAddress2}, #{bizId}, #{totalPrice})
     </insert>
 		
+		<!-- 회원정보 조회 --> 
+   <select id="getMemberById" parameterType="string" resultType="com.spring_boot_final.metasumer.model.MemberVO">
+       SELECT * FROM member WHERE memId = #{memId}
+   </select>
   
   </mapper>

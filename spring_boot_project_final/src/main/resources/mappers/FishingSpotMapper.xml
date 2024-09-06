@@ -42,6 +42,7 @@
         WHERE 
             spotId = #{spotId}
     </select>
+   
   </mapper>
   
   
