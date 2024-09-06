@@ -1,0 +1,218 @@
+@charset "UTF-8";
+
+/* 전체 페이지 */
+.eventWrap {
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+	line-height: 0;
+	padding: 20px 0;
+	background: white;
+}
+
+@media (min-width: 1256px) {
+	.eventWrap {
+		width: 1256px;
+		margin: 0 auto;
+	}
+}
+
+
+
+/* 상단 카테고리 메뉴 박스 */
+#eventCtgBox {
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #39A7FF;
+}
+
+.eventCtgBar {
+	width: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-sizing: border-box;
+	line-height: 0;
+	background: white;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+.eventCtg {
+	list-style: none;
+	text-decoration : none;
+	color: black;
+	font-weight: bold;
+	letter-spacing: -1px;
+	padding-right: 5px;
+	display: inline-block;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.eventCtg.active {
+	color: #39A7FF; 
+	text-shadow: -1px 0px #E0F4FF, 0px 1px #E0F4FF, 1px 0px #E0F4FF, 0px -1px #E0F4FF;
+}
+
+#eventMainBox {
+	margin-top: 30px;
+}
+
+#eventMyFishPrizeBox{
+	margin: 0; 
+	padding: 0;
+}
+
+#eventMyFishPrizeBox {
+	display: flex;
+    justify-content: center;
+	position: relative;
+	width: 100%;
+	height: 250px;
+	margin: 20px 0 20px 0;
+}
+
+.prizeInfo:first-child {
+	margin-right: 20px;
+}
+
+.prizeInfo {
+	position: relative;
+	width: 48%;
+	height: 100%;
+	border-radius: 5px; 
+	border:1px solid #39A7FF;
+}
+
+.prizeTableBox:hover {
+	opacity: 1.0;
+}
+
+.prizeTitle {
+	position: absolute;
+	top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 24px;	
+    font-weight: bold;
+}
+
+.prizeTitle span {
+	color: #39A7FF;
+}
+
+.prizeTableBox {
+	position: absolute;
+	top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+	width: 92%;
+    margin: 10px 10px 10px 0	;
+	opacity: 0.7;
+}
+
+.prizeTable {
+	width: 100%;
+}
+
+.prizeTable th,
+.prizeTable td {
+	height: 25px;
+	font-size: 18px;
+	text-align: center;
+}
+
+.prizeTable tr:nth-child(2) th:nth-child(2) {
+	font-weight: bold;
+	color: #39A7FF;
+}
+
+#myFishTotalBox {
+	float: left;
+	width: 27%;
+}
+
+.myFishTotalList {
+	position: relative;
+	height: 330px;
+	border-radius: 5px; 
+	border:1px solid #39A7FF;
+	margin: 0 0 20px 12px;
+}
+
+.myFishTitle {
+	height: 52px;
+	line-height: 52px;
+	width: 100%;
+	text-align: center;
+	margin: 1px 0 1px 0;
+    font-size: 20px;	
+    font-weight: bold;
+    background-color: #E0F4FF;
+    border-bottom: 1px solid #39A7FF;
+}
+
+.myFishItem {
+	margin: 5px;
+}
+
+.myFishItem table {
+	width: 95%;
+	vertical-align: center;
+	margin: 0 5px;
+}
+
+.myFishItem table tr td {
+	height: 22px;
+	text-align: center;
+}
+
+.myFishItem tr:nth-child(-n + 3) {
+	font-weight: bold;
+}
+
+#myFishDetailBox {
+	float: right;
+	width: 70%;
+	height: 681px;
+	border-radius: 5px; 
+	border: 1px solid #39A7FF;
+	margin: 0 13px 20px 12px;
+}
+
+#myFishContainer {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(22%, auto));
+	gap: 10px;
+	padding: 10px;
+}
+
+.myFishGrid {
+	height: 211px;
+	border-radius: 3px; 
+	border: 1px solid #39A7FF;
+	cursor: pointer;
+}
+
+.myFishGrid:hover {
+	border: 2px solid #39A7FF;
+	background-color: #E0F4FF;
+	font-weight: bold;
+}
+.gridImage img {
+	width: 100%;
+	height: 150px;
+}
+
+.gridInfo table {
+	width: 100%;
+	text-align: center;
+	padding: 10px;
+}
+
+.gridInfo table tr td {
+	height: 15px;
+}

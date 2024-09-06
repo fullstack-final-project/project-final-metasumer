@@ -24,8 +24,8 @@
 							<li data-tab="/weather/tidetable" class="weatherCtg1 weatherCtg" >물때</li>
 							<li data-tab="/weather/current" class="weatherCtg2 weatherCtg" >현재 위치 날씨</li>
 							<li data-tab="/weather/warning" class="weatherCtg3 weatherCtg active" >기상 특보</li>
-							<li data-tab="/weather/nationwide" class="weatherCtg4 weatherCtg" >전국 낚시</li>
-							<li data-tab="/weather/overseas" class="weatherCtg5 weatherCtg" >해외 낚시</li>
+							<li data-tab="/weather/nationwide" class="weatherCtg4 weatherCtg" >전국 날씨</li>
+							<li data-tab="/weather/overseas" class="weatherCtg5 weatherCtg" >해외 날씨</li>
 							<li data-tab="/weather/factor" class="weatherCtg6 weatherCtg" >바다 낚시 지수</li>
 						</ul>
 					</div>
