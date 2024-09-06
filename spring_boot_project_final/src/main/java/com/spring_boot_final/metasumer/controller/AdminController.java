@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
@@ -29,9 +32,10 @@ public class AdminController {
 	public String adminPage() {
 		return "admin/adminPage";
 	}
+
 	@RequestMapping("/admin/newAdminAccount")
 	public String newAdminAccount() {
-		
+
 		return "admin/newAdminAccount";
 	}
 
@@ -209,19 +213,40 @@ public class AdminController {
 	@RequestMapping("/admin/updatePostStatus")
 	public String updatePostStatus(RedirectAttributes redirectAttributes, @RequestParam("boardCtgId") int boardCtgId,
 			@RequestParam(value = "startDate", required = false) String startDate,
-            @RequestParam(value = "endDate", required = false) String endDate,
-			@RequestParam("status") String status, @RequestParam("postId") int postId) {
-		
-		if(boardCtgId == 6) {
+			@RequestParam(value = "endDate", required = false) String endDate, @RequestParam("status") String status,
+			@RequestParam("postId") int postId) {
+
+		if (boardCtgId == 6) {
 			int recordNo = postId;
 			adminService.updateMyFishRecordsPostStatus(recordNo, status);
-		}else {
+		} else {
 			int boardPostNo = postId;
 			adminService.updatePostStatus(boardPostNo, status);
 		}
-		
-		return "redirect:/admin/postOps?startDate=" + URLEncoder.encode(startDate, StandardCharsets.UTF_8) +
-		           "&endDate=" + URLEncoder.encode(endDate, StandardCharsets.UTF_8);
+
+		return "redirect:/admin/postOps?startDate=" + URLEncoder.encode(startDate, StandardCharsets.UTF_8) + "&endDate="
+				+ URLEncoder.encode(endDate, StandardCharsets.UTF_8);
+	}
+
+	// 통계
+	@RequestMapping("/admin/showStatistics")
+	@ResponseBody
+	public Map<String, Object> showTopMembers() {
+	    List<Map<String, Object>> topList = adminService.getTopMembersByLoginCount();
+	    List<Map<String, Object>> postList = adminService.getPostCount();
+	    List<Map<String, Object>> topPostList = adminService.getTopPostsCount();
+	    
+	    System.out.println("topPostList contents:");
+	    for (Map<String, Object> item : topPostList) {
+	        System.out.println(item);
+	    }
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("topList", topList);
+	    response.put("postList", postList);
+	    response.put("topPostList", topPostList);
+
+	    return response;
 	}
 
 }

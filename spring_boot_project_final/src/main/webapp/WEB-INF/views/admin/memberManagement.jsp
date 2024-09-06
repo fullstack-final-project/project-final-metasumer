@@ -19,7 +19,7 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				<c:choose>
-		            <c:when test="${memList[0].memType == 'general'}"><h2>일반 회원 관리!!</h2></c:when>
+		            <c:when test="${memList[0].memType == 'general'}"><h2>일반 회원 관리</h2></c:when>
 		            <c:when test="${memList[0].memType == 'business'}"><h2>사업자 회원 관리</h2></c:when>
 		            <c:when test="${memList[0].memType == 'admin'}"><h2>관리자 관리</h2>
 		            </c:when>
@@ -28,7 +28,7 @@
 	
 	            <c:choose>
 				    <c:when test="${memList[0].memType == 'admin'}">
-				        <a href="<c:url value='/admin/newAdminAccount'/>" class="btn-create-admin">관리자 계정 만들기</a>
+				        <a href="<c:url value='/member/joinForm'/>" class="btn-create-admin">관리자 계정 만들기</a>
 				    </c:when>
 				</c:choose>
 		

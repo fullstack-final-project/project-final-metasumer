@@ -85,7 +85,7 @@
 
 	<update id="updateMemberStatus">
 		UPDATE member
-		SET status = #{status}
+		SET status = #{status}, loss_count = 0
 		WHERE memId = #{memId}
 	</update>
 
@@ -212,8 +212,87 @@
 	   WHERE recordNo = #{recordNo};
 	</update>
 
-
-
+	<select id="getTopMembersByLoginCount" resultType="map">
+		SELECT m.memId, COALESCE(b.postCount, 0) AS postCount, COALESCE(c.commentCount, 0) AS commentCount, COALESCE(f.recordCount, 0) AS recordCount, COALESCE(m.login_count, 0) AS loginCount,
+		    (COALESCE(b.postCount, 0) + COALESCE(c.commentCount, 0) + COALESCE(f.recordCount, 0) + COALESCE(m.login_count, 0)) AS totalActivity
+		FROM member m
+		LEFT JOIN (
+		    SELECT memId, COUNT(*) AS postCount
+		    FROM board
+		    GROUP BY memId
+		) AS b ON m.memId = b.memId
+		LEFT JOIN (
+		    SELECT memId, COUNT(*) AS commentCount
+		    FROM comment
+		    GROUP BY memId
+		) AS c ON m.memId = c.memId
+		LEFT JOIN (
+		    SELECT memId, COUNT(*) AS recordCount
+		    FROM myFishRecords
+		    GROUP BY memId
+		) AS f ON m.memId = f.memId
+		ORDER BY totalActivity DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="getPostCount" resultType="map">
+	    SELECT bc.boardCtgId, bc.boardCtgName, SUM(COALESCE(postCount, 0)) AS postCount, SUM(COALESCE(commentCount, 0)) AS commentCount
+		FROM (
+		    SELECT 
+		        boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
+		    FROM board
+		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		    GROUP BY boardCtgId
+		
+		    UNION ALL
+		
+		    SELECT boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
+		    FROM myfishRecords
+		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		    GROUP BY boardCtgId
+		    
+		    UNION ALL
+		
+		    SELECT  boardCtgId, NULL AS postCount, COUNT(*) AS commentCount
+		    FROM comment
+		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		    GROUP BY boardCtgId
+		) AS combined
+		JOIN boardCtg bc ON combined.boardCtgId = bc.boardCtgId
+		GROUP BY bc.boardCtgId, bc.boardCtgName;
+	</select>
+	
+	<select id="getTopPostsCount" resultType="map">
+        (
+            SELECT 
+                b.boardPostNo AS postNo, 
+                b.title, 
+                b.views, 
+                COUNT(c.commentNo) AS commentCount, 
+                bc.boardCtgName AS categoryName,
+                'Board' AS type
+            FROM board b
+            LEFT JOIN comment c ON b.boardPostNo = c.boardPostNo
+            LEFT JOIN boardCtg bc ON b.boardCtgId = bc.boardCtgId
+            GROUP BY b.boardPostNo, b.title, b.views, bc.boardCtgName
+        )
+        UNION ALL
+        (
+            SELECT 
+                f.recordNo AS postNo, 
+                f.title, 
+                f.views, 
+                COUNT(c.commentNo) AS commentCount, 
+                bc.boardCtgName AS categoryName,
+                'FishRecord' AS type
+            FROM myFishRecords f
+            LEFT JOIN comment c ON f.recordNo = c.recordNo
+            LEFT JOIN boardCtg bc ON f.boardCtgId = bc.boardCtgId
+            GROUP BY f.recordNo, f.title, f.views, bc.boardCtgName
+        )
+        ORDER BY GREATEST(commentCount, views) DESC
+        LIMIT 5
+    </select>
 
 
 </mapper>
