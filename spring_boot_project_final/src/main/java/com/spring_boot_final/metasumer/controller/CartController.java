@@ -1,6 +1,8 @@
 package com.spring_boot_final.metasumer.controller;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,6 +45,26 @@ public class CartController {
 		model.addAttribute("prdCount", prdCount);
 
 		return "myPage/cartListView";
+	}
+	
+	// 장바구니에 상품 추가
+	@RequestMapping("/myPage/insertCart")
+	public String insertCart(CartVO vo, HttpSession session) {
+		// 로그인 성공 시
+		String memId = (String) session.getAttribute("sid");
+		vo.setMemId(memId);
+
+		// count 변수를 통한 동일 상품 확인
+		int count = cartService.checkPrdInCart(vo.getPrdNo(), memId);
+
+		if (count == 0) {
+			cartService.insertCart(vo); // 장바구니에 추가
+		} else {
+			cartService.updateQtyInCart(vo); // 수량 변경
+		}
+
+		// 포워딩을 통한 장바구니 목록 출력
+		return "redirect:/myPage/cartList";
 	}
 	
 	// 장바구니 수량 변경
@@ -153,19 +175,59 @@ public class CartController {
 	
 	// 주문 내역 보기 
 	@RequestMapping("/myPage/orderList")
-	public String orderList(Model model, HttpSession session) {
+	public String orderList(String period, Model model, HttpSession session) {
 		// 회원에 해당하는 orderList 출력
 		String memId = (String) session.getAttribute("sid");
-		ArrayList<OrderProductVO> orderList = cartService.orderList(memId);
-
-		// 주문서에 출력할 회원 정보 가져오기
-		MemberVO memVo = cartService.getMemberInfo(memId);
-
-		// model 설정
-		model.addAttribute("memVo", memVo);
-		model.addAttribute("orderList", orderList);
 		
-		return "myPage/orderListView";
+		LocalDate now = LocalDate.now();
+	    String startDate = null;
+	    String endDate = now.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+	    if (period != null) {
+	        switch (period) {
+	            case "3m":
+	                startDate = now.minusMonths(3).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "6m":
+	                startDate = now.minusMonths(6).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusMonths(3).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "1y":
+	                startDate = now.minusYears(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusMonths(6).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	            case "3y":
+	                startDate = now.minusYears(3).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                endDate = now.minusYears(1).minusDays(1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	                break;
+	        }
+	    }
+
+	    ArrayList<OrderProductVO> orderList = cartService.orderListFiltered(memId, startDate, endDate);
+	    MemberVO memVo = cartService.getMemberInfo(memId);
+
+	    model.addAttribute("memVo", memVo);
+	    model.addAttribute("orderList", orderList);
+
+	    return "myPage/orderListView"; 		
+	}
+	
+	@RequestMapping("/myPage/cartDelete")
+	@ResponseBody  
+	public String deleteCartItem(@RequestParam("cartNo") int cartNo, HttpSession session) {	    
+	    String result = "fail";
+	    
+	    try {
+	        String memId = (String) session.getAttribute("memId");
+	        
+	        cartService.deleteCartItem(memId, cartNo);
+	        
+	        result = "success";
+	    } catch (Exception e) {
+	    	result = "fail";
+	    }
+	    
+	    return result;  
 	}
 
 }

@@ -177,10 +177,12 @@ public class FreeBoardController {
 		return response;
 	}
 
-	@RequestMapping("/freeboard/detailViewFreeBoard/{boardPostNo}")
-	public String detailViewFreeBoard(@PathVariable String boardPostNo, Model model) {
+	@RequestMapping("/freeboard/detailViewFreeBoard/{boardPostNo}/{sidmemId}")
+	public String detailViewFreeBoard(@PathVariable String boardPostNo, @PathVariable String sidmemId, Model model) {
 
 		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
+		fbService.countViews(sidmemId, boardPostNo);
+		
 
 		model.addAttribute("fb", fb);
 
@@ -241,6 +243,7 @@ public class FreeBoardController {
 			}
 
 			fbService.updateFreeBoard(vo);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

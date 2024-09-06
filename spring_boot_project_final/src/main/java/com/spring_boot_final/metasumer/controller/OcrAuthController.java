@@ -54,6 +54,7 @@ public class OcrAuthController {
 		return result;
 	}
 	
+	
 	@RequestMapping("/memberOcr/checkMemId")
 	@ResponseBody
 	public String checkMemId(@RequestParam("memId") String memId) {

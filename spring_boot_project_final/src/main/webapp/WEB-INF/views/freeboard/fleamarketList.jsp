@@ -31,7 +31,7 @@
 			    <div class="container">
 				    <c:forEach items="${fbList}" var="fb">
 				        <div class="item">
-						    <a class="item-link" href="<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}'/>">
+						    <a class="item-link" href="<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}/${sessionScope.sid}'/>">
 						    
 						    <c:choose>
 								    <c:when test="${not empty fb.uploadFile}">
@@ -70,7 +70,7 @@
 	                                	</c:if>
 	                                </div>
 					                <p><fmt:formatDate value="${fb.createdDate}" pattern="yyyy년 MM월 dd일" /></p>
-
+									<p class="viewsP">조회수 ${fb.views }</p>
 					            </div>
 					        </a>
 				        </div>

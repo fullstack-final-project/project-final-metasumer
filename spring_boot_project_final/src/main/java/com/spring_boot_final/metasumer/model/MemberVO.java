@@ -16,6 +16,8 @@ public class MemberVO {
 	private String memGender;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String memJoinDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String birthDate;
 	private String memType;
 	private String status;
 	
@@ -30,6 +32,12 @@ public class MemberVO {
 	
 	
 	
+	public String getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
 	public String getStatus() {
 		return status;
 	}

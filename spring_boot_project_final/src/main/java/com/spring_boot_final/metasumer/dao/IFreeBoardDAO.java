@@ -37,5 +37,8 @@ public interface IFreeBoardDAO {
 
 	// 벼룩시장 거래 완료
 	public void fleamarketcompleted(String boardPostNo, int completed);
+	
+	// 조회수
+	public void countViews(String sidmemId, String boardPostNo);
 
 }

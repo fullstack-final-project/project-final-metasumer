@@ -1,8 +1,12 @@
 package com.spring_boot_final.metasumer.controller;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
@@ -26,6 +31,12 @@ public class AdminController {
 	@RequestMapping("/admin/adminPage")
 	public String adminPage() {
 		return "admin/adminPage";
+	}
+
+	@RequestMapping("/admin/newAdminAccount")
+	public String newAdminAccount() {
+
+		return "admin/newAdminAccount";
 	}
 
 	@RequestMapping("/admin/memberManagement/{memType}")
@@ -97,7 +108,7 @@ public class AdminController {
 
 		int totalItems = adminService.getTotalBusinessAuthCount();
 
-		ArrayList<HashMap<String, Object>> authList = adminService.getPendingBusinessAuth(start, pageSize, authStatus);
+		ArrayList<BusinessAuthVO> authList = adminService.getPendingBusinessAuth(start, pageSize, authStatus);
 
 		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 
@@ -164,37 +175,78 @@ public class AdminController {
 
 	// 게시물 관리
 	@RequestMapping("/admin/postOps")
-	public String postOps(
-	        @RequestParam(value = "startDate", required = false) LocalDate startDate,
-	        @RequestParam(value = "endDate", required = false) LocalDate endDate,
-	        @RequestParam(value = "page", defaultValue = "1") int page,
-	        @RequestParam(value = "size", defaultValue = "20") int size,
-	        Model model) {
+	public String postOps(@RequestParam(value = "boardCategory", required = false) Integer boardCategory,
+			@RequestParam(value = "startDate", required = false) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) LocalDate endDate,
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "size", defaultValue = "20") int size, Model model) {
 
 		if (startDate == null) {
-	        startDate = LocalDate.now();
-	    }
-	    if (endDate == null) {
-	        endDate = LocalDate.now();
+			startDate = LocalDate.now();
+		}
+		if (endDate == null) {
+			endDate = LocalDate.now();
+		}
+		if (boardCategory == null) {
+			boardCategory = 0;
+		}
+		page = Math.max(page, 1);
+		int offset = (page - 1) * size;
+
+		ArrayList<FreeBoardVO> poList = adminService.getPostsList(boardCategory, startDate, endDate, size, offset);
+
+		int totalCount = adminService.getPostsCount(boardCategory, startDate, endDate);
+		int totalPages = (int) Math.ceil((double) totalCount / size);
+
+		model.addAttribute("poList", poList);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("size", size);
+		model.addAttribute("boardCategory", boardCategory);
+
+		return "admin/postOps";
+	}
+
+	// 게시판 글 활성/비활성
+	@RequestMapping("/admin/updatePostStatus")
+	public String updatePostStatus(RedirectAttributes redirectAttributes, @RequestParam("boardCtgId") int boardCtgId,
+			@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate, @RequestParam("status") String status,
+			@RequestParam("postId") int postId) {
+
+		if (boardCtgId == 6) {
+			int recordNo = postId;
+			adminService.updateMyFishRecordsPostStatus(recordNo, status);
+		} else {
+			int boardPostNo = postId;
+			adminService.updatePostStatus(boardPostNo, status);
+		}
+
+		return "redirect:/admin/postOps?startDate=" + URLEncoder.encode(startDate, StandardCharsets.UTF_8) + "&endDate="
+				+ URLEncoder.encode(endDate, StandardCharsets.UTF_8);
+	}
+
+	// 통계
+	@RequestMapping("/admin/showStatistics")
+	@ResponseBody
+	public Map<String, Object> showTopMembers() {
+	    List<Map<String, Object>> topList = adminService.getTopMembersByLoginCount();
+	    List<Map<String, Object>> postList = adminService.getPostCount();
+	    List<Map<String, Object>> topPostList = adminService.getTopPostsCount();
+	    
+	    System.out.println("topPostList contents:");
+	    for (Map<String, Object> item : topPostList) {
+	        System.out.println(item);
 	    }
 	    
-	    page = Math.max(page, 1);
-	    int offset = (page - 1) * size;
-	    
-	    ArrayList<FreeBoardVO> poList = adminService.getPostsList(startDate, endDate, size, offset);
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("topList", topList);
+	    response.put("postList", postList);
+	    response.put("topPostList", topPostList);
 
-
-	    int totalCount = adminService.getPostsCount(startDate, endDate);
-	    int totalPages = (int) Math.ceil((double) totalCount / size);
-
-	    model.addAttribute("poList", poList);
-	    model.addAttribute("startDate", startDate);
-	    model.addAttribute("endDate", endDate);
-	    model.addAttribute("currentPage", page);
-	    model.addAttribute("totalPages", totalPages);
-	    model.addAttribute("size", size);
-
-	    return "admin/postOps";
+	    return response;
 	}
 
 }

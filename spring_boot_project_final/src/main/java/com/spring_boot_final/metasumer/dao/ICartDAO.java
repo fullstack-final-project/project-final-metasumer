@@ -27,6 +27,9 @@ public interface ICartDAO {
 	// 장바구니 수량 변경
 	public void updateCart(CartVO vo);
 	
+	// 장바구니 번호에 따른 삭제
+	public void deleteCartItem(String memId, int cartNo);
+	
 	// 주문서
 	// 회원정보에 따른 주문서
 	public MemberVO getMemberInfo(String memId);
@@ -43,11 +46,8 @@ public interface ICartDAO {
 	// 주문 후 장바구니에서 주문한 선택 상품 삭제
     public void deleteCartAfterOrder(ArrayList<Integer> cartNos, String memId);
     
-    // 주문 내역
-    // 주문 내역 조회
-    public ArrayList<OrderProductVO> orderList(String memId);
-    
-    // 주문 내역 필터링
-    public ArrayList<OrderProductVO> orderListByPeriod(String memId, String period);
+    // 주문 내역    
+    // 주문 내역 필터링해서 조회
+    public ArrayList<OrderProductVO> orderListFiltered(String memId, String startDate, String endDate);
 
 }

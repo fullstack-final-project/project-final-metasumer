@@ -4,6 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.spring_boot_final.metasumer.dao.ICartDAO">  	
+    <!-- 장바구니에 동일 상품이 존재하는지 확인 -->
+  	<select id="checkPrdInCart" parameterType="hashmap" resultType="int">
+  		SELECT COUNT(*)
+  		FROM cart
+  		WHERE prdNo=#{prdNo} AND memId=#{memId}
+  	</select>
+  	
+  	<!-- 장바구니에  상품 추가  -->
+  	<insert id="insertCart">
+  		INSERT INTO cart(memId, prdNo, cartQty)
+  		VALUES(#{memId}, #{prdNo}, #{cartQty})
+  	</insert>
+  	
+  	<!-- 수량 변경 -->
+  	<update id="updateQtyInCart" parameterType="com.spring_boot_final.metasumer.model.CartVO">
+  		UPDATE cart
+  		SET cartQty = cartQty + #{cartQty}
+  		WHERE memId=#{memId} AND prdNo=#{prdNo}
+  	</update>
+  	
   	<!-- 장바구니 목록 조회 -->
   	<select id="cartList" parameterType="string" resultType="com.spring_boot_final.metasumer.model.CartVO">
   		SELECT c.cartNo, c.memId, c.cartQty, p.prdNo, p.prdImage, p.prdName, p.prdPrice
@@ -26,6 +46,11 @@
   			#{item}
   		</foreach>
   	</delete>
+  	
+  	<delete id="deleteCartItem" parameterType="map">
+        DELETE FROM cart
+        WHERE cartNo = #{cartNo} AND memId = #{memId}
+    </delete>
   	
   	<!-- ////////////주문서/////////////// -->
   	
@@ -72,25 +97,14 @@
     </delete>
     
     <!-- 주문 내역 조회 -->
-    <select id="orderList" parameterType="string" resultType="com.spring_boot_final.metasumer.model.OrderProductVO">
-  		SELECT op.ordNo, op.prdNo, op.ordQty, p.prdImage, p.prdName, p.prdPrice
-  		FROM product p, order_product op
-  		WHERE p.prdNo = op.prdNo  AND op.memId = #{memId}
-  		ORDER BY op.ordNo DESC;
-  	</select> 
-  	
-  	<!-- 특정 기간의 주문 내역 조회 -->
-    <select id="orderListByPeriod" parameterType="map" resultType="com.spring_boot_final.metasumer.model.OrderProductVO">
+  	<select id="orderListFiltered" parameterType="map" resultType="com.spring_boot_final.metasumer.model.OrderProductVO">
         SELECT op.ordNo, op.prdNo, op.ordQty, p.prdImage, p.prdName, p.prdPrice
         FROM product p, order_product op
-        WHERE p.prdNo = op.prdNo  AND op.memId = #{memId}
-        AND STR_TO_DATE(SUBSTRING(op.ordNo, 1, 8), '%Y%m%d') >= DATE_SUB(NOW(), INTERVAL 
-        <choose>
-            <when test="period == '3m'">3 MONTH</when>
-            <when test="period == '6m'">6 MONTH</when>
-            <when test="period == '1y'">1 YEAR</when>
-            <otherwise>3 YEAR</otherwise>
-        </choose>)
+        WHERE p.prdNo = op.prdNo 
+        AND op.memId = #{memId}
+        <if test="startDate != null">
+            AND SUBSTRING(op.ordNo, 1, 8) BETWEEN #{startDate} AND #{endDate}
+        </if>
         ORDER BY op.ordNo DESC;
-    </select>
+    </select> 
   </mapper>

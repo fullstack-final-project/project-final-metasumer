@@ -109,7 +109,7 @@ body section {
     cursor: pointer;
 }
 
-#orderFilter button:active{
+#orderFilter button.active{
 	background-color: #39A7FF;
     color: white;
 }

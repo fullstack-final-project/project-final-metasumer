@@ -27,7 +27,7 @@
 				<div class="fish-container">
 				
 				    <c:forEach items="${mfList}" var="mf">
-				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }' />'" style="cursor: pointer;">
+				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }/${ sessionScope.sid }' />'" style="cursor: pointer;">
 				            <div class="date">
 							    <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" />
 							</div>
@@ -41,7 +41,7 @@
 							</c:choose>
 
 							<div class="fish-title">${mf.title}</div>
-    						<div class="fish-nickname">${mf.memNickname}</div>
+    						<div class="fish-nickname">${mf.memNickname}<br>조회수 ${mf.views} </div>
 				            
 				        </div>
 				    </c:forEach>

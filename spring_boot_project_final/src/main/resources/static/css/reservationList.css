@@ -78,7 +78,7 @@
 	width: 64%;
 }
 
-#resTitle{
+#resFilter{
 	background-color: white;
     padding: 15px;
     margin-bottom: 10px;
@@ -87,7 +87,138 @@
     border: 1px solid #eeeeee;
 }
 
-#resTitle p{
+#resFilter p{
 	margin-top: 5px;
 	font-size: 20px;
+}
+
+#resFilter button{
+	border-radius: 28px;
+	padding: 12px;
+	width: 24%;
+	border: none;
+	background-color: #f0faff;
+    color: #39A7FF;
+    margin-top: 8px; 
+    cursor: pointer;
+}
+
+#resFilter button.active{
+	background-color: #39A7FF;
+    color: white;
+}
+
+.noOrderView{
+	text-align: center;
+	padding: 100px;
+}
+
+.noOrderView img{
+	width: 25%;
+	height: auto;
+}
+
+.noOrderView p{
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.noOrderView button{
+	background-color: white;
+	color: #39A7FF;
+	padding: 10px 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-size: 18px;
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+#resListView{
+	background-color: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eeeeee;
+}
+
+.resListInfo{
+	padding: 10px;
+	margin-top: -20px;
+}
+
+.resListInfo hr{
+    background-color: #87C4FF;
+    height: 1px;
+    border: 0;
+}
+
+.resListInfo img{
+	width: 35%;
+}
+
+.resListDetail{
+	display: flex;
+	margin-top: 20px;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.resDescription{
+	margin-left: 20px;
+}
+
+.resDescription table thead{
+	float: left;
+	text-align: left;
+}
+
+.resDescription table thead tr, 
+.resDescription table thead tr th{ 
+	display:block; 
+	font-weight: normal;
+}
+
+.resDescription table{
+	width: 100%
+}
+.resDescription table td, th{
+	padding: 3px;
+}
+
+.resDescription table tbody{ 
+	display:block; 
+	oveflow-x:hidden; 
+	white-space:nowrap; 
+}
+.resDescription table tbody tr{ 
+	display:inline-block; 
+	margin-left: 13px;
+}
+
+.resDescription table tbody tr td{
+	display:block;
+	font-weight: bold;
+}
+
+.resDescription .ordInfo{
+	font-weight: bold;
+}
+
+.inquiryBtn{
+	margin-left: 105px;
+	height: 10%;
+	padding: 8px 15px;
+	margin-top: 40px;
+	border: 1px solid #39A7FF;
+	color: #39A7FF;
+	background-color: white;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.inquiryBtn:hover{
+	opacity: 0.8;
 }

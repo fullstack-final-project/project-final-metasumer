@@ -3,9 +3,24 @@
  */
  
  $(function(){
+      let amount = $('.amount');
+	  let price = $('.price');
+	  let shipping = 2500;
+	  let sum = 0;
+	  
+      updateTotalAmount();
+      
       // 선택한 상품만 주문
       $('#orderAll').on('click', function(event) {
           event.preventDefault();
+          
+          // 주문 금액이 0원 일때 주문 막기
+          let totalAmount = Number($('.totalAmount').text().replace(/[^0-9]/g, ''));
+          
+          if (totalAmount == 0) {
+              alert('장바구니에 상품을 담아주세요.');
+              return; // 페이지 넘어가는 거 막기
+          }
 
           // 선택한 상품만 서버로 전송하기 위한 새로운 form 생성
           let newForm = $('<form>', {
@@ -61,12 +76,7 @@
 	 	}
 	  });
 	  
-      // 주문수량 변경 처리
-	  let amount = $('.amount');
-	  let price = $('.price');
-	  let shipping = 2500;
-	  let sum = 0;
-	
+      // 주문수량 변경 처리	  	
 	  // 장바구니 수량 업데이트 (버튼 클릭 시 수행)
       $('.qtyUpdate').on('click', function() {  
          // 주문수량 수정 시
@@ -132,6 +142,7 @@
           finalAmount();           
       });
       
+      //////////////////////////////////////////////////////////////////////
       // sum 계산하는 함수
       function sumAmount() {
           sum = 0;
@@ -161,7 +172,14 @@
           $('.totalShipping').text(shipping.toLocaleString() + '원');     
           $('.totalAmountOrder').text(totalAmount.toLocaleString() + '원 주문하기');         
       } 
+      
+      function updateTotalAmount() {
+        // 상품 금액 계산
+        sumAmount();
+        finalAmount();
+      }
    
+      //////////////////////////////////////////////////////////////////////////////////
       // 삭제 버튼 클릭 시
       $('#deleteSelected').on('click', function(){
          // 체크 여부 확인 : 하나라도 체크하면 true, 아무 것도 체크하지 않으면 false
@@ -181,7 +199,8 @@
 			 	  data : {"chkbox":checkArr}, /* 컨트롤러에서 받는 이름 chkbox  */
 			 	  dataType:'text', 
 			 	  success:function(result) {
-			 		  if(result == 1) {				 					
+			 		  if(result == 1) {						 		      
+			 			  updateTotalAmount();
 			 			  location.href= "/myPage/cartList";
 			 		  }
 			 	  },
@@ -195,6 +214,29 @@
          }else{
            alert("선택된 상품이 없습니다");
          }	   
-      });           
+      });    
+      
+      $('.closeBtn').click(function(){
+        let cartNo = $(this).data('cartno'); // cartNo 가져오기
+        
+        if(confirm("이 상품을 장바구니에서 삭제하시겠습니까?")) {
+            $.ajax({
+                type: 'post',
+                url: '/myPage/cartDelete',  // 상품 삭제를 처리할 URL
+                data: {cartNo: cartNo},
+                success: function(result) {
+                    if(result == "success") {                                              
+                        updateTotalAmount();
+                        location.href= "/myPage/cartList";
+                    } else {
+                        alert("상품 삭제에 실패했습니다.");
+                    }
+                },
+                error: function() {
+                    alert("실패");
+                }
+            });
+        }
+      });       
                  
  });

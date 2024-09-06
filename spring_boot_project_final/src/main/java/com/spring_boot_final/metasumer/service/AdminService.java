@@ -3,6 +3,8 @@ package com.spring_boot_final.metasumer.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,7 +34,7 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> getPendingBusinessAuth(int start, int pageSize, String authStatus) {
+	public ArrayList<BusinessAuthVO> getPendingBusinessAuth(int start, int pageSize, String authStatus) {
 		return dao.getPendingBusinessAuth(start, pageSize, authStatus);
 	}
 
@@ -83,13 +85,41 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public ArrayList<FreeBoardVO> getPostsList(LocalDate startDate,LocalDate endDate, int size, int offset) {
-		return dao.getPostsList(startDate, endDate, size, offset);
+	public ArrayList<FreeBoardVO> getPostsList(Integer boardCategory, LocalDate startDate,LocalDate endDate, int size, int offset) {
+		return dao.getPostsList(boardCategory, startDate, endDate, size, offset);
 	}
 
 	@Override
-	public int getPostsCount(LocalDate startDate, LocalDate endDate) {
-		return dao.getPostsCount(startDate, endDate);
+	public int getPostsCount(Integer boardCategory, LocalDate startDate, LocalDate endDate) {
+		return dao.getPostsCount(boardCategory, startDate, endDate);
 	}
+
+	@Override
+	public void updatePostStatus(int boardPostNo, String status) {
+		dao.updatePostStatus(boardPostNo, status);
+	}
+
+	@Override
+	public void updateMyFishRecordsPostStatus(int recordNo, String status) {
+		dao.updateMyFishRecordsPostStatus(recordNo, status);
+	}
+
+	@Override
+	public List<Map<String, Object>> getTopMembersByLoginCount() {
+		return dao.getTopMembersByLoginCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> getPostCount() {
+		return dao.getPostCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> getTopPostsCount() {
+		return dao.getTopPostsCount();
+	}
+
+	
+	
 
 }
