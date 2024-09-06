@@ -112,7 +112,6 @@ function cancelReservation(resNo) {
 }
 
 function updateReservationStatus(resNo, status) {
-    // 예약 번호와 정확히 일치하는 행을 선택합니다.
     var row = $(`tr`).filter(function() {
         return $(this).find('td:first').text() == resNo;
     });

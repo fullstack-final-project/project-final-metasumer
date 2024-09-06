@@ -8,10 +8,11 @@ public class FishingSpotAreaVO {
   private int areaPrice;    // 낚시자리 가격
   private int minCapacity;  // 최소 인원
   private int maxCapacity;  // 최대 인원
-  private Time startTime; // 예약 가능한 시작 시간
-  private Time endTime;   // 예약 가능한 종료 시간
+  private Time startTime; 
+  private Time endTime;   
   private String fishType;  // 어종
   private int spotId;       // 낚시터 ID
+  
   public int getAreaId() {
     return areaId;
   }
@@ -66,6 +67,8 @@ public class FishingSpotAreaVO {
   public void setSpotId(int spotId) {
     this.spotId = spotId;
   }
+  
+  
   
   
   

@@ -9,4 +9,10 @@
         SELECT * FROM FishingSpotArea
         WHERE spotId = #{spotId}
     </select>
+    
+    <select id="getFishingSpotAreaById" parameterType="int" resultType="com.spring_boot_final.metasumer.model.FishingSpotAreaVO">
+        SELECT * 
+        FROM fishingSpotArea
+        WHERE areaId = #{areaId}
+    </select>
 	</mapper>

@@ -11,12 +11,13 @@ public class ReservationVO {
   private Date resDate;         // 예약 날짜
   private Time resStart;      // 예약 시작 시간
   private Time resEnd;        // 예약 종료 시간
-  private int resNum;           // 예약 인원 수
+  private int resNum;           // 예약 인원
   private int resPrice;         // 예약 금액
   private String resCoupon;     // 쿠폰 코드
   private String resStatus;     // 예약 상태
   private int bizId;            // 사업자 ID
   private int spotId;           // 낚시터 ID
+  private int resQuantity;      // 예약 수량
   
   public int getResNo() {
     return resNo;
@@ -96,6 +97,13 @@ public class ReservationVO {
   public void setSpotId(int spotId) {
     this.spotId = spotId;
   }
+  public int getResQuantity() {
+    return resQuantity;
+  }
+  public void setResQuantity(int resQuantity) {
+    this.resQuantity = resQuantity;
+  }
+  
   
   
   

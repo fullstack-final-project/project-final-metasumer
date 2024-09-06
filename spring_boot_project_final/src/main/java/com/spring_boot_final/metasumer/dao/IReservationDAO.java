@@ -15,4 +15,8 @@ public interface IReservationDAO {
  
  public int cancelReservation(@Param("resNo") int resNo);
  
+ //저장
+ public void saveReservation(ReservationVO reservation);
+ 
+ 
 }

@@ -12,6 +12,9 @@ public interface IFishingSpotService {
   // 낚시터 상세 조회
   public FishingSpotVO detailFishingSpot(int spotId);
   
-  // 낚시터 구역 상품 조회
+  // 낚시터 구역 전체 조회
   public List<FishingSpotAreaVO> getFishingSpotAreasBySpotId(int spotId);
+  
+  // 낚시터 구역 상세 조회
+  public FishingSpotAreaVO getFishingSpotAreaById(int areaId);
 }

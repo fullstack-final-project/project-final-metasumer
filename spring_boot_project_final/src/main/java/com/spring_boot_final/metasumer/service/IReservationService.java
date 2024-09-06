@@ -14,4 +14,7 @@ public interface IReservationService {
   
   // 취소
   public int cancelReservation(Integer resNo);
+  
+  // 저장
+  public void saveReservation(ReservationVO reservation);
 }

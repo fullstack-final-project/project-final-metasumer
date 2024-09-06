@@ -24,13 +24,14 @@
 							<img id="nextButtonBest" src="/image/nextButton.png" alt="Next">
 						</div>
 						<c:forEach var="product" items="${bestProducts}">
-							<div class="product-card">
-								<img src="<c:url value='/project_images/${product.prdImage}'/>"
-									alt="${product.prdName}">
-								<h3>${product.prdName}</h3>
-								<p>가격: ${product.prdPrice}원</p>
-								<p>제조사: ${product.prdMaker}</p>
-							</div>
+							<a href="<c:url value='/product/detailViewProduct/${product.prdNo}'/>" class="product-link">
+                  <div class="product-card">
+                      <img src="<c:url value='/project_images/${product.prdImage}'/>" alt="${product.prdName}">
+                      <h3>${product.prdName}</h3>
+                      <p>가격: ${product.prdPrice}원</p>
+                      <p>제조사: ${product.prdMaker}</p>
+                  </div>
+              </a>
 						</c:forEach>
 					</div>
 				</div>
@@ -43,13 +44,14 @@
 					</div>
 					<div class="product-slider" id="newProductsSlider">
 						<c:forEach var="product" items="${newProducts}">
-							<div class="product-card">
-								<img src="<c:url value='/project_images/${product.prdImage}'/>"
-									alt="${product.prdName}">
-								<h3>${product.prdName}</h3>
-								<p>가격: ${product.prdPrice}원</p>
-								<p>제조사: ${product.prdMaker}</p>
-							</div>
+							<a href="<c:url value='/product/detailViewProduct/${product.prdNo}'/>" class="product-link">
+	                <div class="product-card">
+	                    <img src="<c:url value='/project_images/${product.prdImage}'/>" alt="${product.prdName}">
+	                    <h3>${product.prdName}</h3>
+	                    <p>가격: ${product.prdPrice}원</p>
+	                    <p>제조사: ${product.prdMaker}</p>
+	                </div>
+	            </a>
 						</c:forEach>
 					</div>
 				</div>
@@ -80,12 +82,14 @@
 					<c:forEach var="entry" items="${categoryProducts}">
 						<div class="category-container" data-category="${entry.key}" style="${entry.key eq '낚싯대' ? 'display: flex;' : 'display: none;'}">
 							<c:forEach var="product" items="${entry.value}">
-								<div class="product-card">
-									<img src="<c:url value='/project_images/${product.prdImage}'/>" alt="${product.prdName}">
-									<h3>${product.prdName}</h3>
-									<p class="price">가격: ${product.prdPrice}원</p>
-									<p>제조사: ${product.prdMaker}</p>
-								</div>
+								<a href="<c:url value='/product/detailViewProduct/${product.prdNo}'/>" class="product-link">
+                    <div class="product-card">
+                        <img src="<c:url value='/project_images/${product.prdImage}'/>" alt="${product.prdName}">
+                        <h3>${product.prdName}</h3>
+                        <p>가격: ${product.prdPrice}원</p>
+                        <p>제조사: ${product.prdMaker}</p>
+                    </div>
+                </a>
 							</c:forEach>
 						</div>
 					</c:forEach>

@@ -20,5 +20,13 @@
     <update id="cancelReservation">
         UPDATE reservation SET resStatus = 'cancelled' WHERE resNo = #{resNo}
     </update>
-	
+		
+		<!-- 예약을 저장하는 쿼리 -->
+    <insert id="saveReservation" parameterType="com.spring_boot_final.metasumer.model.ReservationVO">
+        INSERT INTO reservation 
+        (memId, memName, areaId, resDate, resStart, resEnd, resNum, resPrice, resCoupon, resStatus, bizId, spotId, resQuantity) 
+        VALUES 
+        (#{memId}, #{memName}, #{areaId}, #{resDate}, #{resStart}, #{resEnd}, #{resNum}, #{resPrice}, #{resCoupon}, #{resStatus}, #{bizId}, #{spotId}, #{resQuantity})
+    </insert>
+    
 	</mapper>
