@@ -6,15 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring_boot_final.metasumer.service.WeatherService;
 import com.spring_boot_final.metasumer.service.WebScrapingService;
 
 @Controller
 public class WeatherController {
 	
 	private WebScrapingService scrapingService;
+	private WeatherService weatherService;
 	
-	public WeatherController(WebScrapingService scrapingService) {
+	public WeatherController(WebScrapingService scrapingService,
+										 	WeatherService weatherService) {
 		this.scrapingService = scrapingService;
+		this.weatherService = weatherService;
 	}
 	
 	// 현재 위치 날씨 페이지
@@ -47,8 +51,11 @@ public class WeatherController {
 	
 	// 물때 페이지
 	@RequestMapping("/weather/tidetable")
-	public String weatherTidetableView() {
-	
+	public String weatherTidetableView(Model model) {
+		HashMap<String, String> lunarDate = weatherService.getLunarDate();
+		
+		model.addAttribute("lunarDate", lunarDate);
+		
 		return "weather/weatherTidetable";
 	}
 	
