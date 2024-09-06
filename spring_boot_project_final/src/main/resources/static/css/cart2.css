@@ -147,7 +147,6 @@ input[type=checkbox]{
 }
 
 .prdName{
-    margin-right: 10px;
     display: flex;
 }
 
@@ -186,9 +185,8 @@ input[type=checkbox]{
 
 .prdName img{
 	width: 5%;
-	height: 50%;
-	margin: 0 auto;
-	margin-left: 327px;
+	height: 50%;	
+	margin-left: auto; /* 오른쪽 끝 정렬 */
 	cursor: pointer;
 	margin-top: 1px;
 }

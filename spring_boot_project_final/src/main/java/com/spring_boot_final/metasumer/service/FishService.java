@@ -15,10 +15,15 @@ public class FishService implements IFishService {
 	@Autowired
 	@Qualifier("IFishDAO")
 	IFishDAO dao;
+	
+	@Override
+	public ArrayList<FishVO> listAllFish(int offset, int limit) {
+		return dao.listAllFish(offset, limit);
+	}
 
 	@Override
-	public ArrayList<FishVO> listAllFish() {
-		return dao.listAllFish();
+	public int getFishCount() {
+		return dao.getFishCount();
 	}
 
 	@Override
@@ -34,6 +39,6 @@ public class FishService implements IFishService {
 	@Override
 	public ArrayList<FishVO> fishSearch(HashMap<String, Object> map) {
 		return dao.fishSearch(map);
-	}
+	}	
 
 }

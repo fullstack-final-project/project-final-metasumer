@@ -211,5 +211,23 @@ public class CartController {
 
 	    return "myPage/orderListView"; 		
 	}
+	
+	@RequestMapping("/myPage/cartDelete")
+	@ResponseBody  
+	public String deleteCartItem(@RequestParam("cartNo") int cartNo, HttpSession session) {	    
+	    String result = "fail";
+	    
+	    try {
+	        String memId = (String) session.getAttribute("memId");
+	        
+	        cartService.deleteCartItem(memId, cartNo);
+	        
+	        result = "success";
+	    } catch (Exception e) {
+	    	result = "fail";
+	    }
+	    
+	    return result;  
+	}
 
 }
