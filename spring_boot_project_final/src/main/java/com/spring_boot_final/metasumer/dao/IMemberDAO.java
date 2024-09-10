@@ -68,6 +68,8 @@ public interface IMemberDAO {
 	
 	// 아이디 찾기
 	public String findId(String memName, String birthDate, String memHP, String memEmail);
+
+
 	
 	// 비밀번호 찾기
 	public int findPasswordCount(String memId, String birthDate, String memName, String memEmail);

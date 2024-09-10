@@ -43,7 +43,8 @@ public class MemberService implements IMemberService {
 	    return result;
 	}
 	
-	public Map<String, Object> getUsermemNickname(String memId) {
+	@Override
+  public Map<String, Object> getUsermemNickname(String memId) {
 		return dao.getUsermemNickname(memId);
 	}
 
@@ -87,6 +88,7 @@ public class MemberService implements IMemberService {
 	public ArrayList<MemberVO> newtagList(String memId) {
 		return dao.newtagList(memId);
 	}
+	
 
 	@Override
 	public void deleteInterests(String memId) {

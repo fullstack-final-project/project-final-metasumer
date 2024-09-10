@@ -1,0 +1,455 @@
+@charset "UTF-8";
+
+
+section {
+    max-width: 1256px; /* 최대 너비 설정 */
+    margin: 0 auto;
+    padding: 0 20px; /* 좌우 패딩 */
+    
+}
+
+/* 창 좌측 */
+.area-left {
+    width: 65%; /* 좌측 영역의 너비 */
+    float: left;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 창 우측 */
+.area-right {
+    width: 30%; /* 우측 영역의 너비 */
+    float: right;
+    padding: 20px;
+    box-sizing: border-box;
+    top: 20px; 
+}
+
+/* 전체 테이블 */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.orderer-details {
+		margin-bottom: 50px;
+}
+
+/* 주문자, 배송지 정보 테이블 */
+.order-ship-table, .order-ship-table th, .order-ship-table td {
+	border-top: 1px solid #87C4FF;
+	border-bottom: 1px solid #87C4FF;
+	border-left: none;
+	border-right: none;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 2;
+	text-align: left;
+}
+
+/* 테이블 레이아웃 고정 */
+.order-ship-table {
+    table-layout: fixed; 
+    width: 100%; 
+}
+
+/* 동일한 너비 설정  */
+.order-ship-table th {
+    width: 25%; 
+}
+
+.order-ship-table td {
+    width: 75%; 
+}
+
+/* 상품 정보 테이블 */
+.product-summary {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+
+/* 상품 정보 테이블 스타일 */
+.product-table {
+    width: 100%;
+    font-size: 18px;
+    border-collapse: collapse;
+    border-top: 1px solid #87C4FF;
+    border-bottom: 1px solid #87C4FF;
+}
+
+.product-table th, .product-table td {
+    padding: 10px;
+    border: none;
+    text-align: center;
+}
+
+.product-table th {
+		border-bottom: 1px solid #87C4FF;
+    font-weight: bold;
+}
+
+
+.area-total {
+		color: #09a4f7;
+		font-weight: bold;
+}
+
+.product-table .area-price,
+.product-table .area-quantity {
+		color: #808080;
+}
+
+/*//////////////////////////////////////////////////////////////////*/
+
+/* 주문 내역 */
+.order-summary {
+    position: relative; 
+    width: 300px; /* 너비 설정 */
+    height: auto; /* 전체 높이 */
+}
+
+/* 결제 정보 탭 */
+.payment-info {
+	padding: 15px;
+	background-color: #f9f9f9;
+	position: relative;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.payment-info h3 {
+	margin-left: 6px;
+}
+
+/* 결제 내역 테이블 */
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 3px solid #ddd;
+}
+
+.summary-table th, .summary-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.summary-table th {
+    font-weight: bold;
+    color: #555;
+}
+
+.summary-table td {
+    color: #555;
+}
+
+
+/* 총 결제 금액 스타일 */
+.total-info {
+    margin-top: 20px;
+    font-size: 18px; /* 강조를 위해 더 큰 글씨체 */
+    font-weight: bold;
+    position: relative;
+}
+
+.total-info dt {
+		margin-left: 3.8%;
+    float: left;
+    clear: left;
+    width: 50%; 
+    color: #000000;
+}
+
+.total-info dd {
+    margin-left: 55%; 
+    font-weight: bold;
+    color: #09a4f7;
+}
+
+/* //////////////////////////////////////////////////////////////////////////// */
+
+/* 버튼 그룹 스타일 */
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#searchZipBtn {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+	background-color: #E0F4FF;
+	color: #333333;
+	margin: 2px;
+}
+
+#searchZipBtn:hover {
+		background-color: #87C4FF;
+}
+
+.button-group .btn {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* 결제 버튼 */
+#submit-button {
+		color: white;
+    background-color: #09a4f7;
+    border: 1px solid #d7d7d7;
+}
+
+#submit-button:hover {
+		background-color: #61c5fa;
+}
+
+/* 취소 버튼 */
+#cancel-button {
+		color: black;
+		background-color: #fff;
+		border: 1px solid #d7d7d7;
+}
+
+#cancel-button:hover {
+		background-color: #f2f2f2;
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////// */
+/* input 요소 크기 조정 */
+.orderer-details input[type="text"],
+.orderer-details input[type="email"]
+ {
+    width: 40%; 
+    padding: 8px; 
+    border: 1px solid #ccc;
+		border-radius: 4px;
+    box-sizing: border-box; 
+}
+
+/* hp input 요소의 크기 조정 */
+.orderer-details input.hp {
+    width: 18%; 
+    display: inline-block;
+}
+
+/*///////////////////////////////////////////////*/
+
+/* 결제방법 */
+.payment-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.payment-option {
+    flex: 1 1 calc(25% - 15px);
+    box-sizing: border-box;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.payment-option img {
+    max-width: 50%;
+    height: auto;
+}
+
+.payment-option.active {
+    background-color: #E0F4FF;
+    border-color: #87C4FF;
+}
+
+.payment-option span {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.payment-option:hover {
+		background-color: #E0F4FF;
+    border-color: #87C4FF;
+}
+
+/*///////////////////////////////////////////////////////  */
+/* 기본정보 스타일 */
+.basic-info {
+    margin-bottom: 20px; 
+    padding: 15px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+}
+
+/* 기본정보 내의 step-box */
+.basic-info .step-box {
+    display: flex;
+    justify-content: space-around; /* 아이콘들을 고르게 배치 */
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.basic-info .step-box p {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.basic-info .step-box img {
+    max-width: 50px; 
+    height: auto;
+    margin-bottom: 5px;
+}
+
+/* 기본정보 내의 info-notice */
+.basic-info .info-notice {
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.6; 
+    color: #555; 
+}
+
+.basic-info .info-notice dt {
+    font-weight: bold;
+    color: #09a4f7;
+    margin-bottom: 5px;
+}
+
+.basic-info .info-notice dd {
+    margin: 0;
+}
+
+/*/////////////////////////////////////////////////// */
+
+/* 공지 영역 스타일 */
+.notic-area {
+    margin-bottom: 20px;
+    padding: 15px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+/* 회사 정보 박스 */
+.company-box {
+    flex: 1; 
+    padding: 10px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 회사 이미지 */
+.company-img {
+    margin-bottom: 10px; /* 이미지와 텍스트 간의 여백 */
+}
+
+.company-img img {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+}
+
+/* 회사 이름 및 날짜 텍스트 */
+.company-box p {
+    margin: 5px 0; 
+    text-align: left; 
+    font-size: 16px; 
+    font-weight: bold;
+    color: #333; 
+}
+
+/* 공지 박스 */
+.notice-box {
+    flex: 1; 
+    padding: 10px; /* 내부 여백 */
+}
+
+/* 공지 내용 리스트 */
+.notice-box dl {
+		
+}
+
+/* 공지 제목 */
+.notice-box dt {
+    font-weight: bold; 
+    color: #09a4f7; 
+    margin-bottom: 10px; 
+}
+
+/* 공지 내용 */
+.notice-box dd {
+		margin: 0;
+    font-size: 14px; 
+    line-height: 1.6; 
+    color: #555; 
+    margin-bottom: 10px; 
+    padding-left: 20px;
+    position: relative;
+    list-style-type: disc;
+}
+
+/* 점 스타일링 */
+.notice-box dd::before {
+	 	position: absolute;
+    content: "•"; 
+    left: 0; 
+    color: #000; 
+    font-size: 16px; 
+}
+
+/*//////////////////////////////////  */
+.quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-decrease,
+.quantity-increase {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+

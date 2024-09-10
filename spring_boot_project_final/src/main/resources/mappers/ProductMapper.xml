@@ -30,8 +30,16 @@
     <!-- 상품 상세 정보 조회 -->
   	<!-- 상품번호(string) 전달받아서 해당 상품 찾아서 반환 (VO) -->
   	<select id="detailViewProduct" parameterType="string" resultType="com.spring_boot_final.metasumer.model.ProductVO">
-  		SELECT * FROM product WHERE prdNo = #{prdNo}
-  	</select>
+	    SELECT 
+	        p.prdNo, p.prdName, p.prdPrice, p.prdStock, p.prdMaker, 
+	        p.prdDescript, p.prdImage, p.bizId, c.prdCtgName
+	    FROM 
+	        product p
+	    JOIN 
+	        prdCategory c ON p.prdCtgId = c.prdCtgId
+	    WHERE 
+	        p.prdNo = #{prdNo}
+		</select>
 
     <!-- 상품 추가 -->
     <insert id="insertProduct" parameterType="com.spring_boot_final.metasumer.model.ProductVO">

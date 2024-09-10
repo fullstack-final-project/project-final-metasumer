@@ -178,10 +178,10 @@
 					<div class="subContainerBox">
 						<div class="subListBox" id="subListBox8">
 							<ul class="subList">
-								<li class="subListItem"><a class="subListTxt">크기 겨루기</a></li>
-								<li class="subListItem"><a class="subListTxt">선주 이벤트</a></li>
-								<li class="subListItem"><a class="subListTxt">사이트 이벤트</a></li>
-								<li class="subListItem"><a class="subListTxt">후기 이벤트</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/myFish'/>">크기 겨루기</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/business'/>">선주 이벤트</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/site'/>">사이트 이벤트</a></li>
+								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/review'/>">후기 이벤트</a></li>
 							</ul>
 						</div>
 					</div>

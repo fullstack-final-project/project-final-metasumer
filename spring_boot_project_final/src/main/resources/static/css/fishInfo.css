@@ -120,8 +120,21 @@ section{
 	margin-top: 100px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+}
 
+.pagination a {
+    margin: 0 5px;
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #39A7FF;
+}
 
-
-
-
+.pagination a.active {
+    background-color: #39A7FF;
+    color: white;
+    border: 1px solid #39A7FF;
+}

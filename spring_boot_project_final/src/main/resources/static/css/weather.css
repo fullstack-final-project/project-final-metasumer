@@ -166,3 +166,79 @@
 .subtitle.storm {
 	color: #05F2DB;
 }
+
+/* weatherTidetable.jsp */
+
+#currentDayBox {
+	margin-top: 30px;
+	padding: 10px;
+}
+
+#currentDayInfo {
+	border-radius: 5px; 
+	border: 2px solid white;
+}
+
+#currentDayInfo th {
+	height: 20px;
+	line-height: 20px;
+	padding: 10px;
+	background-color: #39A7FF;
+	color: white;
+	font-size: 18px;
+}
+
+#currentDayInfo td {
+	height: 30px;
+	line-height: 30px;
+	padding: 10px;
+}
+
+#tidetablebox {
+	margin-top: 30px;
+	padding: 10px;
+}
+
+#tidetableInfo {
+	border-radius: 5px; 
+	border: 2px solid white;
+}
+
+#tidetableInfo th {
+	height: 20px;
+	line-height: 20px;
+	padding: 10px;
+	background-color: #39A7FF;
+	color: white;
+	font-size: 18px;
+}
+
+#tidetableInfo td {
+	height: 30px;
+	line-height: 30px;
+	padding: 10px;
+}
+
+.tidetableTitle {
+	background-color: #E0F4FF;
+	text-align: center;
+	font-size: 18px;	
+}
+
+#tidetableInfo td span {
+	font-weight: bold;
+	color: #39A7FF;
+}
+
+.tidetableNum td,
+.tidetableMain {
+	background-color: #FFEED9;
+}
+
+#tidetableSource {
+	padding: 20px;
+}
+
+#tidetableSource a {
+	color: #39A7FF;
+}

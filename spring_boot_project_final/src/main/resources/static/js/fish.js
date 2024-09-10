@@ -18,18 +18,18 @@ $(function(){
     
     // 버튼 클릭 시 이벤트 처리
     $('.fishBtn').on('click', function() {
-        let discountType = $(this).attr('data-category');
+        let category = $(this).attr('data-category');
 
         // btn 클래스 제거
         $('.fishBtn').removeClass('selectedItem');
         // 추가
-        $(this).addClass('selectedItem'); 
-        
+        $(this).addClass('selectedItem');            
+               
         // URL 변경
-        if (discountType === 'all') {
+        if (category === 'all') {
             location.href = '/fish';
         } else {
-            location.href = '/fish/fishCtgList/' + discountType;
+            location.href = '/fish/fishCtgList/' + category;
         }       
     });
     
@@ -56,30 +56,14 @@ $(function(){
                 alert('실패');
             }
         });
-    });
+    });  
     
-    function updateFishList(fishList) {
-        let fishBox = $('.fishBox');
-        fishBox.empty(); // 비우기
-        
-        if(fishList == ""){
-            fishBox.append('<p id="emptyFishMsg">일치하는 항목이 없습니다.</p>');
-        }else{
-            fishList.forEach(function(fish) {
-                let fishInfo = `
-                    <div id="fish" data-category="${fish.fishCtgId}">
-                        <div id="fishDetail">
-                            <div>
-                                <a href="/fish/detailViewFish/${fish.fishNo}">
-                                    <img src="/project_images/어종/${fish.fishImg}">
-                                </a>
-                            </div>
-                            <p id="fishName">${fish.fishName}</p>
-                        </div>
-                    </div>`;
-            
-                fishBox.append(fishInfo); // 정보 넣어주기
-            });
-        }
-    }
+    // 페이지 이동
+    $('.pagination a').on('click', function(e) {
+         e.preventDefault();
+       
+         let page = $(this).text();
+         
+         location.href = '/fish?page=' + page;
+    });
 });

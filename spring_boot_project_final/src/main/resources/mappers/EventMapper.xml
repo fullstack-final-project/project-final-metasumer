@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring_boot_final.metasumer.dao.IEventDAO">
+
+	<resultMap id="eventResult"
+		type="com.spring_boot_final.metasumer.model.EventVO">
+		<result property="prizeNo" column="prizeNo" />
+		<result property="prizeContent" column="prizeContent" />
+		<result property="prizeRank" column="prizeRank" />
+		<result property="prizeCtg" column="prizeCtg" />
+		<result property="prizeMonth" column="prizeMonth" />
+		<result property="prizeYear" column="prizeYear" />
+		<result property="bizId" column="bizId" />
+		<result property="spotId" column="spotId" />
+	</resultMap>
+	
+	<resultMap id="myfishResult"
+		type="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
+		<result property="recordNo" column="recordNo" />
+		<result property="memId" column="memId" />
+		<result property="memNickname" column="memNickname" />
+		<result property="boardCtgId" column="boardCtgId" />
+		<result property="title" column="title" />
+		<result property="createdDate" column="createdDate" />
+		<result property="content" column="content" />
+		<result property="uploadImage" column="uploadImage" />
+		<result property="fishName" column="fishName" />
+		<result property="fishSize" column="fishSize" />
+		<result property="equipment" column="equipment" />
+		<result property="location" column="location" />
+		<result property="weather" column="weather" />
+		<result property="tag" column="tag" />
+	</resultMap>
+
+	<select id="getMyFishEventYear" resultMap="eventResult">
+		SELECT * 
+		FROM event_prize
+		WHERE prizeCtg='myfish' AND prizeYear=#{thisYear} AND prizeMonth=0
+	</select>
+	
+	<select id="getMyFishEventMonth" resultMap="eventResult">
+		SELECT * 
+		FROM event_prize
+		WHERE prizeCtg='myfish' AND prizeYear=#{thisYear} AND prizeMonth=#{thisMonth}
+	</select>
+	
+	<select id="getYearMyFishRecord" resultMap="myfishResult">
+		SELECT * 
+		FROM myFishRecords
+		JOIN member ON myFishRecords.memId = member.memId
+		WHERE createdDate BETWEEN '2024-01-01 00:00:00' AND '2024-12-31 23:59:59'
+		ORDER BY fishSize*1 DESC 
+		LIMIT 10
+	</select>
+	
+	<select id="getMonthMyFishRecord" resultMap="myfishResult">
+		SELECT * 
+		FROM myFishRecords
+		JOIN member ON myFishRecords.memId = member.memId
+		WHERE createdDate BETWEEN '2024-08-01 00:00:00' AND '2024-09-30 23:59:59'
+		ORDER BY fishSize*1 DESC
+		LIMIT 12
+	</select>
+	
+	<select id="getBusinessEvent" resultMap="eventResult">
+		SELECT * 
+		FROM event_prize
+		WHERE prizeCtg='business' AND bizId=#{bizId} AND spotId=#{spotId} AND prizeYear=#{thisYear} 
+	</select>
+	
+	<select id="getSiteEvent" resultMap="eventResult">
+		SELECT * 
+		FROM event_prize
+		WHERE prizeCtg='site' AND prizeYear=#{thisYear}
+	</select>
+
+</mapper>

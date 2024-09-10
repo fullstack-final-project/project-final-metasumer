@@ -29,5 +29,10 @@ public class ReservationService implements IReservationService {
   public int cancelReservation(Integer resNo) {
     return dao.cancelReservation(resNo);
   }
+  
+  @Override
+  public void saveReservation(ReservationVO reservation) {
+    dao.saveReservation(reservation);
+  }
 
 }
