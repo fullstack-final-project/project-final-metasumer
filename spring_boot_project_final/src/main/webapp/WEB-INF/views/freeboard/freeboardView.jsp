@@ -6,6 +6,7 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/freeboardView.css'/>">
+	<link rel="stylesheet" type="text/css" href="<c:url value='/css/pagination.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
     <meta charset="UTF-8">
     <title>자유게시판</title>
@@ -87,31 +88,25 @@
                     </c:forEach>
                 </tbody>
             </table>
-			</div>
-            <div class="pagination" style="text-align: center; margin-top: 10px;">
-                <!-- 이전 페이지 링크 -->
-                <c:if test="${currentPage > 1}">
-                    <a href="?page=${currentPage - 1}">이전</a>
-                </c:if>
-
-                <!-- 페이지 번호 링크 -->
-                <c:forEach begin="1" end="${totalPages}" var="page">
-                    <c:choose>
-                        <c:when test="${page == currentPage}">
-                            <span>${page}</span>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="?page=${page}">${page}</a>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-
-                <!-- 다음 페이지 링크 -->
-                <c:if test="${currentPage < totalPages}">
-                    <a href="?page=${currentPage + 1}">다음</a>
-                </c:if>
-            </div>
             </c:if>
+			</div>
+			
+             <div class="pagination">
+				    <c:if test="${currentPage > 10}">
+				        <a href="<c:url value='/freeboard/freeboardView/${boardCtgId}?page=${startPage - 10}'/>" class="page-link">이전</a>
+				    </c:if>
+				
+				    <c:forEach var="i" begin="${startPage}" end="${endPage}" varStatus="status">
+				        <a href="<c:url value='/freeboard/freeboardView/${boardCtgId}?page=${i}'/>"
+				           class="page-link ${i == currentPage ? 'current' : ''}">
+				           ${i}
+				        </a>
+				    </c:forEach>
+				
+				    <c:if test="${endPage < totalPages}">
+				        <a href="<c:url value='/freeboard/freeboardView/${boardCtgId}?page=${endPage + 1}'/>" class="page-link">다음</a>
+				    </c:if>
+				</div>
         </section>
         <!-- bottom.jsp import -->
         <c:import url="/WEB-INF/views/layout/bottom.jsp"/>

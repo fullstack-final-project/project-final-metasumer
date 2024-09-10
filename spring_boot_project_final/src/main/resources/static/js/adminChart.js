@@ -15,13 +15,12 @@ $(document).ready(function() {
 
                 $.each(response.topList, function(index, item) {
                     labels.push(item.memId);
-                    loginData.push(item.login_count || 0);
+                    loginData.push(item.loginCount || 0);
                     postData.push(item.postCount || 0);
                     commentData.push(item.commentCount || 0);
                     recordData.push(item.recordCount || 0);
                     activityData.push(item.totalActivity || 0);
                 });
-
                 var ctxLoginTop = document.getElementById('loginTop');
                 if (ctxLoginTop) {
                     var ctxLoginTop2d = ctxLoginTop.getContext('2d');
@@ -30,42 +29,42 @@ $(document).ready(function() {
                         data: {
                             labels: labels,
                             datasets: [
-                                {
-                                    label: '총 활동량',
-                                    data: activityData,
-                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                    borderColor: 'rgba(153, 102, 255, 1)',
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: '로그인 횟수',
-                                    data: loginData,
-                                    backgroundColor: 'rgba(135, 196, 255, 0.5)',
-                                    borderColor: 'rgba(57, 167, 255, 1)',
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: '게시물 작성',
-                                    data: postData,
-                                    backgroundColor: 'rgba(255, 159, 64, 0.5)',
-                                    borderColor: 'rgba(255, 159, 64, 1)',
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: '댓글 작성',
-                                    data: commentData,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                    borderColor: 'rgba(54, 162, 235, 1)',
-                                    borderWidth: 1
-                                },
-                                {
-                                    label: '낚시갤러리 기록',
-                                    data: recordData,
-                                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                                    borderColor: 'rgba(75, 192, 192, 1)',
-                                    borderWidth: 1
-                                }
-                            ]
+									    {
+									        label: '총 활동량',
+									        data: activityData,
+									        backgroundColor: 'rgba(135, 196, 255, 0.5)',
+                                    		borderColor: 'rgba(57, 167, 255, 1)',
+									        borderWidth: 1
+									    },
+									    {
+									        label: '로그인 횟수',
+									        data: loginData,
+									        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+									        borderColor: 'rgba(75, 192, 192, 1)',
+									        borderWidth: 1
+									    },
+									    {
+									        label: '게시물 작성',
+									        data: postData,
+									        backgroundColor: 'rgba(255, 159, 64, 0.5)',
+									        borderColor: 'rgba(255, 159, 64, 1)',
+									        borderWidth: 1
+									    },
+									    {
+									        label: '댓글 작성',
+									        data: commentData,
+									        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+									        borderColor: 'rgba(153, 102, 255, 1)',
+									        borderWidth: 1
+									    },
+									    {
+									        label: '낚시갤러리 기록',
+									        data: recordData,
+									        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+									        borderColor: 'rgba(255, 99, 132, 1)',
+									        borderWidth: 1
+									    }
+									]
                         },
                         options: {
                             scales: {
@@ -168,8 +167,8 @@ $(document).ready(function() {
                                 {
                                     label: '조회수',
                                     data: topPostViews,
-                                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    backgroundColor: 'rgba(135, 196, 255, 0.5)',
+                                    borderColor: 'rgba(57, 167, 255, 1)',
                                     borderWidth: 1
                                 },
                                 {

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-link {
+    display: inline-block;
+    margin: 0 4px;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.page-link:hover {
+    background-color: #E0F4FF;
+    color: #007bff;
+}

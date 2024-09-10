@@ -28,6 +28,9 @@ public class FreeBoardVO {
 	private String status;
 	
 	
+	
+	
+	
 	public int getViews() {
 		return views;
 	}

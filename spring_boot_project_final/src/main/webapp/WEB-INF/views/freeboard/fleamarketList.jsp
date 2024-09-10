@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/fleamarketList.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/pagination.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">	
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
@@ -76,6 +77,23 @@
 				        </div>
 					</c:forEach>
 				 </div>
+				 
+				 <div class="pagination">
+				    <c:if test="${currentPage > 10}">
+				        <a href="<c:url value='/freeboard/fleamarketList/0?page=${startPage - 10}'/>" class="page-link">이전</a>
+				    </c:if>
+				
+				    <c:forEach var="i" begin="${startPage}" end="${endPage}" varStatus="status">
+				        <a href="<c:url value='/freeboard/fleamarketList/0?page=${i}'/>"
+				           class="page-link ${i == currentPage ? 'current' : ''}">
+				           ${i}
+				        </a>
+				    </c:forEach>
+				
+				    <c:if test="${endPage < totalPages}">
+				        <a href="<c:url value='/freeboard/fleamarketList/0?page=${endPage + 1}'/>" class="page-link">다음</a>
+				    </c:if>
+				</div>
 				    
 				    
 				
