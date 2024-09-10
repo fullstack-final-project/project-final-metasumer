@@ -9,6 +9,7 @@
 		<title>관리자 페이지</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/memberManagement.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/pagination.css'/>">
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<style>
@@ -103,23 +104,22 @@
 			    </table>
 				 
 				 
-				 <div class="pagination">
-                <c:if test="${currentPage > 1}">
-                    <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${currentPage - 1}&size=${size}">이전</a>
-                </c:if>
-
-                <c:forEach begin="1" end="${totalPages}" var="i">
-                    <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${i}&size=${size}" 
-                       class="${i == currentPage ? 'active' : ''}">
-                       ${i}
-                    </a>
-                </c:forEach>
-
-                <c:if test="${currentPage < totalPages}">
-                    <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${currentPage + 1}&size=${size}">다음</a>
-                </c:if>
-            </div>
+				<div class="pagination">
+				    <c:if test="${currentPage > 1}">
+				        <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${currentPage - 1}&size=${size}" class="page-link">이전</a>
+				    </c:if>
 				
+				    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+				        <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${i}&size=${size}"
+				           class="${i == currentPage ? 'page-link current' : 'page-link'}">
+				           ${i}
+				        </a>
+				    </c:forEach>
+				
+				    <c:if test="${currentPage < totalPages}">
+				        <a href="/admin/postOps?startDate=${startDate}&endDate=${endDate}&boardCategory=${boardCategory}&page=${currentPage + 1}&size=${size}" class="page-link">다음</a>
+				    </c:if>
+				</div>
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>

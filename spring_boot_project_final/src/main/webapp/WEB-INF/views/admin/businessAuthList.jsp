@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/memberManagement.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminPageList.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/pagination.css'/>">
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
@@ -85,18 +86,20 @@
                     </tbody>
                 </table>
                 
-                <div class="pagination">
-				    <c:if test="${currentPage > 1}">
-				        <a href="<c:url value='/admin/businessAuthList'/>?page=${currentPage - 1}">« 이전</a>
+                 <div class="pagination">
+				    <c:if test="${startPage > 1}">
+				        <a href="<c:url value='/admin/businessAuthList'/>?page=${startPage - 1}" class="page-link">« 이전</a>
 				    </c:if>
 				
-				    <c:forEach var="i" begin="1" end="${totalPages}">
+				    <c:forEach var="i" begin="${startPage}" end="${endPage}">
 				        <a href="<c:url value='/admin/businessAuthList'/>?page=${i}" 
-				           class="${i == currentPage ? 'active' : ''}">${i}</a>
+				           class="page-link ${i == currentPage ? 'current' : ''}">
+				           ${i}
+				        </a>
 				    </c:forEach>
 				
-				    <c:if test="${currentPage < totalPages}">
-				        <a href="<c:url value='/admin/businessAuthList'/>?page=${currentPage + 1}">다음 »</a>
+				    <c:if test="${endPage < totalPages}">
+				        <a href="<c:url value='/admin/businessAuthList'/>?page=${endPage + 1}" class="page-link">다음 »</a>
 				    </c:if>
 				</div>
 				
