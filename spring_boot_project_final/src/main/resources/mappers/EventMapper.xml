@@ -61,7 +61,7 @@
 		SELECT * 
 		FROM myFishRecords
 		JOIN member ON myFishRecords.memId = member.memId
-		WHERE createdDate BETWEEN '2024-08-01 00:00:00' AND '2024-09-30 23:59:59'
+		WHERE createdDate BETWEEN '2024-09-01 00:00:00' AND '2024-09-30 23:59:59'
 		ORDER BY fishSize*1 DESC
 		LIMIT 12
 	</select>
