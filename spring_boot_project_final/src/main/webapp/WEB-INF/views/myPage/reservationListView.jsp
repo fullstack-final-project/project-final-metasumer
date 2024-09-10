@@ -77,7 +77,7 @@
 			                  </table>			              
 			                  
 			                </div>
-			                <button class="inquiryBtn">1:1 문의</button>
+			                <button class="inquiryBtn" onclick="location.href='/freeboard/freeboardView/4'">1:1 문의</button>
 			              </div>
 			            </div>
 			          </c:forEach>

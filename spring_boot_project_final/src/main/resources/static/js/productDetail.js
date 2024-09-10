@@ -72,8 +72,25 @@ function buyNow() {
 }
 
 function addToCart() {
-    alert("장바구니에 추가되었습니다.");
+    let prdNo = document.getElementById('prdNo').value; // 상품 번호
+    let quantity = document.getElementById('quantity').value; // 선택한 수량
+    
+    $.ajax({
+        url: '/myPage/insertCart',
+        type: 'post',
+        data: {
+            prdNo: prdNo,
+            cartQty: quantity
+        },
+        success: function(response) {
+            alert("장바구니에 추가되었습니다.");
+        },
+        error: function() {
+            alert("실패");
+        }
+    });
 }
+
 function addToWishlist() {
     alert("관심상품에 추가되었습니다.");
 }

@@ -1,93 +1,92 @@
 package com.spring_boot_final.metasumer.model;
 
-import java.util.Date;
-
 public class OrderVO {
-  private int orderId;            // 주문 ID (자동 생성)
-  private String prdNo;           // 상품 번호
-  private int quantity;           // 주문 수량
-  private Date orderDate;         // 주문 일자
-  private String buyerName;       // 구매자 이름
-  private String buyerHP;         // 구매자 휴대전화
-  private String buyerEmail;      // 구매자 이메일
-  private String shippingZipcode; // 배송지 우편번호
-  private String shippingAddress1; // 배송지 주소1
-  private String shippingAddress2; // 배송지 주소2
-  private int totalPrice; 
-  
-  private int bizId;              // 사업자 ID
-  public int getOrderId() {
-    return orderId;
-  }
-  public void setOrderId(int orderId) {
-    this.orderId = orderId;
-  }
-  public String getPrdNo() {
-    return prdNo;
-  }
-  public void setPrdNo(String prdNo) {
-    this.prdNo = prdNo;
-  }
-  public int getQuantity() {
-    return quantity;
-  }
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
-  public Date getOrderDate() {
-    return orderDate;
-  }
-  public void setOrderDate(Date orderDate) {
-    this.orderDate = orderDate;
-  }
-  public String getBuyerName() {
-    return buyerName;
-  }
-  public void setBuyerName(String buyerName) {
-    this.buyerName = buyerName;
-  }
-  public String getBuyerHP() {
-    return buyerHP;
-  }
-  public void setBuyerHP(String buyerHP) {
-    this.buyerHP = buyerHP;
-  }
-  public String getBuyerEmail() {
-    return buyerEmail;
-  }
-  public void setBuyerEmail(String buyerEmail) {
-    this.buyerEmail = buyerEmail;
-  }
-  public String getShippingZipcode() {
-    return shippingZipcode;
-  }
-  public void setShippingZipcode(String shippingZipcode) {
-    this.shippingZipcode = shippingZipcode;
-  }
-  public String getShippingAddress1() {
-    return shippingAddress1;
-  }
-  public void setShippingAddress1(String shippingAddress1) {
-    this.shippingAddress1 = shippingAddress1;
-  }
-  public String getShippingAddress2() {
-    return shippingAddress2;
-  }
-  public void setShippingAddress2(String shippingAddress2) {
-    this.shippingAddress2 = shippingAddress2;
-  }
-  public int getBizId() {
-    return bizId;
-  }
-  public int getTotalPrice() {
-    return totalPrice;
-  }
-  public void setTotalPrice(int totalPrice) {
-    this.totalPrice = totalPrice;
-  }
-  public void setBizId(int bizId) {
-    this.bizId = bizId;
-  }
+	
+	private String ordNo;
+	private String ordDate;
+	private String memId;
+	private String ordRcvReceiver;
+	private String ordRcvZipcode;
+	private String ordRcvAddress1;
+	private String ordRcvAddress2;
+	private String ordRcvPhone;
+	private String ordRcvMsg;
+	private String ordPay;
+	private String prdNo; // 개별 상품 결제 시 사용
+    private int ordQty; // 개별 상품 수량
+    
+	public String getPrdNo() {
+		return prdNo;
+	}
+	public void setPrdNo(String prdNo) {
+		this.prdNo = prdNo;
+	}
+	public int getOrdQty() {
+		return ordQty;
+	}
+	public void setOrdQty(int ordQty) {
+		this.ordQty = ordQty;
+	}
+	public String getOrdNo() {
+		return ordNo;
+	}
+	public void setOrdNo(String ordNo) {
+		this.ordNo = ordNo;
+	}
+	public String getOrdDate() {
+		return ordDate;
+	}
+	public void setOrdDate(String ordDate) {
+		this.ordDate = ordDate;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+	public String getOrdRcvReceiver() {
+		return ordRcvReceiver;
+	}
+	public void setOrdRcvReceiver(String ordRcvReceiver) {
+		this.ordRcvReceiver = ordRcvReceiver;
+	}
+	public String getOrdRcvZipcode() {
+		return ordRcvZipcode;
+	}
+	public void setOrdRcvZipcode(String ordRcvZipcode) {
+		this.ordRcvZipcode = ordRcvZipcode;
+	}
+	public String getOrdRcvAddress1() {
+		return ordRcvAddress1;
+	}
+	public void setOrdRcvAddress1(String ordRcvAddress1) {
+		this.ordRcvAddress1 = ordRcvAddress1;
+	}
+	public String getOrdRcvAddress2() {
+		return ordRcvAddress2;
+	}
+	public void setOrdRcvAddress2(String ordRcvAddress2) {
+		this.ordRcvAddress2 = ordRcvAddress2;
+	}
+	public String getOrdRcvPhone() {
+		return ordRcvPhone;
+	}
+	public void setOrdRcvPhone(String ordRcvPhone) {
+		this.ordRcvPhone = ordRcvPhone;
+	}
+	public String getOrdRcvMsg() {
+		return ordRcvMsg;
+	}
+	public void setOrdRcvMsg(String ordRcvMsg) {
+		this.ordRcvMsg = ordRcvMsg;
+	}
+	public String getOrdPay() {
+		return ordPay;
+	}
+	public void setOrdPay(String ordPay) {
+		this.ordPay = ordPay;
+	}
   
   
 }
