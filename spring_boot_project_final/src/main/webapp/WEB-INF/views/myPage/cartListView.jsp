@@ -26,7 +26,7 @@
 			        <div id="emptyBox">
 			          <img src="<c:url value='/image/noOrder.png' />">
 			          <p id='emptyMessage'>장바구니가 비어있습니다.</p>
-			          <button>베스트 상품 보기</button>
+			          <button onclick="location.href='/product/productList'">베스트 상품 보기</button>
 			        </div>				        	        			                           
 			      </c:if>
 			      <c:if test="${not empty cartList}">			       
@@ -55,8 +55,8 @@
 						    </div>						  
 						  </div>
 						  <div class="quantityWrap">
-							<input type="number" name="cartQty" value="${prd.cartQty}" class="quantity" min="1">
-                            <input type="hidden" name="cartNo" value="${prd.cartNo}">									                      			                         
+							<input type="number" name="cartQty[]" value="${prd.cartQty}" class="quantity" min="1">
+                            <input type="hidden" name="cartNo[]" value="${prd.cartNo}">									                      			                         
 							<button class="qtyUpdate" type="button">변경</button>
 					      </div>					  
 				        </c:forEach>

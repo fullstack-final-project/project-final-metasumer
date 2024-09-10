@@ -35,13 +35,13 @@
 
               newForm.append($('<input>', { // 자식 태그 생성. 문자열로 append 하는 방식도 있음
                   'type': 'hidden',
-                  'name': 'cartNo',
+                  'name': 'cartNo[]',
                   'value': cartNo
               }));
 
               newForm.append($('<input>', {
                   'type': 'hidden',
-                  'name': 'cartQty',
+                  'name': 'cartQty[]',
                   'value': cartQty
               }));
           });
@@ -101,8 +101,8 @@
 
          // cartNo, cartQty를 배열에 추가
          $('.quantityWrap').each(function() {
-             let cartNo = $(this).find('input[name="cartNo"]').val(); // name="cartNo"인 hidden input 가져오기
-             let cartQty = $(this).find('input[name="cartQty"]').val();                  
+             let cartNo = $(this).find('input[name="cartNo[]"]').val(); // name="cartNo"인 hidden input 가져오기
+             let cartQty = $(this).find('input[name="cartQty[]"]').val();                  
            
              cartNos.push(cartNo);
              cartQtys.push(cartQty);
@@ -113,8 +113,8 @@
              type: "post",
              url: "/myPage/updateCart",
              data: {
-                 "cartNo": cartNos,
-                 "cartQty": cartQtys
+                 "cartNo[]": cartNos,
+                 "cartQty[]": cartQtys
              },
              dataType: 'text', 
              success: function(result) {

@@ -1,6 +1,8 @@
 package com.spring_boot_final.metasumer.model;
 
 import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -54,14 +56,16 @@ public class ReservationListVO {
 	public void setResDate(Date resDate) {
 		this.resDate = resDate;
 	}
-	public Time getResStart() {
-		return resStart;
+	public String getResStart() {
+		LocalTime startTime = resStart.toLocalTime();
+        return startTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
 	public void setResStart(Time resStart) {
 		this.resStart = resStart;
 	}
-	public Time getResEnd() {
-		return resEnd;
+	public String getResEnd() {
+		LocalTime endTime = resEnd.toLocalTime();
+        return endTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
 	public void setResEnd(Time resEnd) {
 		this.resEnd = resEnd;

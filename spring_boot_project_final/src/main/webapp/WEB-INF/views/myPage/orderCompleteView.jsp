@@ -23,6 +23,10 @@
 				    <p>주문일자 : <span id="orderDate">${ordDate}</span></p>		  
 			      </div>				  
 			    </div>
+			    <div id="orderCompleteBtn">
+			      <button id="continueBtn" onclick="location.href='/product/productList'">쇼핑 계속하기</button>
+			      <button id="homeBtn" onclick="location.href='/'">홈으로</button>
+			    </div>
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		

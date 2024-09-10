@@ -22,7 +22,7 @@
         <c:import url="/WEB-INF/views/layout/top.jsp"></c:import>
 
         <section>
-        	<form id="order-form" action="<c:url value='/order/productComplete'/>" method="post">
+        	<form id="order-form" action="<c:url value='/order/productCompletes'/>" method="post">
         		<input type="hidden" id="prdNo" name="prdNo" value="${product.prdNo}">
         		<input type="hidden" id="bizId" name="bizId" value="${bizId}">
         		<input type="hidden" name="prdPrice" value="${product.prdPrice}" />
@@ -91,25 +91,27 @@
 	                    <table class="order-ship-table">
 	                        <tr>
 	                            <th><label for="recipient">수령인</label></th>
-	                            <td><input type="text" id="recipient" name="recipient" required></td>
+	                            <td><input type="text" id="recipient" name="ordRcvReceiver" required>
+	                                <input type="hidden" name="memId" value="${member.memId}">
+	                            </td>
 	                        </tr>
 	                        <tr>
 							            	<th>주소</th>
 							            	<td colspan="3">
-							            		<input type="text" id="memZipcode" name="shippingZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
+							            		<input type="text" id="memZipcode" name="ordRcvZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
 							            		<input type="button" id="searchZipBtn" name="searchZipBtn" class="btn" value="우편번호 찾기"><br>
-							            		<input type="text" id="memAddress1" name="shippingAddress1" placeholder="주소" class="input_text" required readonly>
-							            		<input type="text" id="memAddress2" name="shippingAddress2" placeholder="상세 주소 입력" class="input_text" required>
+							            		<input type="text" id="memAddress1" name="ordRcvAddress1" placeholder="주소" class="input_text" required readonly>
+							            		<input type="text" id="memAddress2" name="ordRcvAddress2" placeholder="상세 주소 입력" class="input_text" required>
 						            		</td>
 						            	</tr>
 	                        <tr>
 	                            <th><label for="phone">휴대전화</label></th>
 	                            <td>
-							                <input type="text" id="memHp1" name="memHp1" size="3" class="hp" 
+							                <input type="text" id="memHp1" name="hp1" size="3" class="hp" 
 							                       value="" required> 
-							                - <input type="text" id="memHp2" name="memHp2" size="4" class="hp" 
+							                - <input type="text" id="memHp2" name="hp2" size="4" class="hp" 
 							                         value="" required>
-							                - <input type="text" id="memHp3" name="memHp3" size="4" class="hp" 
+							                - <input type="text" id="memHp3" name="hp3" size="4" class="hp" 
 							                         value="" required>
 							            		</td>
 	                        </tr>
@@ -130,8 +132,16 @@
 	                                </select>
 	                            </td>
 	                        </tr>
+	                        <tr><th>배송 메시지</th>
+	        		  		  <td><select id="ordRcvMsg" name="ordRcvMsg">
+	        		  		 		<option value="배송 전 전화주세요">배송 전 전화주세요</option>
+	        		  		 		<option value="부재시 경비실에 맡겨주세요">부재시 경비실에 맡겨주세요</option>
+	        		  		 		<option value="부재시 문앞에 놓고 가세요">부재시 문앞에 놓고 가세요</option>       		  		 		
+	        		  		      </select>
+	        		  		  </td>
+	        		  	    </tr>
 	                    </table>
-	           		 </div>
+	           		 </div><br>
 	              
 	               	<!-- 결제 방법 -->
 	               	<h2>결제 방법</h2>
@@ -170,6 +180,7 @@
 									            <span>페이코</span>
 									        </li>
 									    </ul>
+									    <input type="hidden" name="ordPay" id="ordPayInput">
 									</div>
 	           </div>    
 	           
