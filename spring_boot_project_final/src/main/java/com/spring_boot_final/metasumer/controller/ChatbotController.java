@@ -18,8 +18,14 @@ public class ChatbotController {
 	@RequestMapping("/chatbot")
 	@ResponseBody
 	public String chatbot(@RequestParam(value="message",  required=false) String message) {
-		String result = ChatbotService.main(message); // 완료 : ajax에서 데이터 잘 넘어옴
-		System.out.println("질문 : " + message);
+		String result = "";
+		
+		try {
+			result = ChatbotService.main(message);
+			System.out.println("질문 : " + message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 	
