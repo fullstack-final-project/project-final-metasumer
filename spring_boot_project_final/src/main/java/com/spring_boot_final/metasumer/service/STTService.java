@@ -1,17 +1,27 @@
 package com.spring_boot_final.metasumer.service;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class STTService {
+	
+	@Autowired
+	Environment env;
+	
 	public String stt(String filePathName) {
-        String clientId = "sio4q1ij5f";
-        String clientSecret = "mVTSK6B3Ng5X7yhhD9eM4BquW6sPjpfO4qjUdFCu";
+        String clientId = env.getProperty("stt.clientId");
+        String clientSecret = env.getProperty("stt.clientSecret");  
         String result = ""; // STT 적용 결과 저장 변수
 
         try {
