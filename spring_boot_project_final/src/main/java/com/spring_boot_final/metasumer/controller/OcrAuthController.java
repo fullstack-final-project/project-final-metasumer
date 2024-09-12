@@ -42,7 +42,7 @@ public class OcrAuthController {
 			String filePathName = uploadPath + originalFileName;
 
 			File newFile = new File(filePathName);
-			file.transferTo(newFile); // 서버 전송
+			file.transferTo(newFile);
 			
 			result = ocrService.ocrGeneral(filePathName);
 

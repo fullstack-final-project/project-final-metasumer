@@ -7,10 +7,11 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/newfreeboardForm.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/myFishRecordsUploadTag.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
-		<script src="<c:url value='/js/MyFishRecordsUpload.js'/>"></script>
+		<script src="<c:url value='/js/myFishRecordsUpload.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
@@ -22,11 +23,12 @@
 				<form id="uploadMyFishRecordsForm" name="uploadMyFishRecordsForm" enctype="multipart/form-data">
 				<input type="hidden" name="memId" value="${memId}">
 				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
-				
+				<input type="hidden" name="typeNo" value="6">
+				<input type="hidden" id="tagsInput" name="tagsArray" />
 				
                 <table>
                     <tr>
-                        <th colspan="2">물고기 기록${ boardCtgId }</th>
+                        <th colspan="2">낚시 갤러리 기록</th>
                     </tr>
                     <tr>
 		                <th>작성자</th>
@@ -52,9 +54,12 @@
             			</td>
 		            </tr>
 		            <tr>
-		                <th>물고기 이름</th>
-		                <td><input type="text" id="fishName" name="fishName" class="input_text"></td>
-		            </tr>
+					    <th>물고기 이름</th>
+					    <td>
+					        <button type="button" class="btn" onclick="searchFish()">사진으로 이름 찾기</button>
+					        <input type="text" id="fishName" name="fishName" class="input_text">
+					    </td>
+					</tr>
 		            <tr>
 		                <th>물고기 크기</th>
 		                <td><input type="number" id="fishSize" name="fishSize" class="input_num">cm</td>
@@ -64,24 +69,33 @@
 		                <td><input type="text" id="equipment" name="equipment" class="input_text"></td>
 		            </tr>
 		            <tr>
-		                <th>낚시 위치</th>
-		                <td><input type="text" id="location" name="location" class="input_text"></td>
-		            </tr>
+					    <th>낚시 위치</th>
+					    <td>
+					        <input type="radio" id="freshwater" name="location " value="민물낚시" required>
+					        <label for="freshwater">민물 낚시</label>
+					        <input type="radio" id="saltwater" name="location " value="바다낚시" required>
+					        <label for="saltwater">바다 낚시</label>
+					    </td>
+					</tr>
 		            <tr>
 		                <th>날씨</th>
 		                <td><input type="text" id="weather" name="weather" class="input_text"></td>
 		            </tr>
+                    <tr>
+					    <th>태그 추가하기</th>
+					    <td>
+					        <button type="button" class="btn" onclick="openInNewWindow()">태그 추가하기</button>
+					        <div id="selectedTags"></div>
+					    </td>
+					</tr>
 		            <tr>
-		            	<td colspan="2">
+		            	<td colspan="2" class="btn_box_center">
                             <button type="submit" class="btn">저장</button>
                             <button type="button" class="btn" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView'/>'">취소</button>
                     	</td>
-                    </tr>	
+                    </tr>
 		        </table>
             </form>
-				
-				
-				
 				
 			</section>
 			<!-- bottom.jsp import -->

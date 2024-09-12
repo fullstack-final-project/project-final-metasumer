@@ -24,6 +24,7 @@
 		<result property="categoryName" column="categoryName" />
 		<result property="tagName" column="tagName" />
 		<result property="tagId" column="tagId" />
+		<result property="typeNo" column="typeNo" />
 	</resultMap>
 	
 	<select id="loginCheck" parameterType="hashmap" resultType="string">
@@ -80,7 +81,7 @@
   		SELECT t.tagId, t.tagName, t.interestId
 		FROM interesttag t
 		LEFT JOIN memberInterest m ON t.tagId = m.tagId AND m.memId = #{memId}
-		WHERE m.tagId IS NULL;
+		WHERE m.memId IS NULL
   	</select>
   	
   	<select id="userTagList" resultMap="mbResult">
@@ -89,19 +90,21 @@
 		JOIN interesttag t ON m.tagId = t.tagId
 		JOIN interestcategory c ON t.interestId = c.interestId
 		WHERE m.memId = #{memId}
+		AND m.typeNo = #{typeNo}
   	</select>
   	
   	<insert id="saveInterests" parameterType="map">
-        INSERT INTO memberInterest (memId, tagId)
+        INSERT INTO memberInterest (memId, tagId, typeNo, recordNo)
         VALUES
         <foreach collection="tagIds" item="tagId" separator=",">
-            (#{memId}, #{tagId})
+            (#{memId}, #{tagId}, #{typeNo}, #{recordNo})
         </foreach>
     </insert>
     
     <delete id="deleteInterests">
     	DELETE FROM memberInterest
-		WHERE memId = #{memId};
+		WHERE memId = #{memId}
+		AND typeNo = #{typeNo};
     </delete>
     
 	

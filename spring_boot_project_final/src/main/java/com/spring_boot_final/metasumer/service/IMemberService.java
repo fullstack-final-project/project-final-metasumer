@@ -47,17 +47,16 @@ public interface IMemberService {
 	public ArrayList<MemberVO> categoryList();
 
 	// 관심사 태그 저장
-	public void saveInterests(String memId, List<String> tagIds);
+	public void saveInterests(String memId, List<String> tagIds, int typeNo, int recordNo);
 
 	// 사용자 관심사 태그 조회
-	public ArrayList<MemberVO> userTagList(String memId);
+	public ArrayList<MemberVO> userTagList(String memId, int typeNo);
 
 	// 사용자 관심사 있는거 빼고 태그 가져오기
 	public ArrayList<MemberVO> newtagList(String memId);
 
-	
 	// 관심사 태그 삭제
-	public void deleteInterests(String memId);
+	public void deleteInterests(String memId, int typeNo);
 
 	// 사업자 신청 등록
 	public void insertBusinessAuth(BusinessAuthVO vo);

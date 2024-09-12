@@ -119,6 +119,16 @@ public class AdminService implements IAdminService {
 		return dao.getTopPostsCount();
 	}
 
+	@Override
+	public ArrayList<MemberVO> searchMembers(String searchStr) {
+		return dao.searchMembers(searchStr);
+	}
+
+	@Override
+	public ArrayList<BusinessAuthVO> searchbusiness(String searchStr, String memType) {
+		return dao.searchbusiness(searchStr, memType);
+	}
+
 	
 	
 

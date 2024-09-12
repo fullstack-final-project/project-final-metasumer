@@ -24,7 +24,7 @@
 		<result property="tagId" column="tagId" />
 		<result property="status" column="status" />
 	</resultMap>
-	<resultMap id="businessResultMap"
+	<resultMap id="brResult"
 		type="com.spring_boot_final.metasumer.model.BusinessAuthVO">
 		<result property="bizId" column="bizId" />
 		<result property="memId" column="memId" />
@@ -60,7 +60,7 @@
 		WHERE memType = #{memType}
 	</select>
 
-	<select id="businessList" resultMap="businessResultMap">
+	<select id="businessList" resultMap="brResult">
 		SELECT b.bizId, b.memId,
 		b.businessName, b.authStatus, b.authDate,
 		b.bizRegNumber,
@@ -108,7 +108,7 @@
 		FROM business
 	</select>
 
-	<select id="getPendingBusinessAuth" resultMap="businessResultMap">
+	<select id="getPendingBusinessAuth" resultMap="brResult">
 	    SELECT bizId, memId, businessName, bizRegNumber, delegate, businessCategory, businessType, authStatus
 	    FROM business
 	    WHERE (#{authStatus} IS NULL OR #{authStatus} = '' OR authStatus = #{authStatus})
@@ -137,7 +137,7 @@
 		memId = #{memId}
 	</select>
 
-	<select id="businessDetail" resultMap="businessResultMap">
+	<select id="businessDetail" resultMap="brResult">
 		SELECT b.bizId, b.memId,
 		b.businessName, b.authStatus, b.authDate,
 		b.bizRegNumber,
@@ -293,6 +293,27 @@
         ORDER BY GREATEST(commentCount, views) DESC
         LIMIT 5
     </select>
+    
+    <select id="searchMembers" resultMap="mbResult">
+        SELECT *
+        FROM member
+        WHERE (memId LIKE CONCAT('%', #{searchStr}, '%')
+               OR memName LIKE CONCAT('%', #{searchStr}, '%')
+               OR memNickname LIKE CONCAT('%', #{searchStr}, '%'))
+        ORDER BY memJoinDate DESC
+    </select>
+    
+    <select id="searchbusiness" resultMap="brResult">
+	    SELECT b.*, m.memName, m.memType
+	    FROM business b
+	    JOIN member m ON b.memId = m.memId
+	    WHERE (b.businessName LIKE CONCAT('%', #{searchStr}, '%')
+	           OR b.memId LIKE CONCAT('%', #{searchStr}, '%')
+	           OR m.memName LIKE CONCAT('%', #{searchStr}, '%')
+	           OR b.delegate LIKE CONCAT('%', #{searchStr}, '%'))
+	      AND m.memType = #{memType}
+	    ORDER BY b.issueDate DESC
+	</select>
 
 
 </mapper>

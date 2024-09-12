@@ -20,10 +20,11 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
-			<form method="post" action="<c:url value='/myFishRecords/updatemyFishRecords'/>" enctype="multipart/form-data">
+			<form method="post" action="<c:url value='/myFishRecords/updateMyFishRecords'/>" enctype="multipart/form-data">
 				<input type="hidden" name="recordNo" value="${mf.recordNo}" />
 				<input type="hidden" name="memId" value="${mf.memId}" />
 				<input type="hidden" name="boardCtgId" value="${mf.boardCtgId}" />
+				<input type="hidden" name="typeNo" value="6" />
 				
 				<table>
 					<tr>
@@ -36,8 +37,13 @@
 					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>
-						<th>위치</th>
-						<td><input type="text" id="location" name="location" value="${ mf.location }" class="input_text" required></td>
+					    <th>위치</th>
+					    <td>
+					        <input type="radio" id="freshwater" name="location" value="민물낚시" <c:if test="${mf.location == '민물낚시'}">checked</c:if> required>
+					        <label for="freshwater">민물 낚시</label>
+					        <input type="radio" id="saltwater" name="location" value="바다낚시" <c:if test="${mf.location == '바다낚시'}">checked</c:if> required>
+					        <label for="saltwater">바다 낚시</label>
+					    </td>
 						<th>날씨</th>
 						<td><input type="text" id="weather" name="weather" value="${ mf.weather }" class="input_text" required></td>
 					</tr>
