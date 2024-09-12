@@ -49,7 +49,8 @@
 			        </c:if>
 			        <c:if test="${not empty orderList}">
 			          <c:set var="prevOrdNo" value="" />
-			          <c:forEach var="ord" items="${orderList}">	
+			          <c:set var="totalPrice" value="0" />
+			          <c:forEach var="ord" items="${orderList}">				           
 			            <div class="ordListInfo">
 			              <!-- 주문번호에서 날짜 부분을 추출 -->
                           <c:set var="currentDate" value="${ord.ordNo.substring(0, 8)}" />
@@ -59,8 +60,8 @@
                           <!-- 이전 주문번호와 현재 주문번호가 다를 때만 출력 -->
                           <c:if test="${prevOrdNo != currentOrdNo}">
                             <!-- 날짜 출력 -->
-                            <h3>${currentDate.substring(0, 4)}.${currentDate.substring(4, 6)}.${currentDate.substring(6, 8)}</h3><hr>                          
-                          </c:if>						         
+                            <h3>${currentDate.substring(0, 4)}.${currentDate.substring(4, 6)}.${currentDate.substring(6, 8)}</h3><hr>                                                
+                          </c:if>		                          				         
 			              <div class="ordListDetail">
 			                <img src="<c:url value='/project_images/${ord.prdImage}' />">
 			                <div class="ordDescription">
@@ -77,18 +78,18 @@
 						          <tr>
 			                        <td><a href="#">${ord.prdName}</a></td>
 			                        <td>${ord.ordNo}</td>
-			                        <td>${ord.ordQty}</td>
+			                        <td>${ord.ordQty}</td>                                                                       
 			                        <td><fmt:formatNumber value="${ord.prdPrice * ord.ordQty}" pattern="#,###" />원</td>
 			                      </tr>
 						        </tbody>		                    			                   
 			                  </table>			              
 			                  
 			                </div>
-			                <button class="inquiryBtn">1:1 문의</button>
+			                <button class="inquiryBtn" onclick="location.href='/freeboard/freeboardView/4'">1:1 문의</button>
 			              </div>
 			            </div>
 			            <c:set var="prevOrdNo" value="${currentOrdNo}" />
-			          </c:forEach>	
+			          </c:forEach>				         
 			        </c:if>			       				        			        		          				         
 			      </div>			      
 			    </div>

@@ -43,42 +43,59 @@ public class AdminController {
 	public String memberManagement(Model model, @PathVariable("memType") String memType,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
-		int pageSize = 20;
-		int offset = (page - 1) * pageSize;
+		final int pageSize = 20;
 
-		ArrayList<MemberVO> memList = adminService.memberList(memType, offset, pageSize);
-		model.addAttribute("memList", memList);
+	    int offset = (page - 1) * pageSize;
+	    List<MemberVO> memList = adminService.memberList(memType, offset, pageSize);
+	    model.addAttribute("memList", memList);
 
-		int totalCount = adminService.countMembers(memType);
-		int totalPages = (int) Math.ceil((double) totalCount / pageSize);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("pageSize", pageSize);
+	    int totalCount = adminService.countMembers(memType);
+	    int totalPages = (int) Math.ceil((double) totalCount / pageSize);
 
-		return "admin/memberManagement";
+	    if (page < 1) {
+	        page = 1;
+	    } else if (page > totalPages) {
+	        page = totalPages;
+	    }
+
+	    int startPage = ((page - 1) / 10) * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
+
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("memType", memType);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+
+	    return "admin/memberManagement";
 	}
 
 	@RequestMapping("/admin/businessManagement")
 	public String businessManagement(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
 
-		int pageSize = 20;
-		int offset = (page - 1) * pageSize;
+	    int pageSize = 20;
+	    int offset = (page - 1) * pageSize;
 
-		ArrayList<BusinessAuthVO> bsList = adminService.businessList(offset, pageSize);
-		model.addAttribute("bsList", bsList);
+	    ArrayList<BusinessAuthVO> bsList = adminService.businessList(offset, pageSize);
+	    model.addAttribute("bsList", bsList);
 
-		int totalCount = adminService.countbusiness();
-		int totalPages = (int) Math.ceil((double) totalCount / pageSize);
+	    int totalCount = adminService.countbusiness();
+	    int totalPages = (int) Math.ceil((double) totalCount / pageSize);
 
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("pageSize", pageSize);
+	    int startPage = ((page - 1) / 10) * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
 
-		int count = adminService.countBusinessAuth();
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
 
-		model.addAttribute("count", count);
+	    int count = adminService.countBusinessAuth();
+	    model.addAttribute("count", count);
 
-		return "admin/businessManagementList";
+	    return "admin/businessManagementList";
 	}
 
 	// 회원 계정 활성/비활성
@@ -104,18 +121,24 @@ public class AdminController {
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
 		int pageSize = 20;
-		int start = (page - 1) * pageSize;
+	    int offset = (page - 1) * pageSize;
 
-		int totalItems = adminService.getTotalBusinessAuthCount();
+	    ArrayList<BusinessAuthVO> authList = adminService.getPendingBusinessAuth(offset, pageSize, authStatus);
 
-		ArrayList<BusinessAuthVO> authList = adminService.getPendingBusinessAuth(start, pageSize, authStatus);
+	    int totalItems = adminService.getTotalBusinessAuthCount();
 
-		int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+	    int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 
-		model.addAttribute("authList", authList);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("pageSize", pageSize);
+	    int startPage = ((page - 1) / 10) * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
+
+	    model.addAttribute("authList", authList);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("pageSize", pageSize);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+	    model.addAttribute("authStatus", authStatus);
 
 		return "admin/businessAuthList";
 	}
@@ -197,14 +220,19 @@ public class AdminController {
 
 		int totalCount = adminService.getPostsCount(boardCategory, startDate, endDate);
 		int totalPages = (int) Math.ceil((double) totalCount / size);
+		
+		int startPage = ((page - 1) / 10) * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
 
-		model.addAttribute("poList", poList);
-		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("size", size);
-		model.addAttribute("boardCategory", boardCategory);
+	    model.addAttribute("poList", poList);
+	    model.addAttribute("startDate", startDate);
+	    model.addAttribute("endDate", endDate);
+	    model.addAttribute("currentPage", page);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("size", size);
+	    model.addAttribute("boardCategory", boardCategory);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
 
 		return "admin/postOps";
 	}
@@ -235,11 +263,6 @@ public class AdminController {
 	    List<Map<String, Object>> topList = adminService.getTopMembersByLoginCount();
 	    List<Map<String, Object>> postList = adminService.getPostCount();
 	    List<Map<String, Object>> topPostList = adminService.getTopPostsCount();
-	    
-	    System.out.println("topPostList contents:");
-	    for (Map<String, Object> item : topPostList) {
-	        System.out.println(item);
-	    }
 	    
 	    Map<String, Object> response = new HashMap<>();
 	    response.put("topList", topList);

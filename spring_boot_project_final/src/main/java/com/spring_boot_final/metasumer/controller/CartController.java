@@ -17,6 +17,7 @@ import com.spring_boot_final.metasumer.model.CartVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.OrderInfoVO;
 import com.spring_boot_final.metasumer.model.OrderProductVO;
+import com.spring_boot_final.metasumer.model.OrderVO;
 import com.spring_boot_final.metasumer.service.CartService;
 
 import jakarta.servlet.http.HttpSession;
@@ -48,23 +49,30 @@ public class CartController {
 	}
 	
 	// 장바구니에 상품 추가
+	@ResponseBody
 	@RequestMapping("/myPage/insertCart")
-	public String insertCart(CartVO vo, HttpSession session) {
+	public int insertCart(@RequestParam String prdNo, @RequestParam int cartQty, HttpSession session) {
 		// 로그인 성공 시
 		String memId = (String) session.getAttribute("sid");
+		
+		CartVO vo = new CartVO();
+		
 		vo.setMemId(memId);
+		vo.setPrdNo(prdNo);
+	    vo.setCartQty(cartQty);
 
-		// count 변수를 통한 동일 상품 확인
-		int count = cartService.checkPrdInCart(vo.getPrdNo(), memId);
+	    int result = 0;
+	    int count = cartService.checkPrdInCart(prdNo, memId);
 
-		if (count == 0) {
-			cartService.insertCart(vo); // 장바구니에 추가
-		} else {
-			cartService.updateQtyInCart(vo); // 수량 변경
-		}
+	    if (count == 0) {
+	        cartService.insertCart(vo);
+	        result = 1;
+	    } else {
+	        cartService.updateQtyInCart(vo);
+	        result = 1;
+	    }
 
-		// 포워딩을 통한 장바구니 목록 출력
-		return "redirect:/myPage/cartList";
+	    return result; 
 	}
 	
 	// 장바구니 수량 변경
@@ -103,7 +111,7 @@ public class CartController {
 	
 	// 주문서 열기
 	@RequestMapping("/myPage/orderForm")
-	public String orderForm(@RequestParam int[] cartNo, @RequestParam int[] cartQty, 
+	public String orderForm(@RequestParam("cartNo[]") ArrayList<Integer> cartNo, @RequestParam("cartQty[]") ArrayList<Integer> cartQty, 
 			                Model model, HttpSession session) {
 		String memId = (String) session.getAttribute("sid");
 
@@ -111,22 +119,17 @@ public class CartController {
 		MemberVO memVo = cartService.getMemberInfo(memId);
 		// 전화번호 설정
 		String[] hp = (memVo.getMemHP()).split("-");
-
-		// 선택된 상품 정보만 가져오기
-	    ArrayList<CartVO> selectedCartList = new ArrayList<>();
-	    for (int i = 0; i < cartNo.length; i++) {
-	        CartVO cartVO = cartService.selectedCartList(cartNo[i]);
-	        cartVO.setCartQty(cartQty[i]);
-	        selectedCartList.add(cartVO);
-	    }
-
+		
+		// 선택한 상품만 주문서로 이동
+		ArrayList<CartVO> selectedCartList = cartService.selectedCartList(cartNo);	  			
+	    
 	    // model 설정
 	    model.addAttribute("memVo", memVo);
 	    model.addAttribute("hp1", hp[0]);
 	    model.addAttribute("hp2", hp[1]);
 	    model.addAttribute("hp3", hp[2]);
-	    model.addAttribute("cartList", selectedCartList);
-	
+	    model.addAttribute("cartNos", cartNo);
+	    model.addAttribute("cartList", selectedCartList);	
 
 		return "myPage/orderForm";
 	}
@@ -172,6 +175,47 @@ public class CartController {
 
 		return "myPage/orderCompleteView";
 	}
+	
+	@RequestMapping("/order/productCompletes")
+	  public String orderCompletes(OrderVO ordVo, @RequestParam String hp1, 
+	                              @RequestParam String hp2, @RequestParam String hp3, 
+	                              @RequestParam int quantity,
+	                              Model model) {
+			// 전화번호
+			String hp = hp1 + "-" + hp2 + "-" + hp3;
+			ordVo.setOrdRcvPhone(hp);
+
+			// 주문번호
+			long timeNum = System.currentTimeMillis();
+
+			SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMddHHmmss");
+			String strTime = dayTime.format(new Date(timeNum));
+
+			// 랜덤 숫자 4개 생성
+			String rNum = "";
+			for (int i = 1; i <= 4; i++) {
+				rNum += (int) (Math.random() * 10);
+			}
+
+			// 주문번호 설정
+			String ordNo = strTime + "_" + rNum;
+			ordVo.setOrdNo(ordNo);		
+			
+			ordVo.setOrdQty(quantity);
+
+			// 주문 정보 저장
+			cartService.insertOrderInfo2(ordVo);
+
+			// 주문 완료 페이지에서 사용할 Date 타입 설정
+			SimpleDateFormat dayTime2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String strTime2 = dayTime2.format(new Date(timeNum));
+
+			// 모델에 추가
+			model.addAttribute("ordNo", ordNo);
+			model.addAttribute("ordDate", strTime2);
+
+			return "myPage/orderCompleteView";
+	  }
 	
 	// 주문 내역 보기 
 	@RequestMapping("/myPage/orderList")

@@ -12,6 +12,7 @@ import com.spring_boot_final.metasumer.model.CartVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.OrderInfoVO;
 import com.spring_boot_final.metasumer.model.OrderProductVO;
+import com.spring_boot_final.metasumer.model.OrderVO;
 
 @Service
 public class CartService implements ICartService {
@@ -21,8 +22,7 @@ public class CartService implements ICartService {
 
 	@Override
 	public void insertCart(CartVO vo) {
-		// TODO Auto-generated method stub
-
+		dao.insertCart(vo);
 	}
 
 	@Override
@@ -83,8 +83,8 @@ public class CartService implements ICartService {
 	}
 
 	@Override
-	public CartVO selectedCartList(int cartNo) {
-		return dao.selectedCartList(cartNo);
+	public ArrayList<CartVO> selectedCartList(ArrayList<Integer> cartNos) {
+		return dao.selectedCartList(cartNos);
 	}
 
 	@Override
@@ -101,6 +101,26 @@ public class CartService implements ICartService {
 	@Override
 	public void deleteCartItem(String memId, int cartNo) {
 		dao.deleteCartItem(memId, cartNo);
+		
+	}
+
+	@Override
+	public void insertOrderInfo2(OrderVO ordVo) {
+		// (1) 주문 정보 저장
+		dao.insertOrderInfo2(ordVo);
+		
+		// (2) 주문 상품 내용 저장
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("ordNo", ordVo.getOrdNo());
+        map.put("prdNo", ordVo.getPrdNo()); // 개별 상품 번호
+        map.put("ordQty", ordVo.getOrdQty()); // 개별 상품 수량
+        map.put("memId", ordVo.getMemId());
+        dao.insertOrderProduct2(map); 		
+	}
+
+	@Override
+	public void insertOrderProduct2(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -56,19 +56,31 @@
   	
   	<!-- 회원정보 반환 -->
   	<select id="getMemberInfo" parameterType="string" resultType="com.spring_boot_final.metasumer.model.MemberVO">
-  		SELECT memId, memName, memHP, memZipcode, memAddress1, memAddress2
+  		SELECT memId, memName, memHP, memEmail, memZipcode, memAddress1, memAddress2
   		FROM member
   		WHERE memId = #{memId}	
   	</select>
   	
-  	<select id="selectedCartList" parameterType="int" resultType="com.spring_boot_final.metasumer.model.CartVO">
+  	<!-- 선택한 상품 주문서로 넘기기 -->
+  	<select id="selectedCartList" parameterType="list" resultType="com.spring_boot_final.metasumer.model.CartVO">
         SELECT c.cartNo, c.memId, c.cartQty, p.prdNo, p.prdImage, p.prdName, p.prdPrice
         FROM product p, cart c
-        WHERE p.prdNo = c.prdNo AND c.cartNo = #{cartNo}
+        WHERE p.prdNo = c.prdNo AND c.cartNo IN 
+        <foreach collection="cartNos" item="cartNo" open="(" separator="," close=")">
+            #{cartNo}
+        </foreach>
     </select>
     
     <!-- 주문 정보 저장 -->
   	<insert id="insertOrderInfo" parameterType="com.spring_boot_final.metasumer.model.OrderInfoVO">
+  		INSERT INTO order_info(ordNo, memId, ordRcvReceiver, ordRcvZipcode, ordRcvAddress1, 
+  		                       ordRcvAddress2, ordRcvPhone, ordRcvMsg, ordPay)
+  		VALUES(#{ordNo}, #{memId}, #{ordRcvReceiver}, #{ordRcvZipcode}, #{ordRcvAddress1}, 
+  		       #{ordRcvAddress2}, #{ordRcvPhone}, #{ordRcvMsg}, #{ordPay})
+  	</insert>
+  	
+  	<!-- 주문 정보 저장(개별) -->
+  	<insert id="insertOrderInfo2" parameterType="com.spring_boot_final.metasumer.model.OrderVO">
   		INSERT INTO order_info(ordNo, memId, ordRcvReceiver, ordRcvZipcode, ordRcvAddress1, 
   		                       ordRcvAddress2, ordRcvPhone, ordRcvMsg, ordPay)
   		VALUES(#{ordNo}, #{memId}, #{ordRcvReceiver}, #{ordRcvZipcode}, #{ordRcvAddress1}, 
@@ -84,6 +96,12 @@
         <foreach collection="cartNos" item="cartNo" open="(" separator="," close=")">
             #{cartNo}
         </foreach>
+  	</insert>   	
+  	
+  	<!-- 주문 상품 정보 저장(개별) -->
+  	<insert id="insertOrderProduct2" parameterType="map">
+  		INSERT INTO order_product(ordNo, prdNo, ordQty, memId)
+        VALUES (#{ordNo}, #{prdNo}, #{ordQty}, #{memId})
   	</insert> 
   	
   	<!-- 주문 완료 후 해당 회원이 주문한 상품 삭제 -->

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -33,11 +35,47 @@ public class MyFishRecordsController {
 	MyFishRecordsService mfService;
 
 	@RequestMapping("/myFishRecords/myFishRecordsListView")
-	public String selectMyFishRecords(Model model) {
+	public String selectMyFishRecords(Model model, @RequestParam(value = "page", defaultValue = "1") String pageParam) {
 
-		ArrayList<MyFishRecordsVO> mfList = mfService.listAllMyFishRecords();
+		int recordsPerPage = 20;
+	    List<MyFishRecordsVO> mfList = mfService.listAllMyFishRecords();
 
-		model.addAttribute("mfList", mfList);
+	    int totalRecords = mfList.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
+	    int currentPage;
+	    try {
+	        currentPage = Integer.parseInt(pageParam.split("\\.")[0]);
+	    } catch (NumberFormatException e) {
+	        currentPage = 1;
+	    }
+
+	    if (currentPage < 1) {
+	        currentPage = 1;
+	    } else if (currentPage > totalPages) {
+	        currentPage = totalPages;
+	    }
+
+	    int startIndex = (currentPage - 1) * recordsPerPage;
+	    int endIndex = Math.min(startIndex + recordsPerPage, totalRecords);
+
+	    List<MyFishRecordsVO> recordsForPage;
+	    if (startIndex >= totalRecords) {
+	        recordsForPage = Collections.emptyList();
+	    } else {
+	        recordsForPage = mfList.subList(startIndex, endIndex);
+	    }
+
+	    int startPage = (currentPage - 1) / 10 * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
+
+	    model.addAttribute("mfList", recordsForPage);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+
+	    
 
 		return "myFishRecords/myFishRecordsListView";
 	}
@@ -149,14 +187,48 @@ public class MyFishRecordsController {
 	}
 
 	@RequestMapping("/myFishRecords/myFishRecordsList")
-	public String MyFishRecordsList(HttpServletRequest request, Model model) {
+	public String MyFishRecordsList(HttpServletRequest request, Model model,  @RequestParam(value = "page", defaultValue = "1") String pageParam) {
 
-		HttpSession session = request.getSession();
-		String memId = (String) session.getAttribute("memId");
+	    HttpSession session = request.getSession();
+	    String memId = (String) session.getAttribute("memId");
 
-		ArrayList<MyFishRecordsVO> mfList = mfService.MyFishRecordsList(memId);
+	    int recordsPerPage = 20;
+	    List<MyFishRecordsVO> mfList = mfService.MyFishRecordsList(memId);
 
-		model.addAttribute("mfList", mfList);
+	    int totalRecords = mfList.size();
+	    int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage);
+
+	    int currentPage;
+	    try {
+	        currentPage = (int) Double.parseDouble(pageParam.split("\\.")[0]);
+	    } catch (NumberFormatException e) {
+	        currentPage = 1;
+	    }
+
+	    if (currentPage < 1) {
+	        currentPage = 1;
+	    } else if (currentPage > totalPages) {
+	        currentPage = totalPages;
+	    }
+
+	    int startIndex = (currentPage - 1) * recordsPerPage;
+	    int endIndex = Math.min(startIndex + recordsPerPage, totalRecords);
+
+	    List<MyFishRecordsVO> recordsForPage;
+	    if (startIndex >= totalRecords) {
+	        recordsForPage = Collections.emptyList();
+	    } else {
+	        recordsForPage = mfList.subList(startIndex, endIndex);
+	    }
+
+	    int startPage = (currentPage - 1) / 10 * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
+
+	    model.addAttribute("mfList", recordsForPage);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("totalPages", totalPages);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
 
 		return "myFishRecords/myFishRecordsList";
 	}

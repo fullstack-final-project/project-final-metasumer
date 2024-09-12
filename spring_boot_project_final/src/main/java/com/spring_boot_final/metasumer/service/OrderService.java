@@ -1,5 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,10 @@ public class OrderService implements IOrderService {
   
   @Override
   public void saveOrder(OrderVO order) {
-    dao.saveOrder(order);
+	// (1) 주문 정보 저장
+      dao.saveOrder(order);
+
+    
   }
   
   @Override

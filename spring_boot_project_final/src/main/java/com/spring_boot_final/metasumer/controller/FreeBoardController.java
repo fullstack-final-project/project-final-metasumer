@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,63 +39,96 @@ public class FreeBoardController {
 	@RequestMapping("/freeboard/freeboardView/{boardCtgId}")
 	public String freeboardView(@PathVariable String boardCtgId,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-
+		
 		try {
-
-			if ("3".equals(boardCtgId)) {
+        
+			if (boardCtgId.equals("3")) {
 				ArrayList<FreeBoardVO> qnaList = fbService.qnaList(boardCtgId);
 				model.addAttribute("qnaList", qnaList);
 				return "freeboard/qnaView";
 			}
 
-			int pageSize = 10; // 한 페이지에 표시할 항목 수
+            int pageSize = 10;
 
-			if (page < 1) {
-				page = 1;
-			}
+            if (page < 1) {
+                page = 1;
+            }
 
-			// 총 항목 수
-			int totalItems = fbService.countTotalItems(boardCtgId);
+            int totalItems = fbService.countTotalItems(boardCtgId);
 
-			// 총 페이지 수를 계산
-			int totalPages = (int) Math.ceil((double) totalItems / pageSize);
+            int totalPages = (int) Math.ceil((double) totalItems / pageSize);
 
-			if (page > totalPages) {
-				page = totalPages;
-			}
+            if (page > totalPages) {
+                page = totalPages;
+            }
 
-			int offset = (page - 1) * pageSize;
+            int startPage = (page - 1) / 10 * 10 + 1;
+            int endPage = Math.min(startPage + 9, totalPages);
+            int offset = (page - 1) * pageSize;
 
-			ArrayList<FreeBoardVO> fbList = fbService.selectItemsForPage(offset, pageSize, boardCtgId);
+            ArrayList<FreeBoardVO> fbList = fbService.selectItemsForPage(offset, pageSize, boardCtgId);
 
-			model.addAttribute("fbList", fbList);
-			model.addAttribute("currentPage", page);
-			model.addAttribute("totalPages", totalPages);
+            model.addAttribute("fbList", fbList);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("startPage", startPage);
+            model.addAttribute("endPage", endPage);
+            model.addAttribute("boardCtgId", boardCtgId);
 
-			return "freeboard/freeboardView";
+            return "freeboard/freeboardView";
 
-		} catch (Exception e) {
-			System.out.println(boardCtgId);
-			return "freeboard/freeboardView";
-		}
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "freeboard/freeboardView";
+        }
 	}
 
 	// 벼룩시장
 	@RequestMapping("/freeboard/fleamarketList/{completed}")
-	public String fleamarketList(@PathVariable int completed, Model model) {
+	public String fleamarketList(@PathVariable int completed, Model model, @RequestParam(value = "page", defaultValue = "1") String pageParam) {
 
-		String boardCtgId = "5";
+		String boardCtgId = "5"; // 카테고리 ID
 
-		ArrayList<FreeBoardVO> fbList;
+        // 전체 레코드 조회
+        List<FreeBoardVO> fbList = fbService.fleamarketList(boardCtgId, completed);
 
-		if (completed == 1) {
-			fbList = fbService.fleamarketList(boardCtgId, completed);
-		} else {
-			fbList = fbService.fleamarketList(boardCtgId, completed);
-		}
+        // 페이지 네비게이션 설정
+        int recordsPerPage = 20; // 페이지당 레코드 수
+        int totalRecords = fbList.size(); // 전체 레코드 수
+        int totalPages = (int) Math.ceil((double) totalRecords / recordsPerPage); // 총 페이지 수
 
-		model.addAttribute("fbList", fbList);
+        int currentPage;
+        try {
+            currentPage = Integer.parseInt(pageParam.split("\\.")[0]);
+        } catch (NumberFormatException e) {
+            currentPage = 1;
+        }
+
+        if (currentPage < 1) {
+            currentPage = 1;
+        } else if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        int startIndex = (currentPage - 1) * recordsPerPage;
+        int endIndex = Math.min(startIndex + recordsPerPage, totalRecords);
+
+        List<FreeBoardVO> recordsForPage;
+        if (startIndex >= totalRecords) {
+            recordsForPage = Collections.emptyList();
+        } else {
+            recordsForPage = fbList.subList(startIndex, endIndex);
+        }
+
+        int startPage = (currentPage - 1) / 10 * 10 + 1;
+        int endPage = Math.min(startPage + 9, totalPages);
+
+        // 모델에 데이터 추가
+        model.addAttribute("fbList", recordsForPage);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
 		return "freeboard/fleamarketList";
 	}
@@ -219,8 +253,8 @@ public class FreeBoardController {
 
 	@RequestMapping("freeboard/updateFreeBoard")
 	public String updateFreeBoard(@RequestParam("boardPostNo") String boardPostNo, @RequestParam("title") String title,
-			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("content") String content,
-			@RequestParam(value = "price", required = false) String price,
+			@RequestParam("boardCtgId") int boardCtgId, @RequestParam("content") String content, 
+			@RequestParam(value = "price", required = false) String price, @RequestParam(value = "completed", required = false) int completed,
 			@RequestParam("uploadFile") MultipartFile file) {
 
 		FreeBoardVO fb = fbService.detailViewFreeBoard(boardPostNo);
@@ -249,7 +283,7 @@ public class FreeBoardController {
 		}
 
 		if (boardCtgId == 5) {
-			return "redirect:/freeboard/fleamarketList/" + boardCtgId;
+			return "redirect:/freeboard/fleamarketList/" + completed;
 		} else {
 			return "redirect:/freeboard/freeboardView/" + boardCtgId;
 		}

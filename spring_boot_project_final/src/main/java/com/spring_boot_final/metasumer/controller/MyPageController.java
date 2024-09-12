@@ -294,7 +294,7 @@ public class MyPageController {
 	    ArrayList<ReservationListVO> reservationList = myPageService.reservationList(memId, startDate, endDate);
 		
 		// 회원 정보 가져오기
-		MemberVO memVo = myPageService.getMemberInfo(memId);
+		MemberVO memVo = myPageService.getMemberInfo(memId);		
 		
 		// model 설정
 		model.addAttribute("memVo", memVo);
