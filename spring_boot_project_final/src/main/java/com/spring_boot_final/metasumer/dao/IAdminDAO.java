@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 public interface IAdminDAO {
@@ -30,7 +31,6 @@ public interface IAdminDAO {
 
 	// 사업자 신청 조회
 	public ArrayList<BusinessAuthVO> getPendingBusinessAuth(int start, int pageSize, String authStatus);
-
 	public int getTotalBusinessAuthCount();
 
 	// authStatus 상태 바꾸기
@@ -71,5 +71,10 @@ public interface IAdminDAO {
 	// 사업자 회원 조회
 	public ArrayList<BusinessAuthVO> searchbusiness(String searchStr, String memType);
 	
+	// 배너 관리
+	public ArrayList<InterestTagVO> getInterestTagImage();
+	
+	// 배너 수정
+	public void updateTagImage(int interestId, String tagImage);
 
 }

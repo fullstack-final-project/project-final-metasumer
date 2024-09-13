@@ -153,7 +153,7 @@ public class MyFishRecordsController {
 		return response;
 	}
 
-	@RequestMapping("/myFishRecords/detailViewmyFishRecords/{recordNo}/{sidmemId}")
+	@RequestMapping("/myFishRecords/detailViewMyFishRecords/{recordNo}/{sidmemId}")
 	public String detailViewmyFishRecords(@PathVariable String recordNo, @PathVariable String sidmemId, Model model) {
 
 		MyFishRecordsVO mf = mfService.detailViewMyFishRecords(recordNo);
@@ -324,7 +324,7 @@ public class MyFishRecordsController {
 	        mfService.myFishRecordsUpdateTags(recordNo, typeNo, tagId, memId);
 	    }
 		
-		return "redirect:/myFishRecords/detailViewmyFishRecords/" + recordNo + "/" + typeNo;
+		return "redirect:/myFishRecords/detailViewMyFishRecords/" + recordNo + "/" + typeNo;
 	}
 
 }

@@ -27,7 +27,7 @@
 				
                 <table border="1">
                     <tr>
-                        <th colspan="2">글쓰기 페이지${memId}</th>
+                        <th colspan="2">글쓰기 페이지</th>
                     </tr>
                     <tr>
                         <td>작성자</td>

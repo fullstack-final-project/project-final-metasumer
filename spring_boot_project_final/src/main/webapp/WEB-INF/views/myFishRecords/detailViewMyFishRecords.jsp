@@ -12,8 +12,8 @@
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
-		<script src="<c:url value='/js/comment.js'/>"></script>
 		<script src="<c:url value='/js/myFishRecordsTagEdit.js'/>"></script>
+		<script src="<c:url value='/js/comment.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<style>
@@ -37,7 +37,6 @@
 			.tag-item.editable {
 			    cursor: pointer;
 			}
-
 	    </style>
 	</head>
 	<body>
@@ -58,6 +57,9 @@
 						</c:if>
 						</div>
 				<table>
+					<tr>
+						<th colspan="6" class="title-cell">${ mf.title }</th>
+					</tr>
 					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>

@@ -25,6 +25,7 @@
 				        <li><a href="<c:url value='/admin/businessManagement'/>">사업자 회원 관리</a></li>
 				        <li><a href="<c:url value='/admin/memberManagement/admin'/>">관리자 관리</a></li>
 				        <li><a href="<c:url value='/admin/postOps'/>">게시물 관리</a></li>
+				        <li><a href="<c:url value='/admin/BannerManagement'/>">배너 관리</a></li>
 				    </ul>
 				</div>
 			</section>

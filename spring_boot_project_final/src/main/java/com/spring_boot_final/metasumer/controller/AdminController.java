@@ -1,14 +1,19 @@
 package com.spring_boot_final.metasumer.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +22,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.service.AdminService;
 
@@ -34,7 +41,7 @@ public class AdminController {
 	public String adminPage() {
 		return "admin/adminPage";
 	}
-
+	
 	@RequestMapping("/admin/newAdminAccount")
 	public String newAdminAccount() {
 		return "admin/newAdminAccount";
@@ -385,6 +392,46 @@ public class AdminController {
 	    return "admin/businessManagementList";
 	}
 
+	@RequestMapping("/admin/BannerManagement")
+	public String BannerManagement(Model model) {
+		
+	    ArrayList<InterestTagVO> itList = adminService.getInterestTagImage();
+	    model.addAttribute("itList", itList);
+	    
+		return "admin/BannerManagement";
+	}
+	
+	@RequestMapping("/admin/tagUploadImage")
+	@ResponseBody
+	public String tagUploadImage(@RequestParam("file") MultipartFile file,
+            @RequestParam("interestId") int interestId) {
+		String result = "fail";
+		
+		if (file.isEmpty()) {
+            return "fail";
+        }
+        String uploadPath = "D:/springWorkspace/metasumer_images/upload/";
 
+        String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) {
+            return result;
+        }
+
+        originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+        UUID uuid = UUID.randomUUID();
+        String savedFileName = uuid.toString() + "_" + originalFileName;
+        File uploadFile = new File(uploadPath + savedFileName);
+
+        try {
+            file.transferTo(uploadFile);
+            adminService.updateTagImage(interestId, savedFileName);
+            
+            return "success";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
+		
+	}
 
 }

@@ -26,6 +26,7 @@ public class MyFishRecordsVO {
 	private String tagId;
 	private String tagName;
 	private String typeNo;
+	private String tagImage;
 	
 	private int views;
 	

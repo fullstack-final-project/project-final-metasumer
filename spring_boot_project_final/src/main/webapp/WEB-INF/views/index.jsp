@@ -12,18 +12,50 @@
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/index.css'/>">
 		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/all.css'/>">
+		<link rel="stylesheet"   type="text/css"  href="<c:url value='/css/index_tagB.css'/>">
 		<script src="<c:url value='/js/index.js'/>"></script>
+		<script src="<c:url value='/js/index_tagB.js'/>"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<script src="https://apis.google.com/js/api.js"></script>
 		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
 	</head>
+	
 	<body>
 		<div id="wrap">
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
 			<section>
+				<input type="hidden" id="sessionSid" value="${sessionScope.sid}" />
+				<br><br>
+				<div class="tag_slider">
+				   <div class="tag_slides">
+				       <c:choose>
+				           <c:when test="${not empty tagBanner}">
+				               <c:forEach items="${tagBanner}" var="tagB">
+				                   <div class="tag_slide">
+				                       <img src="<c:url value='/project_images/upload/${tagB.tagImage}'/>" alt="Slide">
+				                   </div>
+				               </c:forEach>
+				           </c:when>
+				           <c:otherwise>
+				               <c:forEach items="${NB}" var="NB" varStatus="status">
+				                    <div class="tag_slide">
+					                     <a href="javascript:void(0);" onclick="handleClick('<c:url value='${URL[status.index]}'/>')">
+					                        <img src="<c:url value='/project_images/${NB}'/>" alt="Slide">
+					                    </a>
+				                    </div>
+				                </c:forEach>
+				           </c:otherwise>
+				       </c:choose>
+				   </div>
+				   <div class="tag_prev" onclick="tag_moveSlide(-1)">&#10094;</div>
+				   <div class="tag_next" onclick="tag_moveSlide(1)">&#10095;</div>
+				</div>
+				
+				
+				
 				<div id="eventAdBox" class="indexSection">
 					<div data-slider-id="vtqsjd"></div>
 					<div id="eventBannerBox"><script async src="https://sliderui.com/sliders/vtqsjd.js"></script></div>

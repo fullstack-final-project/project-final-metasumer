@@ -25,7 +25,6 @@
 				<input type="hidden" name="boardCtgId" value="${ boardCtgId }">
 				<input type="hidden" name="typeNo" value="6">
 				<input type="hidden" id="tagsInput" name="tagsArray" />
-				
                 <table>
                     <tr>
                         <th colspan="2">낚시 갤러리 기록</th>

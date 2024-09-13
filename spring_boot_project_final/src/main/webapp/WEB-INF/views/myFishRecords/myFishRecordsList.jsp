@@ -38,7 +38,7 @@
                 <c:otherwise>
                     <div class="fish-container">
                         <c:forEach items="${mfList}" var="mf">
-                            <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }/${ sessionScope.sid }' />'" style="cursor: pointer;">
+                            <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewMyFishRecords/${ mf.recordNo }/${ sessionScope.sid }' />'" style="cursor: pointer;">
                                 <div class="date">
                                     <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" />
                                 </div>

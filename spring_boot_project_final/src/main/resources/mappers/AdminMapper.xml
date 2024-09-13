@@ -314,6 +314,17 @@
 	      AND m.memType = #{memType}
 	    ORDER BY b.issueDate DESC
 	</select>
+	
+	<select id="getInterestTagImage" resultType="com.spring_boot_final.metasumer.model.InterestTagVO">
+		SELECT *
+		FROM interestcategory
+	</select>
+	
+	<update id="updateTagImage">
+        UPDATE interestcategory
+        SET tagImage = #{tagImage}
+        WHERE interestId = #{interestId}
+    </update>
 
 
 </mapper>
