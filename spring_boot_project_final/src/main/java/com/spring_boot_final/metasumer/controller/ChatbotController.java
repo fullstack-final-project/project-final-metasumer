@@ -21,8 +21,8 @@ public class ChatbotController {
 		String result = "";
 		
 		try {
-			result = ChatbotService.main(message);
 			System.out.println("질문 : " + message);
+			result = ChatbotService.main(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -21,7 +21,7 @@ public class WeatherService {
     	String year = Integer.toString(now.getYear());
     	String month = Integer.toString(now.getMonthValue());
     	if(month.length() == 1) { month = "0" + month; }
-    	String day = "0" + Integer.toString(now.getDayOfMonth());
+    	String day = Integer.toString(now.getDayOfMonth());
     	if(day.length() == 1) { day = "0" + day; }
     	//System.out.println(year + ". " + month + ". " + day);
     	
