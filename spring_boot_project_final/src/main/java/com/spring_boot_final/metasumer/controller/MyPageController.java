@@ -194,6 +194,21 @@ public class MyPageController {
         return successRate;
     }
 	
+	
+	// 회원 정보 수정
+	@RequestMapping("/myPage/myInfo")
+	public String myInfo(Model model, HttpSession session) {
+		String memId = (String) session.getAttribute("sid");
+
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);
+
+		// model 설정
+		model.addAttribute("memVo", memVo);
+
+		return "myPage/memberInfoForm";
+	}
+		
 	// 회원 정보 수정
 	@RequestMapping("/myPage/checkPwdForm")
 	public String checkPassword(Model model,
@@ -262,6 +277,40 @@ public class MyPageController {
 		return "myPage/updateCompleteForm";
 	}
 	
+	// 비밀번호 변경 폼
+	@RequestMapping("/myPage/changePwdForm")
+	public String changePwdForm(Model model,
+                               HttpSession session) {		
+        String memId = (String)session.getAttribute("sid");	          		
+		
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);
+		
+		// model 설정
+		model.addAttribute("memVo", memVo);
+                  				
+		return "myPage/changePwdForm";
+	}
+	
+	// 회원정보 수정
+	@ResponseBody
+	@RequestMapping("/myPage/changePwdComplete")
+	public String changePwdComplete(@RequestParam HashMap<String, Object> param, HttpSession session) {
+		String memId = (String) session.getAttribute("sid");
+		param.put("memId", memId);
+
+		String result = "fail";
+
+		// DB 업데이트 서비스 호출
+		boolean updateSuccess = myPageService.changePwd(param);
+
+		if (updateSuccess) {
+			result = "success";
+		}
+
+		return result;
+	}
+	
 	// 나의 예약	
 	@RequestMapping("/myPage/reservation")
 	public String reservation(String period, Model model, HttpSession session) {	
@@ -302,5 +351,19 @@ public class MyPageController {
 		
 		return "myPage/reservationListView";
 	} 
+	
+	// 나의 예약	
+	@RequestMapping("/myPage/event")
+	public String event(Model model, HttpSession session) {
+		String memId = (String) session.getAttribute("sid");
+
+		// 회원 정보 가져오기
+		MemberVO memVo = myPageService.getMemberInfo(memId);
+
+		// model 설정
+		model.addAttribute("memVo", memVo);		
+
+		return "myPage/eventListView";
+	}
 
 }

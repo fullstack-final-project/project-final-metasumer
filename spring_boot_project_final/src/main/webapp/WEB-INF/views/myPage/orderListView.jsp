@@ -23,7 +23,7 @@
 			      <p>최초 1회 무료배송</p>
 			      <div id="pointsInfo">
 			        <p>적립금</p>
-			        <div id="pointsSum">0원</div>
+			        <div id="pointsSum">100원</div>
 			        <div id="eventGoWrapper">
                       <div id="eventGo">
                        <span>이벤트 확인하러 가기</span><span id="mark">></span>
@@ -63,7 +63,9 @@
                             <h3>${currentDate.substring(0, 4)}.${currentDate.substring(4, 6)}.${currentDate.substring(6, 8)}</h3><hr>                                                
                           </c:if>		                          				         
 			              <div class="ordListDetail">
-			                <img src="<c:url value='/project_images/${ord.prdImage}' />">
+			                <a href="/product/detailViewProduct/${ord.prdNo}">
+			                  <img src="<c:url value='/project_images/${ord.prdImage}' />">
+			                </a>
 			                <div class="ordDescription">
 			                  <table class="ordNameInfo">
 			                    <thead>
@@ -76,7 +78,7 @@
 						        </thead>
 						        <tbody>
 						          <tr>
-			                        <td><a href="#">${ord.prdName}</a></td>
+			                        <td><a href="/product/detailViewProduct/${ord.prdNo}">${ord.prdName}</a></td>
 			                        <td>${ord.ordNo}</td>
 			                        <td>${ord.ordQty}</td>                                                                       
 			                        <td><fmt:formatNumber value="${ord.prdPrice * ord.ordQty}" pattern="#,###" />원</td>

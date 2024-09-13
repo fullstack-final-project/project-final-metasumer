@@ -31,7 +31,7 @@ $(function() {
                     
                     // 상세 페이지 이동
                     item.on('click', function() {
-                        location.href = `/myFishRecords/detailViewmyFishRecords/${mf.recordNo}`;
+                        location.href = `/myFishRecords/detailViewmyFishRecords/${mf.recordNo}/${memId}`;
                     });
                     
                     // item 추가
