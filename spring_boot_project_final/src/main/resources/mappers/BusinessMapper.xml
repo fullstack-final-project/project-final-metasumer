@@ -36,8 +36,22 @@
 		        issueDate = #{issueDate}
 		    WHERE bizId = #{bizId}
 		</update>
+		
 		<!-- 업체 삭제 -->
     <delete id="deleteBusiness" parameterType="String">
         DELETE FROM business WHERE bizId = #{bizId}
     </delete>
+    
+    <select id="getBusinessByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT * FROM business
+        WHERE memId = #{memId}
+    </select>
+    
+    <!-- 특정 memId에 대한 모든 사업체를 조회 -->
+    <select id="selectBusinessesByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT *
+        FROM business
+        WHERE memId = #{memId}
+    </select>
+    
 	</mapper>

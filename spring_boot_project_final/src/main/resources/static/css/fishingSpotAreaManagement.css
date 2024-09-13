@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+section {
+		margin: 0 auto;
+    max-width: 80%;
+    padding: 20px;
+}	
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 상품 등록 버튼 */
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #39A7FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #87C4FF;
+}
+
+#fishingSpotAreaList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fishingSpotAreaBox {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.fishingSpotAreaBox h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.fishingSpotAreaBox p {
+    margin: 5px 0;
+}
+
+.fishingSpotAreaBox p:last-of-type {
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.btn-group button {
+    margin-top: 10px;
+    padding: 5px 33px
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-group button:hover {
+		background-color: #218838;
+}
+

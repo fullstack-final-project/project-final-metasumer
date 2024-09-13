@@ -105,6 +105,16 @@ function updateAreaIds() {
     }
 }
 
+function showPaymentConfirmation() {
+    
+    if (confirm("결제하시겠습니까?")) {
+        alert("예약이 완료되었습니다.\n3시간 이내에 예약확정 알림을 드립니다.");
+        setTimeout(() => {
+            document.getElementById('order-form').submit();  // 폼 제출
+        }, 1000);  // 1초 후에 제출
+    }
+}
+
 $('#submit-button').on('click', function() {
     updateAreaIds();
 });

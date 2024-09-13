@@ -42,6 +42,51 @@
         WHERE 
             spotId = #{spotId}
     </select>
+    
+    <!-- 낚시터 목록 조회 쿼리 -->
+    <select id="getFishingSpotsByBizId" resultType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        SELECT * 
+        FROM fishingSpot 
+        WHERE bizId = #{bizId}
+    </select>
+
+    <!-- 낚시터 등록 쿼리 -->
+    <insert id="insertFishingSpot" parameterType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        INSERT INTO fishingSpot (
+            spotName, spotType, spotDescription, spotPrice, spotImage, 
+            openingTime, closingTime, spotZipcode, spotAddress1, spotAddress2, 
+            spotHP1, spotHP2, spotHP3, spotFacility, bizId
+        ) VALUES (
+            #{spotName}, #{spotType}, #{spotDescription}, #{spotPrice}, #{spotImage},
+            #{openingTime}, #{closingTime}, #{spotZipcode}, #{spotAddress1}, #{spotAddress2},
+            #{spotHP1}, #{spotHP2}, #{spotHP3}, #{spotFacility}, #{bizId}
+        )
+    </insert>
+    
+    <!-- 낚시터 상세 조회 쿼리 -->
+    <select id="selectFishingSpotById" parameterType="int" resultType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        SELECT * 
+        FROM fishingSpot 
+        WHERE spotId = #{spotId}
+    </select>
+
+    <!-- 낚시터 수정 쿼리 -->
+    <update id="updateFishingSpot" parameterType="com.spring_boot_final.metasumer.model.FishingSpotVO">
+        UPDATE fishingSpot
+        SET spotName = #{spotName}, spotType = #{spotType}, spotDescription = #{spotDescription}, 
+            spotPrice = #{spotPrice}, spotImage = #{spotImage}, openingTime = #{openingTime},
+            closingTime = #{closingTime}, spotZipcode = #{spotZipcode}, 
+            spotAddress1 = #{spotAddress1}, spotAddress2 = #{spotAddress2}, 
+            spotHP1 = #{spotHP1}, spotHP2 = #{spotHP2}, spotHP3 = #{spotHP3}, 
+            spotFacility = #{spotFacility}
+        WHERE spotId = #{spotId}
+    </update>
+
+    <!-- 낚시터 삭제 쿼리 -->
+    <delete id="deleteFishingSpot" parameterType="int">
+        DELETE FROM fishingSpot 
+        WHERE spotId = #{spotId}
+    </delete>
    
   </mapper>
   

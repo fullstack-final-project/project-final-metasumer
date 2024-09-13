@@ -19,6 +19,11 @@ public class ReservationService implements IReservationService {
   public ArrayList<ReservationVO> getAllReservations() {
     return dao.getAllReservations();
   }
+  
+  @Override
+  public ArrayList<ReservationVO> getReservationsByBusiness(int bizId) {
+    return dao.getReservationsByBusiness(bizId);
+  }
 
   @Override
   public int confirmReservation(Integer resNo) {

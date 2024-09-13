@@ -17,4 +17,13 @@ public interface IFishingSpotService {
   
   // 낚시터 구역 상세 조회
   public FishingSpotAreaVO getFishingSpotAreaById(int areaId);
+  
+  // 사업자 ID 별 낚시터 조회
+  public List<FishingSpotVO> getFishingSpotsByBizId(int bizId);
+  
+  //낚시터 등록 메서드
+  public void insertFishingSpot(FishingSpotVO fishingSpot); 
+  
+  //낚시터 구역 등록
+  public void insertFishingSpotArea(FishingSpotAreaVO fishingSpotArea);
 }

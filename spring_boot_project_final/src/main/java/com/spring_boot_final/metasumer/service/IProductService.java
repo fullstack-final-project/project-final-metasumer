@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.spring_boot_final.metasumer.model.ProductVO;
 
@@ -35,6 +36,9 @@ public interface IProductService {
   
   // 카테고리 별 상품 조회
   public ArrayList<ProductVO> getProductsByCategory(String category);
+  
+  // 사업자ID 별 상품 목록 가져오기
+  public List<ProductVO> getProductsByBizId(int bizId);
 
   
 }

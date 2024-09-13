@@ -64,7 +64,7 @@
                                 <td><input type="text" id="ordererName" name="ordererName" value="${member.memName}" required readonly></td>
                             </tr>
                             <tr>
-                                <th><label for="ordererPhone">휴대전화</label></th>
+                                <th><label for="ordererHP">휴대전화</label></th>
                                 <td>
                                     <input type="text" id="ordererHp1" name="ordererHp1" size="3" class="hp" 
                                         value="${fn:substring(member.memHP, 0, 3)}" required readonly> 
@@ -76,7 +76,7 @@
                             </tr>
                             <tr>
                                 <th><label for="ordererEmail">이메일</label></th>
-                                <td><input type="email" id="ordererEmail" name="ordererEmail" value="${member.memEmail}" required readonly></td>
+                                <td><input type="email" id="ordererEmail" name="ordererEmail" value="${member.memEmail}" required></td>
                             </tr>
                         </table>
                     </div>
@@ -187,7 +187,7 @@
                         
                         <!-- 버튼 그룹 -->
                         <div class="button-group">
-                            <button type="submit" id="submit-button" class="btn">결제하기</button>
+                            <button type="submit" id="submit-button" class="btn" onclick="showPaymentConfirmation()">결제하기</button>
                             <button type="button" id="cancel-button" class="btn" onclick="window.history.back()">취소</button>
                         </div>
                     </div> 

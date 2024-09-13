@@ -42,5 +42,21 @@ public class FishingSpotService implements IFishingSpotService {
     return fishingSpotAreaDAO.getFishingSpotAreaById(areaId);
   }
   
+  @Override
+  public List<FishingSpotVO> getFishingSpotsByBizId(int bizId) {
+    return fishingSpotDAO.getFishingSpotsByBizId(bizId);
+  }
+  
+  @Override
+  public void insertFishingSpot(FishingSpotVO fishingSpot) {
+    fishingSpotDAO.insertFishingSpot(fishingSpot);
+  }
+
+  @Override
+  public void insertFishingSpotArea(FishingSpotAreaVO fishingSpotArea) {
+    fishingSpotAreaDAO.insertFishingSpotArea(fishingSpotArea);
+  }
+  
+  
 
 }

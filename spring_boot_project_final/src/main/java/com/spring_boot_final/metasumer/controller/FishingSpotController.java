@@ -34,7 +34,8 @@ public class FishingSpotController {
   public String getFreshwaterSpots(Model model) {
     List<FishingSpotVO> spots = fishingSpotService.getFishingSpotsByType("freshwater");
     model.addAttribute("spots", spots);
-    return "/fishingSpot/freshwaterSpotList";
+    model.addAttribute("type", "freshwater");
+    return "/fishingSpot/fishingSpotList";
   }
 
   // 바다낚시터 조회
@@ -42,7 +43,8 @@ public class FishingSpotController {
   public String getSaltwaterSpots(Model model) {
     List<FishingSpotVO> spots = fishingSpotService.getFishingSpotsByType("saltwater");
     model.addAttribute("spots", spots);
-    return "/fishingSpot/saltwaterSpotList";
+    model.addAttribute("type", "saltwater");
+    return "/fishingSpot/fishingSpotList";
   }
   
   // 낚시터 상세 조회
@@ -52,9 +54,14 @@ public class FishingSpotController {
       
       // 낚시터 구역 상품 조회
       List<FishingSpotAreaVO> areas = fishingSpotService.getFishingSpotAreasBySpotId(spotId);
+      
+      String[] facilities = spot.getSpotFacility().split(",");
       model.addAttribute("areas", areas);
       model.addAttribute("spot", spot);
       model.addAttribute("bizId", bizId);
+      System.out.println(spot.getSpotAddress1());
+      System.out.println(spot.getSpotAddress2());
+      model.addAttribute("facilities", facilities);
       return "fishingSpot/fishingSpotDetailView";
   }
   

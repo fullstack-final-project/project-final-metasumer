@@ -41,7 +41,7 @@ $(document).ready(function() {
         editable: false,
         events: function(start, end, timezone, callback) {
             $.ajax({
-                url: '/business/listAllReservations', // + bizId(사업자 로그인 후 사용)
+                url: '/business/listReservationsByBizId/${bizId}',
                 dataType: 'json',
                 success: function(data) {
                     var events = [];
@@ -116,7 +116,6 @@ function updateReservationStatus(resNo, status) {
         return $(this).find('td:first').text() == resNo;
     });
 
-    // 예약 상태 셀을 업데이트합니다.
     row.find('td:nth-child(5)').text(status);
 
     // 버튼 활성화/비활성화

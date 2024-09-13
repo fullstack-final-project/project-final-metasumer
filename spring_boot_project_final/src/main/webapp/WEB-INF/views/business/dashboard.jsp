@@ -50,32 +50,33 @@
 						<thead>
 							<tr>
 								<th>예약 번호</th>
-								<th>예약자명</th>
-								<th>예약일</th>
-								<th>시간</th>
-								<th>상태</th>
-								<th>확인</th>
+                <th>예약자명</th>
+                <th>예약일</th>
+                <th>시간</th>
+                <th>낚시터명</th>
+                <th>낚시터 상품</th>
+                <th>상태</th>
+                <th>확인</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="reservation" items="${reservations}">
-								<tr>
-									<td>${reservation.resNo}</td>
-									<td>${reservation.memName}</td>
-									<td><fmt:formatDate value="${reservation.resDate}"
-											pattern="yyyy-MM-dd" /></td>
-									<td><fmt:formatDate value="${reservation.resStart}" pattern="HH:mm" />
-											 ~ 
-											<fmt:formatDate value="${reservation.resEnd}" pattern="HH:mm" /></td>
-									<td>${reservation.resStatus}</td>
-									<td>
-										<button class="btn btn-success"onclick="confirmReservation(${reservation.resNo})"
-                    	<c:if test="${reservation.resStatus == 'confirmed'}">disabled</c:if>>확정</button>
-               			<button class="btn btn-cancel"onclick="cancelReservation(${reservation.resNo})"
-                    	<c:if test="${reservation.resStatus == 'cancelled'}">disabled</c:if>>취소</button>
-									</td>
-								</tr>
-							</c:forEach>
+                <tr>
+                    <td>${reservation.resNo}</td>
+                    <td>${reservation.memName}</td>
+                    <td><fmt:formatDate value="${reservation.resDate}" pattern="yyyy-MM-dd" /></td>
+                    <td><fmt:formatDate value="${reservation.resStart}" pattern="HH:mm" /> ~ <fmt:formatDate value="${reservation.resEnd}" pattern="HH:mm" /></td>
+                    <td>${reservation.spotName}</td>
+                    <td>${reservation.areaName}</td>
+                    <td>${reservation.resStatus}</td>
+                    <td>
+                        <button class="btn btn-success" onclick="confirmReservation(${reservation.resNo})"
+                                <c:if test="${reservation.resStatus == 'confirmed'}">disabled</c:if>>확정</button>
+                        <button class="btn btn-cancel" onclick="cancelReservation(${reservation.resNo})"
+                                <c:if test="${reservation.resStatus == 'cancelled'}">disabled</c:if>>취소</button>
+                    </td>
+                </tr>
+            </c:forEach>
 						</tbody>
 					</table>
 				</div>
