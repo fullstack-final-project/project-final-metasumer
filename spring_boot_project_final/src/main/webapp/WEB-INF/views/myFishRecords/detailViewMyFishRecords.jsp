@@ -8,12 +8,36 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/detailViewFreeBoard.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/myFishRecordsUploadTag.css'/>">
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+		<script src="<c:url value='/js/myFishRecordsTagEdit.js'/>"></script>
 		<script src="<c:url value='/js/comment.js'/>"></script>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
+		<style>
+	        .hidden {
+			    display: none;
+			}
+			
+			.tag-item {
+			    display: flex;
+			    align-items: center;
+			}
+			
+			.tag-item.editable .delete-button {
+			    display: inline;
+			}
+			
+			.delete-button {
+			    display: none;
+			}
+			
+			.tag-item.editable {
+			    cursor: pointer;
+			}
+	    </style>
 	</head>
 	<body>
 		<div id="wrap">
@@ -34,6 +58,9 @@
 						</div>
 				<table>
 					<tr>
+						<th colspan="6" class="title-cell">${ mf.title }</th>
+					</tr>
+					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>
 						<th>날짜</th>
@@ -43,7 +70,7 @@
 					</tr>
 					<tr>
 						<th>위치</th>
-						<td>${ mf.location }</td>
+						<td>${ mf.location}</td>
 						<th>장비</th>
 						<td colspan="3">${ mf.equipment }</td>
 						
@@ -56,6 +83,7 @@
 						<th>날씨</th>
 						<td>${ mf.weather }</td>
 					</tr>
+						
 				</table>
 				<div id="contentContainer">
 					<pre>${fn:escapeXml(mf.content)}</pre>
@@ -64,6 +92,33 @@
 					    <img src="<c:url value='/project_images/${mf.uploadImage}'/>" width="40%"><br>
 					</c:if>
 					
+					<form id="tagForm" action="/myFishRecords/myFishRecordsDetailEditTag" method="post">
+					    <input type="hidden" name="recordNo" value="${mf.recordNo}">
+					    <input type="hidden" name="typeNo" value="${mf.boardCtgId}">
+					    <input type="hidden" name="memId" value="${mf.memId}">
+					
+					    <br><br>
+					    <div id="selectedTags">
+					        <c:forEach items="${tagList}" var="tag">
+					            <span id="tag-${tag.tagId}" class="tag-item">
+					                # ${tag.tagName}
+					                <button id="delete-${tag.tagId}" class="delete-button hidden" onclick="deleteTag('${tag.tagId}'); event.stopPropagation();">x</button>
+					                <input type="hidden" name="tags" value="${tag.tagId}">
+					            </span>
+					        </c:forEach>
+					    </div>
+						<c:if test="${sessionScope.sid eq mf.memId}">
+					    <button id="tagEdit" class="btn" type="button" onclick="showTagEditOptions()">태그 수정</button>
+					    <div id="tagEditOptions" class="hidden">
+					        <button id="tagAddNew" class="btn hidden" type="button" onclick="addNewTag()">추가</button>
+					        <button id="tagCancelEdit" class="btn" type="button" onclick="tagCancelEdit()">취소</button>
+					        <button id="completeSelection" class="btn" type="submit">완료</button>
+					    </div>
+					    </c:if>
+					    <br><br>
+					</form>
+
+
 					
 					<c:choose>
 					    <c:when test="${not empty sessionScope.sid}">

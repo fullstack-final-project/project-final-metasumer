@@ -34,7 +34,7 @@
 			
 			                <c:choose>
 			                    <c:when test="${not isInNewList}">
-			                        <input type="checkbox" disabled />${t.tagName}
+			                        <label><input type="checkbox" disabled />${t.tagName}</label>
 			                    </c:when>
 			                    <c:otherwise>
 			                        <label>

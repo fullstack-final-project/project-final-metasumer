@@ -46,4 +46,15 @@
 		LIMIT 6
 	</select>
 	
+	<select id="tagBannerList" resultType="com.spring_boot_final.metasumer.model.InterestTagVO">
+	    SELECT i.interestId, i.tagImage, COUNT(m.memId) AS memberCount
+	    FROM memberInterest m
+	    JOIN interesttag t ON m.tagId = t.tagId
+	    JOIN interestcategory i ON t.interestId = i.interestId
+	    WHERE m.memId = #{memId}
+	    GROUP BY i.interestId, i.tagImage
+	    ORDER BY memberCount DESC
+	    LIMIT 5
+	</select>
+	
 </mapper>

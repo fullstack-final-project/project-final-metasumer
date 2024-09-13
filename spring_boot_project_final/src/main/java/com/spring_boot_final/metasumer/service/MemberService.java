@@ -75,13 +75,13 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public void saveInterests(String memId, List<String> tagIds) {
-        dao.saveInterests(memId, tagIds);
+	public void saveInterests(String memId, List<String> tagIds, int typeNo, int recordNo) {
+        dao.saveInterests(memId, tagIds, typeNo, recordNo);
 	}
 
 	@Override
-	public ArrayList<MemberVO> userTagList(String memId) {
-		return dao.userTagList(memId);
+	public ArrayList<MemberVO> userTagList(String memId, int typeNo) {
+		return dao.userTagList(memId, typeNo);
 	}
 
 	@Override
@@ -91,8 +91,8 @@ public class MemberService implements IMemberService {
 	
 
 	@Override
-	public void deleteInterests(String memId) {
-		dao.deleteInterests(memId);
+	public void deleteInterests(String memId, int typeNo) {
+		dao.deleteInterests(memId, typeNo);
 	}
 
 	@Override

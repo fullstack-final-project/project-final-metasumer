@@ -26,9 +26,6 @@
 				<h2>관리자 페이지</h2>
 					<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
-				<div>
-					<h1>★ 추후 판매, 예약 부분 추가 ★</h1>
-				</div>
 				
 			<h3>2주 동안 게시판별 활동량</h3>
             <canvas id="postStats" width="600" height="200"></canvas>

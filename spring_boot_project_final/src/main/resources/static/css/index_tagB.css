@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+.tag_slider {
+	position: relative;
+	width: 65%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.tag_slides {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+}
+
+.tag_slide {
+	min-width: 100%;
+	box-sizing: border-box;
+}
+
+.tag_slide img {
+	width: 100%;
+	display: block;
+}
+
+.tag_prev, .tag_next {
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -22px;
+	color: white;
+	font-weight: bold;
+	font-size: 24px; /* Adjust size as needed */
+	background-color: rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+	user-select: none;
+}
+
+.tag_prev {
+	left: 0;
+}
+
+.tag_next {
+	right: 0;
+}

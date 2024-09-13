@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring_boot_final.metasumer.dao.IIndexDAO;
 import com.spring_boot_final.metasumer.model.BusinessVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MyFishRecordsVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
 
@@ -41,6 +42,11 @@ public class IndexService implements IIndexService {
 	@Override
 	public ArrayList<ProductVO> listUserRecProducts() {
 		return dao.listUserRecProducts();
+	}
+
+	@Override
+	public ArrayList<InterestTagVO> tagBannerList(String memId) {
+		return dao.tagBannerList(memId);
 	}
 
 }

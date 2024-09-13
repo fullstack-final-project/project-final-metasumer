@@ -97,3 +97,8 @@
 	});
 
  });
+ 
+ // 검색창
+function searchFish() {
+    window.open('/myFishRecords/fishDetect', '_blank', 'width=800,height=600');
+}

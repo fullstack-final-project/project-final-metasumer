@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_final.metasumer.dao.IAdminDAO;
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 @Service
@@ -117,6 +118,26 @@ public class AdminService implements IAdminService {
 	@Override
 	public List<Map<String, Object>> getTopPostsCount() {
 		return dao.getTopPostsCount();
+	}
+
+	@Override
+	public ArrayList<MemberVO> searchMembers(String searchStr) {
+		return dao.searchMembers(searchStr);
+	}
+
+	@Override
+	public ArrayList<BusinessAuthVO> searchbusiness(String searchStr, String memType) {
+		return dao.searchbusiness(searchStr, memType);
+	}
+
+	@Override
+	public ArrayList<InterestTagVO> getInterestTagImage() {
+		return dao.getInterestTagImage();
+	}
+
+	@Override
+	public void updateTagImage(int interestId, String tagImage) {
+		dao.updateTagImage(interestId, tagImage);
 	}
 
 	

@@ -20,4 +20,15 @@ td {
 }
 
 tr:nth-child(even) {
-	background-color: #F7FCFF;}
+	background-color: #F7FCFF;
+}
+
+.input_text {
+	width: 25%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	font-size: 15px;
+}
