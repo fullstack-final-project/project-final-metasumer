@@ -13,113 +13,94 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring_boot_final.metasumer.model.BusinessVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
+import com.spring_boot_final.metasumer.service.BusinessService;
 import com.spring_boot_final.metasumer.service.ProductService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
   @Autowired
   private ProductService prdService;
+  @Autowired
+  private BusinessService businessService;
 
   
   //사업체가 등록한 상품 조회
-//  @RequestMapping("/product/productManagement")
-//  public String listProductsByBizId(@RequestParam("bizId") Integer bizId, Model model) {
-//      // 서비스에게 사업체 ID 전달하고, 해당 사업체의 상품 데이터 받아오기
-//      ArrayList<ProductVO> prdList = prdService.listAllProductByBizId(bizId);
-//      
-//      // 뷰 페이지에 출력하기 위해 Model 설정
-//      model.addAttribute("prdList", prdList);
-//      
-//      return "product/productManagement";
-//  }
+  @RequestMapping("/product/productManagement")
+  public String listProductsByBizId(HttpSession session, Model model) {
+    String memId = (String) session.getAttribute("memId");
+    BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
+    int bizId = loggedInBusiness.getBizId();
+      // 서비스에게 사업체 ID 전달하고, 해당 사업체의 상품 데이터 받아오기
+      ArrayList<ProductVO> prdList = prdService.listAllProductByBizId(bizId);
+      
+      // 뷰 페이지에 출력하기 위해 Model 설정
+      model.addAttribute("prdList", prdList);
+      
+      return "product/productManagement";
+  }
  
   
   //상품 등록 폼 열기
   @RequestMapping("/product/insertProductForm")
-  public String insertProductForm(Model model) {
+  public String insertProductForm(HttpSession session, Model model) {
+    String memId = (String) session.getAttribute("memId");
+    BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
+    int bizId = loggedInBusiness.getBizId();
+    
     // 카테고리 목록을 서비스에서 가져옴
     ArrayList<ProductVO> categoryList = prdService.listAllCategories();
     model.addAttribute("categoryList", categoryList);
+    model.addAttribute("bizId", bizId);
+    System.out.println("bizId: " + bizId);
     return "product/insertProductForm";
   }  
   
+  // 상품 등록 처리
   @RequestMapping("/product/insertProduct")
-  @ResponseBody
-  public Map<String, Object> registerProduct(@RequestParam("prdNo") String prdNo,
-                                             @RequestParam("prdImage") MultipartFile file,
-                                             @RequestParam("prdName") String prdName,
-                                             @RequestParam("prdPrice") Integer prdPrice,
-                                             @RequestParam("prdStock") Integer prdStock,
-                                             @RequestParam("prdMaker") String prdMaker,
-                                             @RequestParam("prdDescript") String prdDescript,
-                                             @RequestParam("bizId") Integer bizId,
-                                             @RequestParam("prdCtgId") Integer prdCtgId) {
-      Map<String, Object> response = new HashMap<>();
-      try {
-          // 파일 저장
-          String fileName = saveFile(file);
-          System.out.println("파일 등록 성공: " + fileName);
+  public String insertProduct(
+          @RequestParam("prdNo") String prdNo,
+          @RequestParam("prdName") String prdName,
+          @RequestParam("prdPrice") int prdPrice,
+          @RequestParam("prdStock") int prdStock,
+          @RequestParam("prdCtgId") int prdCtgId,
+          @RequestParam("prdMaker") String prdMaker,
+          @RequestParam("prdDescript") String prdDescript,
+          @RequestParam("prdImage") MultipartFile prdImage,
+          @RequestParam("bizId") int bizId,
+          HttpSession session) throws IOException {
+    
+      String memId = (String) session.getAttribute("memId");
+      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
+      bizId = loggedInBusiness.getBizId();
+      
+      // 상품 이미지 저장
+      String savedImageName = saveFile(prdImage);
+      
+      // ProductVO 객체 생성 및 데이터 설정
+      ProductVO product = new ProductVO();
+      product.setPrdNo(prdNo);
+      product.setPrdName(prdName);
+      product.setPrdPrice(prdPrice);
+      product.setPrdStock(prdStock);
+      product.setPrdCtgId(prdCtgId);
+      product.setPrdMaker(prdMaker);
+      product.setPrdDescript(prdDescript);
+      product.setPrdImage(savedImageName);
+      product.setBizId(bizId);
+      
+      // 상품 등록 서비스 호출
+      prdService.insertProduct(product);
 
-          // ProductVO 객체 생성
-          ProductVO product = new ProductVO();
-          product.setPrdNo(prdNo);
-          product.setPrdName(prdName);
-          product.setPrdPrice(prdPrice);
-          product.setPrdStock(prdStock);
-          product.setPrdMaker(prdMaker);
-          product.setPrdDescript(prdDescript);
-          product.setPrdImage(fileName);
-          product.setBizId(bizId);
-          product.setPrdCtgId(prdCtgId);
-
-          // 제품 등록
-          prdService.insertProduct(product);
-
-          response.put("status", "success");
-          response.put("redirectUrl", "/product/productManagement");
-      } catch (IOException e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
-      } catch (Exception e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "제품 등록 중 오류 발생: " + e.getMessage());
-      }
-      return response;
+      // 상품 목록 페이지로 리다이렉트
+      return "redirect:/product/productManagement?bizId=" + bizId;
   }
   
-  private String saveFile(MultipartFile file) throws IOException {
-    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
-
-    String originalFileName = file.getOriginalFilename();
-    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
-
-    UUID uuid = UUID.randomUUID();
-    String savedFileName = uuid.toString() + "_" + originalFileName;
-    File uploadFile = new File(uploadPath + savedFileName);
-
-    file.transferTo(uploadFile);
-
-    return savedFileName;
-  }
- 
-  
-  // 상품 등록(로그인 했을 경우 bizId 처리: 추후에 사용)
-//  @RequestMapping("/product/insertProduct")
-//  public String insertProduct(ProductVO vo, HttpSession session) {
-//      User user = (User) session.getAttribute("user"); // 세션에서 사용자 객체 가져오기
-//      if (user != null) {
-//          int bizId = user.getBizId(); // 사용자 객체에서 bizId 가져오기
-//          product.setBizId(bizId); // 상품 객체에 bizId 설정
-//          prdService.insertProduct(vo);
-//      }
-//      return "redirect:/productManagement";
-//  }
   
   // 상품 상세 정보 조회
   @RequestMapping("/product/detailViewProduct/{prdNo}")
@@ -146,14 +127,36 @@ public class ProductController {
     model.addAttribute("prd", prd);
     model.addAttribute("categoryList", categoryList);
     
-    return "product/updateProductForm"; // 폼에 데이터 출력
+    return "product/updateProductForm";
   }
   
-  // 수정된 데이터 받아서 DB에 저장
   @RequestMapping("/product/updateProduct")
-  public String updateProduct(ProductVO vo) {
-    prdService.updateProduct(vo);   
-    return "redirect:/product/productManagement";
+  public String updateProduct(ProductVO vo,
+                              @RequestParam(value = "prdImage", required = false) MultipartFile file,
+                              HttpSession session) throws IOException {
+    
+      String memId = (String) session.getAttribute("memId");
+      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
+      int bizId = loggedInBusiness.getBizId();
+      
+      // 기존 상품 정보 가져오기
+      ProductVO existingProduct = prdService.detailViewProduct(vo.getPrdNo());
+      
+      // 상품 이미지 처리
+      String savedFileName = existingProduct.getPrdImage(); // 기본적으로 기존 이미지 사용
+      if (vo.getPrdImageFile() != null && !vo.getPrdImageFile().isEmpty()) {
+        savedFileName = saveFile(vo.getPrdImageFile()); // 새 이미지 저장
+      }
+      
+      // ProductVO 객체 설정
+      vo.setPrdImage(savedFileName); // 기존 이미지 또는 새 이미지로 설정
+      vo.setBizId(bizId);
+      
+      // 상품 수정 서비스 호출
+      prdService.updateProduct(vo);
+
+      // 상품 목록 페이지로 리다이렉트
+      return "redirect:/product/productManagement?bizId=" + bizId;
   }
   
   // 상품 정보 삭제 
@@ -166,16 +169,16 @@ public class ProductController {
   //////////////////////////////////////////////////////////////
   
   //모든 상품 조회
-  @RequestMapping("/product/productManagement")
-  public String listAllProduct(Model model) {
-    // 서비스에게 요청하여 전체 상품 데이터 받아오기
-    ArrayList<ProductVO> prdList = prdService.listAllProduct();
-
-    // 뷰 페이지에 출력하기 위해 Model 설정
-    model.addAttribute("prdList", prdList);
-
-    return "product/productManagement";
-  }
+//  @RequestMapping("/product/productManagement")
+//  public String listAllProduct(Model model) {
+//    // 서비스에게 요청하여 전체 상품 데이터 받아오기
+//    ArrayList<ProductVO> prdList = prdService.listAllProduct();
+//
+//    // 뷰 페이지에 출력하기 위해 Model 설정
+//    model.addAttribute("prdList", prdList);
+//
+//    return "product/productManagement";
+//  }
   
   // 상품 리스트
   @RequestMapping("/product/productList")
@@ -199,7 +202,20 @@ public class ProductController {
   }
   
  ///////////////////////////////////////////////////////////////////////////////////////////
- 
+  private String saveFile(MultipartFile file) throws IOException {
+    String uploadPath = "C:/springWorkspace/metasumer_images/";
+
+    String originalFileName = file.getOriginalFilename();
+    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+
+    UUID uuid = UUID.randomUUID();
+    String savedFileName = uuid.toString() + "_" + originalFileName;
+    File uploadFile = new File(uploadPath + savedFileName);
+
+    file.transferTo(uploadFile);
+
+    return savedFileName;
+  }
   
   
 }

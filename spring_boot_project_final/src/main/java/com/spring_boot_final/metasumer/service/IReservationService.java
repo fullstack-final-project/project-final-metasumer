@@ -9,6 +9,9 @@ public interface IReservationService {
   // 일반회원
   public ArrayList<ReservationVO> getAllReservations();
   
+  // 사업자별 예약 내역 불러오기
+  public ArrayList<ReservationVO> getReservationsByBusiness(int bizId);
+  
   // 확정
   public int confirmReservation(Integer resNo);
   

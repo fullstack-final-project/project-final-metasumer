@@ -18,7 +18,7 @@
   </resultMap>
 
     <!-- 모든 상품 조회 (사업체 ID로 필터링) -->
-    <select id="listAllProductByBizId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+    <select id="listAllProductByBizId" resultType="com.spring_boot_final.metasumer.model.ProductVO">
         SELECT * FROM product WHERE bizId = #{bizId}
     </select>
     
@@ -89,5 +89,10 @@
 		    WHERE c.prdCtgName = #{category}
 		</select>
     
+    <!-- 사업자 ID 별 상품 조회 -->
+    <select id="selectProductsByBizId" parameterType="int" resultType="com.spring_boot_final.metasumer.model.ProductVO">
+        SELECT * FROM product
+        WHERE bizId = #{bizId}
+    </select>
 
 </mapper>

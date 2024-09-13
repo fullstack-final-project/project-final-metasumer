@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,5 +36,14 @@ public class BusinessService implements IBusinessService {
   public void deleteBusiness(int bizId) {
     dao.deleteBusiness(bizId);
   }
-
+  
+  @Override
+  public BusinessVO getBusinessByMemId(String memId) {
+    return dao.getBusinessByMemId(memId);
+  }
+  
+  @Override
+  public List<BusinessVO> getBusinessesByMemId(String memId) {
+    return dao.getBusinessesByMemId(memId);
+  }
 }

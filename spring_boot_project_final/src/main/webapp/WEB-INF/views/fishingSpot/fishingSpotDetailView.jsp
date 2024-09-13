@@ -10,51 +10,85 @@
     <title>${spot.spotName} - 상세 정보</title>
     <!-- head.jsp import -->
     <c:import url="/WEB-INF/views/layout/head.jsp" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishingSpotDetail.css'/>" />
+    <script type="text/javascript">
+		    var spotAddress1 = "<c:out value='${spot.spotAddress1}' />"; // 도로명 주소
+		    var spotAddress2 = "<c:out value='${spot.spotAddress2}' />"; // 지번 주소
+		</script>
+		
+		<script>
+        $(document).ready(function() {
+            // 서버에서 전달된 시설 정보
+            var facilities = <%= new org.json.JSONArray((String[]) request.getAttribute("facilities")).toString() %>;
+            
+            // 현재 페이지에서 사용할 전역 변수로 설정
+            window.fishingSpotFacilities = facilities;
+        });
+    </script>
     <script src="<c:url value='/js/fishingSpotDetail.js'/>"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=FjQe56N5sRMOtvgcvWwMTodvHGPmJqNJpMxNRbOS"></script>
+    <script src="<c:url value='/js/fishingSpotFacility.js'/>"></script>
     
     <!-- FullCalendar 관련 CSS와 JS 로드 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/ko.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/fishingSpotDetail.css'/>" />
 </head>
 <body>
     <div id="wrap">
         <!-- top.jsp import -->
         <c:import url="/WEB-INF/views/layout/top.jsp"></c:import>
         <form id="areaSelectionForm" method="post" action="/order/reservationOrder">
-	        <main class="content-container">
+	        <section class="content-container">
 	            <!-- 낚시터 기본 정보 섹션 -->
-	            <section class="spot-basic-info">
+	            <div class="spot-basic-info">
 	                <div class="spot-image">
 	                    <img src="<c:url value='/project_images/${spot.spotImage}'/>" alt="${spot.spotName}">
 	                </div>
 	                <div class="spot-details">
 	                    <h1>${spot.spotName}</h1>
-	                    <p class="address">${spot.spotAddress1} ${spot.spotAddress2}</p>
+	                    <p class="address">${spot.spotAddress1}</p>
+	                    <p>${spot.spotAddress2}</p>
 	                    <p class="price">가격: ${spot.spotPrice}원~</p>
 	                    <p class="hours"><fmt:formatDate value="${spot.openingTime}" pattern="HH:mm" />
 	                        - 
 	                        <fmt:formatDate value="${spot.closingTime}" pattern="HH:mm" /></p>
 	                </div>
-	            </section>
+	            </div>
 	            
 	            <!-- 달력 부분 -->
 	            <div>
 	                <div id="calendar"></div>
 	            </div>
 	            
-	            <!-- 인원 선택 -->
-	            <section class="reservation-info">
-	                <h3>예약 인원 선택</h3>
-	                <label for="resNum">인원 수:</label>
-	                <input type="number" id="resNum" name="resNum" min="1" max="10" value="1">
-	            </section>
+	            <!-- 선택 날짜, 날씨, 인원 정보 -->
+							<div class="reservation-info">
+						    
+							    <!-- 선택한 날짜를 표시할 부분 -->
+							    <div class="date-title">
+							        <p id="selectedDateDisplay"></p> 
+							    </div>
+							    
+							    <!-- 날씨 정보와 인원 선택 컨테이너 -->
+							    <div class="info-container">
+							        <!-- 선택한 날씨 정보를 표시할 부분 -->
+							        <div class="info-item">
+							            <div id="weatherDisplay"></div>
+							        </div>
+							        
+							        <!-- 인원 선택 -->
+							        <div class="info-item resNum-choice">
+							        	
+							        		<img src="<c:url value='/images/people.png'/>" alt="예약인원" class="people-img">
+							        	
+							            <label for="resNum">예약 인원</label>
+							            <input type="number" id="resNum" name="resNum" min="1" max="10" value="1">
+							        </div>
+							    </div>
+							</div>
 	            
 	            <!-- 낚시터 구역 정보 섹션 -->
-	            <section class="spot-areas">
+	            <div class="spot-areas">
 	                <h2>상품 정보</h2>
 	                <c:forEach var="area" items="${areas}">
 	                    <div class="area-item" data-checkbox-id="area_${area.areaId}">
@@ -65,25 +99,25 @@
 	                        <p><fmt:formatDate value="${area.startTime}" pattern="HH:mm" /> - <fmt:formatDate value="${area.endTime}" pattern="HH:mm" /></p>
 	                    </div>
 	                </c:forEach>
-	            </section>
+	            </div>
 	            
 	            <!-- 낚시터 설명 섹션 -->
-	            <section class="spot-description">
+	            <div class="spot-description">
 	                <h2>낚시터 설명</h2>
 	                <p>${spot.spotDescription}</p>
-	            </section>
+	            </div>
 	
 	            <!-- 시설 정보 섹션 -->
-	            <section class="spot-facilities">
-	                <h2>시설 정보</h2>
-	                <p>${spot.spotFacility}</p>
-	            </section>
-	        </main>
+	            <div class="spot-facilities">
+							    <h2>편의시설</h2>
+							    <ul id="facilityList"></ul>
+							</div>
+	        </section>
         
-        <section class="bottom-section">
+        <div class="bottom-section">
             <!-- 모달 버튼 -->
             <button type="button" id="productSelectionButton" class="modal-button">상품 선택</button>
-        </section>
+        </div>
         
         <!-- 모달 창 -->
         <div id="areaModal" class="modal">

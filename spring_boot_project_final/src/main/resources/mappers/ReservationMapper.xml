@@ -10,6 +10,24 @@
     <select id="getAllReservations" resultType="com.spring_boot_final.metasumer.model.ReservationVO">
         SELECT * FROM reservation
     </select>
+    
+    <!-- 사업자 ID로 예약 정보를 조회하는 쿼리 -->
+    <select id="getReservationsByBusiness" resultType="com.spring_boot_final.metasumer.model.ReservationVO">
+        SELECT 
+            r.resNo, 
+            r.memName, 
+            r.resDate, 
+            r.resStart, 
+            r.resEnd, 
+            r.resStatus, 
+            fs.spotName AS spotName, 
+            fa.areaName AS areaName
+        FROM reservation r
+        JOIN fishingSpot fs ON r.spotId = fs.spotId
+        JOIN fishingSpotArea fa ON r.areaId = fa.areaId
+        WHERE r.bizId = #{bizId}
+        ORDER BY r.resDate DESC, r.resStart DESC;
+    </select>
  
 	
 		<!-- 예약 상태 업데이트 쿼리 -->
@@ -24,9 +42,9 @@
 		<!-- 예약을 저장하는 쿼리 -->
     <insert id="saveReservation" parameterType="com.spring_boot_final.metasumer.model.ReservationVO">
         INSERT INTO reservation 
-        (memId, memName, areaId, resDate, resStart, resEnd, resNum, resPrice, resCoupon, resStatus, bizId, spotId, resQuantity) 
+        (memId, memName, ordererHP, ordererEmail, areaId, resDate, resStart, resEnd, resNum, resPrice, resCoupon, resStatus, bizId, spotId, resQuantity) 
         VALUES 
-        (#{memId}, #{memName}, #{areaId}, #{resDate}, #{resStart}, #{resEnd}, #{resNum}, #{resPrice}, #{resCoupon}, #{resStatus}, #{bizId}, #{spotId}, #{resQuantity})
+        (#{memId}, #{memName}, #{ordererHP}, #{ordererEmail}, #{areaId}, #{resDate}, #{resStart}, #{resEnd}, #{resNum}, #{resPrice}, #{resCoupon}, #{resStatus}, #{bizId}, #{spotId}, #{resQuantity})
     </insert>
     
 	</mapper>

@@ -1,5 +1,7 @@
 package com.spring_boot_final.metasumer.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductVO {
   private String prdNo; // 제품 번호
   private String prdName; // 제품 이름
@@ -11,6 +13,18 @@ public class ProductVO {
   private Integer bizId; // 사업체 ID
   private Integer prdCtgId;
   private String prdCtgName;
+  
+  private MultipartFile prdImageFile;
+  
+  
+
+  public MultipartFile getPrdImageFile() {
+    return prdImageFile;
+  }
+
+  public void setPrdImageFile(MultipartFile prdImageFile) {
+    this.prdImageFile = prdImageFile;
+  }
 
   public String getPrdNo() {
     return prdNo;

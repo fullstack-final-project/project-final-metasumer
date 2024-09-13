@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,5 +64,10 @@ import com.spring_boot_final.metasumer.model.ProductVO;
   @Override
     public ArrayList<ProductVO> getProductsByCategory(String category) {
       return dao.getProductsByCategory(category);
+    }
+  
+  @Override
+    public List<ProductVO> getProductsByBizId(int bizId) {
+      return dao.getProductsByBizId(bizId);
     }
 }

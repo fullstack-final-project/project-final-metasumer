@@ -7,6 +7,8 @@ public class ReservationVO {
   private int resNo;            // 예약 번호
   private String memId;         // 회원 ID
   private String memName;       // 회원 이름
+  private String ordererHP;     // 예약자 휴대폰
+  private String ordererEmail;   // 예약자 이메일
   private int areaId;           // 낚시자리 ID
   private Date resDate;         // 예약 날짜
   private Time resStart;      // 예약 시작 시간
@@ -18,6 +20,7 @@ public class ReservationVO {
   private int bizId;            // 사업자 ID
   private int spotId;           // 낚시터 ID
   private int resQuantity;      // 예약 수량
+  private Date resCreatedDate;   // 예약상품 결제 날짜
   
   public int getResNo() {
     return resNo;
@@ -103,6 +106,25 @@ public class ReservationVO {
   public void setResQuantity(int resQuantity) {
     this.resQuantity = resQuantity;
   }
+  public String getOrdererHP() {
+    return ordererHP;
+  }
+  public void setOrdererHP(String ordererHP) {
+    this.ordererHP = ordererHP;
+  }
+  public String getOrdererEmail() {
+    return ordererEmail;
+  }
+  public void setOrdererEmail(String ordererEmail) {
+    this.ordererEmail = ordererEmail;
+  }
+  public Date getResCreatedDate() {
+    return resCreatedDate;
+  }
+  public void setResCreatedDate(Date resCreatedDate) {
+    this.resCreatedDate = resCreatedDate;
+  }
+  
   
   
   

@@ -15,4 +15,23 @@
         FROM fishingSpotArea
         WHERE areaId = #{areaId}
     </select>
+    
+    <!-- 구역 등록 -->
+		<insert id="insertFishingSpotArea" parameterType="com.spring_boot_final.metasumer.model.FishingSpotAreaVO">
+		    INSERT INTO fishingSpotArea (spotId, areaName, areaPrice, minCapacity, maxCapacity, startTime, endTime, fishType)
+		    VALUES (#{spotId}, #{areaName}, #{areaPrice}, #{minCapacity}, #{maxCapacity}, #{startTime}, #{endTime}, #{fishType})
+		</insert>
+		
+		<!-- 구역 수정 -->
+    <update id="updateFishingSpotArea" parameterType="com.spring_boot_final.metasumer.model.FishingSpotAreaVO">
+        UPDATE fishingSpotArea
+        SET spotId = #{spotId}, areaName = #{areaName}, areaPrice = #{areaPrice}, minCapacity = #{minCapacity},
+            maxCapacity = #{maxCapacity}, startTime = #{startTime}, endTime = #{endTime}, fishType = #{fishType}
+        WHERE areaId = #{areaId}
+    </update>
+
+    <!-- 구역 삭제 -->
+    <delete id="deleteFishingSpotArea" parameterType="int">
+        DELETE FROM fishingSpotArea WHERE areaId = #{areaId}
+    </delete>
 	</mapper>

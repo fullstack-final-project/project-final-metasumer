@@ -2,6 +2,11 @@
 
 /* dashboard.css  */
 
+section {
+		margin: 0 auto;
+    max-width: 80%;
+    padding: 20px;
+}	
 
 /* 대시보드 제목 스타일 */
 #dashboard h1 {
@@ -153,26 +158,6 @@ h2 {
     color: black !important;
 }
 
-/* 반응형 디자인: 작은 화면에서의 스타일 조정 */
-@media (max-width: 768px) {
-    #dashboard {
-        width: 95%;
-        margin: 0 auto; /* 중앙 정렬 */
-    }
-
-    .tab {
-        justify-content: center; /* 가운데 정렬 */
-    }
-
-    .tabcontent {
-        padding: 15px;
-        align-items: center; /* 가운데 정렬 */
-    }
-
-    .table {
-        margin: 0 auto; /* 가운데 정렬 */
-    }
-}
 
 
 

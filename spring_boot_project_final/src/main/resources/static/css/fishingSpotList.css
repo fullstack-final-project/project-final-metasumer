@@ -43,7 +43,7 @@
 }
 
 /* 필터 버튼 및 드롭다운 메뉴 */
-.filter-button, .distance-dropdown {
+.filter-dropdown, #open-map-modal {
     padding: 15px;
     background: white;
     border: 1px solid #ddd;
@@ -53,17 +53,21 @@
     
 }
 
+/* 드롭다운 메뉴의 선택 옵션 스타일 */
+#filter-options option {
+    text-align: center; /* 옵션 텍스트 가운데 정렬 */
+}
+
 /* 필터 드롭다운 메뉴 */
-.distance-dropdown select {
+.filter-dropdown select {
     border: none;
     background: none;
     font-weight: bold;
-    width: 100%; /* 드롭다운 메뉴의 너비를 버튼과 맞추기 */
+    width: 100%; 
 }
 
 /* 낚시터 컨테이너 */
 .spot-container {
-		position: fixed; /* 화면에 고정 */
 		width: calc(60% - 10px); 
     position: relative;
     margin-bottom: 20px;
@@ -88,6 +92,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
+    color: #333;
 }
 
 .spot-location {
@@ -100,4 +105,106 @@
     font-size: 18px;
     color: #39A7FF;
     font-weight: bold;
+}
+
+
+
+/* 모달 배경 스타일 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 배경색 */
+    z-index: 1000; /* 모달이 페이지 위에 오도록 설정 */
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 중앙 정렬 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* 모달 내 버튼 스타일 */
+.modal-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#modal-searchBox {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#modal-searchButton,
+#set-current-location,
+#saveLocation {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#modal-searchButton {
+    background-color: #09a4f7; /* 검색 버튼 색상 */
+}
+
+#set-current-location {
+    background-color: #6c757d; /* 현재 위치 설정 버튼 색상 */
+    margin-top: 10px; /* 위쪽 여백 */
+}
+
+#saveLocation {
+    background-color: #28a745; /* 저장 버튼 색상 */
+    margin-top: 10px; /* 위쪽 여백 */
+}
+
+/* 지도 스타일 */
+#map {
+    margin-top: 10px;
+}
+
+#modal-searchButton:hover {
+    background-color: #61c5fa; 
+}
+
+
+#set-current-location:hover {
+    background-color: #5a6268; 
+}
+
+
+#saveLocation:hover {
+    background-color: #218838; 
 }

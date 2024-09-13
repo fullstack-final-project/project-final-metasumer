@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+h1{text-align: center;}
+
+/* 전체 테이블 */
+table {
+	border-collapse: collapse;
+	width: 80%;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+table, th, td {
+	border-top: 1px solid #87C4FF;
+	border-bottom: 1px solid #87C4FF;
+	border-left: none;
+	border-right: none;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 2;
+	text-align: left;
+}
+
+thead th {
+	border-top: 2px solid #87C4FF;
+}
+
+tbody tr:last-child td {
+	border-bottom: 2px solid #87C4FF;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"],
+textarea, select {
+  width: 60%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	font-size: 15px;
+}
+
+select {
+		width: 15%;
+}
+
+input[type="time"] {
+		width: 28%;
+}
+
+/* 주소 input 요소의 간격 조정 */
+#spotZipcode,
+#spotAddress1,
+#spotAddress2 {
+		width: 40%; 
+    padding: 8px; 
+		border-radius: 4px;
+    box-sizing: border-box; 
+    margin-bottom: 10px; 
+    margin-right: 5px; 
+    box-sizing: border-box;
+}
+
+#spotHP1,
+#spotHP2,
+#spotHP1 {
+		width: 18%; 
+    display: inline-block;
+}
+
+input.hp {
+    width: 18%; 
+    display: inline-block;
+}
+
+input:focus,
+textarea:focus {
+  background-color: #E0F4FF;
+  border-color: #87C4FF;
+  outline: none;
+}
+
+/********* fishingSpotArea **********/
+#minCapacity, #maxCapacity {
+		width: 18%;
+}

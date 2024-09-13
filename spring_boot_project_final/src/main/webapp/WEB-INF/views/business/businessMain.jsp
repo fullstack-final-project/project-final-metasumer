@@ -15,30 +15,18 @@
 		<div id="wrap">
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
-			<section class="cards">
-         <div id="seaFishing" class="card">
-         		<div class="card-content">
-	             <h2>바다낚시</h2>
-	             <p>바다낚시 관련 상품과 판매 내역을 관리하세요.</p>
-	             <a href="<c:url value='/business/dashboard'/>" class="btn">자세히 보기</a>
-            </div>
-         </div>
-         <div id="freshWaterFishing" class="card">
-         		<div class="card-content">
-	             <h2>민물낚시</h2>
-	             <p>민물낚시 관련 상품과 판매 내역을 관리하세요.</p>
-	             <a href="<c:url value='/business/dashboard'/>" class="btn">자세히 보기</a>
-	           </div>  
-         </div>
-         <div id="sale" class="card">
-        		 <div class="card-content">
-	             <h2>상품 판매</h2>
-	             <p>상품 판매 관련 관리 및 분석을 진행하세요.</p>
-	             <%-- <c:set var="bizId" value="${loggedInUser.bizId}" />
-	             <a href="<c:url value='/product/productManagement?bizId=${bizId}'/>" class="btn">자세히 보기</a> --%>
-	             <a href="<c:url value='/product/productManagement'/>" class="btn">자세히 보기</a>
-	           </div> 
-         </div>
+			<section>
+				<header>
+			    <h2>사업자 페이지</h2>
+			  </header>
+				<div class="bizPageCtg">
+			    <div id='bizPageCtgBtn'>
+			      <button class='bizPageBtn' onclick="location.href='/business/fishingSpotManagement?bizId=${bizId}'">낚시터 관리</button>
+			      <button class='bizPageBtn' onclick="location.href='/business/dashboard?bizId=${bizId}'">예약확인</button>
+			      <button class='bizPageBtn' onclick="location.href='/product/productManagement?bizId=${bizId}'">상품판매 관리</button>
+			      <button class='bizPageBtn' onclick="location.href='/memberOcr/businessAuth'">업체 등록</button>
+			    </div>
+			  </div>
         </section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		

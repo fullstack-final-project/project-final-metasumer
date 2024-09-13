@@ -10,4 +10,7 @@ public interface IFishingSpotAreaDAO {
   
   //낚시터 구역 상세 상품 조회
   public FishingSpotAreaVO getFishingSpotAreaById(int areaId);
+  
+  // 낚시터 구역 등록
+  public void insertFishingSpotArea(FishingSpotAreaVO fishingSpotArea);
 }
