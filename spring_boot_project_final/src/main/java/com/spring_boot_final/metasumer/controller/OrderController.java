@@ -3,7 +3,6 @@ package com.spring_boot_final.metasumer.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,14 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.spring_boot_final.metasumer.model.FishingSpotAreaVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
-import com.spring_boot_final.metasumer.model.OrderVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.model.ReservationVO;
-import com.spring_boot_final.metasumer.model.SalesVO;
 import com.spring_boot_final.metasumer.service.FishingSpotService;
 import com.spring_boot_final.metasumer.service.OrderService;
 import com.spring_boot_final.metasumer.service.ProductService;
@@ -78,6 +74,7 @@ public class OrderController {
       }
   }
   
+  /*
   @RequestMapping("/order/productComplete")
   public ModelAndView productComplete(
       @RequestParam("prdNo") String prdNo,
@@ -129,9 +126,12 @@ public class OrderController {
       
       return new ModelAndView("redirect:/product/productList");
   }
+  */
+  
   
   ////////////////////////////////////////////////////////////
   // 예약
+  
   @RequestMapping("/order/reservationComplete")
   public String reservationComplete(
       @RequestParam(value = "spotId", defaultValue = "0") int spotId,

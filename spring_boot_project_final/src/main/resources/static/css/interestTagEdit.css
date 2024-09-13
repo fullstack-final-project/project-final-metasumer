@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.input_tagName {
+    width: 90%;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid;
+    border-radius: 0;
+    padding: 10px;
+    box-shadow: none;
+    transition: border-color 0.3s;
+}
+
+.input_tagName:focus {
+    border-bottom-color: #39A7FF;
+    outline: none;
+}
+
+

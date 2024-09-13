@@ -50,6 +50,7 @@ table {
 .order-ship-table {
     table-layout: fixed; 
     width: 100%; 
+    margin-top: 10px;
 }
 
 /* 동일한 너비 설정  */
@@ -74,7 +75,7 @@ table {
 /* 상품 정보 테이블 스타일 */
 .product-table {
     width: 100%;
-    font-size: 18px;
+    font-size: 16px;
     border-collapse: collapse;
     border-top: 1px solid #87C4FF;
     border-bottom: 1px solid #87C4FF;
@@ -133,6 +134,7 @@ table {
 	padding: 15px;
 	background-color: #f2f2f2;
 	position: relative;
+	border-radius: 8px;
 }
 
 .payment-info h3 {
@@ -224,13 +226,14 @@ table {
 
 /* 결제 버튼 */
 #submit-button {
-		color: white;
-    background-color: #09a4f7;
-    border: 1px solid #d7d7d7;
+	color: white;
+    background-color: #39A7FF;
+    border: 1px solid #39A7FF;
 }
 
 #submit-button:hover {
 		background-color: #61c5fa;
+		border: 1px solid #61c5fa;
 }
 
 /* 취소 버튼 */
@@ -251,7 +254,8 @@ table {
 .shipping-details input[type="text"],
 .orderer-details input[type="email"],
 .shipping-details input[type="email"],
-#emailDomain
+#emailDomain,
+#ordRcvMsg
  {
     width: 40%; 
     padding: 8px; 

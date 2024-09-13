@@ -108,7 +108,7 @@
 		
 		<!-- Google API 의존성 추가 -->
 		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
-		<dependency>
+<!-- 		<dependency>
 		    <groupId>com.google.api-client</groupId>
 		    <artifactId>google-api-client</artifactId>
 		    <version>2.6.0</version>
@@ -119,13 +119,11 @@
 			<artifactId>google-api-services-youtube</artifactId>
 			<version>v3-rev20240814-2.0.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2 -->
 		<dependency>
 			<groupId>com.google.http-client</groupId>
 			<artifactId>google-http-client-jackson2</artifactId>
 			<version>1.44.2</version>
 		</dependency>
-				<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-java6 -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
 			<artifactId>google-api-client-java6</artifactId>
@@ -135,7 +133,7 @@
 			<groupId>com.google.oauth-client</groupId>
 			<artifactId>google-oauth-client-jetty</artifactId>
 			<version>1.36.0</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- json 추가 -->
 		<dependency>
@@ -154,15 +152,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		
+		<!-- jsoup 추가 -->
 		<dependency> 
 			<groupId>org.jsoup</groupId> 
 			<artifactId>jsoup</artifactId> 
 			<version>1.18.1</version> 
         </dependency>
-        
-        <dependency>
+<!--         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency> -->
+		
+		<!-- Maven Plugins 의존성 -->
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>3.3.1</version>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>3.3.1</version>
+			<type>maven-plugin</type>
 		</dependency>
 		
 	</dependencies>

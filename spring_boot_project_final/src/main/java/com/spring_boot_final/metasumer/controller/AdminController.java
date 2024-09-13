@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -433,5 +434,48 @@ public class AdminController {
         }
 		
 	}
+	
+	@RequestMapping("/admin/interestTagEdit/{interestId}")
+	public String interestTagEdit(@PathVariable("interestId") int interestId, Model model) {
+		
+		ArrayList<InterestTagVO> itList = adminService.getInterestTag(interestId);
+		
+		model.addAttribute("itList", itList);
+		
+		return "admin/interestTagEdit";
+	}
+	
+	@RequestMapping(value = "/admin/updateTag", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateTag(@RequestParam String tagName, @RequestParam int interestId, @RequestParam int tagId) {
+		String result = "fail";
+		
+		 try {
+		        adminService.updateTag(tagName, interestId, tagId);
+		        result = "success";
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		
+		
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/admin/insertTag", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertTag(@RequestParam String tagName, @RequestParam int interestId) {
+		
+	    String result = "fail";
+	    try {
+	        adminService.insertTag(tagName, interestId);
+	        result = "success";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return result;
+	}
+	
+	
 
 }

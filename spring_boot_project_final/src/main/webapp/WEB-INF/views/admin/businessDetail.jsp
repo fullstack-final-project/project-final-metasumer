@@ -22,7 +22,7 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
-				<h2>디테일 페이지</h2>
+				<h2>사업자 상세 페이지</h2>
 				<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
 				<table border="1">
@@ -66,7 +66,7 @@
 						            <option value="approved" ${bs.authStatus == 'approved' ? 'selected' : ''}>승인</option>
 						            <option value="rejected" ${bs.authStatus == 'rejected' ? 'selected' : ''}>거부</option>
 						        </select>
-                                <input type="submit" value="변경">
+                                <input type="submit" class="btn" value="변경">
                             </form>
                         </td>
 					</tr>

@@ -78,4 +78,13 @@ public interface IAdminService {
 	// 배너 수정
 	public void updateTagImage(int interestId, String tagImage);
 
+	// 태그 가져오기
+	public ArrayList<InterestTagVO> getInterestTag(int interestId);
+
+	// 태그 수정
+	public void updateTag(String tagName, int interestId, int tagId);
+
+	// 태그 추가
+	public void insertTag(String tagName, int interestId);
+
 }

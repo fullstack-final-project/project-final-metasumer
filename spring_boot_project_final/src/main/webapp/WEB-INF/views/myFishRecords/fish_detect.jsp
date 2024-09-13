@@ -17,7 +17,7 @@
 		
 		<div class="container">
 			<div class="title-container">
-	           <h3>사진으로 물고기이름 찾기</h3>
+	           <h3>사진으로 물고기 이름 찾기</h3>
 	        </div>
 			
 			<!-- 파일 업로드 -->
@@ -27,7 +27,7 @@
 			</form>
 		
 			<!-- 결과 출력 -->	
-			<h2>텍스트</h2>
+			<h2>물고기 이름</h2>
 			<div id="resultBox"></div>
 			<br><br>			
 			

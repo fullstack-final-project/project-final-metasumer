@@ -140,6 +140,22 @@ public class AdminService implements IAdminService {
 		dao.updateTagImage(interestId, tagImage);
 	}
 
+	@Override
+	public ArrayList<InterestTagVO> getInterestTag(int interestId) {
+		return dao.getInterestTag(interestId);
+	}
+
+	@Override
+	public void updateTag(String tagName, int interestId, int tagId) {
+		dao.updateTag(tagName, interestId, tagId);
+		
+	}
+
+	@Override
+	public void insertTag(String tagName, int interestId) {
+		dao.insertTag(tagName, interestId);
+	}
+
 	
 	
 

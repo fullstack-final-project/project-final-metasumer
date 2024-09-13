@@ -9,7 +9,7 @@
 	<!-- 전체 회원 기록 불러오기 : 크기순으로 나열 -->
 	<select id="listBestMemFishRecords" resultType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
 		SELECT f.recordNo, f.title,  f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
-		FROM myFishRecords f
+		FROM myfishrecords f
 	    JOIN member m ON f.memId = m.memId
 		ORDER BY fishSize*1 DESC
 	</select>
@@ -25,7 +25,7 @@
 	<!-- 최신 회원 기록 불러오기 : 날짜순으로 나열 -->
 	<select id="listNewMemFishRecords" resultType="com.spring_boot_final.metasumer.model.MyFishRecordsVO">
 		SELECT f.recordNo, f.title,  f.memId, f.uploadImage, f.fishName, f.fishSize, f.location, f.createdDate, m.memNickname
-		FROM myFishRecords f
+		FROM myfishrecords f
 	    JOIN member m ON f.memId = m.memId
 		ORDER BY createdDate*1 DESC
 	</select>

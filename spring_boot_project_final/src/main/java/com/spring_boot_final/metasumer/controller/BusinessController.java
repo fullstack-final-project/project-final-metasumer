@@ -22,103 +22,97 @@ import com.spring_boot_final.metasumer.service.BusinessService;
 @RequestMapping("/business")
 public class BusinessController {
 
-  @Autowired
-  private BusinessService businessService;
-  
-  //사업자 메인 페이지
-  @RequestMapping("/businessMain")
-  public String businessMain() {
-    return "business/businessMain";
-  }
-  
-  // 사업체 등록 폼 열기
-  @RequestMapping("/registerBusinessForm")
-  public String registerBusinessForm() {
-      return "business/registerBusiness";
-  }
-  
+	@Autowired
+	private BusinessService businessService;
 
-  @RequestMapping("/getAllBusiness")
-  public String getAllBusiness(Model model) {
-      ArrayList<BusinessVO> businesses = businessService.getAllBusiness();
-      model.addAttribute("businesses", businesses);
-      return "business/getAllBusiness";
-  }
+	// 사업자 메인 페이지
+	@RequestMapping("/businessMain")
+	public String businessMain() {
+		return "business/businessMain";
+	}
 
-  @RequestMapping("/register")
-  @ResponseBody
-  public Map<String, Object> registerBusiness(@RequestParam("memId") String memId,
-                                              @RequestParam("bizRegImg") MultipartFile file,
-                                              @RequestParam("businessName") String businessName,
-                                              @RequestParam(value = "authStatus", defaultValue = "pending") String authStatus,
-                                              @RequestParam("bizRegNumber") String bizRegNumber,
-                                              @RequestParam("businessType") String businessType,
-                                              @RequestParam("delegate") String delegate,
-                                              @RequestParam("businessAddress") String businessAddress,
-                                              @RequestParam("businessCategory") String businessCategory,
-                                              @RequestParam("issueDate") String issueDate) {
-   
-      Map<String, Object> response = new HashMap<>();
-      try {
-          // 파일 저장
-          String fileName = saveFile(file);
-          System.out.println("파일 등록 성공: " + fileName);
+	// 사업체 등록 폼 열기
+	@RequestMapping("/registerBusinessForm")
+	public String registerBusinessForm() {
+		return "business/registerBusiness";
+	}
 
-          // BusinessVO 객체 생성
-          BusinessVO business = new BusinessVO();
-          business.setMemId(memId);
-          business.setBusinessName(businessName);
-          business.setAuthStatus(authStatus); // String 값 사용
-          business.setBizRegNumber(bizRegNumber);
-          business.setBusinessType(businessType); // String 값 사용
-          business.setBizRegImg(fileName);
-          business.setDelegate(delegate); // 대표자 설정
-          business.setBusinessAddress(businessAddress); // 사업장 소재지 설정
-          business.setBusinessCategory(businessCategory); // 업태 설정
-          business.setIssueDate(issueDate); // 발행일 설정
+	@RequestMapping("/getAllBusiness")
+	public String getAllBusiness(Model model) {
+		ArrayList<BusinessVO> businesses = businessService.getAllBusiness();
+		model.addAttribute("businesses", businesses);
+		return "business/getAllBusiness";
+	}
 
-          // 비즈니스 등록
-          businessService.registerBusiness(business);
+	@RequestMapping("/register")
+	@ResponseBody
+	public Map<String, Object> registerBusiness(@RequestParam("memId") String memId,
+			@RequestParam("bizRegImg") MultipartFile file, @RequestParam("businessName") String businessName,
+			@RequestParam(value = "authStatus", defaultValue = "pending") String authStatus,
+			@RequestParam("bizRegNumber") String bizRegNumber, @RequestParam("businessType") String businessType,
+			@RequestParam("delegate") String delegate, @RequestParam("businessAddress") String businessAddress,
+			@RequestParam("businessCategory") String businessCategory, @RequestParam("issueDate") String issueDate) {
 
-          response.put("status", "success");
-          response.put("redirectUrl", "/business/businessMain");
-      } catch (IOException e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
-      } catch (Exception e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "비즈니스 등록 중 오류 발생: " + e.getMessage());
-      }
-      return response;
-  }
-  
+		Map<String, Object> response = new HashMap<>();
+		try {
+			// 파일 저장
+			String fileName = saveFile(file);
+			System.out.println("파일 등록 성공: " + fileName);
 
-  @RequestMapping("/update")
-  public String updateBusiness(BusinessVO business) {
-      businessService.updateBusiness(business);
-      return "redirect:/business/detail?bizId=" + business.getBizId();
-  }
+			// BusinessVO 객체 생성
+			BusinessVO business = new BusinessVO();
+			business.setMemId(memId);
+			business.setBusinessName(businessName);
+			business.setAuthStatus(authStatus); // String 값 사용
+			business.setBizRegNumber(bizRegNumber);
+			business.setBusinessType(businessType); // String 값 사용
+			business.setBizRegImg(fileName);
+			business.setDelegate(delegate); // 대표자 설정
+			business.setBusinessAddress(businessAddress); // 사업장 소재지 설정
+			business.setBusinessCategory(businessCategory); // 업태 설정
+			business.setIssueDate(issueDate); // 발행일 설정
 
-  @RequestMapping("/delete")
-  public String deleteBusiness(@RequestParam("bizId") int bizId) {
-      businessService.deleteBusiness(bizId);
-      return "redirect:/business/list";
-  }
-  
-  private String saveFile(MultipartFile file) throws IOException {
-    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
+			// 비즈니스 등록
+			businessService.registerBusiness(business);
 
-    String originalFileName = file.getOriginalFilename();
-    originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+			response.put("status", "success");
+			response.put("redirectUrl", "/business/businessMain");
+		} catch (IOException e) {
+			e.printStackTrace();
+			response.put("status", "fail");
+			response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("status", "fail");
+			response.put("error", "비즈니스 등록 중 오류 발생: " + e.getMessage());
+		}
+		return response;
+	}
 
-    UUID uuid = UUID.randomUUID();
-    String savedFileName = uuid.toString() + "_" + originalFileName;
-    File uploadFile = new File(uploadPath + savedFileName);
+	@RequestMapping("/update")
+	public String updateBusiness(BusinessVO business) {
+		businessService.updateBusiness(business);
+		return "redirect:/business/detail?bizId=" + business.getBizId();
+	}
 
-    file.transferTo(uploadFile);
+	@RequestMapping("/delete")
+	public String deleteBusiness(@RequestParam("bizId") int bizId) {
+		businessService.deleteBusiness(bizId);
+		return "redirect:/business/list";
+	}
 
-    return savedFileName;
-  }
+	private String saveFile(MultipartFile file) throws IOException {
+//    String uploadPath = "C:/springWorkspace/metasumer_images_upload/";
+		String uploadPath = "/usr/local/project/upload/";
+		String originalFileName = file.getOriginalFilename();
+		originalFileName = originalFileName.replace("[", "_").replace("]", "_");
+
+		UUID uuid = UUID.randomUUID();
+		String savedFileName = uuid.toString() + "_" + originalFileName;
+		File uploadFile = new File(uploadPath + savedFileName);
+
+		file.transferTo(uploadFile);
+
+		return savedFileName;
+	}
 }

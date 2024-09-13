@@ -12,6 +12,17 @@
 		<title>Insert title here</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
+		<script>
+		function checkLogin() {
+		    var sid = '${sessionScope.sid}';
+		    if (!sid) {
+		        alert('이 콘텐츠를 확인하시려면 로그인해 주시기 바랍니다.\n\n로그인 페이지로 이동합니다.');
+		        window.location.href = '<c:url value="/member/loginForm"/>';
+		        return false;
+		    }
+		    return true;
+		}
+		</script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -32,7 +43,7 @@
 			    <div class="container">
 				    <c:forEach items="${fbList}" var="fb">
 				        <div class="item">
-						    <a class="item-link" href="<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}/${sessionScope.sid}'/>">
+						    <a class="item-link" href="<c:url value='/freeboard/detailViewFreeBoard/${fb.boardPostNo}/${sessionScope.sid}'/>" onclick="return checkLogin();">
 						    
 						    <c:choose>
 								    <c:when test="${not empty fb.uploadFile}">

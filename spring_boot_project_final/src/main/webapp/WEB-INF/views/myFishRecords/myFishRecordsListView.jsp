@@ -19,6 +19,7 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
+				<h1 style="text-align: center;">낚시 갤러리</h1>
 				<c:if test="${not empty sessionScope.sid}">
 				<div class="button-container">
 	        		<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsList'/>">내가 쓴 기록보기</a>

@@ -8,14 +8,19 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LocationSearchService {
 	
+	@Autowired
+	Environment env;
+	
 	public String searchLoc() {
-        String clientId = "XjxDM6iHG4SdWTesRkqB"; //애플리케이션 클라이언트 아이디
-        String clientSecret = "YhTaOd0JmL"; //애플리케이션 클라이언트 시크릿
+        String clientId =  env.getProperty("kakaomap.clientId"); //애플리케이션 클라이언트 아이디
+        String clientSecret =  env.getProperty("kakaomap.clientSecret"); //애플리케이션 클라이언트 시크릿
 
         String text = null;
         try {

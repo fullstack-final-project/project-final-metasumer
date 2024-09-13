@@ -17,7 +17,7 @@
 						<span class="infoMenuItem">현재 나의 위치</span></a>
 					<a href="<c:url value='/weather/current'/>">
 						<span class="infoMenuItem">현재 날씨</span></a>
-					<a href="#" class="btn" onclick="searchFish()">
+					<a href="#" onclick="searchFish()">
 						<span class="infoMenuItem">물고기 찾기</span></a>
 				</div> <!-- infoMenuBox 종료 -->
 				</c:if>
