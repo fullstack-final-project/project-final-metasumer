@@ -47,6 +47,9 @@ public interface IMyPageDAO {
 	// 회원 정보 수정
 	public boolean updateMemberInfo(HashMap<String, Object> map);
 	
+	// 비밀번호 수정
+	public boolean changePwd(HashMap<String, Object> map);
+	
 	// 나의 예약
 	// 예약 내역 필터링해서 조회
     public ArrayList<ReservationListVO> reservationList(String memId, String startDate, String endDate);

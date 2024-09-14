@@ -155,7 +155,7 @@
 }
 
 .resListInfo img{
-	width: 35%;
+	width: 39%;
 }
 
 .resListDetail{
@@ -207,10 +207,10 @@
 }
 
 .inquiryBtn{
-	margin-left: 105px;
+	margin-left: auto;
 	height: 10%;
 	padding: 8px 15px;
-	margin-top: 40px;
+	margin-top: 60px;
 	border: 1px solid #39A7FF;
 	color: #39A7FF;
 	background-color: white;

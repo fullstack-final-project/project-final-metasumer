@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+#wrap {
+    margin: 0 auto;
+    max-width: 66%;
+    padding: 20px;
+}
+
+section {
+    margin-top: 20px;
+}
+
+#wrap section header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#wrap h2 {
+    margin: 0 auto;
+    margin-top: 7px;
+}
+
+#changePwd{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#pwdCheck{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#pwdCheck img{
+	width: 10%;
+	height: auto;
+}
+
+#pwdCheck b{
+	color: #39A7FF;
+}
+
+input{ 
+	border: 1px solid #ccc;
+	padding: 4px;
+	/*height: 20px;*/
+}
+
+#changePwdTable{
+	margin: 0 auto;
+	text-align: left;	
+	border-collapse: collapse;
+}
+
+#changePwdTable th, #changePwdTable td{
+	padding: 12px;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+#updateMemBtn{
+	text-align: center;
+	margin-top: 25px;
+}
+
+#cancelUpdateBtn{
+	background-color: white;
+	color: #39A7FF;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	font-weight: bold;
+}
+
+#updateBtn{
+	background-color: #39A7FF;
+	color: white;
+	height: 40px;
+	width: 120px;
+	cursor: pointer;
+	border: 1px solid #39A7FF;
+	font-weight: bold;
+}

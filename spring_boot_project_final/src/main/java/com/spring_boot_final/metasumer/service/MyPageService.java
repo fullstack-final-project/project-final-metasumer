@@ -102,4 +102,17 @@ public class MyPageService implements IMyPageService {
 		return dao.reservationList(memId, startDate, endDate);
 	}
 
+	@Override
+	public boolean changePwd(HashMap<String, Object> map) {
+		// 비밀번호 암호화
+        String rawPassword = (String) map.get("PwdCheck");
+        String encodedPassword = pwdEncoder.encode(rawPassword);
+
+        // 암호화된 비밀번호를 맵에 추가
+        map.put("PwdCheck", encodedPassword);
+
+        // DAO 호출하여 결과 반환
+        return dao.changePwd(map);
+	}
+
 }

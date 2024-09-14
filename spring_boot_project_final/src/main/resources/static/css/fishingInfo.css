@@ -132,18 +132,50 @@ section{
 }
 
 #fishingPrdImg{
-	margin-top: 60px;
+	margin-top: 30px;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
 }
 
-#fishingPrdImg img{
-    width: 30%;
+#randomPrd img{
+    width: 100%;
     height: auto;
-    margin-right: 10px;
+    margin-left: auto;
 }
 
 #fishingPrdImg img:hover{
 	cursor: pointer;
 	opacity: 70%;
+}
+
+#randomPrd{
+	width: 20%;
+	border: 1px solid #ddd;
+	padding: 10px 15px 10px 15px;
+	text-align: center;
+	border-radius: 8px;
+	transition: box-shadow 0.3s, transform 0.3s;
+}
+
+#randomPrd p{
+	font-size: 15px;
+}
+
+#randomPrd:hover{
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    cursor: pointer;
+}
+
+#recommendPrd{
+	display: flex;
+	margin-top: 20px;
+}
+
+#recommendPrd a{
+	margin-left: auto;
+	color: #39A7FF;
 }
 
 .fishingVideo{

@@ -101,7 +101,7 @@
 			          <input type="text" id="memAddress1" name="updateMemAddress1" value="${memVo.memAddress1}">
 			          <input type="text" id="memAddress2" name="updateMemAddress2" value="${memVo.memAddress2}">
 		            </td>
-			      </tr>
+			      </tr>			      
 			    </table>
 			    <div id="updateMemBtn">
 			      <button id="cancelUpdateBtn" type="button">취소</button>
