@@ -93,7 +93,7 @@ public class OrderController {
   ) {
       // 상품 정보 조회
       ProductVO product = prdService.detailViewProduct(prdNo);
-      int bizId = product.getBizId(); 
+      int bizId = product.getBizId(); // 상품의 사업자 ID를 가져온다.
 
       // OrderVO 객체 생성 및 데이터 설정
       OrderVO order = new OrderVO();
@@ -135,80 +135,71 @@ public class OrderController {
   @RequestMapping("/order/reservationComplete")
   public String reservationComplete(
       @RequestParam(value = "spotId", defaultValue = "0") int spotId,
-      @RequestParam(value = "resDate", defaultValue = "2020-01-01") String resDateString,
+      @RequestParam(value = "resDate", defaultValue = "1970-01-01") String resDateString,
       @RequestParam(value = "bizId", defaultValue = "0") int bizId,
       @RequestParam(value = "areaId") String[] areaIds,
       @RequestParam(value = "resQuantity") int[] resQuantities, // 각 구역별 수량 배열
       @RequestParam(value = "finalTotalPrice", defaultValue = "0") int finalTotalPrice,
-      @RequestParam(value = "resNum", required = true) int resNum,
-      @RequestParam(value = "ordererHp1") String ordererHp1,
-      @RequestParam(value = "ordererHp2") String ordererHp2,
-      @RequestParam(value = "ordererHp3") String ordererHp3,
-      @RequestParam(value = "ordererEmail") String ordererEmail,
+      @RequestParam(value = "resNum", defaultValue = "1") int resNum,
       HttpSession session,
       Model model
-  ) {
-    String memId = (String) session.getAttribute("memId");
-    
-    String ordererHP = ordererHp1 + "-" + ordererHp2 + "-" + ordererHp3;
-  
-    // 문자열을 Date 객체로 변환
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    java.sql.Date resDate = null;
-    try {
-        resDate = new java.sql.Date(dateFormat.parse(resDateString).getTime());
-    } catch (ParseException e) {
-        e.printStackTrace();
-        return "error";
-    }
-  
-    // areaId에 대한 정보를 미리 가져오기
-    Map<Integer, FishingSpotAreaVO> areaMap = new HashMap<>();
-    for (String areaIdStr : areaIds) {
-        int areaId = Integer.parseInt(areaIdStr.trim());
-        FishingSpotAreaVO area = fishingSpotService.getFishingSpotAreaById(areaId);
-        if (area != null) {
-            areaMap.put(areaId, area);
-        }
-    }
-  
-    // 각 구역별로 예약을 처리
-    for (int i = 0; i < areaIds.length; i++) {
-        int areaId = Integer.parseInt(areaIds[i]);
-        int quantity = resQuantities[i];  // 해당 구역의 수량을 가져옴
-        FishingSpotAreaVO area = areaMap.get(areaId);
-  
-        if (area != null) {
-            ReservationVO reservation = new ReservationVO();
-  
-            reservation.setMemId(memId);
-            reservation.setMemName(orderService.getMemberById(memId).getMemName());
-            reservation.setSpotId(spotId);
-            reservation.setResDate(resDate);
-            reservation.setResNum(resNum);  // resNum 값이 제대로 전달되도록 처리
-            reservation.setResPrice(area.getAreaPrice() * quantity);  // 구역 가격 * 수량
-            reservation.setResCoupon(""); // 쿠폰 정보가 있는 경우 추가
-            reservation.setResStatus("pending");
-            reservation.setBizId(bizId);
-            reservation.setResQuantity(quantity);  // 각 구역별 수량 저장
-            reservation.setAreaId(areaId);
-            reservation.setResStart(area.getStartTime());
-            reservation.setResEnd(area.getEndTime());
-            reservation.setOrdererHP(ordererHP);
-            reservation.setOrdererEmail(ordererEmail);
-            reservation.setResCreatedDate(new Date());
-  
-            // Reservation 테이블에 저장
-            reservationService.saveReservation(reservation);
-        }
-    }
-  
-    return "redirect:/myPage/reservation";
+) {
+  String memId = (String) session.getAttribute("memId");
+
+  // 문자열을 Date 객체로 변환
+  SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+  java.sql.Date resDate = null;
+  try {
+      resDate = new java.sql.Date(dateFormat.parse(resDateString).getTime());
+  } catch (ParseException e) {
+      e.printStackTrace();
+      return "error";
   }
+
+  // areaId에 대한 정보를 미리 가져오기
+  Map<Integer, FishingSpotAreaVO> areaMap = new HashMap<>();
+  for (String areaIdStr : areaIds) {
+      int areaId = Integer.parseInt(areaIdStr.trim());
+      FishingSpotAreaVO area = fishingSpotService.getFishingSpotAreaById(areaId);
+      if (area != null) {
+          areaMap.put(areaId, area);
+      }
+  }
+
+  // 각 구역별로 예약을 처리
+  for (int i = 0; i < areaIds.length; i++) {
+      int areaId = Integer.parseInt(areaIds[i]);
+      int quantity = resQuantities[i];  // 해당 구역의 수량을 가져옴
+      FishingSpotAreaVO area = areaMap.get(areaId);
+
+      if (area != null) {
+          ReservationVO reservation = new ReservationVO();
+
+          reservation.setMemId(memId);
+          reservation.setMemName(orderService.getMemberById(memId).getMemName());
+          reservation.setSpotId(spotId);
+          reservation.setResDate(resDate);
+          reservation.setResNum(resNum);  // resNum 값이 제대로 전달되도록 처리
+          reservation.setResPrice(area.getAreaPrice() * quantity);  // 구역 가격 * 수량
+          reservation.setResCoupon(""); // 쿠폰 정보가 있는 경우 추가
+          reservation.setResStatus("pending");
+          reservation.setBizId(bizId);
+          reservation.setResQuantity(quantity);  // 각 구역별 수량 저장
+          reservation.setAreaId(areaId);
+          reservation.setResStart(area.getStartTime());
+          reservation.setResEnd(area.getEndTime());
+
+          // Reservation 테이블에 저장
+          reservationService.saveReservation(reservation);
+      }
+  }
+
+  model.addAttribute("message", "결제되었습니다.");
+  return "redirect:/";
+}
 
   
 }
 
   
   
-
