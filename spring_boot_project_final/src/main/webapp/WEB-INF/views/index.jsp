@@ -16,6 +16,7 @@
 		<script src="<c:url value='/js/index.js'/>"></script>
 		<script src="<c:url value='/js/index_tagB.js'/>"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+		<script src="<c:url value='/js/index.js'/>"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 		<script src="https://apis.google.com/js/api.js"></script>
 		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=sio4q1ij5f"></script>
@@ -26,40 +27,11 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			
-			<section>
-				<input type="hidden" id="sessionSid" value="${sessionScope.sid}" />
-				<br><br>
-				<div class="tag_slider">
-				   <div class="tag_slides">
-				       <c:choose>
-				           <c:when test="${not empty tagBanner}">
-				               <c:forEach items="${tagBanner}" var="tagB">
-				                   <div class="tag_slide">
-				                       <img src="<c:url value='/project_images/upload/${tagB.tagImage}'/>" alt="Slide">
-				                   </div>
-				               </c:forEach>
-				           </c:when>
-				           <c:otherwise>
-				               <c:forEach items="${NB}" var="NB" varStatus="status">
-				                    <div class="tag_slide">
-					                     <a href="javascript:void(0);" onclick="handleClick('<c:url value='${URL[status.index]}'/>')">
-					                        <img src="<c:url value='/project_images/${NB}'/>" alt="Slide">
-					                    </a>
-				                    </div>
-				                </c:forEach>
-				           </c:otherwise>
-				       </c:choose>
-				   </div>
-				   <div class="tag_prev" onclick="tag_moveSlide(-1)">&#10094;</div>
-				   <div class="tag_next" onclick="tag_moveSlide(1)">&#10095;</div>
-				</div>
-				
-				
-				
+			<section> 
 				<div id="eventAdBox" class="indexSection">
-					<div data-slider-id="vtqsjd"></div>
-					<div id="eventBannerBox"><script async src="https://sliderui.com/sliders/vtqsjd.js"></script></div>
-					<!-- https://sliderui.com/dashboard/sliders/vtqsjd -->
+					<div data-slider-id="kqsirv"></div>
+					<script type="text/javascript" src="https://sliderui.com/sliders/kqsirv.js"></script>
+					<!-- https://sliderui.com/dashboard/sliders/kqsirv -->
 				</div> <!-- eventAdBox 종료 : 1. 추천 광고, 이벤트 베너 (슬라이드쇼) -->
 				
 				<div id="hotKeywordBox" class="indexSection">
@@ -137,8 +109,39 @@
 					</div>
 				</div> <!-- nowFishingBox 종료 : 3. 실시간 낚시터 상황 -->
 				
+				<input type="hidden" id="sessionSid" value="${sessionScope.sid}" />
+				<br><br>
+				<div class="tag_slider">
+				   <div class="tag_slides">
+				       <c:choose>
+				           <c:when test="${not empty tagBanner}">
+				               <c:forEach items="${tagBanner}" var="tagB">
+				                   <div class="tag_slide">
+				                       <img src="<c:url value='/project_images/upload/${tagB.tagImage}'/>" alt="Slide">
+				                   </div>
+				               </c:forEach>
+				           </c:when>
+				           <c:otherwise>
+				               <c:forEach items="${NB}" var="NB" varStatus="status">
+				                    <div class="tag_slide">
+					                     <a href="javascript:void(0);" onclick="handleClick('<c:url value='${URL[status.index]}'/>')">
+					                        <img src="<c:url value='/project_images/${NB}'/>" alt="Slide">
+					                    </a>
+				                    </div>
+				                </c:forEach>
+				           </c:otherwise>
+				       </c:choose>
+				   </div>
+				   <div class="tag_prev" onclick="tag_moveSlide(-1)">&#10094;</div>
+				   <div class="tag_next" onclick="tag_moveSlide(1)">&#10095;</div>
+				</div>
+				
+				
 				<div id="fishRecordRankBox" class="indexSection fishRecordSeries">
 					<div class="sectionTitle">베스트 낚시 기록 - 사이즈 순위 🎣</div>
+					<script type="text/javascript"> // jQuery 충돌 방지
+					      $.noConflict();
+					</script>
 					<div class="menber_slick2">	
 						<c:forEach items="${mfList}" var="mfList">
 					        <div class="fishRecordList slider-contents" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mfList.recordNo }' />'" style="cursor: pointer;">

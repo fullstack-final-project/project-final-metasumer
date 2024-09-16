@@ -31,13 +31,13 @@
                         	<a href="<c:url value='/admin/businessAuthList'/>" class="right-align">* 사업자 회원 신청이 없습니다</a>
                         </c:otherwise>
                     </c:choose>
-				
-				<form action="<c:url value='/admin/searchBusinesses'/>" method="get" class="search-form">
-			        <input type="text" class="" name="searchStr" placeholder="회원 ID, 이름, 업체명으로 검색" value="${param.searchStr}" />
-			        <input type="hidden" name="memType" value="business" />
-			        <button type="submit" class="btn">검색</button>
-			    </form>
-				
+				<div class="right-align" style="text-align: right; margin-top: 15px;">
+					<form action="<c:url value='/admin/searchBusinesses'/>" method="get" class="search-form">
+				        <input type="text" class="input_text" name="searchStr" placeholder="회원 ID, 이름, 업체명으로 검색" value="${param.searchStr}" />
+				        <input type="hidden" name="memType" value="business" />
+				        <button type="submit" class="btn">검색</button>
+				    </form>
+				</div>
 				<table>
 		            <thead>
 		                <tr>
