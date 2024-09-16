@@ -9,6 +9,7 @@
 		<title>관리자 페이지</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/memberManagement.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/BannerManagement.css'/>">
 		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 		<script src="<c:url value='/js/BannerManagement.js'/>"></script>
 		<!-- head.jsp import -->
@@ -34,7 +35,7 @@
 			        <c:forEach items="${itList}" var="it">
 			            <tr>
 			                <td>${it.interestId}</td>
-			                <td>${it.categoryName}</td>
+			                <td id="categoryName" onclick="location.href='/admin/interestTagEdit/${it.interestId}'">${it.categoryName}</td>
 			                <td>
 			                    <img src="<c:url value='/project_images/upload/${it.tagImage}'/>" alt="Banner Image" style="max-width: 100px; max-height: 100px;" />
 			                </td>
