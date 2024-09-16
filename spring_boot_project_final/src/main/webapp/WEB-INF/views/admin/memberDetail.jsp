@@ -18,7 +18,12 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
-				<h2>디테일 페이지</h2>
+				<c:choose>
+		            <c:when test="${memList[0].memType == 'general'}"><h2>일반 회원 상세 페이지</h2></c:when>
+		            <c:when test="${memList[0].memType == 'business'}"><h2>사업자 상세 페이지</h2></c:when>
+		            <c:when test="${memList[0].memType == 'admin'}"><h2>관리자 상세 페이지</h2>
+		            </c:when>
+		        </c:choose>
 				<c:import url = "/WEB-INF/views/admin/adminPageList.jsp"></c:import>
 				
 				<table border="1">

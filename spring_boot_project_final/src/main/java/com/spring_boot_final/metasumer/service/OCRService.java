@@ -13,14 +13,21 @@ import java.util.UUID;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OCRService {
+	
+	@Value("${ocr.api.url}")
+    private String apiURL;
 
+    @Value("${ocr.secret.key}")
+    private String secretKey;
+	
 	public String ocrGeneral(String filePathName) {
-		String apiURL = "https://ptv3iyyjyg.apigw.ntruss.com/custom/v1/33804/a3967d977006febf2214676675cfe263edc280eb473df8151e9f2ef8b598534b/infer";
-		String secretKey = "V2dZSVBQUmxvUUx2anNZVWdkWXFaaXdrQldoVlJkWFE=";
+	//	String apiURL = "https://ptv3iyyjyg.apigw.ntruss.com/custom/v1/33804/a3967d977006febf2214676675cfe263edc280eb473df8151e9f2ef8b598534b/infer";
+	//	String secretKey = "V2dZSVBQUmxvUUx2anNZVWdkWXFaaXdrQldoVlJkWFE=";
 		String imageFile = filePathName;
 		String result = "";
 

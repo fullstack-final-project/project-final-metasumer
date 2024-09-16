@@ -42,7 +42,7 @@
 			        <option value="5" ${boardCategory == '5' ? 'selected' : ''}>벼룩시장</option>
 			        <option value="6" ${boardCategory == '6' ? 'selected' : ''}>낚시갤러리</option>
 			    </select>
-			    <button type="submit">조회</button>
+			    <button type="submit" class="btn">조회</button>
 			</form>
 							    
 			     <h3>게시물 목록</h3>
