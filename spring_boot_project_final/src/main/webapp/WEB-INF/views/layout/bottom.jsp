@@ -59,4 +59,11 @@
 	<div id="chatbotBox">
 		<i class="fa-solid fa-robot fa-2xl" style="color: #37a2f8;"></i>
 	</div>
+	<div id="my_modal" class="noshow modal-body">
+    	<iframe src="<c:url value='/chatbotPage'/>" id="chat_iframe" class="forModal">모달창 내용: 챗봇</iframe>
+    	<div class="modal_close_btn">
+    		<i class="fa-regular fa-circle-xmark" 
+    			style="color: #38a3f9; background: white; cursor: pointer; "></i>
+    	</div><br>
+	</div>
 </footer> <!-- footer 끝 -->

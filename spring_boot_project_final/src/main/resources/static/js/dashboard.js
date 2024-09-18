@@ -41,7 +41,7 @@ $(document).ready(function() {
         editable: false,
         events: function(start, end, timezone, callback) {
             $.ajax({
-                url: '/business/listReservationsByBizId/${bizId}',
+                url: '/business/listReservationsByBizId/' + bizId,
                 dataType: 'json',
                 success: function(data) {
                     var events = [];
@@ -92,8 +92,9 @@ $(document).ready(function() {
 });
 
 function confirmReservation(resNo) {
+    var bizId = document.getElementById('bizId').value;  // bizId를 HTML 요소에서 가져오는 예
     if (confirm("예약을 확정하시겠습니까?")) {
-        $.post(`/business/confirmReservation/${resNo}`, function(response) {
+        $.post(`/business/confirmReservation/${bizId}/${resNo}`, function(response) {
             alert("예약이 확정되었습니다.");
             // 예약 상태 업데이트
             updateReservationStatus(resNo, 'confirmed');
@@ -102,8 +103,9 @@ function confirmReservation(resNo) {
 }
 
 function cancelReservation(resNo) {
+    var bizId = document.getElementById('bizId').value;  // bizId를 HTML 요소에서 가져오는 예
     if (confirm("예약을 취소하시겠습니까?")) {
-        $.post(`/business/cancelReservation/${resNo}`, function(response) {
+        $.post(`/business/cancelReservation/${bizId}/${resNo}`, function(response) {
             alert("예약이 취소되었습니다.");
             // 예약 상태 업데이트
             updateReservationStatus(resNo, 'cancelled');
@@ -116,7 +118,7 @@ function updateReservationStatus(resNo, status) {
         return $(this).find('td:first').text() == resNo;
     });
 
-    row.find('td:nth-child(5)').text(status);
+    row.find('td:nth-child(7)').text(status);
 
     // 버튼 활성화/비활성화
     if (status === 'confirmed') {

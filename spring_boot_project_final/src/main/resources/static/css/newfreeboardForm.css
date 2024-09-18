@@ -26,7 +26,7 @@ tbody tr:last-child td {
 
 .input_text, input[type="file"], textarea, input[type="password"],
 	input[type="email"], .hp, .input_num {
-	width: 60%;
+	width: 90%;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -34,7 +34,9 @@ tbody tr:last-child td {
 	margin-bottom: 10px;
 	font-size: 15px;
 }
-
+textarea{
+	resize: none;
+}
 .input_text:focus, input[type="file"]:focus, input[type="email"]:focus,
 	textarea:focus, .hp:focus, input[type="password"]:focus, .input_num:focus {
 	border-color: transparent;
@@ -60,3 +62,6 @@ h2 {
 	width: 200px;
 }
 
+.btn_container{
+	text-align: center;
+}

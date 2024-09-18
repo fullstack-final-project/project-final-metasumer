@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,11 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring_boot_final.metasumer.model.BusinessVO;
+import com.spring_boot_final.metasumer.model.OrderVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.service.BusinessService;
+import com.spring_boot_final.metasumer.service.OrderService;
 import com.spring_boot_final.metasumer.service.ProductService;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,19 +32,23 @@ public class ProductController {
   private ProductService prdService;
   @Autowired
   private BusinessService businessService;
+  @Autowired
+  private OrderService orderService;
 
   
-  //사업체가 등록한 상품 조회
+  // 상품관리 페이지 열기
   @RequestMapping("/product/productManagement")
-  public String listProductsByBizId(HttpSession session, Model model) {
-    String memId = (String) session.getAttribute("memId");
-    BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-    int bizId = loggedInBusiness.getBizId();
-      // 서비스에게 사업체 ID 전달하고, 해당 사업체의 상품 데이터 받아오기
+  public String listProductsByBizId(@RequestParam("bizId") int bizId, Model model) {
+      // 사업자 ID에 해당하는 제품 목록 조회
       ArrayList<ProductVO> prdList = prdService.listAllProductByBizId(bizId);
-      
-      // 뷰 페이지에 출력하기 위해 Model 설정
+      ArrayList<ProductVO> categoryList = prdService.listAllCategories();
+      // 모든 주문 내역 조회
+      List<OrderVO> orderHistory = orderService.findAllOrders(bizId);
+      // 모델에 데이터 추가
+      model.addAttribute("categoryList", categoryList);
       model.addAttribute("prdList", prdList);
+      model.addAttribute("bizId", bizId);
+      model.addAttribute("orderHistory", orderHistory);
       
       return "product/productManagement";
   }
@@ -48,16 +56,14 @@ public class ProductController {
   
   //상품 등록 폼 열기
   @RequestMapping("/product/insertProductForm")
-  public String insertProductForm(HttpSession session, Model model) {
-    String memId = (String) session.getAttribute("memId");
-    BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-    int bizId = loggedInBusiness.getBizId();
+  public String insertProductForm(@RequestParam("bizId") int bizId, Model model) {
     
     // 카테고리 목록을 서비스에서 가져옴
     ArrayList<ProductVO> categoryList = prdService.listAllCategories();
+    
     model.addAttribute("categoryList", categoryList);
     model.addAttribute("bizId", bizId);
-    System.out.println("bizId: " + bizId);
+    
     return "product/insertProductForm";
   }  
   
@@ -75,9 +81,7 @@ public class ProductController {
           @RequestParam("bizId") int bizId,
           HttpSession session) throws IOException {
     
-      String memId = (String) session.getAttribute("memId");
-      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-      bizId = loggedInBusiness.getBizId();
+     
       
       // 상품 이미지 저장
       String savedImageName = saveFile(prdImage);
@@ -118,27 +122,27 @@ public class ProductController {
   // 상품 정보를 수정하기 위해 먼저 상품 정보를 출력 : 상세 정보 출력 (입력 폼에)
   // detailViewProduct() 사용해서 정보 먼저 출력
   @RequestMapping("/product/updateProductForm/{prdNo}")
-  public String updateProductForm(@PathVariable String prdNo, Model model) {
+  public String updateProductForm(@PathVariable String prdNo, @RequestParam("bizId") int bizId, Model model) {
     // 서비스에게 상품번호 전달하고, 해당 상품 데이터 받아오기
     ProductVO prd = prdService.detailViewProduct(prdNo);
     ArrayList<ProductVO> categoryList = prdService.listAllCategories();
+    BusinessVO business = businessService.getBusinessByBizId(bizId);
     
     // 뷰 페이지에 출력하기 위해 Model 설정
     model.addAttribute("prd", prd);
     model.addAttribute("categoryList", categoryList);
+    model.addAttribute("business", business);
     
     return "product/updateProductForm";
   }
   
+  // 상품정보 수정
   @RequestMapping("/product/updateProduct")
   public String updateProduct(ProductVO vo,
                               @RequestParam(value = "prdImage", required = false) MultipartFile file,
-                              HttpSession session) throws IOException {
+                              @RequestParam("bizId") int bizId) throws IOException {
     
-      String memId = (String) session.getAttribute("memId");
-      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-      int bizId = loggedInBusiness.getBizId();
-      
+    
       // 기존 상품 정보 가져오기
       ProductVO existingProduct = prdService.detailViewProduct(vo.getPrdNo());
       
@@ -161,9 +165,10 @@ public class ProductController {
   
   // 상품 정보 삭제 
   @RequestMapping("/product/deleteProduct/{prdNo}")
-  public String deleteProduct(@PathVariable String prdNo) {
-    prdService.deleteProduct(prdNo);  
-    return "redirect:/product/productManagement";
+  public String deleteProduct(@PathVariable String prdNo,
+                              @RequestParam("bizId") int bizId) {
+    prdService.deleteProduct(prdNo); 
+    return "redirect:/product/productManagement?bizId=" + bizId;
   }
   
   //////////////////////////////////////////////////////////////
@@ -201,6 +206,19 @@ public class ProductController {
       return "product/productList";
   }
   
+  //중복 확인
+   @ResponseBody
+   @RequestMapping("/product/prdNoCheck")
+   public String bookNoCheck(@RequestParam("prdNo") String prdNo) {
+     
+     String prdNo_result = prdService.prdNoCheck(prdNo);
+     String result = "available";
+     if(prdNo_result != null) { // 도서번호가 존재한다면
+        result = "not_available";
+     }
+     
+     return result;
+   }
  ///////////////////////////////////////////////////////////////////////////////////////////
   private String saveFile(MultipartFile file) throws IOException {
     String uploadPath = "C:/springWorkspace/metasumer_images/";

@@ -35,12 +35,24 @@ public class BusinessController {
   @Autowired
   private FishingSpotService fishingSpotService;
   
-  //사업자 메인 페이지
+  //사업자 메인 페이지(업체 1개일 때)
+//  @RequestMapping("/business/businessMain")
+//  public String businessMain(HttpSession session, Model model) {
+//    
+//    return "business/businessMain";
+//  }
+
   @RequestMapping("/business/businessMain")
   public String businessMain(HttpSession session, Model model) {
-    
-    return "business/businessMain";
+      String memId = (String) session.getAttribute("memId");
+      List<BusinessVO> businesses = businessService.getBusinessesByMemId(memId);
+
+      // 사업체 목록을 모델에 추가
+      model.addAttribute("businesses", businesses);
+      return "business/businessMain";
   }
+  
+  
   
   // 사업체 등록 폼 열기
   @RequestMapping("/business/registerBusinessForm")
@@ -122,22 +134,18 @@ public class BusinessController {
   
   // 낚시터 관리 페이지
   @RequestMapping("/business/fishingSpotManagement")
-  public String fishingSpotManagement(HttpSession session, Model model) {
-      // 세션에서 로그인한 사업자 정보 가져오기
-      String memId = (String) session.getAttribute("memId");
-      
-      // 사업자 정보를 통해 사업자 ID 가져오기
-      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-      int bizId = loggedInBusiness.getBizId();
-      
-      // 사업자 ID를 통해 낚시터 목록 조회
+  public String fishingSpotManagement(@RequestParam("bizId") int bizId, Model model) {
+    
+      // 사업체의 낚시터 목록 조회
       List<FishingSpotVO> fishingSpots = fishingSpotService.getFishingSpotsByBizId(bizId);
+      BusinessVO business = businessService.getBusinessByBizId(bizId);
 
-      // 모델에 낚시터 목록을 추가
+      // 모델에 낚시터 목록 추가
+      model.addAttribute("business", business);
       model.addAttribute("fishingSpots", fishingSpots);
       model.addAttribute("bizId", bizId);
 
-      // 낚시터 관리 페이지를 반환
+      // 낚시터 관리 페이지 반환
       return "business/fishingSpotManagement";
   }
   
@@ -259,6 +267,33 @@ public class BusinessController {
     
     return "redirect:/business/fishingSpotAreaManagement?spotId=" + spotId;
 }
+  
+  //낚시터 구역 수정 폼 열기
+  @RequestMapping("/business/fishingSpotAreaUpdate")
+  public String updateFishingSpotAreaForm(@RequestParam("areaId") int areaId,
+                                          Model model) {
+      // 수정할 구역 정보 가져오기
+      FishingSpotAreaVO area = fishingSpotService.getFishingSpotAreaById(areaId);
+      model.addAttribute("area", area);
+      return "business/fishingSpotAreaUpdate";
+  }
+  
+  //낚시터 구역 수정 처리
+  @RequestMapping("/business/updateFishingSpotArea")
+  public String updateFishingSpotArea(FishingSpotAreaVO area, @RequestParam("spotId") int spotId) {
+      // 구역 정보 업데이트
+      fishingSpotService.updateFishingSpotArea(area);
+      return "redirect:/business/fishingSpotAreaManagement?spotId=" + spotId;
+  }
+
+  // 낚시터 구역 삭제 처리
+  @RequestMapping("/business/deleteFishingSpotArea")
+  public String deleteFishingSpotArea(@RequestParam("areaId") int areaId, @RequestParam("spotId") int spotId) {
+      // 구역 삭제 처리
+      fishingSpotService.deleteFishingSpotArea(areaId);
+      return "redirect:/business/fishingSpotAreaManagement?spotId=" + spotId;
+  } 
+
 
   // /////////////////////////////////////////////////////////////////////
   private String saveFile(MultipartFile file) throws IOException {

@@ -28,44 +28,46 @@
 				<table>
 					<tr>
 						<th>제목</th>
-						<td colspan="3"><input type="text" id="title" name="title" value="${ mf.title }" required></td>
+						<td colspan="3"><input type="text" id="title" name="title" class="input_text" value="${ mf.title }" required></td>
 						<th>날짜</th>
-						<td><input type="date" id="createdDate" name="createdDate" value="<fmt:formatDate value="${mf.createdDate}" pattern="yyyy-MM-dd" />" required></td>
+						<td><input type="date" id="createdDate" name="createdDate" class="input_text" value="<fmt:formatDate value="${mf.createdDate}" pattern="yyyy-MM-dd" />" required></td>
 						
 					</tr>
 					<tr>
 						<th>작성자</th>
 						<td>${ mf.memNickname }</td>
 						<th>위치</th>
-						<td><input type="text" id="location" name="location" value="${ mf.location }" required></td>
+						<td><input type="text" id="location" name="location" value="${ mf.location }" class="input_text" required></td>
 						<th>날씨</th>
-						<td><input type="text" id="weather" name="weather" value="${ mf.weather }" required></td>
+						<td><input type="text" id="weather" name="weather" value="${ mf.weather }" class="input_text" required></td>
 					</tr>
 					<tr>
 						<th>어종</th>
-						<td><input type="text" id="fishName" name="fishName" value="${ mf.fishName }" required></td>
+						<td><input type="text" id="fishName" name="fishName" value="${ mf.fishName }" class="input_text" required></td>
 						<th>크기</th>
-						<td><input type="text" id="fishSize" name="fishSize" value="${ mf.fishSize }" required></td>
+						<td><input type="text" id="fishSize" name="fishSize" value="${ mf.fishSize }" class="input_text" required></td>
 						<th>장비</th>
-						<td><input type="text" id="equipment" name="equipment" value="${ mf.equipment }" required></td>
+						<td><input type="text" id="equipment" name="equipment" value="${ mf.equipment }" class="input_text" required></td>
 						
 					</tr>
 					<tr>
 					    <th>글내용</th>
-					    <td colspan="5"><input type="text" id="content" name="content" value="${ mf.content }" required></td>
+					    <td colspan="5"><textarea id="content" name="content" style="height: 250px;" required> ${mf.content}</textarea></td>
 					</tr>
 					<tr>
 					    <th>첨부파일</th>
 					    <td colspan="5">
-					        <input type="text" id="uploadedFile" value="${mf.uploadImage}" readonly/>
+					        <input type="text" id="uploadedFile" value="${mf.uploadImage}" class="input_text" readonly/>
 					        <button type="button" class="btn" id="deleteButton" onclick="clearFile(event)">삭제</button>
 					        <input type="file" id="uploadFile" name="uploadFile" onchange="UploadOnChange(event)">
   						</td>
 					</tr>
 					 <tr>
                         <td colspan="6">
-                        <button class="btn" type="button" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView'/>';">취소</button>
-                        <button class="btn" type="submit">완료</button>
+	                        <div class="btn_container">
+		                        <button class="btn" type="button" onclick="window.location.href='<c:url value='/myFishRecords/myFishRecordsListView'/>';">취소</button>
+		                        <button class="btn" type="submit">완료</button>
+	                        </div>
                         </td>
                     </tr>
 				</table>

@@ -23,7 +23,7 @@
 				<input type="hidden" name="sid" value="${sessionScope.sid}" />
 				<table border="1">
                     <tr>
-                        <th colspan="4">상세페이지 ${fb.boardCtgId }</th>
+                        <th colspan="4">${fb.boardCtgName } 상세페이지</th>
                     </tr>
                     <tr>
                     	<th>제목</th>

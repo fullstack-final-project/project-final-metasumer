@@ -16,7 +16,7 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 				<div class="container">
-	        <h1>낚시터 관리</h1>
+	        <h1>${business.businessName}</h1>
 	        <button onclick="location.href='/business/fishingSpotRegister'">낚시터 등록</button>
 	        <div class="spots-list">
                 <c:forEach var="spot" items="${fishingSpots}">

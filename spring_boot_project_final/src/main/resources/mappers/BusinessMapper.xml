@@ -48,10 +48,16 @@
     </select>
     
     <!-- 특정 memId에 대한 모든 사업체를 조회 -->
-    <select id="selectBusinessesByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+    <select id="getBusinessesByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
         SELECT *
         FROM business
         WHERE memId = #{memId}
     </select>
     
+    
+    <select id="getBusinessByBizId" parameterType="int" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT *
+        FROM business
+        WHERE bizId = #{bizId}
+    </select>
 	</mapper>

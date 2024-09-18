@@ -31,8 +31,8 @@
                 <!-- 왼쪽 낚시터 리스트 영역 -->
                 <div class="spots-list">
                     <c:forEach var="spot" items="${spots}">
-                            <div class="spot-container" data-spotId="${spot.spotId}">
-                       				 <a href="<c:url value='/detailFishingSpot/${spot.spotId}?bizId=${spot.bizId}'/>">
+                            <div class="spot-container" data-spotId="${spot.spotId}"
+                            			onclick="location.href='/detailFishingSpot/${spot.spotId}?bizId=${spot.bizId}'">
 	                                <img class="spot-image"
 	                                    src="<c:url value='/project_images/${spot.spotImage}'/>"
 	                                    alt="${spot.spotName}">
@@ -41,7 +41,7 @@
 	                                    <div class="spot-location">${spot.spotAddress1}</div>
 	                                    <div class="spot-price">${spot.spotPrice}원~</div>
 	                                </div>
-                        				</a>
+                        				
                             </div>
                     </c:forEach>
                 </div>

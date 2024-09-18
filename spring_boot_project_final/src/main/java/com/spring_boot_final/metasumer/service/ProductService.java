@@ -70,4 +70,9 @@ import com.spring_boot_final.metasumer.model.ProductVO;
     public List<ProductVO> getProductsByBizId(int bizId) {
       return dao.getProductsByBizId(bizId);
     }
+  
+  @Override
+    public String prdNoCheck(String prdNo) {
+      return dao.prdNoCheck(prdNo);
+    }
 }

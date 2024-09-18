@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var creditCardOption = document.getElementById('creditCardOption');
         if (creditCardOption) {
             creditCardOption.classList.add('active');
+            document.getElementById('ordPayInput').value = creditCardOption.getAttribute('data-value'); // 초기값 설정
         }
     }
 
@@ -72,6 +73,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 
                 // 클릭된 결제 옵션에 active 클래스를 추가
                 this.classList.add('active');
+                
+                // hidden input 설정
+                document.getElementById('ordPayInput').value = this.getAttribute('data-value');
             });
         });
     }

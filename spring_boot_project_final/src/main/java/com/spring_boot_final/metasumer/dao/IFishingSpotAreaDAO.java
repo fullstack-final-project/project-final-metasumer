@@ -13,4 +13,10 @@ public interface IFishingSpotAreaDAO {
   
   // 낚시터 구역 등록
   public void insertFishingSpotArea(FishingSpotAreaVO fishingSpotArea);
+  
+  //낚시터 구역 정보 업데이트
+  public void updateFishingSpotArea(FishingSpotAreaVO area);
+  
+  //낚시터 구역 삭제
+  public void deleteFishingSpotArea(int areaId);
 }

@@ -19,8 +19,11 @@
 
     <!-- 모든 상품 조회 (사업체 ID로 필터링) -->
     <select id="listAllProductByBizId" resultType="com.spring_boot_final.metasumer.model.ProductVO">
-        SELECT * FROM product WHERE bizId = #{bizId}
-    </select>
+	    SELECT p.prdNo, p.prdName, p.prdPrice, p.prdStock, p.prdCtgId, c.prdCtgName, p.prdMaker, p.prdDescript, p.prdImage, p.bizId
+	    FROM Product p
+	    JOIN prdCategory c ON p.prdCtgId = c.prdCtgId
+	    WHERE p.bizId = #{bizId}
+	</select>
     
     <!-- 상품 조회 -->
     <select id="listAllProduct" parameterType="String" resultType="com.spring_boot_final.metasumer.model.ProductVO">
@@ -94,5 +97,11 @@
         SELECT * FROM product
         WHERE bizId = #{bizId}
     </select>
+    
+    <!-- 중복 확인 -->
+  	<select id="prdNoCheck" parameterType="string" resultType="string">
+  		SELECT prdNo FROM product
+  		WHERE prdNo = #{prdNo}
+  	</select>
 
 </mapper>

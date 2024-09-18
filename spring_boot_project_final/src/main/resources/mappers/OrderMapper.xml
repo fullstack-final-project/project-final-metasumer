@@ -5,9 +5,11 @@
   
   <mapper namespace="com.spring_boot_final.metasumer.dao.IOrderDAO">
   	<!-- 주문 데이터 저장 -->
-    <insert id="saveOrder" parameterType="com.spring_boot_final.metasumer.model.OrderVO">
-        INSERT INTO orders (prdNo, quantity, orderDate, buyerName, buyerHP, buyerEmail, shippingZipcode, shippingAddress1, shippingAddress2, bizId, totalPrice)
-        VALUES (#{prdNo}, #{quantity}, #{orderDate}, #{buyerName}, #{buyerHP}, #{buyerEmail}, #{shippingZipcode}, #{shippingAddress1}, #{shippingAddress2}, #{bizId}, #{totalPrice})
+    <insert id="saveOrder" parameterType="com.spring_boot_final.metasumer.model.OrderInfoVO">
+        INSERT INTO order_info(ordNo, memId, ordRcvReceiver, ordRcvZipcode, ordRcvAddress1, 
+  		                       ordRcvAddress2, ordRcvPhone, ordRcvMsg, ordPay)
+  		VALUES(#{ordNo}, #{memId}, #{ordRcvReceiver}, #{ordRcvZipcode}, #{ordRcvAddress1}, 
+  		       #{ordRcvAddress2}, #{ordRcvPhone}, #{ordRcvMsg}, #{ordPay})
     </insert>
 		
 		<!-- 회원정보 조회 --> 
@@ -15,4 +17,18 @@
        SELECT * FROM member WHERE memId = #{memId}
    </select>
   
+  	<!-- 재고 업데이트 쿼리 -->
+    <update id="updateProductStock" parameterType="com.spring_boot_final.metasumer.model.ProductVO">
+        UPDATE product
+        SET prdStock = #{prdStock}
+        WHERE prdNo = #{prdNo}
+    </update>
+    
+    <select id="findAllOrders" resultType="com.spring_boot_final.metasumer.model.OrderVO">
+        SELECT o.ordNo, o.ordDate, op.prdNo, op.ordQty, o.ordRcvReceiver, o.ordRcvPhone, 
+               o.ordRcvAddress1, o.ordRcvAddress2, o.ordRcvMsg
+        FROM order_info o
+        JOIN order_product op ON o.ordNo = op.ordNo
+        WHERE op.prdNo IN (SELECT prdNo FROM product WHERE bizId = #{bizId})
+    </select>
   </mapper>

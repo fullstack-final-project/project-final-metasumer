@@ -92,5 +92,9 @@
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		
 		</div>
+		<script type="text/javascript">
+	    // 로그인 여부를 세션에서 가져오기
+	    var isLoggedIn = <c:out value="${not empty sessionScope.sid}"/>;
+  	</script>
 	</body>
 </html>

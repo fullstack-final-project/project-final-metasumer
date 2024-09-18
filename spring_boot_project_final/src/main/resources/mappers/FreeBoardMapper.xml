@@ -19,6 +19,7 @@
 		<result property="price" column="price" />
 		<result property="completed" column="completed" />
 		<result property="views" column="views" />
+		<result property="boardCtgName" column="boardCtgName" />
 	</resultMap>
 	
 	<select id="selectItemsForPage" resultMap="fbResult">
@@ -60,11 +61,11 @@
 		VALUES (#{memId}, #{boardCtgId}, #{title}, #{content}, #{uploadFile}, #{price})
 	</insert>
 
-	<select id="detailViewFreeBoard" parameterType="string"
-		resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
-		SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname, b.price, b.views
+	<select id="detailViewFreeBoard" parameterType="string" resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		SELECT b.boardPostNo, b.memId, b.boardCtgId, b.title, b.createdDate, b.content, b.uploadFile, m.memNickname, b.price, b.views, bc.boardCtgName
 		FROM board b
 		JOIN member m ON b.memId = m.memId
+		JOIN boardCtg bc ON b.boardCtgId = bc.boardCtgId
 		WHERE b.boardPostNo = #{boardPostNo}
 	</select>
 

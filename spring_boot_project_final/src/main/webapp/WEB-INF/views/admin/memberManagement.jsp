@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/memberManagement.css'/>">
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/adminPageList.css'/>">
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/pagination.css'/>">
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 	</head>
@@ -77,17 +78,22 @@
         </table>
         
         <div class="pagination">
-                <c:if test="${currentPage > 1}">
-                    <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${currentPage - 1}">« 이전</a>
-                </c:if>
-                <c:forEach var="i" begin="1" end="${totalPages}">
-                    <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${i}" 
-                       class="${i == currentPage ? 'active' : ''}">${i}</a>
-                </c:forEach>
-                <c:if test="${currentPage < totalPages}">
-                    <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${currentPage + 1}">다음 »</a>
-                </c:if>
-            </div>
+		    <c:if test="${startPage > 1}">
+		        <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${startPage - 1}" class="page-link">이전</a>
+		    </c:if>
+		
+		    <c:forEach var="i" begin="${startPage}" end="${endPage}" varStatus="status">
+		        <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${i}"
+		           class="page-link ${i == currentPage ? 'current' : ''}">
+		           ${i}
+		        </a>
+		    </c:forEach>
+		
+		    <c:if test="${endPage < totalPages}">
+		        <a href="<c:url value='/admin/memberManagement/${memType}'/>?page=${endPage + 1}" class="page-link">다음</a>
+		    </c:if>
+		</div>
+
         
         
         

@@ -59,10 +59,10 @@
 			            <tr>
 			                <th><label for="spotAddress">주소</label></th>
 			                <td colspan="3">
-			                		<input type="text" id="spotZipcode" name="shippingZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
+			                		<input type="text" id="memZipcode" name="shippingZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
 			                    <input type="button" id="searchZipBtn" name="searchZipBtn" class="btn" value="우편번호 찾기"><br>
-					                <input type="text" id="spotAddress1" name="spotAddress1">
-					                <input type="text" id="spotAddress2" name="spotAddress2">
+					                <input type="text" id="memAddress1" name="spotAddress1">
+					                <input type="text" id="memAddress2" name="spotAddress2">
 			                </td>
 			            </tr>
 			            <tr>

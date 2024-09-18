@@ -28,8 +28,8 @@
                     <p>어종: ${area.fishType}</p>
                     <p><fmt:formatDate value="${area.startTime}" pattern="HH:mm" /> - <fmt:formatDate value="${area.endTime}" pattern="HH:mm" /></p>
                     <div class="btn-group">
-	                    <button onclick="location.href='/business/fishingSpotAreaEdit?areaId=${area.areaId}'">수정</button>
-	                    <button onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='/business/fishingSpotAreaDelete?areaId=${area.areaId}&spotId=${spotId}'">삭제</button>
+	                    <button onclick="location.href='/business/fishingSpotAreaUpdate?areaId=${area.areaId}'" class="btn">수정</button>
+	                    <button onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='/business/deleteFishingSpotArea?areaId=${area.areaId}&spotId=${spotId}'" class="btn">삭제</button>
                 		</div>
                 </div>
             </c:forEach>

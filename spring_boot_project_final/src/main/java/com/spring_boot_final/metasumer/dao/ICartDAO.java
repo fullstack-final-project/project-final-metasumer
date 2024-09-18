@@ -7,6 +7,7 @@ import com.spring_boot_final.metasumer.model.CartVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 import com.spring_boot_final.metasumer.model.OrderInfoVO;
 import com.spring_boot_final.metasumer.model.OrderProductVO;
+import com.spring_boot_final.metasumer.model.OrderVO;
 
 public interface ICartDAO {
 	// 장바구니에 추가
@@ -36,12 +37,18 @@ public interface ICartDAO {
 
 	// 주문 정보 저장
 	public void insertOrderInfo(OrderInfoVO ordInfoVo);
+	
+	// 주문 정보 저장(개별상품)
+	public void insertOrderInfo2(OrderVO ordVo);
 
 	// 주문 상품 정보 저장
 	public void insertOrderProduct(HashMap<String, Object> map);
 	
+	// 주문 상품 정보 저장(개별상품)
+	public void insertOrderProduct2(HashMap<String, Object> map);
+	
 	// 장바구니에서 선택된 상품 가져오기
-	public CartVO selectedCartList(int cartNo);
+	public ArrayList<CartVO> selectedCartList(ArrayList<Integer> cartNos);
 	
 	// 주문 후 장바구니에서 주문한 선택 상품 삭제
     public void deleteCartAfterOrder(ArrayList<Integer> cartNos, String memId);

@@ -12,7 +12,7 @@ public class CartVO {
 	private String prdName;
 	private String prdPrice;
 	private String prdImage;
-	
+		
 	public int getCartNo() {
 		return cartNo;
 	}
