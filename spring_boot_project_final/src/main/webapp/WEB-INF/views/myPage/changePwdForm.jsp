@@ -18,7 +18,7 @@
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
 			  <header>
-			    <h2>비밀번호 수정</h2>
+			    <h2>비밀번호 변경</h2>
 			  </header>
 			  <form id="changePwdForm" method="post">
 			    <div id="pwdCheck">

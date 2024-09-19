@@ -51,9 +51,9 @@ input[type="time"] {
 }
 
 /* 주소 input 요소의 간격 조정 */
-#spotZipcode,
-#spotAddress1,
-#spotAddress2 {
+#memZipcode,
+#memAddress1,
+#memAddress2 {
 		width: 40%; 
     padding: 8px; 
 		border-radius: 4px;

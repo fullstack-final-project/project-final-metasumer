@@ -22,6 +22,9 @@ public class ReservationVO {
   private int resQuantity;      // 예약 수량
   private Date resCreatedDate;   // 예약상품 결제 날짜
   
+  private String spotName;
+  private String areaName;
+  
   public int getResNo() {
     return resNo;
   }
@@ -123,6 +126,18 @@ public class ReservationVO {
   }
   public void setResCreatedDate(Date resCreatedDate) {
     this.resCreatedDate = resCreatedDate;
+  }
+  public String getSpotName() {
+    return spotName;
+  }
+  public void setSpotName(String spotName) {
+    this.spotName = spotName;
+  }
+  public String getAreaName() {
+    return areaName;
+  }
+  public void setAreaName(String areaName) {
+    this.areaName = areaName;
   }
   
   

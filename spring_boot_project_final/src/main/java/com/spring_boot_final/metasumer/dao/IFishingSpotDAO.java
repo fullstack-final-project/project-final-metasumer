@@ -16,4 +16,10 @@ public interface IFishingSpotDAO {
   
   //낚시터 등록 메서드
   public void insertFishingSpot(FishingSpotVO fishingSpot); 
+  
+  //낚시터 정보 수정
+  public void updateFishingSpot(FishingSpotVO fishingSpot);
+  
+  //낚시터 삭제
+  public void deleteFishingSpot(int spotId);
 }

@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>나의 정보</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/myInfo.css'/>">
@@ -25,7 +25,7 @@
 			          <div id="pointsSum">100원</div>
 			          <div id="eventGoWrapper">
                         <div id="eventGo">
-                         <span>이벤트 확인하러 가기</span><span id="mark">></span>
+                         <a href="/event/myFish"><span>이벤트 확인하러 가기</span><span id="mark">></span></a>
                         </div>
                       </div>                    
 			        </div>			  
@@ -39,6 +39,38 @@
 			    <div id="myList">
 			      <div id="myFilter">
 			        <p>나의 정보</p><hr>
+			      </div>
+			      <div id="myInfoView">
+			        <table id="myInfoViewTable">
+			          <tr>
+			            <th>이름</th>
+			            <td>${memVo.memName}</td>
+			          </tr>
+			          <tr>
+			            <th>아이디</th>
+			            <td>${memVo.memId}</td>
+			          </tr>
+			          <tr>
+			            <th>닉네임</th>
+			            <td>${memVo.memNickname}</td>
+			          </tr>
+			          <tr>
+			            <th>성별</th>
+			            <td>${memVo.memGender}</td>
+			          </tr>
+			          <tr>
+			            <th>휴대폰 번호</th>
+			            <td>${memVo.memHP}</td>
+			          </tr>
+			          <tr>
+			            <th>이메일</th>
+			            <td>${memVo.memEmail}</td>
+			          </tr>
+			          <tr>
+			            <th>주소</th>
+			            <td>${memVo.memAddress1} ${memVo.memAddress2}</td>
+			          </tr>
+			        </table>			        
 			      </div>
 			    </div>
 			  </div>

@@ -26,7 +26,7 @@
                  <h2>제품 목록</h2>
              </div>
              <div class="table table-button">
-                 <button class="btn btn-add" onclick="location.href='/product/insertProductForm'">제품 등록</button>
+                 <button class="btn btn-add" onclick="location.href='/product/insertProductForm?bizId=${bizId}'">제품 등록</button>
              </div>
          	</div>
 					<table class="table productList">
@@ -50,57 +50,58 @@
 									<td>${product.prdName}</td>
 									<td>${product.prdPrice}</td>
 									<td>${product.prdStock}</td>
-									<td>${product.prdCtgId}</td>
+									<td>${product.prdCtgName}</td>
 									<td>${product.prdMaker}</td>
 									<td>${product.prdDescript}</td>
 									<td><img src="<c:url value='/project_images/${product.prdImage}'/>"
 																alt="${product.prdName}"width="40px" height="40px">
 									<td>
-										<a href="<c:url value='/product/updateProductForm/${product.prdNo }'/>">[수정]</a>
-										<a href="javascript:deleteCheck('${product.prdNo}');">[삭제]</a>
+										<button type="button" class="btn" onclick="location.href='<c:url value='/product/updateProductForm/${product.prdNo}?bizId=${product.bizId}'/>'">
+														수정</button>       
+                    <button type="button" class="btn" onclick="deleteCheck('${product.prdNo}', '${product.bizId}');">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-				<!-- 삭제 확인 메시지 출력 -->
-	    <script>
-	    	function deleteCheck(prdNo){
-	    		let answer = confirm("삭제하시겠습니까?");
-	    		if(answer) {
-	    			location.href = "/product/deleteProduct/" + prdNo;
-	    		}
-	    	}
-	    </script>
+				
 	
-				<!-- 판매 내역 섹션 -->
-				<div id="sales-history">
-					<h2>판매 내역</h2>
-					<table class="table salesList">
-						<thead>
-							<tr>
-								<th>판매 번호</th>
-								<th>제품명</th>
-								<th>판매 날짜</th>
-								<th>판매 가격</th>
-								<th>판매 수량</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="sale" items="${sales}">
-								<tr>
-									<td>${sale.saleNo}</td>
-									<td>${sale.prdName}</td>
-									<td><fmt:formatDate value="${sale.saleDate}"
-											pattern="yyyy-MM-dd" /></td>
-									<td>${sale.salePrice}</td>
-									<td>${sale.saleQuantity}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+				<!-- 주문 내역 섹션 -->
+            <div id="order-history">
+                <h2>주문 내역</h2>
+                <table class="table orderList">
+                    <thead>
+                        <tr>
+                            <th>주문 번호</th>
+                            <th>주문 날짜</th>
+                            <th>제품 번호</th>
+                            <th>수량</th>
+                            <th>받는 사람</th>
+                            <th>전화번호</th>
+                            <th>주소</th>
+                            <th>메시지</th>
+                            <th>처리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="order" items="${orderHistory}">
+                            <tr>
+                                <td>${order.ordNo}</td>
+                                <td><fmt:parseDate value="${order.ordDate}" pattern="yyyy-MM-dd HH:mm:ss" var="parsedDate"/>
+                    								<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                                <td>${order.prdNo}</td>
+                                <td>${order.ordQty}</td>
+                                <td>${order.ordRcvReceiver}</td>
+                                <td>${order.ordRcvPhone}</td>
+                                <td>${order.ordRcvAddress1} ${order.ordRcvAddress2}</td>
+                                <td>${order.ordRcvMsg}</td>
+                                <td><button class="btn">처리</button></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
 			</section>
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		

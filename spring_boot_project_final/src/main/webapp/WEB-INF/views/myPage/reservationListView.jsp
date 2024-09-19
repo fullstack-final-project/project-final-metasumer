@@ -26,7 +26,7 @@
 			        <div id="pointsSum">100원</div>
 			        <div id="eventGoWrapper">
                       <div id="eventGo">
-                       <span>이벤트 확인하러 가기</span><span id="mark">></span>
+                       <a href="/event/myFish"><span>이벤트 확인하러 가기</span><span id="mark">></span></a>
                       </div>
                     </div>                    
 			      </div>
@@ -43,7 +43,7 @@
 			        <c:if test="${empty reservationList}">
 			          <div class="noOrderView">
 			            <img src="<c:url value='/image/noOrder.png' />">
-			            <p>주문 내역이 없습니다.</p>
+			            <p>예약 내역이 없습니다.</p>
 			            <button>베스트 상품 보기</button>
 			          </div>
 			        </c:if>

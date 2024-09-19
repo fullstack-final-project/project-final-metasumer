@@ -46,4 +46,9 @@ public class BusinessService implements IBusinessService {
   public List<BusinessVO> getBusinessesByMemId(String memId) {
     return dao.getBusinessesByMemId(memId);
   }
+  
+  @Override
+  public BusinessVO getBusinessByBizId(int bizId) {
+    return dao.getBusinessByBizId(bizId);
+  }
 }
