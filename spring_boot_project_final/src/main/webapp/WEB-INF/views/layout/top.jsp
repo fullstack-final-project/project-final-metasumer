@@ -39,7 +39,7 @@
 					</c:if>
 					<a href="<c:url value='/dashboard'/>">예약</a>
 					<a href="<c:url value='/myFishRecords/myFishRecordsListView'/>">낚시갤러리</a>
-					<a href="<c:url value='/product/cartList'/>">장바구니</a>
+					<a href="<c:url value='/myPage/cartList'/>">장바구니</a>
 					<a href="<c:url value='/member/myPage'/>">마이페이지</a>
 					<a href="<c:url value='/member/userInterestTag'/>">낚시 취향</a>
 					<c:if test="${sessionScope.memType eq 'general'}">
@@ -55,7 +55,7 @@
 					<span class="infoMenuItem">물고기를 사랑하는 모임</span></a>
 			</div>
 			<div id="searchBox">
-				<form id="searchForm" name="searchForm" method="get"
+				<form id="topSearch" class="topSearch" name="topSearch" method="get"
 						  action="<c:url value='/searchResult'/>">
 					<input type="text" id="searchTxt" name="searchTxt"
 							   placeholder="검색어를 입력하세요">
