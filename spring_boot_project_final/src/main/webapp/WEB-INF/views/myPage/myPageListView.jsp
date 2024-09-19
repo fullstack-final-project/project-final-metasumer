@@ -33,7 +33,7 @@
 			    </div>
 			    <div id='myPageCtgBtn'>
 			      <button class='myPageBtn' data-category='4' onclick="location.href='/myPage/orderList'">주문 내역</button>
-			      <button class='myPageBtn' data-category='5' onclick="location.href='/myPage/event'">나의 이벤트 참여 현황</button>			      
+			      <button class='myPageBtn' data-category='5' onclick="location.href='/myFishRecords/myFishRecordsList'">나의 낚시 기록</button>			      
 			      <button class='myPageBtn' data-category='6' onclick="location.href='/myPage/myFishingSuccess'">나의 낚시 성공률</button>
 			    </div>			    
 			  </div>

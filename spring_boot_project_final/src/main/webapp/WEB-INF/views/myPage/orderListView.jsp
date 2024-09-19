@@ -26,7 +26,7 @@
 			        <div id="pointsSum">100원</div>
 			        <div id="eventGoWrapper">
                       <div id="eventGo">
-                       <span>이벤트 확인하러 가기</span><span id="mark">></span>
+                       <a href="/event/myFish"><span>이벤트 확인하러 가기</span><span id="mark">></span></a>
                       </div>
                     </div>                    
 			      </div>
