@@ -84,7 +84,6 @@
     					<input type="hidden" id="prdNo" value="${product.prdNo}" />
 					        <button class="buy-button" onclick="buyNow()">구매하기</button>
 					        <button class="cart-button" onclick="addToCart()">장바구니</button>
-					        <button class="wishlist-button" onclick="addToWishlist()">관심상품</button>
 					    </div>
 					</div>
 				</div>
@@ -92,5 +91,9 @@
 			<!-- bottom.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/bottom.jsp"></c:import>		
 		</div>
+		<script type="text/javascript">
+	    // 로그인 여부를 세션에서 가져오기
+	    var isLoggedIn = <c:out value="${not empty sessionScope.sid}"/>;
+  	</script>
 	</body>
 </html>

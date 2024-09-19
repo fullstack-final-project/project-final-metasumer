@@ -1,12 +1,14 @@
 package com.spring_boot_final.metasumer.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring_boot_final.metasumer.model.BusinessVO;
@@ -26,24 +28,17 @@ public class ReservationController {
         
    
     @RequestMapping("/business/dashboard")
-    public String showDashboard(HttpSession session, Model model) {
-        // 세션에서 로그인한 사업자 정보 가져오기
-        String memId = (String) session.getAttribute("memId");
+    public String showDashboard(@RequestParam("bizId") int bizId, HttpSession session, Model model) {
         
-        // memId를 통해 사업자 정보를 가져옴
-        BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-
+        // 선택한 사업체의 예약 정보를 가져옴
+        List<ReservationVO> reservations = reservationService.getReservationsByBusiness(bizId);
         
-
-        int bizId = loggedInBusiness.getBizId();
-
-        // 사업자 ID를 통해 예약 정보 조회
-        ArrayList<ReservationVO> reservations = reservationService.getReservationsByBusiness(bizId);
-
-        System.out.println("bizId:" + bizId);
-
+        BusinessVO business = businessService.getBusinessByBizId(bizId);
+       
+        model.addAttribute("business", business);
         model.addAttribute("reservations", reservations);
         model.addAttribute("bizId", bizId);
+
         return "business/dashboard";
     }
     
@@ -53,25 +48,24 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
     
-    // 사업자별 예약 정보 조회(로그인 후 사용)
     @RequestMapping("/business/listReservationsByBizId/{bizId}")
-    public @ResponseBody ArrayList<ReservationVO> listReservationsByBizId(@PathVariable int bizId) {
+    @ResponseBody
+    public List<ReservationVO> listReservationsByBizId(@PathVariable("bizId") int bizId) {
         return reservationService.getReservationsByBusiness(bizId);
     }
     
 
     // 예약 확정
-    @RequestMapping("/business/confirmReservation/{resNo}")
-    public String confirmReservation(@PathVariable int resNo) {
-        reservationService.confirmReservation(resNo);
-        return "redirect:/business/dashboard";
+    @RequestMapping("/business/confirmReservation/{bizId}/{resNo}")
+    @ResponseBody
+    public void confirmReservation(@PathVariable("bizId") int bizId, @PathVariable("resNo") int resNo) {
+        reservationService.confirmReservation(resNo);  // bizId는 쿼리와 관련이 없으므로 사용하지 않음
     }
 
-    // 예약 취소
-    @RequestMapping("/business/cancelReservation/{resNo}")
-    public String cancelReservation(@PathVariable int resNo) {
-        reservationService.cancelReservation(resNo);
-        return "redirect:/business/dashboard";
+    @RequestMapping("/business/cancelReservation/{bizId}/{resNo}")
+    @ResponseBody
+    public void cancelReservation(@PathVariable("bizId") int bizId, @PathVariable("resNo") int resNo) {
+        reservationService.cancelReservation(resNo);  // bizId는 쿼리와 관련이 없으므로 사용하지 않음
     }
     
  ///////////////////////////////////////////////////////////////////////////

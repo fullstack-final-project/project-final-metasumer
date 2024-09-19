@@ -1,8 +1,10 @@
 package com.spring_boot_final.metasumer.controller;
 
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring_boot_final.metasumer.model.FishingSpotAreaVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
+import com.spring_boot_final.metasumer.model.OrderVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.model.ReservationVO;
+import com.spring_boot_final.metasumer.service.CartService;
 import com.spring_boot_final.metasumer.service.FishingSpotService;
 import com.spring_boot_final.metasumer.service.OrderService;
 import com.spring_boot_final.metasumer.service.ProductService;
 import com.spring_boot_final.metasumer.service.ReservationService;
-import com.spring_boot_final.metasumer.service.SalesService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,13 +34,11 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
   @Autowired
-  private SalesService salesService;
-  @Autowired
   private ReservationService reservationService;
   @Autowired
   private FishingSpotService fishingSpotService;
-  
-  
+  @Autowired
+  private CartService cartService;
   
   @RequestMapping("/order/productOrder")
   public String productOrder(@RequestParam("prdNo") String prdNo,
@@ -127,6 +128,68 @@ public class OrderController {
       return new ModelAndView("redirect:/product/productList");
   }
   */
+  
+  @RequestMapping("/order/productCompletes")
+  public String orderCompletes(OrderVO ordVo, @RequestParam String hp1, 
+                              @RequestParam String hp2, @RequestParam String hp3, 
+                              @RequestParam int quantity, @RequestParam String prdNo,
+                              Model model) {
+    // 전화번호
+    String hp = hp1 + "-" + hp2 + "-" + hp3;
+    ordVo.setOrdRcvPhone(hp);
+
+    // 주문번호
+    long timeNum = System.currentTimeMillis();
+
+    SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMddHHmmss");
+    String strTime = dayTime.format(new Date(timeNum));
+
+    // 랜덤 숫자 4개 생성
+    String rNum = "";
+    for (int i = 1; i <= 4; i++) {
+      rNum += (int) (Math.random() * 10);
+    }
+
+    // 주문번호 설정
+    String ordNo = strTime + "_" + rNum;
+    ordVo.setOrdNo(ordNo);    
+    
+    ordVo.setOrdQty(quantity);
+
+    // 주문 정보 저장
+    cartService.insertOrderInfo2(ordVo);
+    
+    // 재고 업데이트
+    try {
+        ProductVO product = prdService.detailViewProduct(prdNo);
+        int updatedStock = product.getPrdStock() - quantity;
+
+        if (updatedStock < 0) {
+            // 재고 부족 시 예외 처리
+            throw new RuntimeException("재고가 부족합니다.");
+        }
+
+        ProductVO updatedProduct = new ProductVO();
+        updatedProduct.setPrdNo(prdNo);
+        updatedProduct.setPrdStock(updatedStock);
+        orderService.updateProductStock(updatedProduct);  // 재고 업데이트
+    } catch (Exception e) {
+        // 에러 처리
+        model.addAttribute("status", "error");
+        model.addAttribute("message", "재고 업데이트 중 오류 발생: " + e.getMessage());
+        return "myPage/orderCompleteView";
+    }
+
+    // 주문 완료 페이지에서 사용할 Date 타입 설정
+    SimpleDateFormat dayTime2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String strTime2 = dayTime2.format(new Date(timeNum));
+
+    // 모델에 추가
+    model.addAttribute("ordNo", ordNo);
+    model.addAttribute("ordDate", strTime2);
+
+    return "myPage/orderCompleteView";
+  }
   
   
   ////////////////////////////////////////////////////////////

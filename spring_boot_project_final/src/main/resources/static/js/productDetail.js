@@ -55,20 +55,23 @@
     updateTotalPrice();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('buy-button').addEventListener('click', buyNow);
-});
+
 
 function buyNow() {
     const quantity = document.getElementById('quantity').value;
     const prdNo = document.getElementById('prdNo').value; // 상품 ID
     const prdPrice = document.getElementById('prdPrice').textContent.replace(/,/g, ''); // 가격에서 쉼표 제거
 
-    if (prdNo && quantity && prdPrice) { // 값이 있는지 확인
-        window.location.href = `/order/productOrder?prdNo=${prdNo}&prdPrice=${prdPrice}&quantity=${quantity}`;
-    } else {
-        console.error('필수 값이 누락되었습니다.');
-    }
+        if (isLoggedIn) {
+            // 로그인 상태이면 주문 페이지로 이동
+            window.location.href = `/order/productOrder?prdNo=${prdNo}&prdPrice=${prdPrice}&quantity=${quantity}`;
+        } else {
+            // 로그인 상태가 아니면 로그인 페이지로 이동
+            if (confirm('로그인이 필요합니다. 로그인 하시겠습니까?')) {
+                // 로그인 페이지로 이동, 현재 페이지 URL을 리디렉션 URL로 포함
+                window.location.href = `/member/loginForm`;
+            }
+        }
 }
 
 function addToCart() {

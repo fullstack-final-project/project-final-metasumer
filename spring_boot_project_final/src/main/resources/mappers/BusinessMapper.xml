@@ -9,38 +9,6 @@
 		<select id="getAllBusiness" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
         SELECT * FROM business
     </select>
-
-		<!-- 업체 등록 -->
-		<insert id="registerBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
-		    INSERT INTO business (memId, businessName, authStatus, authDate,
-		                          bizRegNumber, businessType, bizRegImg,
-		                          delegate, businessAddress, businessCategory, issueDate)
-		    VALUES (#{memId}, #{businessName}, #{authStatus}, #{authDate},
-		            #{bizRegNumber}, #{businessType}, #{bizRegImg},
-		            #{delegate}, #{businessAddress}, #{businessCategory}, #{issueDate})
-		</insert>
-		
-		<!-- 업체 수정 -->
-		<update id="updateBusiness" parameterType="com.spring_boot_final.metasumer.model.BusinessVO">
-		    UPDATE business
-		    SET memId = #{memId},
-		        businessName = #{businessName},
-		        authStatus = #{authStatus},
-		        authDate = #{authDate},
-		        bizRegNumber = #{bizRegNumber},
-		        businessType = #{businessType},
-		        bizRegImg = #{bizRegImg},
-		        delegate = #{delegate},
-		        businessAddress = #{businessAddress},
-		        businessCategory = #{businessCategory},
-		        issueDate = #{issueDate}
-		    WHERE bizId = #{bizId}
-		</update>
-		
-		<!-- 업체 삭제 -->
-    <delete id="deleteBusiness" parameterType="String">
-        DELETE FROM business WHERE bizId = #{bizId}
-    </delete>
     
     <select id="getBusinessByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
         SELECT * FROM business
@@ -48,10 +16,16 @@
     </select>
     
     <!-- 특정 memId에 대한 모든 사업체를 조회 -->
-    <select id="selectBusinessesByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+    <select id="getBusinessesByMemId" parameterType="String" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
         SELECT *
         FROM business
         WHERE memId = #{memId}
     </select>
     
+    
+    <select id="getBusinessByBizId" parameterType="int" resultType="com.spring_boot_final.metasumer.model.BusinessVO">
+        SELECT *
+        FROM business
+        WHERE bizId = #{bizId}
+    </select>
 	</mapper>

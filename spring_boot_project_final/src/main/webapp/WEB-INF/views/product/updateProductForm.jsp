@@ -19,7 +19,7 @@
 				<h1>상품 수정</h1>
 				<div id="product-form">
 					<form action="/product/updateProduct" method="post" enctype="multipart/form-data">
-                		<input type="hidden" name="bizId" value="${bizId}">
+                		<input type="hidden" name="bizId" value="${business.bizId}">
                 		<input type="hidden" name="prdNo" value="${prd.prdNo}">
                     <table>
                         <tbody>
@@ -51,10 +51,13 @@
                                 <th><label for="prdCategory">카테고리</label></th>
                                 <td>
                                     <select id="prdCtgId" name="prdCtgId" required>
-                                        <c:forEach var="category" items="${categoryList}">
-                                            <option value="${category.prdCtgId}">${category.prdCtgName}</option>
-                                        </c:forEach>
-                                    </select>
+                                    	 <c:forEach var="category" items="${categoryList}">
+													                <option value="${category.prdCtgId}" 
+													                    <c:if test="${category.prdCtgName == prd.prdCtgName}">selected</c:if>>
+													                    ${category.prdCtgName}
+													                </option>
+												            </c:forEach>
+														        </select>
                                 </td>
                             </tr>
                             <tr>

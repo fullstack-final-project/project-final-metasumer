@@ -23,7 +23,7 @@
 		</insert>
 		
 		<!-- 구역 수정 -->
-    <update id="updateFishingSpotArea" parameterType="com.spring_boot_final.metasumer.model.FishingSpotAreaVO">
+    <update id="updateFishingSpotArea">
         UPDATE fishingSpotArea
         SET spotId = #{spotId}, areaName = #{areaName}, areaPrice = #{areaPrice}, minCapacity = #{minCapacity},
             maxCapacity = #{maxCapacity}, startTime = #{startTime}, endTime = #{endTime}, fishType = #{fishType}
@@ -31,7 +31,7 @@
     </update>
 
     <!-- 구역 삭제 -->
-    <delete id="deleteFishingSpotArea" parameterType="int">
+    <delete id="deleteFishingSpotArea">
         DELETE FROM fishingSpotArea WHERE areaId = #{areaId}
     </delete>
 	</mapper>

@@ -2,28 +2,68 @@
 
 
 section {
-		margin: 0 auto;
-    max-width: 66%;
-    padding: 20px;
+		max-width: 1256px; /* 중앙 정렬을 위한 최대 너비 */
+    margin: 0 auto;
+    padding: 0 20px; 
+    display: flex;
+    flex-direction: column;
 }	
 
-#wrap section header {
-    display: flex;
-    align-items: center;
-    padding-bottom: 10px;
+header {
     margin-bottom: 20px;
 }
 
-#wrap h2 {
-    margin: 0 auto;
-    margin-top: 7px;
+header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
 }
 
-.bizPageCtg{
-	margin: 0 auto;
-	border: 1px solid #ccc;
-	padding: 20px;
-	text-align: center;
+
+
+.bizPageCtg {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.bizCard {
+    width: calc(28%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.bizCard h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.bizCard h5 {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    border: 1px solid white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+    display: inline-block;
+    top: 15px;
+    left: 15px;
+    background-color: #f1f1f1;
+}
+
+.businessAuth-btn {
+    text-align: right;
 }
 
 #bizPageCtgBtn{

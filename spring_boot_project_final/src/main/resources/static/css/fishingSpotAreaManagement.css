@@ -69,16 +69,13 @@ button:hover {
 
 .btn-group button {
     margin-top: 10px;
-    padding: 5px 33px
+    padding: 5px 33px;
     font-size: 18px;
-    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.btn-group button:hover {
-		background-color: #218838;
-}
+
 

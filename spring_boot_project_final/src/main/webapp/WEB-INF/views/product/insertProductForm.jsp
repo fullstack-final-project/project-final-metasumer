@@ -10,6 +10,7 @@
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/fishingSpotRegister.css'/>" />
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>">
+		<script src="<c:url value='/js/prdNoCheck.js'/>"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -24,7 +25,8 @@
                         <tbody>
                             <tr>
                                 <th><label for="prdNo">상품 번호</label></th>
-                                <td><input type="text" id="prdNo" name="prdNo" required></td>
+                                <td><input type="text" id="prdNo" name="prdNo" required>
+                                <button id="prdNoCheckBtn" name="prdNoCheckBtn" class="btn">중복확인</button></td>
                             </tr>
                             <tr>
                                 <th><label for="prdName">제품명</label></th>

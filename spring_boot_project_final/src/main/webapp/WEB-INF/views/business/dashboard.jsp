@@ -7,6 +7,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Business Dashboard</title>
+		<script>
+		    var bizId = ${bizId};
+		</script>
 		<!--head 임포트  -->
 		<c:import url="/WEB-INF/views/layout/head.jsp" />
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/dashboard.css'/>" />
@@ -27,7 +30,7 @@
 			<!-- top 임포트 -->
 			<c:import url="/WEB-INF/views/layout/top.jsp" />
 			<section id="dashboard">
-				
+			<input type="hidden" id="bizId" value="${bizId}" />
 				<h1>
 					예약 현황
 				</h1>
@@ -46,6 +49,7 @@
 				<!-- 예약 목록 탭 -->
 				<div id="reservationsTab" class="tabcontent">
 					<h2>예약 목록</h2>
+					<c:if test="${not empty reservations}">
 					<table class="table resList">
 						<thead>
 							<tr>
@@ -79,6 +83,28 @@
             </c:forEach>
 						</tbody>
 					</table>
+					</c:if>
+			    <c:if test="${empty reservations}">
+			        <table class="table resList">
+						<thead>
+							<tr>
+								<th>예약 번호</th>
+                <th>예약자명</th>
+                <th>예약일</th>
+                <th>시간</th>
+                <th>낚시터명</th>
+                <th>낚시터 상품</th>
+                <th>상태</th>
+                <th>확인</th>
+							</tr>
+						</thead>
+						<tbody>
+                <tr>
+                    <td colspan="8">예약 정보가 없습니다.</td>
+                </tr>
+						</tbody>
+					</table>
+			    </c:if>
 				</div>
 			</section>
 			<!-- bottom 임포트 -->

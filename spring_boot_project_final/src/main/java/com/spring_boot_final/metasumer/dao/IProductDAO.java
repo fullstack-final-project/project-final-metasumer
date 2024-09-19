@@ -38,5 +38,8 @@ public interface IProductDAO {
   
   //사업자ID 별 상품 목록 가져오기
   public List<ProductVO> getProductsByBizId(int bizId);
+  
+  //상품번호 중복 체크
+  public String prdNoCheck(String prdNo);
 
 }

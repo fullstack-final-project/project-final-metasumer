@@ -19,4 +19,6 @@ public interface IBusinessDAO {
   
   //특정 memId에 대한 모든 사업체를 조회
   public List<BusinessVO> getBusinessesByMemId(String memId);
+  
+  public BusinessVO getBusinessByBizId(int bizId);
 }

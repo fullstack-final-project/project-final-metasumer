@@ -57,6 +57,24 @@ public class FishingSpotService implements IFishingSpotService {
     fishingSpotAreaDAO.insertFishingSpotArea(fishingSpotArea);
   }
   
+  @Override
+  public void updateFishingSpotArea(FishingSpotAreaVO area) {
+    fishingSpotAreaDAO.updateFishingSpotArea(area);
+  }
   
+  @Override
+  public void deleteFishingSpotArea(int areaId) {
+    fishingSpotAreaDAO.deleteFishingSpotArea(areaId);
+  }
+  
+  @Override
+  public void updateFishingSpot(FishingSpotVO fishingSpot) {
+    fishingSpotDAO.updateFishingSpot(fishingSpot);
+  }
+  
+  @Override
+  public void deleteFishingSpot(int spotId) {
+    fishingSpotDAO.deleteFishingSpot(spotId);
+  }
 
 }
