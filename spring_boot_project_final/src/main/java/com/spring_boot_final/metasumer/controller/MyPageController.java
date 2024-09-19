@@ -352,7 +352,7 @@ public class MyPageController {
 		return "myPage/reservationListView";
 	} 
 	
-	// 나의 예약	
+	// 나의 이벤트
 	@RequestMapping("/myPage/event")
 	public String event(Model model, HttpSession session) {
 		String memId = (String) session.getAttribute("sid");
