@@ -22,6 +22,7 @@
 				<div id="addSpotSection">
 			    <h1>낚시터 등록</h1>
 			    <form action="/business/registerFishingSpot" method="post" enctype="multipart/form-data">
+			    		<input type="hidden" name="bizId" value="${bizId}">
 			        <table>
 			            <tr>
 			                <th><label for="spotName">낚시터명</label></th>
@@ -59,7 +60,7 @@
 			            <tr>
 			                <th><label for="spotAddress">주소</label></th>
 			                <td colspan="3">
-			                		<input type="text" id="memZipcode" name="shippingZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
+			                		<input type="text" id="memZipcode" name="spotZipcode" placeholder="우편번호" size="5" class="input_text" required readonly>
 			                    <input type="button" id="searchZipBtn" name="searchZipBtn" class="btn" value="우편번호 찾기"><br>
 					                <input type="text" id="memAddress1" name="spotAddress1">
 					                <input type="text" id="memAddress2" name="spotAddress2">

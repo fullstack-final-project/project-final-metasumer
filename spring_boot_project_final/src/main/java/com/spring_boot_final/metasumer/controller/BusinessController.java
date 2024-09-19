@@ -6,9 +6,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring_boot_final.metasumer.model.BusinessVO;
@@ -52,8 +49,6 @@ public class BusinessController {
       return "business/businessMain";
   }
   
-  
-  
   // 사업체 등록 폼 열기
   @RequestMapping("/business/registerBusinessForm")
   public String registerBusinessForm() {
@@ -66,68 +61,6 @@ public class BusinessController {
       ArrayList<BusinessVO> businesses = businessService.getAllBusiness();
       model.addAttribute("businesses", businesses);
       return "business/getAllBusiness";
-  }
-
-  @RequestMapping("/business/register")
-  @ResponseBody
-  public Map<String, Object> registerBusiness(@RequestParam("memId") String memId,
-                                              @RequestParam("bizRegImg") MultipartFile file,
-                                              @RequestParam("businessName") String businessName,
-                                              @RequestParam(value = "authStatus", defaultValue = "pending") String authStatus,
-                                              @RequestParam("bizRegNumber") String bizRegNumber,
-                                              @RequestParam("businessType") String businessType,
-                                              @RequestParam("delegate") String delegate,
-                                              @RequestParam("businessAddress") String businessAddress,
-                                              @RequestParam("businessCategory") String businessCategory,
-                                              @RequestParam("issueDate") String issueDate) {
-   
-      Map<String, Object> response = new HashMap<>();
-      try {
-          // 파일 저장
-          String fileName = saveFile(file);
-          System.out.println("파일 등록 성공: " + fileName);
-
-          // BusinessVO 객체 생성
-          BusinessVO business = new BusinessVO();
-          business.setMemId(memId);
-          business.setBusinessName(businessName);
-          business.setAuthStatus(authStatus); // String 값 사용
-          business.setBizRegNumber(bizRegNumber);
-          business.setBusinessType(businessType); // String 값 사용
-          business.setBizRegImg(fileName);
-          business.setDelegate(delegate); // 대표자 설정
-          business.setBusinessAddress(businessAddress); // 사업장 소재지 설정
-          business.setBusinessCategory(businessCategory); // 업태 설정
-          business.setIssueDate(issueDate); // 발행일 설정
-
-          // 비즈니스 등록
-          businessService.registerBusiness(business);
-
-          response.put("status", "success");
-          response.put("redirectUrl", "/business/businessMain");
-      } catch (IOException e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "파일 저장 중 오류 발생: " + e.getMessage());
-      } catch (Exception e) {
-          e.printStackTrace();
-          response.put("status", "fail");
-          response.put("error", "비즈니스 등록 중 오류 발생: " + e.getMessage());
-      }
-      return response;
-  }
-  
-
-  @RequestMapping("/business/update")
-  public String updateBusiness(BusinessVO business) {
-      businessService.updateBusiness(business);
-      return "redirect:/business/detail?bizId=" + business.getBizId();
-  }
-
-  @RequestMapping("/business/delete")
-  public String deleteBusiness(@RequestParam("bizId") int bizId) {
-      businessService.deleteBusiness(bizId);
-      return "redirect:/business/list";
   }
   
   // ////////////////////////////////////////////////////////////////////////////////////////
@@ -151,12 +84,13 @@ public class BusinessController {
   
   //낚시터 등록 폼 페이지
   @RequestMapping("/business/fishingSpotRegister")
-  public String showFishingSpotRegisterForm(Model model, HttpSession session) {
+  public String showFishingSpotRegisterForm(Model model, @RequestParam("bizId") int bizId) {
+      model.addAttribute("bizId", bizId);
       return "business/fishingSpotRegister";
   }
   
   //낚시터 등록 처리
-  @RequestMapping("business/registerFishingSpot")
+  @RequestMapping("/business/registerFishingSpot")
   public String registerFishingSpot(
           @RequestParam("spotName") String spotName,
           @RequestParam("spotType") String spotType,
@@ -172,13 +106,10 @@ public class BusinessController {
           @RequestParam("spotHP2") String spotHP2,
           @RequestParam("spotHP3") String spotHP3,
           @RequestParam("spotFacility") String spotFacility,
+          @RequestParam("bizId") int bizId,
           HttpSession session) throws ParseException, IOException {
 
-      // 세션에서 사업자 ID 가져오기
-      String memId = (String) session.getAttribute("memId");
-      BusinessVO loggedInBusiness = businessService.getBusinessByMemId(memId);
-      int bizId = loggedInBusiness.getBizId();
-      
+     
       // 문자열을 Time 객체로 변환
       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
       Time openingTime = new Time(sdf.parse(openingTimeStr).getTime());
@@ -212,8 +143,88 @@ public class BusinessController {
       fishingSpotService.insertFishingSpot(fishingSpot);
 
       // 낚시터 관리 페이지로 리다이렉트
-      return "redirect:/business/fishingSpotManagement";
+      return "redirect:/business/fishingSpotManagement?bizId=" + bizId;
   }
+  
+  //낚시터 수정 페이지로 이동
+  @RequestMapping("/business/fishingSpotUpdate")
+  public String showFishingSpotUpdateForm(@RequestParam("spotId") int spotId, @RequestParam("bizId") int bizId,
+                                          Model model) {
+     FishingSpotVO fishingSpot = fishingSpotService.detailFishingSpot(spotId);
+     model.addAttribute("bizId", bizId);
+     model.addAttribute("fishingSpot", fishingSpot);
+     return "business/fishingSpotUpdate";
+  }
+  
+  //낚시터 수정 처리
+  @RequestMapping("/business/updateFishingSpot")
+  public String updateFishingSpot(
+      @RequestParam("spotId") int spotId,
+      @RequestParam("spotName") String spotName,
+      @RequestParam("spotType") String spotType,
+      @RequestParam("spotDescription") String spotDescription,
+      @RequestParam("spotPrice") int spotPrice,
+      @RequestParam("spotImage") MultipartFile spotImage,
+      @RequestParam("openingTime") String openingTimeStr,
+      @RequestParam("closingTime") String closingTimeStr,
+      @RequestParam("spotZipcode") String spotZipcode,
+      @RequestParam("spotAddress1") String spotAddress1,
+      @RequestParam("spotAddress2") String spotAddress2,
+      @RequestParam("spotHP1") String spotHP1,
+      @RequestParam("spotHP2") String spotHP2,
+      @RequestParam("spotHP3") String spotHP3,
+      @RequestParam("spotFacility") String spotFacility,
+      @RequestParam("bizId") int bizId,
+      HttpSession session) throws ParseException, IOException {
+
+    // 기존 낚시터 정보 불러오기
+    FishingSpotVO fishingSpot = fishingSpotService.detailFishingSpot(spotId);
+  
+    // 문자열을 Time 객체로 변환
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    Time openingTime = new Time(sdf.parse(openingTimeStr).getTime());
+    Time closingTime = new Time(sdf.parse(closingTimeStr).getTime());
+  
+    // 파일 업로드 처리 (이미지 업데이트 시)
+    if (!spotImage.isEmpty()) {
+        String savedFileName = saveFile(spotImage);
+        fishingSpot.setSpotImage(savedFileName);
+    }
+  
+    // 낚시터 정보 업데이트
+    fishingSpot.setSpotName(spotName);
+    fishingSpot.setSpotType(spotType);
+    fishingSpot.setSpotDescription(spotDescription);
+    fishingSpot.setSpotPrice(spotPrice);
+    fishingSpot.setOpeningTime(openingTime);
+    fishingSpot.setClosingTime(closingTime);
+    fishingSpot.setSpotZipcode(spotZipcode);
+    fishingSpot.setSpotAddress1(spotAddress1);
+    fishingSpot.setSpotAddress2(spotAddress2);
+    fishingSpot.setSpotHP1(spotHP1);
+    fishingSpot.setSpotHP2(spotHP2);
+    fishingSpot.setSpotHP3(spotHP3);
+    fishingSpot.setSpotFacility(spotFacility);
+    fishingSpot.setBizId(bizId);
+  
+    // 낚시터 업데이트 처리
+    fishingSpotService.updateFishingSpot(fishingSpot);
+  
+    // 업데이트 후 낚시터 관리 페이지로 리다이렉트
+    return "redirect:/business/fishingSpotManagement?bizId=" + bizId;
+  }
+  
+  //낚시터 삭제 처리
+  @RequestMapping("/business/deleteFishingSpot")
+  public String deleteFishingSpot(@RequestParam("spotId") int spotId, 
+                                  @RequestParam("bizId") int bizId,
+                                  Model model) {
+     model.addAttribute("bizId", bizId);
+     fishingSpotService.deleteFishingSpot(spotId);
+     return "redirect:/business/fishingSpotManagement?bizId=" + bizId;
+  }
+
+// //////////////////////////////////////////////////////////////////////////////
   
   // 낚시터 상품 관리 페이지
   @RequestMapping("/business/fishingSpotAreaManagement")

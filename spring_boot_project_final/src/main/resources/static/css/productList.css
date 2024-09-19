@@ -73,6 +73,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.5;
+}
+
+#prevButtonBest:hover,
+#nextButtonBest:hover,
+#prevButtonNew:hover,
+#nextButtonNew:hover {
+  opacity: 1; 
 }
 
 /* 버튼 이미지 스타일 */

@@ -21,7 +21,7 @@ h1 {
 }
 
 /* 낚시터 등록 버튼 스타일 */
-button {
+#reg-btn {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
@@ -33,9 +33,26 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+#reg-btn:hover {
     background-color: #87C4FF;
 }
+
+
+.spot-btn button {
+    margin: 10px;
+    padding: 5px 10px;
+    background-color: #39A7FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.spot-btn button:hover {
+    background-color: #87C4FF; /* 호버 시 색상 변경 */
+}
+
 
 /* 낚시터 리스트 스타일 */
 .spots-list {

@@ -66,5 +66,15 @@ public class FishingSpotService implements IFishingSpotService {
   public void deleteFishingSpotArea(int areaId) {
     fishingSpotAreaDAO.deleteFishingSpotArea(areaId);
   }
+  
+  @Override
+  public void updateFishingSpot(FishingSpotVO fishingSpot) {
+    fishingSpotDAO.updateFishingSpot(fishingSpot);
+  }
+  
+  @Override
+  public void deleteFishingSpot(int spotId) {
+    fishingSpotDAO.deleteFishingSpot(spotId);
+  }
 
 }

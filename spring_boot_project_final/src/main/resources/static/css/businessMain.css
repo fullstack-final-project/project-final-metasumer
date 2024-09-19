@@ -2,9 +2,11 @@
 
 
 section {
-		margin: 0 auto;
-    max-width: 80%;
-    padding: 20px;
+		max-width: 1256px; /* 중앙 정렬을 위한 최대 너비 */
+    margin: 0 auto;
+    padding: 0 20px; 
+    display: flex;
+    flex-direction: column;
 }	
 
 header {
@@ -18,6 +20,8 @@ header h2 {
     text-align: center;
     font-weight: bold;
 }
+
+
 
 .bizPageCtg {
     display: flex;
@@ -60,7 +64,6 @@ header h2 {
 
 .businessAuth-btn {
     text-align: right;
-    margin-bottom: 20px;
 }
 
 #bizPageCtgBtn{

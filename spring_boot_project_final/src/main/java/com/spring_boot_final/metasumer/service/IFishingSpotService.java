@@ -32,4 +32,10 @@ public interface IFishingSpotService {
   
   //낚시터 구역 삭제
   public void deleteFishingSpotArea(int areaId);
+  
+  //낚시터 정보 수정
+  public void updateFishingSpot(FishingSpotVO fishingSpot);
+  
+  //낚시터 삭제
+  public void deleteFishingSpot(int spotId);
 }

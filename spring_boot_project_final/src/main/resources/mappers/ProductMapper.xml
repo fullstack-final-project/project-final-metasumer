@@ -76,7 +76,7 @@
 		
 		<!-- 신상품 조회 -->
     <select id="getNewProduct" resultType="com.spring_boot_final.metasumer.model.ProductVO">
-        SELECT * FROM product ORDER BY prdNo DESC LIMIT 8
+        SELECT * FROM product ORDER BY prdNo ASC LIMIT 8
     </select>
     
     <!-- 카테고리 목록 조회 -->

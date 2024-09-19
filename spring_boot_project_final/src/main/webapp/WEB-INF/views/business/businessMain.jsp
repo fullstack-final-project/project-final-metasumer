@@ -9,8 +9,8 @@
 		<title>사업자 메인 페이지</title>
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>
-		<link rel="stylesheet" type="text/css" href="<c:url value='/css/businessMain.css'/>" />
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/btn.css'/>" />
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/businessMain.css'/>" />
 	</head>
 	<body>
 		<div id="wrap">

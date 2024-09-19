@@ -3,9 +3,31 @@
 /* dashboard.css  */
 
 section {
-		margin: 0 auto;
-    padding: 20px;
+		margin-top: 20px;
+    padding-bottom: 80px !important;
 }	
+
+@media (min-width: 768px) {
+    section {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding: 0 40px;
+    }
+}
+
+@media (min-width: 1024px) {
+    section {
+        padding: 0 40px;
+    }
+}
+
+@media (min-width: 1256px) {
+    section {
+        max-width: 1256px;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+}
 
 /* 대시보드 제목 스타일 */
 #dashboard h1 {
@@ -56,9 +78,9 @@ h2 {
 
 /* 달력 스타일 */
 #calendar {
-    margin-bottom: 40px;
-    width: 70%;
-    margin: 0 auto;
+    max-width: 80%;
+    margin: 40px auto;
+}
 }
 
 /* 예약 목록 스타일 */
@@ -75,7 +97,7 @@ h2 {
 
 /* 테이블 스타일 */
 .table {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
     margin-bottom: 1rem;
     background-color: transparent;
