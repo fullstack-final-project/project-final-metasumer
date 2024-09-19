@@ -25,8 +25,8 @@ import com.spring_boot_final.metasumer.service.FishingSpotService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/business")
 public class BusinessController {
-
   @Autowired
   private BusinessService businessService;
   @Autowired
@@ -49,15 +49,9 @@ public class BusinessController {
       return "business/businessMain";
   }
   
-  // 사업체 등록 폼 열기
-  @RequestMapping("/business/registerBusinessForm")
-  public String registerBusinessForm() {
-      return "business/registerBusiness";
-  }
-  
 
   @RequestMapping("/business/getAllBusiness")
-  public String getAllBusiness(Model model) {
+  public String getAllBussiness(Model model) {
       ArrayList<BusinessVO> businesses = businessService.getAllBusiness();
       model.addAttribute("businesses", businesses);
       return "business/getAllBusiness";
@@ -120,7 +114,7 @@ public class BusinessController {
       if (!spotImage.isEmpty()) {  // 파일이 있을 경우 처리
           savedFileName = saveFile(spotImage);  // saveFile 메소드 호출
       }
-
+      
       // 낚시터 등록 정보 설정
       FishingSpotVO fishingSpot = new FishingSpotVO();
       fishingSpot.setSpotName(spotName);
@@ -141,6 +135,7 @@ public class BusinessController {
 
       // 낚시터 등록 서비스 호출
       fishingSpotService.insertFishingSpot(fishingSpot);
+
 
       // 낚시터 관리 페이지로 리다이렉트
       return "redirect:/business/fishingSpotManagement?bizId=" + bizId;
@@ -321,4 +316,5 @@ public class BusinessController {
 
     return savedFileName;
   }
+
 }

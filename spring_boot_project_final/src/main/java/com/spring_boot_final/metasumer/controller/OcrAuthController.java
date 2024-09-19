@@ -36,13 +36,14 @@ public class OcrAuthController {
 		String result = "";
 
 		try {
-			String uploadPath = "D:/springWorkspace/metasumer_images/upload/";
-
+			// String uploadPath = "D:/springWorkspace/metasumer_images/upload/";
+			String uploadPath = "/usr/local/project/upload/"; 
+			
 			String originalFileName = file.getOriginalFilename();
 			String filePathName = uploadPath + originalFileName;
 
 			File newFile = new File(filePathName);
-			file.transferTo(newFile); // 서버 전송
+			file.transferTo(newFile);
 			
 			result = ocrService.ocrGeneral(filePathName);
 

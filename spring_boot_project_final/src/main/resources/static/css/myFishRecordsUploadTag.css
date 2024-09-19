@@ -1,0 +1,29 @@
+@charset "UTF-8";
+th{
+	width: 15%;
+}
+#selectedTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid #FFAB40;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.tag-item button {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 0;
+}
+

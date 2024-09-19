@@ -23,10 +23,10 @@
 			      <p>최초 1회 무료배송</p>
 			      <div id="pointsInfo">
 			        <p>적립금</p>
-			        <div id="pointsSum">0원</div>
+			        <div id="pointsSum">100원</div>
 			        <div id="eventGoWrapper">
                       <div id="eventGo">
-                       <span>이벤트 확인하러 가기</span><span id="mark">></span>
+                       <a href="/event/myFish"><span>이벤트 확인하러 가기</span><span id="mark">></span></a>
                       </div>
                     </div>                    
 			      </div>
@@ -43,7 +43,7 @@
 			        <c:if test="${empty reservationList}">
 			          <div class="noOrderView">
 			            <img src="<c:url value='/image/noOrder.png' />">
-			            <p>주문 내역이 없습니다.</p>
+			            <p>예약 내역이 없습니다.</p>
 			            <button>베스트 상품 보기</button>
 			          </div>
 			        </c:if>
@@ -62,7 +62,8 @@
 							       <th>예약자명</th>
 							       <th>예약인원</th>
 							       <th>예약시간</th>
-							       <th>결제금액</th>							     
+							       <th>결제일</th>
+							       <th>결제금액</th>										    				     
 						          </tr>	
 						        </thead>
 						        <tbody>
@@ -71,6 +72,7 @@
 			                        <td>${res.memName}</td>
 			                        <td>${res.resNum}</td>
 			                        <td>${res.resStart}~${res.resEnd}</td>
+			                        <td><fmt:formatDate value="${res.resCreatedDate}" pattern="yyyy.MM.dd" /></td>
 			                        <td><fmt:formatNumber value="${res.resPrice}" pattern="#,###" />원</td>
 			                      </tr>
 						        </tbody>		                    			                   
@@ -83,6 +85,7 @@
 			          </c:forEach>
 			        </c:if>
 			      </div>
+			  </div>
 			  </div>
 			</section>
 			<!-- bottom.jsp import -->

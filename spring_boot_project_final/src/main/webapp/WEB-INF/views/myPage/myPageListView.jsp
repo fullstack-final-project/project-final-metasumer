@@ -10,6 +10,9 @@
 		<!-- head.jsp import -->
 		<c:import url = "/WEB-INF/views/layout/head.jsp"></c:import>		
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>">
+		<script>
+          const memId = '${sessionScope.memId}'; // 세션에서 가져온 memId를 JavaScript 변수에 저장
+        </script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 		<script src="/js/myPageChart.js"></script>		
 		<script src="/js/myPagePagination.js"></script>
@@ -24,13 +27,13 @@
 			  </header>
 			  <div class="myPageCtg">
 			    <div id='myPageCtgBtn'>
-			      <button class='myPageBtn' data-category='1' onclick="location.href='/myPage/checkPwdForm'">회원 정보 수정</button>
+			      <button class='myPageBtn' data-category='1' onclick="location.href='/myPage/myInfo'">회원 정보 관리</button>
 			      <button class='myPageBtn' data-category='2' onclick="location.href='/myPage/cartList'">장바구니</button>
 			      <button class='myPageBtn' data-category='3' onclick="location.href='/myPage/reservation'">나의 예약</button>
 			    </div>
 			    <div id='myPageCtgBtn'>
 			      <button class='myPageBtn' data-category='4' onclick="location.href='/myPage/orderList'">주문 내역</button>
-			      <button class='myPageBtn' data-category='5'>나의 이벤트 참여 현황</button>			      
+			      <button class='myPageBtn' data-category='5' onclick="location.href='/myFishRecords/myFishRecordsList'">나의 낚시 기록</button>			      
 			      <button class='myPageBtn' data-category='6' onclick="location.href='/myPage/myFishingSuccess'">나의 낚시 성공률</button>
 			    </div>			    
 			  </div>

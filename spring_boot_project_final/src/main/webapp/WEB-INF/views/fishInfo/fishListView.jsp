@@ -27,6 +27,7 @@
 			      <button class='fishBtn' data-category='1'>인기 어종</button>
 			      <button class='fishBtn' data-category='2'>희귀 어종</button>
 			      <button class='fishBtn' data-category='3'>일반 어종</button>
+			      <button class='fishBtn' data-category='4'>해외 어종</button>
 			    </div>			    
 			  </div>
 			  <form class="fishSearch" method="get" action="">

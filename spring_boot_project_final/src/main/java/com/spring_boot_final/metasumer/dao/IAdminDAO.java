@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.spring_boot_final.metasumer.model.BusinessAuthVO;
 import com.spring_boot_final.metasumer.model.FreeBoardVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MemberVO;
 
 public interface IAdminDAO {
@@ -58,11 +59,32 @@ public interface IAdminDAO {
 
 	// 회원 활동량 TOP10
 	public List<Map<String, Object>> getTopMembersByLoginCount();
-	
+
 	// 2주간 게시판 게시물, 댓글 통계
 	public List<Map<String, Object>> getPostCount();
 
 	// 2주간 게시물 중에 조회수/댓글 수 통계 TOP10
 	public List<Map<String, Object>> getTopPostsCount();
+
+	// 일반 회원 조회
+	public ArrayList<MemberVO> searchMembers(String searchStr);
+
+	// 사업자 회원 조회
+	public ArrayList<BusinessAuthVO> searchbusiness(String searchStr, String memType);
+
+	// 배너 관리
+	public ArrayList<InterestTagVO> getInterestTagImage();
+
+	// 배너 수정
+	public void updateTagImage(int interestId, String tagImage);
+
+	// 태그 가져오기
+	public ArrayList<InterestTagVO> getInterestTag(int interestId);
+
+	// 태그 수정
+	public void updateTag(String tagName, int interestId, int tagId);
+	
+	// 태그 추가
+	public void insertTag(String tagName, int interestId);
 
 }

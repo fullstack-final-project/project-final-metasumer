@@ -27,6 +27,7 @@ public class ChatbotRestController {
 		
 		try {
 			String uploadPath = "D:/springWorkspace/upload/";
+			//String uploadPath = "/usr/local/project/upload/"; 
 			String originalFileName = file.getOriginalFilename();
 			String filePathName = uploadPath + originalFileName;
 			

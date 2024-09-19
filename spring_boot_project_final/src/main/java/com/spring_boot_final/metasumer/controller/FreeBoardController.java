@@ -226,9 +226,9 @@ public class FreeBoardController {
 	// 다운로드
 	@RequestMapping("/downloadFile/{uploadFile}")
 	public void FileDownload(@PathVariable String uploadFile, HttpServletResponse response) throws IOException {
-
-		File f = new File("D:/springWorkspace/metasumer_images", uploadFile);
-
+		
+		// File f = new File("D:/springWorkspace/metasumer_images", uploadFile);
+		File f = new File("/usr/local/project/metasumer_images/", uploadFile);
 		String encodedFileName = new String(uploadFile.getBytes("UTF-8"), "ISO-8859-1");
 
 		response.setContentType("application/download");
@@ -305,7 +305,8 @@ public class FreeBoardController {
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {
-		String uploadPath = "D:/springWorkspace/metasumer_images/";
+		// String uploadPath = "D:/springWorkspace/metasumer_images/";
+		String uploadPath = "/usr/local/project/upload/";
 
 		String originalFileName = file.getOriginalFilename();
 		originalFileName = originalFileName.replace("[", "_").replace("]", "_");

@@ -24,7 +24,7 @@
 		<result property="tagId" column="tagId" />
 		<result property="status" column="status" />
 	</resultMap>
-	<resultMap id="businessResultMap"
+	<resultMap id="brResult"
 		type="com.spring_boot_final.metasumer.model.BusinessAuthVO">
 		<result property="bizId" column="bizId" />
 		<result property="memId" column="memId" />
@@ -60,7 +60,7 @@
 		WHERE memType = #{memType}
 	</select>
 
-	<select id="businessList" resultMap="businessResultMap">
+	<select id="businessList" resultMap="brResult">
 		SELECT b.bizId, b.memId,
 		b.businessName, b.authStatus, b.authDate,
 		b.bizRegNumber,
@@ -71,7 +71,8 @@
 		m.status
 		FROM business b
 		JOIN member m ON b.memId = m.memId
-		WHERE m.memType = 'business'
+		WHERE
+		m.memType = 'business'
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 
@@ -80,7 +81,8 @@
 		FROM
 		business b
 		JOIN member m ON b.memId = m.memId
-		WHERE m.memType = 'business'
+		WHERE m.memType =
+		'business'
 	</select>
 
 	<update id="updateMemberStatus">
@@ -92,7 +94,8 @@
 	<update id="updateMemberType">
 		UPDATE member
 		SET memType = #{memType}
-		WHERE memId = #{memId}
+		WHERE memId =
+		#{memId}
 	</update>
 
 	<select id="countBusinessAuth" resultType="int">
@@ -108,19 +111,21 @@
 		FROM business
 	</select>
 
-	<select id="getPendingBusinessAuth" resultMap="businessResultMap">
-	    SELECT bizId, memId, businessName, bizRegNumber, delegate, businessCategory, businessType, authStatus
-	    FROM business
-	    WHERE (#{authStatus} IS NULL OR #{authStatus} = '' OR authStatus = #{authStatus})
-	    ORDER BY
-	        CASE
-	        WHEN authStatus = 'pending' THEN 1
-	        WHEN authStatus = 'rejected' THEN 2
-	        WHEN authStatus = 'approved' THEN 3
-	        ELSE 4
-	        END,
-	        issueDate ASC
-	    LIMIT #{pageSize} OFFSET #{start}
+	<select id="getPendingBusinessAuth" resultMap="brResult">
+		SELECT bizId, memId, businessName, bizRegNumber, delegate, businessCategory,
+		businessType, authStatus
+		FROM business
+		WHERE (#{authStatus} IS NULL OR #{authStatus} = '' OR authStatus =
+		#{authStatus})
+		ORDER BY
+		CASE
+		WHEN authStatus = 'pending' THEN 1
+		WHEN authStatus = 'rejected' THEN 2
+		WHEN authStatus = 'approved' THEN 3
+		ELSE 4
+		END,
+		issueDate ASC
+		LIMIT #{pageSize} OFFSET #{start}
 	</select>
 
 	<update id="updateAuthStatus">
@@ -137,7 +142,7 @@
 		memId = #{memId}
 	</select>
 
-	<select id="businessDetail" resultMap="businessResultMap">
+	<select id="businessDetail" resultMap="brResult">
 		SELECT b.bizId, b.memId,
 		b.businessName, b.authStatus, b.authDate,
 		b.bizRegNumber,
@@ -152,29 +157,35 @@
 		= #{memId} AND b.bizId = #{bizId};
 	</select>
 
-	<select id="getPostsList" parameterType="map" resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
-	    SELECT title, content, createdDate, boardCtgId, memId, memNickname, postId, status
-	    FROM (
-	        SELECT b.title, b.content, b.createdDate, b.boardCtgId, b.memId, m.memNickname, b.boardPostNo AS postId, b.status
-	        FROM board b
-	        JOIN member m ON b.memId = m.memId
-	        WHERE b.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
-	        <if test="boardCategory != 0">
-	            AND b.boardCtgId = #{boardCategory}
-	        </if>
-	
-	        UNION ALL
-	
-	        SELECT r.title, r.content, r.createdDate, r.boardCtgId, r.memId, m.memNickname, r.recordNo AS postId, r.status
-	        FROM myFishRecords r
-	        JOIN member m ON r.memId = m.memId
-	        WHERE r.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1 DAY)
-	        <if test="boardCategory != 0">
-	            AND r.boardCtgId = #{boardCategory}
-	        </if>
-	    ) AS combined
-	    ORDER BY createdDate DESC
-	    LIMIT #{size} OFFSET #{offset};
+	<select id="getPostsList" parameterType="map"
+		resultType="com.spring_boot_final.metasumer.model.FreeBoardVO">
+		SELECT title, content, createdDate, boardCtgId, memId, memNickname,
+		postId, status
+		FROM (
+		SELECT b.title, b.content, b.createdDate, b.boardCtgId, b.memId,
+		m.memNickname, b.boardPostNo AS postId, b.status
+		FROM board b
+		JOIN member m ON b.memId = m.memId
+		WHERE b.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL
+		1 DAY)
+		<if test="boardCategory != 0">
+			AND b.boardCtgId = #{boardCategory}
+		</if>
+
+		UNION ALL
+
+		SELECT r.title, r.content, r.createdDate, r.boardCtgId, r.memId,
+		m.memNickname, r.recordNo AS postId, r.status
+		FROM myFishRecords r
+		JOIN member m ON r.memId = m.memId
+		WHERE r.createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL
+		1 DAY)
+		<if test="boardCategory != 0">
+			AND r.boardCtgId = #{boardCategory}
+		</if>
+		) AS combined
+		ORDER BY createdDate DESC
+		LIMIT #{size} OFFSET #{offset};
 	</select>
 
 	<select id="getPostsCount" parameterType="map" resultType="int">
@@ -182,7 +193,8 @@
 		FROM (
 		SELECT 1
 		FROM board
-		WHERE createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1
+		WHERE createdDate BETWEEN
+		#{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1
 		DAY)
 		<if test="boardCategory != 0">
 			AND boardCtgId = #{boardCategory}
@@ -192,7 +204,8 @@
 
 		SELECT 1
 		FROM myFishRecords
-		WHERE createdDate BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1
+		WHERE createdDate BETWEEN
+		#{startDate} AND DATE_ADD(#{endDate}, INTERVAL 1
 		DAY)
 		<if test="boardCategory != 0">
 			AND boardCtgId = #{boardCategory}
@@ -201,98 +214,159 @@
 	</select>
 
 	<update id="updatePostStatus">
-	    UPDATE board
-	    SET status = #{status}
-	    WHERE boardPostNo = #{boardPostNo};
+		UPDATE board
+		SET status = #{status}
+		WHERE boardPostNo = #{boardPostNo};
 	</update>
-	
+
 	<update id="updateMyFishRecordsPostStatus">
-	   UPDATE myfishrecords
-	   SET status = #{status}
-	   WHERE recordNo = #{recordNo};
+		UPDATE myfishrecords
+		SET status = #{status}
+		WHERE recordNo = #{recordNo};
 	</update>
 
 	<select id="getTopMembersByLoginCount" resultType="map">
-		SELECT m.memId, COALESCE(b.postCount, 0) AS postCount, COALESCE(c.commentCount, 0) AS commentCount, COALESCE(f.recordCount, 0) AS recordCount, COALESCE(m.login_count, 0) AS loginCount,
-		    (COALESCE(b.postCount, 0) + COALESCE(c.commentCount, 0) + COALESCE(f.recordCount, 0) + COALESCE(m.login_count, 0)) AS totalActivity
+		SELECT
+		m.memId, COALESCE(b.postCount, 0) AS postCount,
+		COALESCE(c.commentCount, 0) AS commentCount, COALESCE(f.recordCount,
+		0) AS recordCount, COALESCE(m.login_count, 0) AS loginCount,
+		(COALESCE(b.postCount, 0) + COALESCE(c.commentCount, 0) +
+		COALESCE(f.recordCount, 0) + COALESCE(m.login_count, 0)) AS
+		totalActivity
 		FROM member m
 		LEFT JOIN (
-		    SELECT memId, COUNT(*) AS postCount
-		    FROM board
-		    GROUP BY memId
+		SELECT memId, COUNT(*) AS postCount
+		FROM board
+		GROUP BY memId
 		) AS b ON m.memId = b.memId
 		LEFT JOIN (
-		    SELECT memId, COUNT(*) AS commentCount
-		    FROM comment
-		    GROUP BY memId
+		SELECT memId, COUNT(*) AS commentCount
+		FROM comment
+		GROUP BY memId
 		) AS c ON m.memId = c.memId
 		LEFT JOIN (
-		    SELECT memId, COUNT(*) AS recordCount
-		    FROM myFishRecords
-		    GROUP BY memId
+		SELECT memId, COUNT(*) AS recordCount
+		FROM myFishRecords
+		GROUP BY memId
 		) AS f ON m.memId = f.memId
 		ORDER BY totalActivity DESC
-		LIMIT 10;
+		LIMIT
+		10;
 	</select>
-	
+
 	<select id="getPostCount" resultType="map">
-	    SELECT bc.boardCtgId, bc.boardCtgName, SUM(COALESCE(postCount, 0)) AS postCount, SUM(COALESCE(commentCount, 0)) AS commentCount
+		SELECT bc.boardCtgId, bc.boardCtgName, SUM(COALESCE(postCount, 0)) AS
+		postCount, SUM(COALESCE(commentCount, 0)) AS commentCount
 		FROM (
-		    SELECT 
-		        boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
-		    FROM board
-		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
-		    GROUP BY boardCtgId
-		
-		    UNION ALL
-		
-		    SELECT boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
-		    FROM myfishRecords
-		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
-		    GROUP BY boardCtgId
-		    
-		    UNION ALL
-		
-		    SELECT  boardCtgId, NULL AS postCount, COUNT(*) AS commentCount
-		    FROM comment
-		    WHERE createdDate >= NOW() - INTERVAL 2 WEEK
-		    GROUP BY boardCtgId
+		SELECT
+		boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
+		FROM board
+		WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		GROUP BY boardCtgId
+
+		UNION ALL
+
+		SELECT boardCtgId, COUNT(*) AS postCount, NULL AS commentCount
+		FROM myfishRecords
+		WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		GROUP BY boardCtgId
+
+		UNION ALL
+
+		SELECT boardCtgId, NULL AS postCount, COUNT(*) AS commentCount
+		FROM comment
+		WHERE createdDate >= NOW() - INTERVAL 2 WEEK
+		GROUP BY boardCtgId
 		) AS combined
-		JOIN boardCtg bc ON combined.boardCtgId = bc.boardCtgId
+		JOIN boardCtg bc ON combined.boardCtgId =
+		bc.boardCtgId
 		GROUP BY bc.boardCtgId, bc.boardCtgName;
 	</select>
-	
+
 	<select id="getTopPostsCount" resultType="map">
-        (
-            SELECT 
-                b.boardPostNo AS postNo, 
-                b.title, 
-                b.views, 
-                COUNT(c.commentNo) AS commentCount, 
-                bc.boardCtgName AS categoryName,
-                'Board' AS type
-            FROM board b
-            LEFT JOIN comment c ON b.boardPostNo = c.boardPostNo
-            LEFT JOIN boardCtg bc ON b.boardCtgId = bc.boardCtgId
-            GROUP BY b.boardPostNo, b.title, b.views, bc.boardCtgName
-        )
-        UNION ALL
-        (
-            SELECT 
-                f.recordNo AS postNo, 
-                f.title, 
-                f.views, 
-                COUNT(c.commentNo) AS commentCount, 
-                bc.boardCtgName AS categoryName,
-                'FishRecord' AS type
-            FROM myFishRecords f
-            LEFT JOIN comment c ON f.recordNo = c.recordNo
-            LEFT JOIN boardCtg bc ON f.boardCtgId = bc.boardCtgId
-            GROUP BY f.recordNo, f.title, f.views, bc.boardCtgName
-        )
-        ORDER BY GREATEST(commentCount, views) DESC
-        LIMIT 5
-    </select>
+		(
+		SELECT
+		b.boardPostNo AS postNo,
+		b.title,
+		b.views,
+		COUNT(c.commentNo) AS commentCount,
+		bc.boardCtgName AS categoryName,
+		'Board' AS type
+		FROM board b
+		LEFT JOIN comment c ON b.boardPostNo = c.boardPostNo
+		LEFT JOIN boardCtg bc ON b.boardCtgId = bc.boardCtgId
+		GROUP BY b.boardPostNo, b.title, b.views, bc.boardCtgName
+		)
+		UNION ALL
+		(
+		SELECT
+		f.recordNo AS postNo,
+		f.title,
+		f.views,
+		COUNT(c.commentNo) AS commentCount,
+		bc.boardCtgName AS categoryName,
+		'FishRecord' AS type
+		FROM myFishRecords f
+		LEFT JOIN comment c ON f.recordNo = c.recordNo
+		LEFT JOIN boardCtg bc ON f.boardCtgId = bc.boardCtgId
+		GROUP BY f.recordNo, f.title, f.views, bc.boardCtgName
+		)
+		ORDER BY GREATEST(commentCount, views) DESC
+		LIMIT 5
+	</select>
+
+	<select id="searchMembers" resultMap="mbResult">
+		SELECT *
+		FROM member
+		WHERE (memId LIKE CONCAT('%', #{searchStr}, '%')
+		OR memName LIKE CONCAT('%', #{searchStr}, '%')
+		OR memNickname LIKE CONCAT('%', #{searchStr}, '%'))
+		ORDER BY memJoinDate DESC
+	</select>
+
+	<select id="searchbusiness" resultMap="brResult">
+		SELECT b.*, m.memName, m.memType
+		FROM business b
+		JOIN member m ON b.memId = m.memId
+		WHERE (b.businessName LIKE CONCAT('%', #{searchStr}, '%')
+		OR b.memId LIKE CONCAT('%', #{searchStr}, '%')
+		OR m.memName LIKE CONCAT('%', #{searchStr}, '%')
+		OR b.delegate LIKE CONCAT('%', #{searchStr}, '%'))
+		AND m.memType = #{memType}
+		ORDER BY b.issueDate DESC
+	</select>
+
+	<select id="getInterestTagImage"
+		resultType="com.spring_boot_final.metasumer.model.InterestTagVO">
+		SELECT *
+		FROM interestcategory
+	</select>
+
+	<update id="updateTagImage">
+		UPDATE interestcategory
+		SET tagImage = #{tagImage}
+		WHERE interestId = #{interestId}
+	</update>
+
+	<select id="getInterestTag"
+		resultType="com.spring_boot_final.metasumer.model.InterestTagVO">
+		SELECT *
+		FROM interesttag
+		WHERE interestId = #{interestId}
+	</select>
+
+	<update id="updateTag">
+		UPDATE interesttag
+		SET tagName = #{tagName}
+		WHERE tagId = #{tagId}
+		AND interestId = #{interestId}
+	</update>
+
+	<insert id="insertTag">
+		INSERT INTO interesttag (interestId, tagName)
+		VALUES (#{interestId}, #{tagName})
+	</insert>
+  
 
 
 </mapper>

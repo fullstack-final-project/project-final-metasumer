@@ -31,45 +31,62 @@
                         	<a href="<c:url value='/admin/businessAuthList'/>" class="right-align">* 사업자 회원 신청이 없습니다</a>
                         </c:otherwise>
                     </c:choose>
-		
+				<div class="right-align" style="text-align: right; margin-top: 15px;">
+					<form action="<c:url value='/admin/searchBusinesses'/>" method="get" class="search-form">
+				        <input type="text" class="input_text" name="searchStr" placeholder="회원 ID, 이름, 업체명으로 검색" value="${param.searchStr}" />
+				        <input type="hidden" name="memType" value="business" />
+				        <button type="submit" class="btn">검색</button>
+				    </form>
+				</div>
 				<table>
-            <thead>
-                <tr>
-                	<th>순번</th>
-                    <th>회원 ID</th>
-                    <th>이름</th>
-                    <th>업체명</th>
-                    <th>사업자 등록번호</th>
-                    <th>대표자</th>
-                    <th>회원 유형</th>
-                    <th>상태</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${bsList}" var="bs" varStatus="status">
-                    <tr>
-                    	<td>${(currentPage - 1) * pageSize + status.index + 1}</td>
-                        <td id="memberIdCell" onclick="location.href='<c:url value='/admin/businessDetail/${bs.memId}/${bs.bizId}' />'">${bs.memId}</td>
-                        <td>${bs.memName}</td>
-                        <td>${bs.businessName}</td>
-                        <td>${bs.bizRegNumber}</td>
-                        <td>${bs.delegate}</td>
-                        <td>${bs.memType}</td>                        
-                       <td><form action="/admin/updateMemberStatus" method="post">
-		                    <input type="hidden" name="memberId" value="${bs.memId}" />
-		                    <input type="hidden" name="memType" value="${bs.memType}" />
-		                    <select name="status">
-		                        <option value="active" <c:if test="${bs.status == 'active'}">selected</c:if>>활성</option>
-		                        <option value="inactive" <c:if test="${bs.status == 'inactive'}">selected</c:if>>비활성</option>
-		                        <c:out value="${statusMessage}" />${statusMessage}
-		                    </select>
-		                    <button type="submit">변경</button>
-		                	</form>
-		                </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+		            <thead>
+		                <tr>
+		                	<th>순번</th>
+		                    <th>회원 ID</th>
+		                    <th>이름</th>
+		                    <th>업체명</th>
+		                    <th>사업자 등록번호</th>
+		                    <th>대표자</th>
+		                    <th>회원 유형</th>
+		                    <th>상태</th>
+		                </tr>
+		            </thead>
+		            <tbody>
+                    <c:if test="${not empty message}">
+                        <tr>
+                            <td colspan="8" class="text-center">${message}</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${bsList}" var="bs" varStatus="status">
+                        <tr>
+                            <td>${(currentPage - 1) * recordsPerPage + status.index + 1}</td>
+                            <td id="memberIdCell" onclick="location.href='<c:url value='/admin/businessDetail/${bs.memId}/${bs.bizId}' />'">${bs.memId}</td>
+                            <td>${bs.memName}</td>
+                            <td>${bs.businessName}</td>
+                            <td>${bs.bizRegNumber}</td>
+                            <td>${bs.delegate}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${bs.memType == 'general'}">일반</c:when>
+                                    <c:when test="${bs.memType == 'business'}">사업자</c:when>
+                                    <c:when test="${bs.memType == 'admin'}">관리자</c:when>
+                                </c:choose>
+                            </td>
+                            <td>
+                                <form action="/admin/updateMemberStatus" method="post">
+                                    <input type="hidden" name="memberId" value="${bs.memId}" />
+                                    <input type="hidden" name="memType" value="${bs.memType}" />
+                                    <select name="status">
+                                        <option value="active" <c:if test="${bs.status == 'active'}">selected</c:if>>활성</option>
+                                        <option value="inactive" <c:if test="${bs.status == 'inactive'}">selected</c:if>>비활성</option>
+                                    </select>
+                                    <button type="submit">변경</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+        	</table>
         
          <div class="pagination">
 		    <c:if test="${startPage > 1}">

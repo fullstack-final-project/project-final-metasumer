@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.spring_boot_final.metasumer.dao.IFishingDAO;
 import com.spring_boot_final.metasumer.model.FishingDetailVO;
 import com.spring_boot_final.metasumer.model.FishingVO;
+import com.spring_boot_final.metasumer.model.ProductVO;
 
 @Service
 public class FishingService implements IFishingService {
@@ -26,4 +27,8 @@ public class FishingService implements IFishingService {
 		return dao.fishingDetail(fishingCtgId);
 	}
 
+	@Override
+	public ArrayList<ProductVO> getRandomProducts(String fishingDetailCtgId) {
+		return dao.getRandomProducts(fishingDetailCtgId);
+	}
 }

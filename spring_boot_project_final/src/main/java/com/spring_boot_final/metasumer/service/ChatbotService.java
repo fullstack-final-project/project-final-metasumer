@@ -175,7 +175,7 @@ public class ChatbotService {
 
             long timestamp = new Date().getTime();
 
-            System.out.println("##"+timestamp);
+            //System.out.println("##"+timestamp);
 
             obj.put("version", "v2");
             obj.put("userId", "U47b00b58c90f8e47428af8b7bddc1231heo2");

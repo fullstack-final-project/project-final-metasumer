@@ -61,7 +61,10 @@ public class MemberController {
 
 	@RequestMapping("/member/selectedTagsView/{memId}")
 	public String selectedTagsView(Model model, @PathVariable("memId") String memId) {
-		ArrayList<MemberVO> usList = mbService.userTagList(memId);
+		
+		int typeNo = 0;
+		
+		ArrayList<MemberVO> usList = mbService.userTagList(memId, typeNo);
 
 		model.addAttribute("usList", usList);
 
@@ -73,12 +76,12 @@ public class MemberController {
 	public String userInterestTag(Model model, HttpSession session) {
 
 		String memId = (String) session.getAttribute("sid");
-
+		int typeNo = 0;
 		if (memId == null) {
 			return "redirect:/member/loginForm";
 		}
 
-		ArrayList<MemberVO> usList = mbService.userTagList(memId);
+		ArrayList<MemberVO> usList = mbService.userTagList(memId, typeNo);
 
 		model.addAttribute("usList", usList);
 
@@ -92,7 +95,7 @@ public class MemberController {
 	// 관심사 태그 가져오기
 	@RequestMapping("/member/userTagSelection")
 	public String userTagSelection(Model model) {
-
+		
 		ArrayList<MemberVO> caList = mbService.categoryList();
 		ArrayList<MemberVO> tagList = mbService.tagList();
 
@@ -112,8 +115,7 @@ public class MemberController {
 		try {
 			String memId = request.getMemId();
 			List<String> tags = request.getTags();
-
-			mbService.saveInterests(memId, tags);
+			mbService.saveInterests(memId, tags, 0, 0);
 			response.put("redirectUrl", "/");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -131,10 +133,9 @@ public class MemberController {
 		String memId = request.getMemId();
 		List<String> tags = request.getTags();
 		List<String> newTags = request.getNewTags();
-		mbService.deleteInterests(memId);
+		mbService.deleteInterests(memId, 0);
 
 		Map<String, String> response = new HashMap<>();
-
 		try {
 			List<String> allTags = new ArrayList<>();
 
@@ -145,8 +146,7 @@ public class MemberController {
 			if (newTags != null) {
 				allTags.addAll(newTags);
 			}
-
-			mbService.saveInterests(memId, allTags);
+			mbService.saveInterests(memId, allTags, 0, 0);
 			response.put("redirectUrl", "/member/selectedTagsView/" + memId);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,7 +166,7 @@ public class MemberController {
 
 		model.addAttribute("caList", caList);
 		model.addAttribute("tagList", tagList);
-
+		
 		ArrayList<MemberVO> newList = mbService.newtagList(memId);
 		model.addAttribute("newList", newList);
 
@@ -229,9 +229,9 @@ public class MemberController {
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-		logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
 
-		request.getSession().invalidate();
+        request.getSession().invalidate();
 
 		return "redirect:/";
 	}

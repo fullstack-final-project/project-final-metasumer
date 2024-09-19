@@ -11,11 +11,8 @@ public interface IMyFishRecordsDAO {
 	// 물고기기록 게시판 글 목록
 	public ArrayList<MyFishRecordsVO> listAllMyFishRecords();
 
-	// 내가 쓴 물고기기록 글 목록
-	public List<MyFishRecordsVO> viewMyFishLogs(String recordNo);
-
 	// 물고기기록 등록
-	public void insertMyFishRecords(MyFishRecordsVO vo);
+	public int insertMyFishRecords(MyFishRecordsVO vo);
 
 	// 물고기기록 수정
 	public void updateMyFishRecords(MyFishRecordsVO vo);
@@ -27,6 +24,7 @@ public interface IMyFishRecordsDAO {
 
 	// 물고기기록 상세 보기
 	public MyFishRecordsVO detailViewMyFishRecords(String recordNo);
+	public ArrayList<MyFishRecordsVO> detailViewTagList(String recordNo, int boardCtgId);
 
 	// 물고기기록 검색
 	public ArrayList<MyFishRecordsVO> MyFishRecordsSearch(HashMap<String, Object> map);
@@ -36,5 +34,10 @@ public interface IMyFishRecordsDAO {
 
 	// 조회수
 	public void countViews(String recordNo, String sidmemId);
+	
+	// 태그 삭제/수정
+	public void myFishRecordsDeleteTags(String recordNo, String typeNo);
+	public void myFishRecordsUpdateTags(String recordNo, String typeNo, List<String> tagId, String memId);
+		
 
 }

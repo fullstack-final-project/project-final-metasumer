@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -76,11 +77,18 @@
 			                    <br><br>
 			                    <h3 id="h3Refer">추천 상품</h3>
 			                    <div id="fishingPrdImg"> <!-- 그냥 예시임 -->
-			                      <c:forEach var="cnt" begin="1" end="3" step="1">
-			                        <a href="###">
-			                          <img src="<c:url value='/project_images/상품/${fishing.fishingDetailCtgId}_${cnt}.jpg'/>">
-			                        </a>
-			                      </c:forEach>			                      
+			                      <c:forEach var="product" items="${randomProducts}">
+			                        <div id="randomPrd">
+                                      <a href="/product/detailViewProduct/${product.prdNo}">
+                                        <img src="<c:url value='/project_images/${product.prdImage}'/>">
+                                        <h4>${product.prdName}</h4>
+                                        <p>가격 : <fmt:formatNumber value="${product.prdPrice}" pattern="#,###" />원</p>
+                                      </a>
+                                    </div>
+                                  </c:forEach>			                      
+			                    </div>
+			                    <div id="recommendPrd">
+			                      <a href="/product/productList">추천 상품 더보기 ></a>
 			                    </div>
 			                  </c:when>			                  
 			                </c:choose>			                

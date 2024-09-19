@@ -11,12 +11,16 @@
 						<img alt="로고 이미지" src="/project_images/logo.png" id="logoImg">
 					</a>
 				</div> <!-- logoBox 종료 -->
+				<c:if test="${not empty sessionScope.sid }">
 				<div id="infoMenuBox">
 					<a href="<c:url value='/location/overview'/>">
 						<span class="infoMenuItem">현재 나의 위치</span></a>
 					<a href="<c:url value='/weather/current'/>">
 						<span class="infoMenuItem">현재 날씨</span></a>
+					<a href="#" onclick="searchFish()">
+						<span class="infoMenuItem">물고기 찾기</span></a>
 				</div> <!-- infoMenuBox 종료 -->
+				</c:if>
 			</div> <!-- topMenuLeftBox 종료 -->
 			<div id="topMenuRightBox">
 				<!-- 로그인하지 않은 경우 : 로그인, 회원가입만 보여줌 -->

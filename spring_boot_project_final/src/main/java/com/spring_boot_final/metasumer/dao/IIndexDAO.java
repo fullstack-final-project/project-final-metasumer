@@ -3,6 +3,7 @@ package com.spring_boot_final.metasumer.dao;
 import java.util.ArrayList;
 
 import com.spring_boot_final.metasumer.model.BusinessVO;
+import com.spring_boot_final.metasumer.model.InterestTagVO;
 import com.spring_boot_final.metasumer.model.MyFishRecordsVO;
 import com.spring_boot_final.metasumer.model.ProductVO;
 
@@ -22,4 +23,7 @@ public interface IIndexDAO {
 	
 	// 사용자 기반 추천 상품 : 알고리즘 사용 예정 (현재는 임의로 추출중)
 	public ArrayList<ProductVO> listUserRecProducts();
+	
+	// 태그 기반 추천 배너
+	public ArrayList<InterestTagVO> tagBannerList(String memId);
 }

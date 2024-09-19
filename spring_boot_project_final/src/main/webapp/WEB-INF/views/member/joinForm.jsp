@@ -133,8 +133,8 @@
 		            	</tr>
 			             <tr>
 			                <td style="text-align: center;" colspan="2" align="center" id="button">
-			                    <input type="submit" value="완료" class="btn">
 			                    <input type="reset" value="취소" class="btn" id="cancelButton">
+			                    <input type="submit" value="완료" class="btn">
 			                </td>
 			            </tr>             
 		            </table>

@@ -1,6 +1,7 @@
 package com.spring_boot_final.metasumer.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,14 +20,50 @@ public class MyFishRecordsVO {
 	private String fishName;
 	private String fishSize;
 	private String equipment; // 장비
-	private String location; // 위치
+	private String location;
 	private String weather; // 날씨
 	private String tag;
+	private String tagId;
+	private String tagName;
+	private String typeNo;
+	private String tagImage;
 	
 	private int views;
 	
 	
 	
+
+	public String getTypeNo() {
+		return typeNo;
+	}
+
+	public void setTypeNo(String typeNo) {
+		this.typeNo = typeNo;
+	}
+
+	public String getTagName() {
+		return tagName;
+	}
+
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
+
+	public String getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public int getViews() {
 		return views;
@@ -122,14 +159,6 @@ public class MyFishRecordsVO {
 
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
 	}
 
 	public String getWeather() {

@@ -19,6 +19,7 @@
 			<!-- top.jsp import -->
 			<c:import url = "/WEB-INF/views/layout/top.jsp"></c:import>
 			<section>
+				<h1 style="text-align: center;">낚시 갤러리</h1>
 				<c:if test="${not empty sessionScope.sid}">
 				<div class="button-container">
 	        		<a class="btn" href="<c:url value='/myFishRecords/myFishRecordsList'/>">내가 쓴 기록보기</a>
@@ -28,7 +29,7 @@
 				<div class="fish-container">
 				
 				    <c:forEach items="${mfList}" var="mf">
-				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewmyFishRecords/${ mf.recordNo }/${ sessionScope.sid }' />'" style="cursor: pointer;">
+				        <div class="fish-item" onclick="location.href='<c:url value='/myFishRecords/detailViewMyFishRecords/${ mf.recordNo }/${ sessionScope.sid }' />'" style="cursor: pointer;">
 				            <div class="date">
 							    <fmt:formatDate value="${mf.createdDate}" pattern="yyyy년 MM월 dd일" />
 							</div>

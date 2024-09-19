@@ -66,7 +66,7 @@ public class STTService {
                     response.append(inputLine);
                 }
                 br.close();
-                System.out.println(response.toString());
+                //System.out.println("stt 결과 : " + response.toString());
                 result = jsonToString(response.toString());
                 
             } else {

@@ -15,6 +15,9 @@ public class ReservationListVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date resDate; // 예약 날짜
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date resCreatedDate; // 결제 날짜
+	
 	private Time resStart; // 예약 시작 시간
 	private Time resEnd; // 예약 종료 시간
 	private int resNum; // 예약 인원 수
@@ -32,6 +35,12 @@ public class ReservationListVO {
 	private String spotHP2;
 	private String spotHP3;
 	
+	public Date getResCreatedDate() {
+		return resCreatedDate;
+	}
+	public void setResCreatedDate(Date resCreatedDate) {
+		this.resCreatedDate = resCreatedDate;
+	}
 	public int getResNo() {
 		return resNo;
 	}

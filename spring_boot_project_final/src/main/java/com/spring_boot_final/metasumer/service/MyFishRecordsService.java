@@ -24,14 +24,10 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 	}
 
 	@Override
-	public ArrayList<MyFishRecordsVO> viewMyFishLogs(String recordNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insertMyFishRecords(MyFishRecordsVO vo) {
+	public int insertMyFishRecords(MyFishRecordsVO vo) {
 		dao.insertMyFishRecords(vo);
+		int recordNo = Integer.parseInt(vo.getRecordNo());
+		return recordNo;
 	}
 
 	@Override
@@ -71,6 +67,21 @@ public class MyFishRecordsService implements IMyFishRecordsService {
 	public void countViews(String recordNo, String sidmemId) {
 		dao.countViews(recordNo, sidmemId);
 		
+	}
+
+	@Override
+	public ArrayList<MyFishRecordsVO> detailViewTagList(String recordNo, int boardCtgId) {
+		return dao.detailViewTagList(recordNo, boardCtgId);
+	}
+
+	@Override
+	public void myFishRecordsDeleteTags(String recordNo, String typeNo) {
+		dao.myFishRecordsDeleteTags(recordNo, typeNo);
+	}
+
+	@Override
+	public void myFishRecordsUpdateTags(String recordNo, String typeNo, List<String> tagId, String memId) {
+		dao.myFishRecordsUpdateTags(recordNo, typeNo, tagId, memId);
 	}
 
 }

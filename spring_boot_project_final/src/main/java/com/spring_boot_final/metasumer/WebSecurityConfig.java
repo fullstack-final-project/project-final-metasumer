@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
 
@@ -24,7 +25,12 @@ public class WebSecurityConfig {
 		.csrf(csrf -> csrf.disable())
 		.formLogin(formLogin -> formLogin.disable())
         .headers(headerConfig -> headerConfig.frameOptions(frameOptionsConfig ->
-        		frameOptionsConfig.disable()));
+        		frameOptionsConfig.disable()))
+        
+        .addFilterBefore(new CustomAccessFilter(), UsernamePasswordAuthenticationFilter.class)
+        .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+            .anyRequest().permitAll()
+        );
 
 		return http.build();
 	}

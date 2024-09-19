@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring_boot_final.metasumer.model.FishingDetailVO;
 import com.spring_boot_final.metasumer.model.FishingVO;
+import com.spring_boot_final.metasumer.model.ProductVO;
 import com.spring_boot_final.metasumer.service.FishingService;
 
 @Controller
@@ -54,9 +55,13 @@ public class FishingController {
                 iterator.remove();
             }
         }       
+        
+        // 랜덤 상품 추천
+        ArrayList<ProductVO> randomProducts = fishingService.getRandomProducts(fishingDetailCtgId);
 
         model.addAttribute("fishingList", fishingList);
         model.addAttribute("fishingDetailList", fishingDetailList);
+        model.addAttribute("randomProducts", randomProducts);
 
         return "fishingInfo/fishingInfoView";
     }

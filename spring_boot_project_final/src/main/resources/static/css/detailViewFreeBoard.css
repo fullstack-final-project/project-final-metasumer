@@ -47,3 +47,9 @@ th {
 	width: 20%;
 	overflow: hidden;
 }
+
+.title-cell {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

@@ -1,21 +1,27 @@
 /**
- * MyFishRecordsUpload.js
+ * myFishRecordsUpload.js
  */
 
 $(document).ready(function(){
 
     hideDeleteButton();
 
+    
+
 	$("#uploadMyFishRecordsForm").submit(function(event) {
 	    event.preventDefault();
+
+	    updateTagsInput();
+	    
 	    
 	    let formData = new FormData(this);
 
         let fishSize = $("#fishSize").val();
         if (fishSize) {
             formData.set("fishSize", `${fishSize}cm`);
-        }
-	    
+    }
+    
+    
 	    $.ajax({
 	        type: "post",
 	        url: "/myFishRecords/insertMyFishRecords",
@@ -83,4 +89,72 @@ function showDeleteButton() {
 function hideDeleteButton() {
     var deleteButton = document.getElementById("deleteButton");
     deleteButton.style.display = "none";
+}
+
+// 검색창
+function searchFish() {
+    window.open('/myFishRecords/fishDetect', '_blank', 'width=800,height=600');
+}
+
+
+
+// 태그
+var allTags = [];
+
+function openInNewWindow() {
+    window.open('/myFishRecords/myFishRecordsUploadTag', '_blank', 'width=800,height=600');
+}
+
+function updateSelectedTags(newTags) {
+    newTags.forEach(function(tag) {
+        if (!allTags.some(existingTag => existingTag.id === tag.id)) {
+            allTags.push(tag);
+        }
+    });
+
+    displayTags();
+}
+
+function displayTags() {
+        var tagList = document.getElementById('selectedTags');
+        tagList.innerHTML = '';
+
+        allTags.forEach(function(tag) {
+            var tagItem = document.createElement('div');
+            tagItem.className = 'tag-item';
+            tagItem.textContent = tag.name;
+            
+            tagItem.dataset.tagId = tag.id;
+            
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = '×';
+            deleteButton.onclick = function() {
+                removeTag(tag.id);
+            };
+
+            tagItem.appendChild(deleteButton);
+            tagList.appendChild(tagItem);
+        });
+    }
+
+function removeTag(tagId) {
+    allTags = allTags.filter(tag => tag.id !== tagId);
+    displayTags();
+}
+
+function updateTagsInput() {
+   	let tagsArray = Array.from(document.querySelectorAll('#selectedTags .tag-item'))
+        .map(tagItem => tagItem.dataset.tagId)
+        .filter(tagId => tagId)
+        .join(',');
+        
+        console.log("Tags Array:", tagsArray);
+        
+    let tagsInput = document.getElementById('tagsInput');
+    if (tagsInput) {
+        tagsInput.value = tagsArray;
+        console.log("Updated tagsInput value:", tagsInput.value);
+    } else {
+        console.error("tagsInput 요소를 찾을 수 없습니다.");
+    }
 }
