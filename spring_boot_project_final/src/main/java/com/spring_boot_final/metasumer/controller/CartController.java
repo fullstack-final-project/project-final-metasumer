@@ -27,7 +27,7 @@ public class CartController {
 	CartService cartService;
 	
 	// 장바구니 목록 보기 
-	@RequestMapping("/myPage/cartList")
+	@RequestMapping("/product/cartList")
 	public String cartList(Model model, HttpSession session) {
 		// 회원에 해당하는 cartList 출력
 		String memId = (String)session.getAttribute("sid");

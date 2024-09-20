@@ -28,7 +28,7 @@
 			  <div class="myPageCtg">
 			    <div id='myPageCtgBtn'>
 			      <button class='myPageBtn' data-category='1' onclick="location.href='/myPage/myInfo'">회원 정보 관리</button>
-			      <button class='myPageBtn' data-category='2' onclick="location.href='/myPage/cartList'">장바구니</button>
+			      <button class='myPageBtn' data-category='2' onclick="location.href='/product/cartList'">장바구니</button>
 			      <button class='myPageBtn' data-category='3' onclick="location.href='/myPage/reservation'">나의 예약</button>
 			    </div>
 			    <div id='myPageCtgBtn'>
