@@ -63,9 +63,12 @@ $(function(){
     function updateFishList(fishList) {
         let fishBox = $('.fishBox');
         fishBox.empty(); // 비우기
+        
+        let pagination = $('.pagination');
 
         if(fishList == ""){
             fishBox.append('<p id="emptyFishMsg">일치하는 항목이 없습니다.</p>');
+            pagination.hide();
         }else{
             fishList.forEach(function(fish) {
                 let fishInfo = `
@@ -79,7 +82,7 @@ $(function(){
                             <p id="fishName">${fish.fishName}</p>
                         </div>
                     </div>`;
-
+                pagination.hide();
                 fishBox.append(fishInfo); // 정보 넣어주기
             });
         }
