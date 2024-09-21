@@ -138,9 +138,8 @@
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/tidetable'/>">물때</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/current'/>">현재 위치 날씨</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/warning'/>">기상 특보</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/nationwide'/>">전국 날씨</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/overseas'/>">해외 낚시</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/weather/factor'/>">바다 낚시 지수</a></li>
+								<li class="subListItem"><a class="subListTxt" href="https://www.khoa.go.kr/swtc/main.do" target='_blank'>해상 낚시</a></li>
+								<li class="subListItem"><a class="subListTxt" href="https://www.weather.go.kr/w/ocean/forecast/daily-forecast.do" target='_blank'>바다 낚시 지수</a></li>
 							</ul>
 						</div>
 					</div>
@@ -157,7 +156,6 @@
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/nearFood'/>">주변 정보</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/traffic'/>">교통 상황</a></li>
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/nationwide'/>">전국 낚시터</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/location/intl'/>">해외 낚시터</a></li>
 							</ul>
 						</div>
 					</div>
@@ -183,9 +181,6 @@
 						<div class="subListBox" id="subListBox8">
 							<ul class="subList">
 								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/myFish'/>">크기 겨루기</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/business'/>">선주 이벤트</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/site'/>">사이트 이벤트</a></li>
-								<li class="subListItem"><a class="subListTxt" href="<c:url value='/event/review'/>">후기 이벤트</a></li>
 							</ul>
 						</div>
 					</div>
